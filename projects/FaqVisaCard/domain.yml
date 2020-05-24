@@ -1,0 +1,64 @@
+session_config:
+  session_expiration_time: 20
+  carry_over_slots_to_new_session: true
+intents:
+- application
+- application_requirements
+- application_age
+- application_usage
+- application_cardlimit
+- points_collect
+- poitns_seebalance
+- poitns_shopping
+- starting_credit
+- starting_credit_problem
+- annualcost
+- annualcost_partner
+- annualcost_problem
+- cardmotif_new
+- cardmotif_primelogo
+- banking_statement
+- banking_pin
+- banking_contact
+- banking_replacement
+entities:
+- card_name
+- age_group
+- amazon_website
+slots:
+  card_name:
+    type: unfeaturized
+  age_group:
+    type: unfeaturized
+  amazon_website:
+    type: unfeaturized
+responses:
+  utter_application:
+  - text: "The application is only possible online. Simply click [here]\
+      \ (https://amazon-kreditkarte.kartenantrag.lbb.de/antrag/seite1.html)\n\
+      \ and fill out the online application. After confirming your application, we will immediately deposit\
+      \ the credit card details in your Amazon.de customer account.\n\
+      \ You can ask me about the Amazon.de VISA card application requirements."
+  utter_reasons_to_contribute:
+  - text: "Here a few reasons why you should contribute:\n- Explore the source code\
+      \ in depth\n- Contribute to open source software\n- Earn [Rasa swag])(https://rasa.com/community/contribute/)!\n"
+  utter_application_requirements:
+  - text: "A minimum age of 18, residence in Germany and bank details from the Euro Payments Area (SEPA)\ 
+      \ are required to order an Amazon.de Prime VISA card."
+  utter_required_age:
+  - text: "A minimum age of 18 is required to order an Amazon.de Prime VISA card."
+  utter_application_usage:
+  - text: "As soon as your application for the Amazon.de VISA card has been approved, you will be informed by email.\n\
+      \ The card is automatically deposited in your customer account as a means of payment.\
+      \ You can start shopping immediately with your Amazon.de VISA card.\n\
+      \ Please note that  The card will be sent within 5-7 days.\
+      \ If you have any questions about the whereabouts of your Amazon.de VISA card, please contact Landesbank Berlin AG at 030/245 524 57.\
+      \ You can reach the bank by phone around the clock."
+  utter_application_cardlimit:
+  - text: "Your preliminary card limit is limited to € 210.00. As soon as you have identified yourself, the limit will be increased."
+actions:
+- utter_application
+- utter_application_requirements
+- utter_required_age
+- utter_application_usage
+

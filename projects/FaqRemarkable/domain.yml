@@ -1,0 +1,24 @@
+intents:
+  - faq_preorder_reMarkableTwo
+  - faq_price_reMarkableTwo
+  - faq_where_order_reMarkableTwo
+responses:
+  utter_faq_preorder_reMarkableTwo:
+  - text: "reMarkable 2 is available for pre-order in [our webshop](https://remarkable.com/store/remarkable-2).\ 
+      \ The first batch will be shipped in June 2020. "
+  utter_faq_price_reMarkableTwo:
+  - text: "Pricing on our products and other promotions can be found in [our webshop](https://remarkable.com/store/remarkable-2)\n\
+      \ See our accepted forms of payment for an overview of the available payment options.\
+      \ All duties, taxes, and VAT are included in the price the customer sees in the Store, except for customers in the United States.\n\
+      \ For customers in the United States taxes will be added at checkout." 
+  utter_faq_where_order_reMarkableTwo:
+  - text: "reMarkable 2 is now available to pre-order from [our webshop](https://remarkable.com/store/remarkable-2).\ 
+      \ We offer free express shipping and a 30-day satisfaction guarantee.\
+      \ If you want to return your reMarkable, we offer a free return and full refund."
+actions:
+- utter_faq_preorder_reMarkableTwo
+- utter_faq_price_reMarkableTwo
+- utter_faq_where_order_reMarkableTwo
+session_config:
+  session_expiration_time: 10
+  carry_over_slots_to_new_session: true

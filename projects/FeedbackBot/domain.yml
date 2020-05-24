@@ -1,0 +1,51 @@
+session_config:
+  session_expiration_time: 20
+  carry_over_slots_to_new_session: true
+intents:
+- feedback
+- canthelp
+- affirm
+- deny
+entities:
+- feedback_value
+slots:
+  feedback_value:
+    type: categorical
+    values:
+    - positive
+    - negative
+responses:
+  utter_ask_feedback:
+  - buttons:
+    - payload: /feedback{"feedback_value":"positive"}
+      title: 👍
+    - payload: /feedback{"feedback_value":"negative"}
+      title: 👎
+    text: How is this conversation going?
+  utter_great:
+  - text: Great! 
+  - text: That's great! 
+  - text: Awesome!
+  utter_anything_else:
+  - text: Is there anything else I can help you with?
+  utter_thumbsup:
+  - text: Okay.
+  - text: Got it.
+  utter_ask_feedback_message:
+  - text: I'm sorry I couldn't help you. Please let me know if you have any suggestions
+      for how I can improve.
+  utter_what_help:
+  - text: Ok, what can I help you with?
+  utter_default:
+  - text: I didn't quite understand that. Can you rephrase the question?
+actions:
+- utter_ask_feedback
+- utter_ask_feedback_message
+- utter_anything_else
+- utter_what_help
+- utter_great
+- utter_thumbsup
+- utter_default
+
+
+

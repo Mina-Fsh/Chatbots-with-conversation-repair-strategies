@@ -1,0 +1,46 @@
+session_config:
+  session_expiration_time: 20
+  carry_over_slots_to_new_session: true
+intents:
+- greet
+- goodbye
+- affirm
+- deny
+- ask_help
+- ask_creator
+- ask_license
+- out_of_scope:
+    triggers: utter_out_of_scope
+    use_entities: []
+responses:
+  utter_greet:
+  - text: Welcome to BIBA digital assistant! What would you like to know?
+  utter_goodbye:
+  - text: Goodbye!
+  - text: Bye!
+  - text: Ciao!
+  - text: Bye, was nice talking to you!
+  - text: Bye bye!
+  utter_thumbsup:
+  - text: Okay.
+  - text: Got it.
+  utter_ask_help:
+  - text: "You can ask me about:\n- Where is the product LB-4488-3-A1101?\n- what is the description of error code A010\n- Tell me all about this product!\nOr choose one of the\
+      \ following options."
+  utter_default:
+  - text: I didn't quite understand that. Can you rephrase the question?
+  utter_ask_creator:
+  - text: I was created by "BIBA Bremer Institute for Production and Logistics GmbH" in Bremen, Germany!
+  utter_ask_license:
+  - text: My software uses more than one license. Please contact my creators.
+  utter_out_of_scope:
+  - text: I can't help you with that, I'm sorry.
+actions:
+- utter_greet
+- utter_goodbye
+- utter_ask_help
+- utter_default
+- utter_thumbsup
+- utter_out_of_scope
+- utter_ask_creator
+- utter_ask_license

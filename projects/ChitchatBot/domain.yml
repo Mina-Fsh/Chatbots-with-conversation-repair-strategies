@@ -1,0 +1,33 @@
+session_config:
+  session_expiration_time: 20
+  carry_over_slots_to_new_session: true
+intents:
+- ask_howdoing
+- ask_isbot
+- handleinsult
+- nicetomeetyou
+responses:
+  utter_ask_howdoing:
+  - text: I'm great! Thanks for asking.
+  - text: I'm good, thanks!
+  utter_ask_isbot:
+  - text: I am indeed a bot!
+  - text: Yep, you guessed it, I'm a bot!
+  utter_handleinsult:
+  - text: That's not very nice!
+  - text: That wasn't very nice. Perhaps try an anger management class?
+  - text: I'll pretend I didn't process that mean comment.
+  utter_nicetomeetyou:
+  - text: Nice to meet you too! Happy to be of help.
+  - text: Thank you. It is a pleasure to meet you as well!
+  - text: It's always a pleasure to meet new people!
+  utter_default:
+  - text: I didn't quite understand that. Can you rephrase the question?
+actions:
+- utter_ask_howdoing
+- utter_ask_isbot
+- utter_handleinsult
+- utter_nicetomeetyou
+- utter_default
+
+
