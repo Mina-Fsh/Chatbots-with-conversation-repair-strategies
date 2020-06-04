@@ -14,25 +14,34 @@ intents:
     use_entities: []
 responses:
   utter_greet:
-  - text: Welcome to BIBA digital assistant! What would you like to know?
+  - text: Hello, it is nice to see you! I am Ola, the chatbot for The Student's Bank in Germany. I can answer your questions about the Student's Back products and services!  
   utter_goodbye:
   - text: Goodbye!
   - text: Bye!
   - text: Ciao!
-  - text: Bye, was nice talking to you!
-  - text: Bye bye!
+  - text: Bye, it was nice talking to you!
+  - text: Bye-bye!
   utter_thumbsup:
+  - text: 👍
   - text: Okay.
   - text: Got it.
   utter_ask_help:
-  - text: "You can ask me about:\n- Where is the product LB-4488-3-A1101?\n- what is the description of error code A010\n- Tell me all about this product!\nOr choose one of the\
-      \ following options."
+  - text: "You can ask me questions such as:\n- What are the advantages of the Student's Back Visa card?\
+      \ \n- What is the annual cost?\n- Are the services available in English?\
+      \ \n Or choose one of the following options."
+    buttons:
+    - title: "Tell me about your bank"
+      payload: '/whatis{"bank_name": "Student''s Bank"}'
+    - title: "What are the requirenments to open a bank account?"
+      payload: '/application_requirements{"product_name": "bank account"}'
   utter_default:
-  - text: I didn't quite understand that. Can you rephrase the question?
+  - text: Sorry, I didn't get that 🤷. Could you please, rephrase?
+  - text: I didn't understand, could you rephrase that?
+  - text: I'm sorry, but I didn't understand you. Could you please rephrase what you just said?
   utter_ask_creator:
-  - text: I was created by "BIBA Bremer Institute for Production and Logistics GmbH" in Bremen, Germany!
+  - text: I was created by Mina Foosherian, a master's student at the University of Bremen, Germany! 
   utter_ask_license:
-  - text: My software uses more than one license. Please contact my creators.
+  - text: My software uses more than one license. Please contact my creator.
   utter_out_of_scope:
   - text: I can't help you with that, I'm sorry.
 actions:

@@ -2,34 +2,31 @@ session_config:
   session_expiration_time: 20
   carry_over_slots_to_new_session: true
 intents:
-- card_descriptions
-- card_differences
-- card_application
-- application_requirements
-- required_age
-- cardlimit
-- points_collect
-- annualcost
+- whatis
+- product_application
+- product_application_requirements
+- product_required_age
+- product_cardlimit
+- product_points_collect
+- product_annualcost
 entities:
-- card_name
+- product_name
+- bank_name
 slots:
-  card_name:
+  product_name:
     type: categorical
     values:
-    - VISA card
-    - MASTER card
-    - Credit card
+    - Visa Card
+    - Master Card
+    - credit card
+    - bank account
+  bank_name:
+    type: unfeaturized
 responses:
-  utter_card_differences:
-  - text: "Here a few differences between these cards\n- Credit card is ...\
-      \n- Master card is ...\n- Visa card is...!\n"
-  utter_card_application:
-  - text: "You can apply for the card via ..."
-  utter_application_requirements:
-  - text: "A minimum age of 18, residence in Germany and bank details from the Euro Payments Area (SEPA)\ 
-      \ are required to order a {card_name}."
+  utter_visa_application_requirements:
+  - text: "You need to first open a free bank account in Student's bank. Then you can request your {product_name}" 
   utter_required_age:
-  - text: "A minimum age of 18 is required to order a {card_name}."
+  - text: "A minimum age of 18 is required to order a {product_name}."
   utter_cardlimit:
   - text: "You first card limit is ..."
   utter_points_collect:

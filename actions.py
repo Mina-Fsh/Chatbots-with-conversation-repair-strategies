@@ -59,10 +59,10 @@ class ActionCard_descriptions(Action):
             if requestedCardName == 'Credit card':
                 dispatcher.utter_message("A {} is a card that ...".format(requestedCardName))
                 return [SlotSet("card_name", requestedCardName)]   
-            elif requestedCardName == 'MASTER card':
+            elif requestedCardName == 'Master card':
                 dispatcher.utter_message("A {} is a card that ...".format(requestedCardName))
                 return [SlotSet("card_name", requestedCardName)]
-            elif requestedCardName == 'VIDA card':
+            elif requestedCardName == 'Visa card':
                 dispatcher.utter_message("A {} is a card that ...".format(requestedCardName))
                 return [SlotSet("card_name", requestedCardName)]
             else:

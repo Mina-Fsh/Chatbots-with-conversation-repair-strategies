@@ -1,5 +1,5 @@
-## card description
-* card_descriptions
+## asking what is
+* ask_whatis
   - action_card_descriptions
 
 ## card differences
