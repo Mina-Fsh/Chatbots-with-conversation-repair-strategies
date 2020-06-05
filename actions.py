@@ -41,33 +41,68 @@ class ActionRepeat(Action):
             return []
 
 
-class ActionCard_descriptions(Action):
-    '''custom action for card_descriptions intent
+class ActionProduct_description(Action):
+    '''custom action for product_description intent
        reads descriptions based on the card type'''
 
     def name(self) -> Text:
-        return "action_card_descriptions"
+        return "action_product_description"
 		
     def run(self, dispatcher: CollectingDispatcher,
                 tracker: Tracker,
                 domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-            requestedCardName = tracker.get_slot("card_name")
-            log.info("requested card name is: {}".format(requestedCardName))
+            requestedProductName = tracker.get_slot("card_name")
+            log.info("requested card name is: {}".format(requestedProductName))
             
             # Validates the location name if it exists
-            if requestedCardName == 'Credit card':
-                dispatcher.utter_message("A {} is a card that ...".format(requestedCardName))
-                return [SlotSet("card_name", requestedCardName)]   
-            elif requestedCardName == 'Master card':
-                dispatcher.utter_message("A {} is a card that ...".format(requestedCardName))
-                return [SlotSet("card_name", requestedCardName)]
-            elif requestedCardName == 'Visa card':
-                dispatcher.utter_message("A {} is a card that ...".format(requestedCardName))
-                return [SlotSet("card_name", requestedCardName)]
+            if requestedProductName == 'credit card':
+                dispatcher.utter_message("A {} is a card that ...".format(requestedProductName))
+                return [SlotSet("card_name", requestedProductName)]   
+            elif requestedProductName == 'Master card':
+                dispatcher.utter_message("A {} is a card that ...".format(requestedProductName))
+                return [SlotSet("card_name", requestedProductName)]
+            elif requestedProductName == 'Visa card':
+                dispatcher.utter_message("A {} is a card that ...".format(requestedProductName))
+                return [SlotSet("card_name", requestedProductName)]
+            elif requestedProductName == 'bank account':
+                dispatcher.utter_message("A {} is a free account that ...".format(requestedProductName))
+                return [SlotSet("card_name", requestedProductName)]
             else:
                 # Telling the user that the card name is not known
                 dispatcher.utter_message("I don't know about this card. You can ask me questions about Credit card, Master card or Visa card!")
                 return [SlotSet("card_name", None)]
 
+
+class ActionProduct_application(Action):
+    '''custom action for product_application intent
+       reads descriptions based on the card type'''
+
+    def name(self) -> Text:
+        return "action_product_application"
+		
+    def run(self, dispatcher: CollectingDispatcher,
+                tracker: Tracker,
+                domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+            requestedProductName = tracker.get_slot("card_name")
+            log.info("requested card name is: {}".format(requestedProductName))
+            
+            # Validates the location name if it exists
+            if requestedProductName == 'credit card':
+                dispatcher.utter_message("A {} is a card that ...".format(requestedProductName))
+                return [SlotSet("card_name", requestedProductName)]   
+            elif requestedProductName == 'Master card':
+                dispatcher.utter_message("A {} is a card that ...".format(requestedProductName))
+                return [SlotSet("card_name", requestedProductName)]
+            elif requestedProductName == 'Visa card':
+                dispatcher.utter_message("A {} is a card that ...".format(requestedProductName))
+                return [SlotSet("card_name", requestedProductName)]
+            elif requestedProductName == 'bank account':
+                dispatcher.utter_message("A {} is a free account that ...".format(requestedProductName))
+                return [SlotSet("card_name", requestedProductName)]
+            else:
+                # Telling the user that the card name is not known
+                dispatcher.utter_message("I don't know about this card. You can ask me questions about Credit card, Master card or Visa card!")
+                return [SlotSet("card_name", None)]
 

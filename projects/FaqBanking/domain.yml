@@ -2,13 +2,14 @@ session_config:
   session_expiration_time: 20
   carry_over_slots_to_new_session: true
 intents:
-- whatis
+- ask_whatis
 - product_application
 - product_application_requirements
 - product_required_age
-- product_cardlimit
+- product_limit
 - product_points_collect
 - product_annualcost
+- product_advantages
 entities:
 - product_name
 - bank_name
@@ -23,22 +24,24 @@ slots:
   bank_name:
     type: unfeaturized
 responses:
-  utter_visa_application_requirements:
+  utter_product_application_requirements:
   - text: "You need to first open a free bank account in Student's bank. Then you can request your {product_name}" 
-  utter_required_age:
-  - text: "A minimum age of 18 is required to order a {product_name}."
-  utter_cardlimit:
+  utter_product_required_age:
+  - text: "A minimum age of 18 is required to have a {product_name}."
+  utter_product_limit:
   - text: "You first card limit is ..."
-  utter_points_collect:
+  utter_product_points_collect:
   - text: "You can collect points via ..."
-  utter_annualcost:
+  utter_product_annualcost:
   - text: "The annual cost is ..."
+  utter_product_advantages:
+  - text: "The benefits of having {product_name} are ..."
 actions:
-- action_card_descriptions
-- utter_card_differences
-- utter_card_application
-- utter_application_requirements
-- utter_required_age
-- utter_cardlimit
-- utter_points_collect
-- utter_annualcost
+- action_product_description
+- action_product_application
+- utter_product_application_requirements
+- utter_product_required_age
+- utter_product_limit
+- utter_product_points_collect
+- utter_product_annualcost
+- utter_product_advantages
