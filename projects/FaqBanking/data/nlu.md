@@ -1,4 +1,4 @@
-## intent:ask_whatis
+## intent:product_description
 - what is a [credit card](product_name)?
 - what is a [master card](product_name)?
 - what is a [visa card](product_name)?
@@ -71,6 +71,7 @@
 ## intent:product_advantages
 - what are the benefits that [your bank](bank_name) offer for a [bank account](product_name)
 - tell me the advantages of having this [card](product_name)
+
 ## synonym:Visa Card
 - visa card
 - visa card
@@ -107,4 +108,4 @@
 - your bank
 - bank
 - Students bank
-- Students Bank
+- Student's Bank

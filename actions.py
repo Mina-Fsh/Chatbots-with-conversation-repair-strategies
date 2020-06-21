@@ -52,8 +52,8 @@ class ActionProduct_description(Action):
                 tracker: Tracker,
                 domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-            requestedProductName = tracker.get_slot("card_name")
-            log.info("requested card name is: {}".format(requestedProductName))
+            requestedProductName = tracker.get_slot("product_name")
+            log.info("requested product name is: {}".format(requestedProductName))
             
             # Validates the location name if it exists
             if requestedProductName == 'credit card':

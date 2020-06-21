@@ -1,5 +1,5 @@
-## asking what is
-* ask_whatis
+## product description
+* product_description
   - action_product_description
 
 ## product application
