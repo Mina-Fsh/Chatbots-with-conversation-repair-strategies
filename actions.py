@@ -1,108 +1,87 @@
-from typing import Dict, Text, Any, List
+from typing import Dict, Text, Any, List, Union
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk import Action, Tracker
 from rasa_sdk.events import SlotSet, FollowupAction
-
+from rasa_sdk.forms import FormAction
 import logging
-log = logging.getLogger("my-logger")
 
-class ActionRepeat(Action):
-    '''custom action repeating the last bot utterance'''
+log = logging.getLogger("Debugging")
 
-    def name(self) -> Text:
-        return "action_repeat"
+##############################################
+# Classes for the gear assembly Bot functionality.
+##############################################
+class OrderGearboxForm(FormAction):
+    """Example of a custom form action"""
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+    def name(self):
+        """Unique identifier of the form"""
 
-            user_ignore_count = 2
-            count = 0
-            tracker_list = []
+        return "order_gearbox_form"
 
-            while user_ignore_count > 0:
-                event = tracker.events[count].get('event')
-                if event == 'user':
-                    user_ignore_count = user_ignore_count - 1
-                if event == 'bot':
-                    tracker_list.append(tracker.events[count])
-                count = count - 1
+    @staticmethod
+    def required_slots(tracker: Tracker) -> List[Text]:
+        """A list of required slots that the form has to fill"""
+        
+        if tracker.get_slot('num_gears') is not None:
+            if int(tracker.get_slot('num_gears')) == 1:
+                return ["num_gears", "gear_one_size", "gear_one_polishing"]
+            elif int(tracker.get_slot('num_gears')) == 2:
+                return ["num_gears", "gear_one_size", "gear_one_polishing", "gear_two_size", "gear_two_polishing"]
+            elif int(tracker.get_slot('num_gears')) == 3:
+                return ["num_gears", "gear_one_size", "gear_one_polishing", "gear_two_size", "gear_two_polishing", "gear_three_size", "gear_three_polishing"]
+        else:
+            return ["num_gears", "gear_one_size", "gear_one_polishing"]
 
-            i = len(tracker_list) - 1
-            while i >= 0:
-                data = tracker_list[i].get('data')
-                if data:
-                    if "buttons" in data:
-                        dispatcher.utter_message(text=tracker_list[i].get('text'), buttons=data["buttons"])
-                    else:
-                        dispatcher.utter_message(text=tracker_list[i].get('text'))
-                i -= 1
+    def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
+        """A dictionary to map required slots to
+            - an extracted entity
+            - intent: value pairs
+            - a whole message
+            or a list of them, where a first match will be picked"""
+        
+        return {
+            "num_gears": [
+            self.from_entity(entity="num_gears", intent=["inform", "order_gearbox"]),
+            self.from_intent(intent="deny", value="None"),
+            ],
+            "gear_one_size": [
+                self.from_entity(entity="gear_one_size", intent=["inform", "order_gearbox"]),
+                self.from_intent(intent="deny", value="None"),
+            ],
+            "gear_two_size": [
+                self.from_entity(entity="gear_two_size", intent=["inform", "order_gearbox"]),
+                self.from_intent(intent="deny", value="None"),
+            ],
+            "gear_three_size": [
+                self.from_entity(entity="gear_three_size", intent=["inform", "order_gearbox"]),
+                self.from_intent(intent="deny", value="None"),
+            ],
+            "gear_one_polishing": [
+                self.from_entity(entity="gear_one_polishing", intent=["inform", "order_gearbox"]),
+                self.from_intent(intent="affirm", value=True),
+                self.from_intent(intent="deny", value=False),
+            ],
+            "gear_two_polishing": [
+                self.from_entity(entity="gear_two_polishing", intent=["inform", "order_gearbox"]),
+                self.from_intent(intent="affirm", value=True),
+                self.from_intent(intent="deny", value=False),
+            ],
+            "gear_three_polishing": [
+                self.from_entity(entity="pgear_three_polishing", intent=["inform", "order_gearbox"]),
+                self.from_intent(intent="affirm", value=True),
+                self.from_intent(intent="deny", value=False),
+            ]
+        }
 
-            return []
+    def submit(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict]:
+        """Define what the form has to do
+            after all required slots are filled"""
 
-
-class ActionProduct_description(Action):
-    '''custom action for product_description intent
-       reads descriptions based on the card type'''
-
-    def name(self) -> Text:
-        return "action_product_description"
-		
-    def run(self, dispatcher: CollectingDispatcher,
-                tracker: Tracker,
-                domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-            requestedProductName = tracker.get_slot("product_name")
-            log.info("requested product name is: {}".format(requestedProductName))
-            
-            # Validates the location name if it exists
-            if requestedProductName == 'credit card':
-                dispatcher.utter_message("A {} is a card that ...".format(requestedProductName))
-                return [SlotSet("card_name", requestedProductName)]   
-            elif requestedProductName == 'Master card':
-                dispatcher.utter_message("A {} is a card that ...".format(requestedProductName))
-                return [SlotSet("card_name", requestedProductName)]
-            elif requestedProductName == 'Visa card':
-                dispatcher.utter_message("A {} is a card that ...".format(requestedProductName))
-                return [SlotSet("card_name", requestedProductName)]
-            elif requestedProductName == 'bank account':
-                dispatcher.utter_message("A {} is a free account that ...".format(requestedProductName))
-                return [SlotSet("card_name", requestedProductName)]
-            else:
-                # Telling the user that the card name is not known
-                dispatcher.utter_message("I don't know about this card. You can ask me questions about Credit card, Master card or Visa card!")
-                return [SlotSet("card_name", None)]
-
-
-class ActionProduct_application(Action):
-    '''custom action for product_application intent
-       reads descriptions based on the card type'''
-
-    def name(self) -> Text:
-        return "action_product_application"
-		
-    def run(self, dispatcher: CollectingDispatcher,
-                tracker: Tracker,
-                domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-            requestedProductName = tracker.get_slot("card_name")
-            log.info("requested card name is: {}".format(requestedProductName))
-            
-            # Validates the location name if it exists
-            if requestedProductName == 'credit card':
-                dispatcher.utter_message("A {} is a card that ...".format(requestedProductName))
-                return [SlotSet("card_name", requestedProductName)]   
-            elif requestedProductName == 'Master card':
-                dispatcher.utter_message("A {} is a card that ...".format(requestedProductName))
-                return [SlotSet("card_name", requestedProductName)]
-            elif requestedProductName == 'Visa card':
-                dispatcher.utter_message("A {} is a card that ...".format(requestedProductName))
-                return [SlotSet("card_name", requestedProductName)]
-            elif requestedProductName == 'bank account':
-                dispatcher.utter_message("A {} is a free account that ...".format(requestedProductName))
-                return [SlotSet("card_name", requestedProductName)]
-            else:
-                # Telling the user that the card name is not known
-                dispatcher.utter_message("I don't know about this card. You can ask me questions about Credit card, Master card or Visa card!")
-                return [SlotSet("card_name", None)]
-
+        # utter submit template
+        dispatcher.utter_message(template="utter_submit")
+        return []

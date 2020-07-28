@@ -1,6 +1,6 @@
 # Configuration for Rasa NLU.
 # https://rasa.com/docs/rasa/nlu/components/
-language: en
+language: de
 pipeline:
   - name: WhitespaceTokenizer
   - name: RegexFeaturizer
@@ -16,6 +16,10 @@ pipeline:
   - name: EntitySynonymMapper
   - name: ResponseSelector
     epochs: 100
+  - name: DucklingHTTPExtractor
+    url: http://0.0.0.0:8000
+    dimensions: time
+    timezone: Europe/Berlin
 
 # Configuration for Rasa Core.
 # https://rasa.com/docs/rasa/core/policies/
@@ -30,8 +34,4 @@ policies:
     nlu_threshold: 0.6
     core_threshold: 0.6
     fallback_action_name: "action_default_fallback"
-
-importers:
-  - name: MultiProjectImporter
-imports:
-  - projects/BaseBot
+  - name: FormPolicy

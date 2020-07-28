@@ -1,0 +1,69 @@
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: false
+intents:
+- inform
+- stop
+- order_gearbox
+- affirm
+- deny
+- out_of_scope
+entities:
+- num_gears
+- gear_one_size
+- gear_two_size
+- gear_three_size
+- gear_one_polishing
+- gear_two_polishing
+- gear_three_polishing
+slots:
+  num_gears:
+    type: unfeaturized
+  gear_one_size:
+    type: unfeaturized
+  gear_two_size:
+    type: unfeaturized
+  gear_three_size:
+    type: unfeaturized
+  gear_one_polishing:
+    type: unfeaturized
+  gear_two_polishing:
+    type: unfeaturized
+  gear_three_polishing:
+    type: unfeaturized
+responses:
+  utter_default_fallback:
+  - text: Entschuldigung, ich verstehe nicht ganz.
+  utter_ask_num_gears:
+  - text: Wie viele Zahnräder möchten Sie in diesem Planetengetriebe haben?
+  utter_ask_gear_one_size:
+  - text: "Dieses Zahnrad kann klein, mittel, oder groß sein. Welche Größe möchten Sie haben?"
+  utter_ask_gear_one_polishing:
+  - text: Wollen Sie, dass dieses Zahnrad poliert wird?
+  utter_ask_gear_two_size:
+  - text: "Welche Größe möchten Sie haben?"
+  utter_ask_gear_two_polishing:
+  - text: Wollen Sie, dass dieses Zahnrad poliert wird?
+  utter_ask_gear_three_size:
+  - text: "Welche Größe möchten Sie haben?"
+  utter_ask_gear_three_polishing:
+  - text: Wollen Sie, dass dieses Zahnrad poliert wird?
+  utter_submit:
+  - text: "Hier sind Ihre Bestelldetails: Planetenräder: {gear_amount}. Polieren: {confirm_polishing}. Zahnradgröße: {gear_size}"
+  utter_ask_continue:
+  - text: "Entschuldigung, ich verstehe nicht ganz. Wollen Sie fortfahren?"
+  utter_wrong_gear_num:
+  - text: "Sie können maximal drei Zahnräder in Ihrem Planetengetriebe haben."
+forms:
+- order_gearbox_form
+actions:
+- utter_ask_num_gears
+- utter_ask_gear_one_size
+- utter_ask_gear_two_size
+- utter_ask_gear_three_size
+- utter_ask_gear_one_polishing
+- utter_ask_gear_two_polishing
+- utter_ask_gear_three_polishing
+- utter_ask_continue
+- utter_submit
+- action_default_fallback
