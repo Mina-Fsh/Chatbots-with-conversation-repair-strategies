@@ -114,5 +114,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Custom
-digital_assistant_rasa.git
+# models folder
+models/
+
