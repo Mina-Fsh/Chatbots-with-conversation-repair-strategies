@@ -22,15 +22,8 @@ class OrderGearboxForm(FormAction):
     def required_slots(tracker: Tracker) -> List[Text]:
         """A list of required slots that the form has to fill"""
         
-        if tracker.get_slot('num_gears') is not None:
-            if int(tracker.get_slot('num_gears')) == 1:
-                return ["num_gears", "gear_one_size", "gear_one_polishing"]
-            elif int(tracker.get_slot('num_gears')) == 2:
-                return ["num_gears", "gear_one_size", "gear_one_polishing", "gear_two_size", "gear_two_polishing"]
-            elif int(tracker.get_slot('num_gears')) == 3:
-                return ["num_gears", "gear_one_size", "gear_one_polishing", "gear_two_size", "gear_two_polishing", "gear_three_size", "gear_three_polishing"]
-        else:
-            return ["num_gears", "gear_one_size", "gear_one_polishing"]
+        return ["num_gears", "gear_one_size", "gear_one_polishing", "gear_two_size", "gear_two_polishing", "gear_three_size", "gear_three_polishing"]
+
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
         """A dictionary to map required slots to
