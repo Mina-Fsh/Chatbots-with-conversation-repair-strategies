@@ -37,19 +37,19 @@ responses:
   utter_ask_num_gears:
   - text: Wie viele Zahnräder möchten Sie in diesem Planetengetriebe haben?
   utter_ask_gear_one_size:
-  - text: "Dieses Zahnrad kann klein, mittel, oder groß sein. Welche Größe möchten Sie haben?"
+  - text: "Dieses Zahnrad kann klein, mittel, oder groß sein. Welche Größe möchten Sie für Ihren ersten Zahnrad haben?"
   utter_ask_gear_one_polishing:
   - text: Wollen Sie, dass dieses Zahnrad poliert wird?
   utter_ask_gear_two_size:
-  - text: "Welche Größe möchten Sie haben?"
+  - text: "Welche Größe möchten Sie für Ihren zweiten Zahnrad haben?"
   utter_ask_gear_two_polishing:
   - text: Wollen Sie, dass dieses Zahnrad poliert wird?
   utter_ask_gear_three_size:
-  - text: "Welche Größe möchten Sie haben?"
+  - text: "Welche Größe möchten Sie für Ihren dritten Zahnrad haben?"
   utter_ask_gear_three_polishing:
   - text: Wollen Sie, dass dieses Zahnrad poliert wird?
   utter_submit:
-  - text: "Hier sind Ihre Bestelldetails: Planetenräder: {gear_amount}. Polieren: {confirm_polishing}. Zahnradgröße: {gear_size}"
+  - text: "Hier sind Ihre Bestelldetails: Planetenräder: {gear_amount}. Polieren: {gear_one_polishing},{gear_two_polishing},{gear_three_polishing} . Zahnradgröße: {gear_one_size}, {gear_two_size} und {gear_three_size}"
   utter_ask_continue:
   - text: "Entschuldigung, ich verstehe nicht ganz. Wollen Sie fortfahren?"
   utter_wrong_gear_num:

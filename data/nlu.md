@@ -47,9 +47,6 @@
 - [groß](gear_three_size)
 - [klein](gear_three_size)
 - [mittel](gear_three_size)
-- [Groß](gear_one_size)
-- [Klein](gear_two_size)
-- [Mittel](gear_three_size)
 
 ## intent:stop
 - halt
