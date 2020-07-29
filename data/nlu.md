@@ -96,15 +96,15 @@
 - Bist du eine Frau
 - Wer bin ich
 
-## synonym:1
+## synonym:one
 - ein
 - einem
 - einer
 - eine
 - eins
 
-## synonym:2
+## synonym:two
 - zwei
 
-## synonym:3
+## synonym:three
 - drei

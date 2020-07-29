@@ -1,4 +1,4 @@
-from typing import Dict, Text, Any, List, Union
+from typing import Dict, Text, Any, List, Union, Optional
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk import Action, Tracker
 from rasa_sdk.events import SlotSet, FollowupAction
@@ -22,8 +22,13 @@ class OrderGearboxForm(FormAction):
     def required_slots(tracker: Tracker) -> List[Text]:
         """A list of required slots that the form has to fill"""
         
-        return ["num_gears", "gear_one_size", "gear_one_polishing", "gear_two_size", "gear_two_polishing", "gear_three_size", "gear_three_polishing"]
-
+        if tracker.get_slot('num_gears') == "one":
+            return ["num_gears", "gear_one_size", "gear_one_polishing"]
+        elif tracker.get_slot('num_gears') == "two":
+            return ["num_gears", "gear_one_size", "gear_one_polishing", "gear_two_size", "gear_two_polishing"]
+        elif tracker.get_slot('num_gears') == "three":
+            return ["num_gears", "gear_one_size", "gear_one_polishing", "gear_two_size", "gear_two_polishing", "gear_three_size", "gear_three_polishing"]
+        
 
     def slot_mappings(self) -> Dict[Text, Union[Dict, List[Dict]]]:
         """A dictionary to map required slots to
@@ -50,21 +55,37 @@ class OrderGearboxForm(FormAction):
                 self.from_intent(intent="deny", value="None"),
             ],
             "gear_one_polishing": [
-                self.from_entity(entity="gear_one_polishing", intent=["inform", "order_gearbox"]),
+                self.from_entity(entity="gear_one_polishing", intent=["inform"]),
                 self.from_intent(intent="affirm", value=True),
                 self.from_intent(intent="deny", value=False),
             ],
             "gear_two_polishing": [
-                self.from_entity(entity="gear_two_polishing", intent=["inform", "order_gearbox"]),
+                self.from_entity(entity="gear_two_polishing", intent=["inform"]),
                 self.from_intent(intent="affirm", value=True),
                 self.from_intent(intent="deny", value=False),
             ],
             "gear_three_polishing": [
-                self.from_entity(entity="pgear_three_polishing", intent=["inform", "order_gearbox"]),
+                self.from_entity(entity="pgear_three_polishing", intent=["inform"]),
                 self.from_intent(intent="affirm", value=True),
                 self.from_intent(intent="deny", value=False),
             ]
         }
+        
+    def validate_num_gears(self,
+                         value: Text,
+                         dispatcher: CollectingDispatcher,
+                         tracker: Tracker,
+                         domain: Dict[Text, Any]) -> Optional[Text]:
+        """Validate cuisine value."""
+
+        if tracker.get_slot('num_gears') in ["one", "two", "three"] :
+            # validation succeeded
+            return value
+        else:
+            dispatcher.utter_template('utter_wrong_gear_num', tracker)
+            # validation failed, set this slot to None, meaning the
+            # user will be asked for the slot again
+            return None
 
     def submit(
         self,
