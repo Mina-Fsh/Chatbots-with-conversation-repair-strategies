@@ -97,6 +97,7 @@
 - Wer bin ich
 
 ## synonym:one
+- 1
 - ein
 - einem
 - einer
@@ -105,6 +106,8 @@
 
 ## synonym:two
 - zwei
+- 2
 
 ## synonym:three
 - drei
+- 3
