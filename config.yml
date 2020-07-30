@@ -1,6 +1,4 @@
-# Configuration for Rasa NLU.
-# https://rasa.com/docs/rasa/nlu/components/
-language: de
+language: en
 pipeline:
   - name: WhitespaceTokenizer
   - name: RegexFeaturizer
@@ -11,27 +9,24 @@ pipeline:
     min_ngram: 1
     max_ngram: 4
   - name: DIETClassifier
-    epochs: 150
-    random_seed: 1
+    epochs: 100
   - name: EntitySynonymMapper
-  - name: ResponseSelector
-    epochs: 100
   - name: DucklingHTTPExtractor
-    url: http://0.0.0.0:8000
-    dimensions: time
-    timezone: Europe/Berlin
+    url: http://localhost:8000
+    dimensions:
+    - amount-of-money
+    - time
+    - number
+  - name: "SpacyNLP"
+    model: "en_core_web_md"
+  - name: "SpacyEntityExtractor"
+    dimensions: ["PERSON"]
 
-# Configuration for Rasa Core.
-# https://rasa.com/docs/rasa/core/policies/
 policies:
-  - name: AugmentedMemoizationPolicy
-    max_history: 4
-  - name: TEDPolicy
-    max_history: 4
-    epochs: 100
-  - name: MappingPolicy
-  - name: FallbackPolicy
-    nlu_threshold: 0.6
-    core_threshold: 0.6
-    fallback_action_name: "action_default_fallback"
-  - name: FormPolicy
+- name: FallbackPolicy
+  nlu_threshold: 0.75
+- name: AugmentedMemoizationPolicy
+- name: FormPolicy
+- name: MappingPolicy
+- name: TEDPolicy
+  epochs: 20
