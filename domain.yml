@@ -206,6 +206,16 @@ responses:
         \n- Pay off my credit card
         \n- What did I spend at Target last month?
         \n- I need to transfer money"
+    utter_restart:
+    - text: Loading... And I've been restarted! 🤯
+    - text: Congrats you've restarted me! 😉
+    utter_restart_with_button:
+    - buttons:
+      - payload: /restart
+        title: Restart
+      text: Click the button below if you want to start over.
+    utter_ask_rephrase:
+    - text: Can you rephrase the question?
 actions:
 - action_account_balance
 - action_session_start
@@ -214,6 +224,8 @@ actions:
 - action_recipients
 - action_handoff
 - action_handoff_options
+- action_default_ask_affirmation
+- action_default_fallback
 forms:
 - cc_payment_form
 - transfer_form
