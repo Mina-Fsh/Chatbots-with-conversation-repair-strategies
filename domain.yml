@@ -200,22 +200,20 @@ responses:
   utter_ask_whatelse:
   - text: What else can I help you with?
   utter_help:
-    - text: "I can help you with your financial accounts.
+  - text: "I can help you with your financial accounts.
         \nYou can ask me things like:
         \n- What's my account balance?
         \n- Pay off my credit card
         \n- What did I spend at Target last month?
         \n- I need to transfer money"
-    utter_restart:
-    - text: Loading... And I've been restarted! 🤯
-    - text: Congrats you've restarted me! 😉
-    utter_restart_with_button:
-    - buttons:
-      - payload: /restart
-        title: Restart
-      text: Click the button below if you want to start over.
-    utter_ask_rephrase:
-    - text: Can you rephrase the question?
+  utter_restart:
+  - text: Loading... And I've been restarted! 🤯
+  - text: Congrats you've restarted me! 😉
+  utter_restart_with_button:
+  - buttons:
+    - payload: /restart
+      title: Restart
+    text: Click the button below if you want to start over.
 actions:
 - action_account_balance
 - action_session_start
