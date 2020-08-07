@@ -26,9 +26,9 @@ intents:
 - restart
 - trigger_handoff
 - human_handoff
-- handoff:
-    triggers: utter_greet
+- handoff
 - help
+- trigger_rephrase
 
 entities:
 - amount-of-money
