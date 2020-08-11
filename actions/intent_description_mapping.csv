@@ -1,2 +1,16 @@
 intent,button,entities
 affirm,Yes,
+deny,No,
+goodbye,Bye Bye,
+greet,Hello,
+thankyou,Thank you,
+help,Help me,
+inform,Inform,
+ask_transfer_charge,Transaction cost,
+check_balance,Account balance,
+check_earnings,Earning balance,
+pay_cc,Pay may card,
+search_transactions,Search transactions,
+transfer_money,Transfer money,
+check_recipients,Recipient list
+human_handoff,Connection to a real agent,

@@ -19,6 +19,7 @@
 - is there a transfer fee
 - is there a xfer fee
 - how much is the transfer fee
+- transaction cost
 
 ## intent:check_balance
 - How much money is on my account?
@@ -33,6 +34,7 @@
 - what's my account balance
 - what's my balance?
 - whats my account balance
+- Account balance
 - What's my [credit card](account_type) balance
 - What's my [credit](account_type) balance
 - How much money do I owe on my [credit cards](account_type)
@@ -205,6 +207,7 @@
 - can I look at past transactions
 - I want to search my transactions with [amazon](vendor_name)
 - can i seem my transactions with [target](vendor_name)
+- search transactions
 
 ## intent:thankyou
 - thank you goodbye
@@ -241,6 +244,7 @@
 - Pay Karen 60 Euros
 - pay Lisa $60
 - transfer $60 to Sally
+- transfer money
 
 ## intent:check_recipients
 - Who can I send money to?
@@ -253,6 +257,7 @@
 - who can I transfer money?
 - who's in my recipient list?
 - who can I transfer money to?
+- recipient list
 
 ## intent:help
 - help

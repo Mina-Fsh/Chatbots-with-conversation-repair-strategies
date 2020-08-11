@@ -4,5 +4,5 @@ pytz~=2019.3
 pandas~=0.24.1
 spacy~=2.1.9
 beautifulsoup4~=4.6.3
-requests~=2.21.0
+requests~=2.23.0
 ruamel.yaml
