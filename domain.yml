@@ -215,6 +215,8 @@ responses:
       title: Restart
     text: Click the button below if you want to start over.
 actions:
+- action_default_ask_affirmation
+- action_default_fallback
 - action_account_balance
 - action_session_start
 - action_restart
@@ -222,8 +224,6 @@ actions:
 - action_recipients
 - action_handoff
 - action_handoff_options
-- action_default_ask_affirmation
-- action_default_fallback
 forms:
 - cc_payment_form
 - transfer_form
