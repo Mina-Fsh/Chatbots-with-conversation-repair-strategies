@@ -682,7 +682,8 @@ class ActionDefaultAskAffirmation(Action):
                 )
 
         buttons.append(
-            {"title": "Something else", "payload": "/trigger_rephrase"}
+            {"title": "Connect me to a human agent", "payload": "/trigger_handoff"},
+            {"title": "Something else", "payload": "/trigger_rephrase"},
         )
 
         dispatcher.utter_message(text=message_title, buttons=buttons)
