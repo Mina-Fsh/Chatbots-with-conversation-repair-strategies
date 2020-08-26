@@ -196,7 +196,7 @@ responses:
   utter_wouldve_handed_off:
   - text: If you were talking to me via chatroom, I would have handed you off to {handoffhost}. 
   utter_no_handoff:
-  - text: Since you haven't configured a host to hand off to, I can't send you anywhere!
+  - text: Since you haven't configured a host to hand off to, I can't send you anywhere! Please contact the phone number 01234567.
   utter_ask_whatelse:
   - text: What else can I help you with?
   utter_help:
