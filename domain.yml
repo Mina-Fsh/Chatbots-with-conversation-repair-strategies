@@ -4,9 +4,9 @@ session_config:
 
 intents:
 - chitchat:
-  use_entities: []
+    use_entities: []
 - faq:
-  use_entities: ["product"]
+    use_entities: ["product"]
 - greet
 - affirm
 - deny
@@ -17,8 +17,8 @@ intents:
 - thank
 - feedback
 - out_of_scope:
-  triggers: respond_out_of_scope
-  use_entities: []
+    triggers: respond_out_of_scope
+    use_entities: []
 - transfer_money:
     use_entities: []
 - inform
@@ -39,7 +39,7 @@ intents:
 - trigger_handoff
 - human_handoff
 - handoff:
-  triggers: utter_greet
+    triggers: utter_greet
 - trigger_rephrase
 
 entities:
@@ -64,6 +64,13 @@ slots:
     type: unfeaturized
   name:
     type: text
+  product:
+    type: categorical
+    values:
+    - bank account
+    - visa card
+    - master card
+    - credit card
   feedback_message:
     type: unfeaturized
   feedback_value:
@@ -172,6 +179,10 @@ responses:
   - text: 👍
   - text: Okay.
   - text: Got it.
+  utter_can_do:
+  - text: Sure thing!
+  - text: Can do!
+  - text: You got it. 👍
   utter_ask_feedback:
   - buttons:
     - payload: /feedback{"feedback_value":"positive"}
@@ -200,6 +211,8 @@ responses:
   - text: Ok, what can I help you with?
   utter_ask_whatelse:
   - text: What else can I help you with?
+  utter_anything_else:
+  - text: Is there anything else I can help you with?
   utter_help:
   - text: "I can help you with your financial accounts.
         \nYou can ask me things like:

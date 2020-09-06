@@ -1,6 +1,6 @@
 ## chitchat
 * human_handoff
-    - utter_contact_email
+    - utter_ask_handoff
 
 ## greet + handoff
 * greet

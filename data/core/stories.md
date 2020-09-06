@@ -31,7 +31,7 @@
     - utter_anything_else
 * inform
     - utter_not_sure
-    - utter_possibilities
+    - utter_help
 
 ## positive reaction
 * react_positive
