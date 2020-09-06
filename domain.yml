@@ -1,17 +1,29 @@
 session_config:
-  session_expiration_time: 0
+  session_expiration_time: 30
   carry_over_slots_to_new_session: true
+
 intents:
+- chitchat:
+  use_entities: []
+- faq:
+  use_entities: ["product"]
+- greet
+- affirm
+- deny
+- bye
+- canthelp
+- react_negative
+- react_positive
+- thank
+- feedback
+- out_of_scope:
+  triggers: respond_out_of_scope
+  use_entities: []
 - transfer_money:
     use_entities: []
 - inform
 - pay_cc:
     use_entities: []
-- greet
-- goodbye
-- affirm
-- deny
-- thankyou
 - ask_transfer_charge
 - search_transactions:
     use_entities: []
@@ -26,11 +38,16 @@ intents:
 - restart
 - trigger_handoff
 - human_handoff
-- handoff
-- help
+- handoff:
+  triggers: utter_greet
 - trigger_rephrase
 
 entities:
+- name
+- product
+- location
+- company
+- feedback_value
 - amount-of-money
 - payment_amount
 - credit_card
@@ -41,7 +58,19 @@ entities:
 - number
 - account_type
 - handoff_to
+
 slots:
+  company:
+    type: unfeaturized
+  name:
+    type: text
+  feedback_message:
+    type: unfeaturized
+  feedback_value:
+    type: categorical
+    values:
+    - positive
+    - negative
   PERSON:
     type: unfeaturized
   account_balance:
@@ -92,15 +121,104 @@ slots:
     type: unfeaturized
   handoff_to:
     type: unfeaturized
+
 responses:
+  utter_greet:
+  - text: Hey there, I'm your PAY Bank financial assistant.
+  utter_greet_name:
+  - text: Hi, {name}!
+  - text: Hello, {name}!
+  - text: Hey, {name}!
+  utter_greet_noname:
+  - text: Hey!
+  - text: Hi!
+  - text: Hey there!
+  utter_bye:
+  - text: Goodbye!
+  - text: Bye!
+  - text: Ciao!
+  - text: Bye, was nice talking to you!
+  - text: Bye bye!
+  utter_great:
+  - text: Great! 👍
+  - text: That's great! 🙌
+  - text: Awesome! 🎉
+  - text: Cool, let's do it 🚀
+  utter_awesome:
+  - text: Awesome, thanks! 👍
+  - text: Sweet, thank you! 😄
+  - text: Thanks! 👌
+  - text: Cool, thank you!
+  utter_nohelp:
+  - text: For now that's all I can do, so feel free to try it out. If you have any
+      suggestions for what I should learn, let me know!
+  utter_not_sure:
+  - text: Hmm, not sure what you mean...
+  utter_noworries:
+  - text: No worries!
+  - text: You're welcome!
+  - text: I'm happy to help.
+  utter_react_negative:
+  - text: 😕
+  - text: 😞
+  - text: 😥
+  - text: 😢
+  utter_react_positive:
+  - text: 😄
+  - text: 😊
+  - text: 👏
+  - text: 😍
+  utter_thumbsup:
+  - text: 👍
+  - text: Okay.
+  - text: Got it.
+  utter_ask_feedback:
+  - buttons:
+    - payload: /feedback{"feedback_value":"positive"}
+      title: 👍
+    - payload: /feedback{"feedback_value":"negative"}
+      title: 👎
+    text: How is this conversation going?
+  utter_ask_feedback_message:
+  - text: I'm sorry I couldn't help you. Please let me know if you have any suggestions
+      for how I can improve.
+  utter_restart_with_button:
+  - buttons:
+    - payload: /restart
+      title: Restart
+    text: Click the button below if you want to start over.
+  utter_restart:
+  - text: Loading... And I've been restarted! 🤯
+  - text: Congrats you've restarted me! 😉
+  utter_canthelp:
+  - text: I'm sorry I couldn't help you. If you have general questions about Rasa,
+      please head to our [forum](https://forum.rasa.com/), otherwise contact us at
+      [hi@rasa.com](mailto:hi@rasa.com) for anything else.
+  utter_ask_continue:
+  - text: Would you like to continue?
+  utter_what_help:
+  - text: Ok, what can I help you with?
+  utter_ask_whatelse:
+  - text: What else can I help you with?
+  utter_help:
+  - text: "I can help you with your financial accounts.
+        \nYou can ask me things like:
+        \n- What's my account balance?
+        \n- Pay off my credit card
+        \n- What did I spend at Target last month?
+        \n- I need to transfer money"
+  utter_default:
+    - text: Sorry, I didn't get that 🤷. Could you please rephrase?
+    - text: I didn't understand, could you rephrase that?
+    - text: I'm sorry, but I didn't understand you. Could you please rephrase what you
+        just said?
+    - text: I'm afraid I didn't get what you just said. Could you rephrase that?
+    - text: I didn't quite get that, could you rephrase your message?
+    - text: Could you rephrase your message? I didn't get it, I'm sorry.
   utter_ask_transfer_form_amount_of_money:
   - text: How much money do you want to transfer?
   utter_ask_transfer_form_PERSON:
   - text: Who do you want to transfer money to?
-  utter_goodbye:
-  - text: Bye
-  utter_noworries:
-  - text: You're welcome :)
   utter_transfer_complete:
   - text: Successfully transferred {currency}{amount_of_money} to {PERSON}.
   utter_transfer_charge:
@@ -140,7 +258,7 @@ responses:
   utter_found_deposit_transactions:
   - text: I found {numtransacts} deposits made to your account totalling {currency}{total}
   utter_ask_rephrase:
-  - text: I didn't quite understand that. Can you rephrase?
+  - text: I didn't quite understand that. Can you rephrase the question?
   utter_ask_switch_goal:
   - text: We haven't completed the transaction search yet. Are you sure you want to
       switch to transfer money?
@@ -151,10 +269,6 @@ responses:
   utter_ok:
   - text: 👍
   - text: ok
-  utter_ask_continue:
-  - text: Would you like to continue?
-  utter_default:
-  - text: Sorry, I didn't get that. Could you rephrase?
   utter_ask_cc_payment_form_confirm:
   - buttons:
     - payload: /affirm
@@ -187,8 +301,12 @@ responses:
   - text: The current balance for your {credit_card} account is {currency}{amount_of_money}.
   utter_recipients:
   - text: These are your known recpients to whom you can send money:{formatted_recipients}
-  utter_greet:
-  - text: Hi! I'm your Financial Assistant! 
+  utter_ask_continue_cc_payment:
+  - text: Do you still want to pay for your credit card account?
+  utter_ask_continue_transfer:
+  - text: Do you want to go ahead with transfering {currency}{amount_of_money} to {PERSON}?
+  utter_ask_continue_transact_search:
+  - text: Do you still want to search your transactions?
   utter_ask_handoff:
   - text: It looks like you want to be transferred to a human agent.
   utter_handoff:
@@ -197,33 +315,25 @@ responses:
   - text: If you were talking to me via chatroom, I would have handed you off to {handoffhost}. 
   utter_no_handoff:
   - text: Since you haven't configured a host to hand off to, I can't send you anywhere! Please contact the phone number 01234567.
-  utter_ask_whatelse:
-  - text: What else can I help you with?
-  utter_help:
-  - text: "I can help you with your financial accounts.
-        \nYou can ask me things like:
-        \n- What's my account balance?
-        \n- Pay off my credit card
-        \n- What did I spend at Target last month?
-        \n- I need to transfer money"
-  utter_restart:
-  - text: Loading... And I've been restarted! 🤯
-  - text: Congrats you've restarted me! 😉
-  utter_restart_with_button:
-  - buttons:
-    - payload: /restart
-      title: Restart
-    text: Click the button below if you want to start over.
+        
 actions:
 - action_default_ask_affirmation
 - action_default_fallback
 - action_account_balance
 - action_session_start
-- action_restart
 - action_credit_card_balance
 - action_recipients
 - action_handoff
 - action_handoff_options
+- action_greet_user
+- action_restart
+- action_pause
+- action_tag_feedback
+- utter_greet
+- respond_chitchat
+- respond_faq
+- respond_out_of_scope
+
 forms:
 - cc_payment_form
 - transfer_form

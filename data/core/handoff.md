@@ -1,9 +1,15 @@
-## handoff
+## chitchat
 * human_handoff
-  - utter_ask_handoff
-  - action_handoff_options
+    - utter_contact_email
+
+## greet + handoff
+* greet
+    - action_greet_user
+* human_handoff
+    - utter_ask_handoff
+    - action_handoff_options
 * trigger_handoff
-  - action_handoff
+    - action_handoff
 
 ## handoff
 * human_handoff
@@ -18,3 +24,4 @@
   - action_handoff_options
 * deny
   - utter_ask_whatelse
+

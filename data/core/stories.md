@@ -1,11 +1,52 @@
 ## greet/bye path
 * greet
-  - utter_greet
+  - action_greet_user
   - utter_help
 
-## say goodbye
-* goodbye
-  - utter_goodbye
+## thanks
+* thank
+    - utter_noworries
+    - utter_anything_else
+
+## bye
+* bye
+    - utter_bye
+
+## greet
+* greet OR inform{"name": "akela"}
+    - action_greet_user
+    - utter_help
+
+## anything else? - yes
+    - utter_anything_else
+* affirm
+    - utter_what_help
+
+## anything else? - no
+    - utter_anything_else
+* deny
+    - utter_thumbsup
+
+## anything else?
+    - utter_anything_else
+* inform
+    - utter_not_sure
+    - utter_possibilities
+
+## positive reaction
+* react_positive
+    - utter_react_positive
+
+## negative reaction
+* react_negative
+    - utter_react_negative
+
+## neither 
+* greet
+    - action_greet_user
+    - utter_help
+* deny
+    - utter_nohelp
 
 ## pay credit card and check account balance
 * pay_cc
@@ -31,12 +72,13 @@
     - cc_payment_form
     - form{"name": "cc_payment_form"}
     - form{"name": null}
-* thankyou
+* thank
     - utter_noworries
+    - utter_anything_else
 
 ## pay credit card happy path
 * greet
-    - utter_greet
+    - action_greet_user
     - utter_help
 * pay_cc
     - cc_payment_form
@@ -155,6 +197,12 @@
     - form{"name": "transfer_form"}
     - form{"name":null}
     - slot{"requested_slot":null}
+    - utter_ask_feedback
+* feedback{"feedback_value": "positive"}
+    - slot{"feedback_value": "positive"}
+    - action_tag_feedback
+    - utter_great
+    - utter_anything_else
 
 ## transfer money ask account balance
 * transfer_money
@@ -215,22 +263,24 @@
 
 ## search transactions happy path
 * greet
-    - utter_greet
+    - action_greet_user
     - utter_help
 * search_transactions
     - transact_search_form
     - form{"name": "transact_search_form"}
     - form{"name": null}
-* thankyou
+* thank
     - utter_noworries
+    - utter_anything_else
 
 ## search transactions happy path no greet
 * search_transactions
     - transact_search_form
     - form{"name": "transact_search_form"}
     - form{"name": null}
-* thankyou
+* thank
     - utter_noworries
+    - utter_anything_else
 
 ## search transactions happy path no greet or thanks
 * search_transactions OR check_earnings
@@ -290,7 +340,6 @@
     - slot{"requested_slot":null}
 
 ## Pay CC ask account balance
-
 * pay_cc
     - cc_payment_form
     - form{"name":"cc_payment_form"}
@@ -303,7 +352,6 @@
     - slot{"requested_slot":null}
 
 ## Pay CC ask account balance
-
 * pay_cc
     - cc_payment_form
     - form{"name":"cc_payment_form"}
@@ -357,6 +405,94 @@
 * check_balance{"account_type":"credit","credit_card":"emblem"}
     - action_credit_card_balance
 
-## help
-* help
+## greet, transfer money, feedback
+* greet OR inform{"name": "akela"}
+    - action_greet_user
     - utter_help
+* transfer_money
+    - transfer_form
+    - form{"name":"transfer_form"}
+    - utter_ask_feedback
+* feedback{"feedback_value": "positive"}
+    - slot{"feedback_value": "positive"}
+    - action_tag_feedback
+    - utter_great
+    - utter_anything_else
+
+## newsletter then sales
+* greet
+    - action_greet_user
+    - utter_help
+* transfer_money
+    - transfer_form
+    - form{"name":"transfer_form"}
+* pay_cc
+    - cc_payment_form
+    - form{"name":"cc_payment_form"}
+    - form{"name": null}
+    - utter_ask_back_to_transfer
+* affirm
+    - transfer_form
+    - form{"name":"transfer_form"}
+    - form{"name": null}
+    - utter_ask_feedback
+* feedback{"feedback_value": "positive"}
+    - slot{"feedback_value": "positive"}
+    - action_tag_feedback
+    - utter_great
+    - utter_anything_else
+
+## newsletter, confirm, then sales
+* greet
+    - action_greet_user
+    - utter_help
+* check_recipients
+    - action_recipients
+* check_balance{"account_type":"credit"}
+    - action_credit_card_balance
+    - utter_ask_feedback
+* feedback{"feedback_value": "negative"}
+    - slot{"feedback_value": "negative"}
+    - action_tag_feedback
+    - utter_thumbsup
+    - utter_anything_else
+* transfer_money
+    - transfer_form
+    - form{"name":"transfer_form"}
+    - utter_ask_feedback
+* feedback{"feedback_value": "positive"}
+    - slot{"feedback_value": "positive"}
+    - action_tag_feedback
+    - utter_great
+    - utter_anything_else
+
+## chitchat --> transfer money --> no email
+* greet
+    - action_greet_user
+* chitchat
+    - respond_chitchat
+* chitchat
+    - respond_chitchat
+* chitchat
+    - respond_chitchat
+* chitchat
+    - respond_chitchat
+* transfer_money
+    - transfer_form
+    - form{"name":"transfer_form"}
+    - utter_ask_feedback
+* feedback{"feedback_value": "negative"}
+    - slot{"feedback_value": "negative"}
+    - action_tag_feedback
+    - utter_thumbsup
+    - utter_anything_else
+    
+
+
+
+
+
+
+
+
+

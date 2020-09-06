@@ -1,14 +1,3 @@
-## intent:affirm
-- indeed
-- correct
-- that sounds good
-- yes
-- of course
-- yup
-- yeah
-- yes please
-- yes plz
-
 ## intent:ask_transfer_charge
 - Will I be charged for transferring money
 - do transfers cost something?
@@ -73,31 +62,6 @@
 - how much was deposited in January
 - how much money have I earned?
 
-## intent:deny
-- not really
-- no
-- I don't think so
-- never
-- no way
-- nope
-- no thanks
-
-## intent:goodbye
-- see you later
-- goodbye
-- i'm done
-- quit
-- stop
-- bye
-
-## intent:greet
-- good morning
-- hi
-- hey there
-- hey
-- good evening
-- hello
-
 ## intent:inform
 - $10
 - 5000
@@ -106,6 +70,43 @@
 - $500
 - 100 dollars
 - 1000 dollars
+- $0.00
+- $1000
+- 0
+- 1 million
+- 1 million big ones
+- 10 m
+- 1000000
+- 100000
+- 1000
+- 100
+- 10
+- 10k
+- 120000
+- 1231
+- 12
+- 2 million
+- 200 bucks
+- 200000000
+- 20000
+- 20000k
+- 2000k
+- 200k
+- 25,000
+- 300 rupees
+- 300000
+- 300k
+- 3
+- 500 million
+- 500000
+- 5000
+- 500k
+- 50 p
+- 5 quid
+- 6000000
+- 900 dollars
+- 90k
+- 99
 - tomorrow
 - next week
 - yesterday
@@ -164,6 +165,31 @@
 - for saturday
 - I want to pay the [minimum balance](payment_amount) on my [emblem](credit_card) [credit card](account_type) today
 - today
+- I am [Christina Sullivan](name)
+- I am [Hattie Rice](name)
+- I am [Robert Starks](name)
+- I am [Aniket](name)
+- My name is [Ashleigh Mees](name)
+- My name is [chelsea Parker](name)
+- My name is [jessie maglione](name)
+- My name is [Kenneth Sherman](name)
+- My name is [Lee George](name)
+- My name is [Louise Caudill](name)
+- My name is [Richard smith](name)
+- My name is [Shane Goodyear](name)
+- My name is [Sondra Boyd](name)
+- My name si [tom Harbin](name)
+- My name is [manuel](name)
+- [Elise](name)
+- [Jamie Moore](name)
+- [Jane Baines](name)
+- [John Strickland](name)
+- [Michele Perry](name)
+- [Michelle Garcia](name)
+- [Michelle Vinion](name)
+- [Mr. Sweney](name)
+- [Terri Cline](name)
+- [William Zelkind](name)
 
 ## intent:pay_cc
 - I would like to pay the [minimum balance](payment_amount) on my [embelm](credit_card) card
@@ -209,18 +235,6 @@
 - can i seem my transactions with [target](vendor_name)
 - search transactions
 
-## intent:thankyou
-- thank you goodbye
-- okay thank you goodbye
-- thank you bye
-- um okay thank you good bye
-- thank you
-- and thats all thank you and good bye
-- okay thank you
-- thanks
-- thanks goodbye
-- thank you and good bye
-
 ## intent:transfer_money
 - I want to pay John
 - I want to transfer $100 to Bob
@@ -259,16 +273,6 @@
 - who can I transfer money to?
 - recipient list
 
-## intent:help
-- help
-- what can you do?
-- what can I ask you?
-- what do you do?
-- what can you help me with?
-- help me
-- help, what do you do
-- how do I use this
-
 ## intent:human_handoff
 - I want a human 
 - can I speak to an agent
@@ -277,7 +281,86 @@
 - chat with a live agent
 - give me a person please
 - i want to talk to a human
+- Can I speak to anyone who can really help me?
+- Could I talk to [Tyrone King](name)?
+- I don't wanna talk to a bot
+- I dont like to talk to a machine
+- I want to talk to a human
+- I want to talk to the founders
+- are there also humans working for your company?
+- can I speak to a person?
+- can i please speak to a human?
+- can you forward me to your team
+- can you please connect me to a real rasa employee?
+- can you put me in touch with a human?
+- do you have human support ?
+- gimme a proper human
+- give me a human
+- give me a human now
+- human handoff
+- i dont wanna talk to a bot
+- i want to speak to a real person
+- i want to speak to customer service
+- i want to talk to a human
+- i want to talk to a person
+- i want to talk to human
+- i want to talk to someone at rasa
+- i want to talk to someone else
+- i want to talk to someone who is smarter than you
+- i would like to speak to a person
+- i'd rather speak with a real rasa employee
+- id like to talk to a real rasa employee
+- let me speak with a real person please
+- let me talk to a human
+- let me talk to a real person
+- please give me a human
+- service agent
+- someone from customer care
+- speak to a real person
+- talking to a bot is stupid
+- that's annoying I'd like to speak to someone real
+- thats not helping, can i talk to human?
+- wrong i want to speak to a human
+- can i speak to human
+- can i speak to your human
+- i want to chat with human
+- How do I talk to a human
+- talk with a human
+- Can i talk to a human instead
+- nevermind.... you're not human ... I need to talk to a live person
+- Can you get a human to assist me?
+- Can i talk to a human?
+- Can I talk to a human
+- Can I speak to a human?
+- can i speak to a human
+- no, i want to talk to human
+- can you hand a conversation over to a human?
+- can I talk to human?
+- can I talk to human
+- talk to human
+- i want human :(
+- can i talk to human
+- i want to talk to a human \
+- i want to speak to human
+- can i talk to a real person?
+- connect me to a real person
+- I need a real person
+- can i took with a real person
+- let me speak to a real person
+- let me speak to a real person please
+- i want to talk to a real person
 
+## intent:restart
+- yep you can restart
+- Please restart this chat/
+- ok restart please
+- please restart the bot
+- restart this conversation
+- i want to restart
+- why don't you restart????
+- hey, i said restart
+- restart session pls
+- restart ps
 
 ## synonym:emblem
 - emblm
@@ -289,3 +372,61 @@
 - credit account
 - credit accounts
 
+## synonym:english
+- English
+- en
+- eng
+- Eng
+- ENGLISH
+
+## synonym: duration
+- durations
+- how long
+
+## synonym:USA
+- US
+- United States
+- U.S.
+- usa
+
+## synonym:United Kingdom
+- UK
+- U.K.
+
+## synonym:all
+- both
+
+## synonym:date
+- dates
+
+## synonym:english
+- English
+- en
+- eng
+- Eng
+- ENGLISH
+
+## synonym:money
+- amounts
+
+## synonym:name
+- names
+
+## synonym:PAY bank
+- pay bank
+- PAY BANK
+- paybank
+- PAY
+- your bank
+
+## regex:greet
+- hey[^\s]*
+
+## regex:zipcode
+- [0-9]{5}
+
+## lookup:location.txt
+data/nlu/lookups/location.txt
+
+## lookup:products.txt
+data/nlu/lookups/products.txt
