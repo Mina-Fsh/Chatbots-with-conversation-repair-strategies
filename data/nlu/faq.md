@@ -68,7 +68,7 @@
 - should i pay to get it?
 - should i pay for your [Visa card](product)
 
-## synonym:visa Card
+## synonym:visa card
 - visa card
 - visa card
 - Visa card
@@ -78,7 +78,7 @@
 - Visa credit card
 - VISA card
 
-## synonym:master Card
+## synonym:master card
 - master card
 - MASTER
 - MASTER card
@@ -87,7 +87,7 @@
 - Master credit card
 - MASTER credit card
 
-## synonym:credit Card
+## synonym:credit
 - Credit card
 - credit
 - credit card
@@ -99,7 +99,7 @@
 - Account
 - acount
 
-## synonym:pay bank
+## synonym:PAY bank
 - PAY bank
 - your bank
 - bank
