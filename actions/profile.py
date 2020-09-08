@@ -38,9 +38,14 @@ def create_mock_profile():
         "lisa macintyre",
     ]
     vendor_db = [
-        "target",
+        "Saturn",
         "starbucks",
         "amazon",
+        "rewe",
+        "lidl",
+        "aldi",
+        "penny",
+        "netto",
     ]
 
     start_date = utc.localize(datetime(2019, 1, 1))
