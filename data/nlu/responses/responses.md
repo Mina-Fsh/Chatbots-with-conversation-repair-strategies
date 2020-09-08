@@ -119,11 +119,16 @@
 
 ## chitchat
 * chitchat/ask_whatspossible 
-  -  You can ask me about how to get started with Rasa, the difference between Rasa and Rasa X, subscribing to our newsletter or booking a sales call.
+  -  I can help you with your financial accounts.
+        \nYou can ask me things like:
+        \n- What's my account balance?
+        \n- Pay off my credit card
+        \n- What did I spend at Target last month?
+        \n- I need to transfer money
 
 ## chitchat
 * chitchat/ask_wherefrom 
-  -  I was born in Bremen, but I consider myself a citizen of the world.
+  -  I was born in Bremen, Germany. But I consider myself a citizen of the world.
   -  My developers come from all over the world!
   -  I was taught not to give out my address on the internet.
   -  My address starts with github.com.

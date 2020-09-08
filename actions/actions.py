@@ -609,7 +609,7 @@ class ActionPause(Action):
         return [ConversationPaused()]
 
 class ActionGreetUser(Action):
-    """Greets the user with/without privacy policy"""
+    """Greets the user with/without Name"""
 
     def name(self) -> Text:
         return "action_greet_user"
@@ -618,12 +618,13 @@ class ActionGreetUser(Action):
         intent = tracker.latest_message["intent"].get("name")
         name_entity = next(tracker.get_latest_entity_values("name"), None)
         if intent == "greet" or (intent == "enter_data" and name_entity):
-            dispatcher.utter_message(template="utter_greet_name", name=name_entity)
-            return []
-        else:
-            dispatcher.utter_message(template="utter_greet_noname")
-            return []
-
+            if name_entity is not None:
+                dispatcher.utter_message(template="utter_greet_name", name=name_entity)
+                return []
+            else:
+                dispatcher.utter_message(template="utter_greet_noname")
+                return []
+        return []
 
 class ActionDefaultAskAffirmation(Action):
     """Asks for an affirmation of the intent if NLU threshold is not met."""
