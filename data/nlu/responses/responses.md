@@ -119,12 +119,7 @@
 
 ## chitchat
 * chitchat/ask_whatspossible 
-  -  I can help you with your financial accounts.
-        \nYou can ask me things like:
-        \n- What's my account balance?
-        \n- Pay off my credit card
-        \n- What did I spend at Target last month?
-        \n- I need to transfer money
+  -  I can help you with your financial accounts. You can ask me things like: What's my account balance? Pay off my credit card! What did I spend at Amazon last month?
 
 ## chitchat
 * chitchat/ask_wherefrom 
