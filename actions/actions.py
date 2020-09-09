@@ -23,7 +23,9 @@ from actions.parsing import (
     get_entity_details,
     parse_duckling_currency,
 )
+
 from actions.profile import create_mock_profile
+from actions import config
 from dateutil import parser
 
 INTENT_DESCRIPTION_MAPPING_PATH = "actions/intent_description_mapping.csv"
@@ -129,7 +131,7 @@ class PayCCForm(FormAction):
             return {
                 "payment_amount": f"{amount:.2f}",
                 "payment_amount_type": amount_type,
-                "currency": "$",
+                "currency": "€",
             }
 
         else:

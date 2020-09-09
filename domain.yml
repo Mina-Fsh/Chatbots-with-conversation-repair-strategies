@@ -193,9 +193,7 @@ responses:
   - text: Loading... And I've been restarted! 🤯
   - text: Congrats you've restarted me! 😉
   utter_canthelp:
-  - text: I'm sorry I couldn't help you. If you have general questions about Rasa,
-      please head to our [forum](https://forum.rasa.com/), otherwise contact us at
-      [hi@rasa.com](mailto:hi@rasa.com) for anything else.
+  - text: I'm sorry I couldn't help you. I'm still learning, hopefully next time you talk to me, I can answer this request.
   utter_ask_continue:
   - text: Would you like to continue?
   utter_what_help:

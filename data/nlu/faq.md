@@ -25,6 +25,8 @@
 - required documents to open a [bank account](product)
 - tell me the necessary documents
 - what are the requirements
+- how can i apply for it
+- how can I apply for a [credit card](product)
 
 ## intent:faq/required_age
 - required age
@@ -35,6 +37,8 @@
 - can I order an [visa card](product) for my child
 - i want to order a [card](product) for my parents
 - can i open a [bank account](product) for my family members?
+- what is the minimum required age to get it
+- what is the minimum required age to get a [master card](product)
 
 ## intent:faq/cardlimit
 - How high is my [card](product) limit for the first purchase
@@ -67,6 +71,8 @@
 - is it free for students?
 - should i pay to get it?
 - should i pay for your [Visa card](product)
+- Does this product cost?
+- does the [creadit](product)
 
 ## synonym:visa card
 - visa card
@@ -98,6 +104,7 @@
 - Bank account
 - Account
 - acount
+- bank account
 
 ## synonym:PAY bank
 - PAY bank

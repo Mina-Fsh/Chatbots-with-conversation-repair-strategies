@@ -11,25 +11,24 @@ utc = pytz.UTC
 
 
 def create_mock_profile():
-    currency = "$"
+    currency = "€"
     account_balance = 0
 
     credit_card_balance = {}
     transaction_history = {"spend": {}, "deposit": {}}
 
     credit_card_db = [
-        "iron bank",
-        "credit all",
-        "emblem",
-        "justice bank",
+        "credit card",
+        "master card",
+        "visa card",
     ]
     deposit_db = [
         "employer",
         "interest",
     ]
     recipient_db = [
-        "katy parrow",
-        "evan oslo",
+        "Mina Foosherian",
+        "Stefan Welsandt",
         "william baker",
         "karen lancaster",
         "kyle gardner",
