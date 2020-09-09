@@ -622,7 +622,7 @@ class ActionGreetUser(Action):
         if intent == "greet" or (intent == "inform" and name_entity):
             if name_entity is not None:
                 dispatcher.utter_message(template="utter_greet_name", name=name_entity)
-                return [SlotSet("PERSON", None)
+                return [SlotSet("PERSON", None)]
             else:
                 dispatcher.utter_message(template="utter_greet_noname")
                 return []
