@@ -117,12 +117,12 @@
 - the last two weeks
 - at [amazon](vendor_name)
 - [starbucks](vendor_name)
-- at [target](vendor_name)
+- at [penny](vendor_name)
 - at [starbucks](vendor_name)
-- [target](vendor_name)
+- [rewe](vendor_name)
 - [Amazon](vendor_name)
 - [Starbucks](vendor_name)
-- [Target](vendor_name)
+- [netto](vendor_name)
 - I want to pay the [current balance](payment_amount)
 - [current balance](payment_amount)
 - [minimum balance](payment_amount)
@@ -165,31 +165,31 @@
 - for saturday
 - I want to pay the [minimum balance](payment_amount) on my [emblem](credit_card) [credit card](account_type) today
 - today
-- I am [Christina Sullivan](name)
-- I am [Hattie Rice](name)
-- I am [Robert Starks](name)
-- I am [Aniket](name)
-- My name is [Ashleigh Mees](name)
-- My name is [chelsea Parker](name)
-- My name is [jessie maglione](name)
-- My name is [Kenneth Sherman](name)
-- My name is [Lee George](name)
-- My name is [Louise Caudill](name)
-- My name is [Richard smith](name)
-- My name is [Shane Goodyear](name)
-- My name is [Sondra Boyd](name)
-- My name si [tom Harbin](name)
-- My name is [manuel](name)
-- [Elise](name)
-- [Jamie Moore](name)
-- [Jane Baines](name)
-- [John Strickland](name)
-- [Michele Perry](name)
-- [Michelle Garcia](name)
-- [Michelle Vinion](name)
-- [Mr. Sweney](name)
-- [Terri Cline](name)
-- [William Zelkind](name)
+- I am Christina Sullivan
+- I am Hattie Rice
+- I am Robert Starks
+- I am Aniket
+- My name is Ashleigh Mees
+- My name is chelsea Parker
+- My name is jessie maglione
+- My name is Kenneth Sherman
+- My name is Lee George
+- My name is Louise Caudill
+- My name is Richard smith
+- My name is Shane Goodyear
+- My name is Sondra Boyd
+- My name si tom Harbin
+- My name is manuel
+- Elise
+- Jamie Moore
+- Jane Baines
+- John Strickland
+- Michele Perry
+- Michelle Garcia
+- Michelle Vinion
+- Mr. Sweney
+- Terri Cline
+- William Zelkind
 
 ## intent:pay_cc
 - I would like to pay the [minimum balance](payment_amount) on my [embelm](credit_card) card
@@ -219,7 +219,7 @@
 - i need to pay off my [emblm](credit_card) [credit card](account_type)
 
 ## intent:search_transactions
-- how much did I spend at [Target](vendor_name) this week?
+- how much did I spend at [Lidl](vendor_name) this week?
 - what is my typical spending at [Amazon](vendor_name)?
 - I want to check my spending history
 - how much did I spend at [Starbucks](vendor_name) last week?
@@ -232,7 +232,7 @@
 - can I search my transaction history
 - can I look at past transactions
 - I want to search my transactions with [amazon](vendor_name)
-- can i seem my transactions with [target](vendor_name)
+- can i seem my transactions with [Rewe](vendor_name)
 - search transactions
 
 ## intent:transfer_money
@@ -282,7 +282,7 @@
 - give me a person please
 - i want to talk to a human
 - Can I speak to anyone who can really help me?
-- Could I talk to [Tyrone King](name)?
+- Could I talk to Tyrone King?
 - I don't wanna talk to a bot
 - I dont like to talk to a machine
 - I want to talk to a human
