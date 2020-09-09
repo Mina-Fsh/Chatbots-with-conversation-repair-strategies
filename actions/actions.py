@@ -616,7 +616,9 @@ class ActionGreetUser(Action):
 
     def run(self, dispatcher, tracker, domain) -> List[EventType]:
         intent = tracker.latest_message["intent"].get("name")
-        name_entity = next(tracker.get_latest_entity_values("name"), None)
+        logger.info("The intent name is: {}".format(intent))
+        name_entity = next(tracker.get_latest_entity_values("PERSON"), None)
+        logger.info("The name entity is: {}".format(name_entity))
         if intent == "greet" or (intent == "inform" and name_entity):
             if name_entity is not None:
                 dispatcher.utter_message(template="utter_greet_name", name=name_entity)
