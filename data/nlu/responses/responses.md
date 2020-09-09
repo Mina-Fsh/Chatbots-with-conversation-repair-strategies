@@ -142,8 +142,8 @@
 
 ## chitchat
 * chitchat/ask_whoisit 
-  -  I'm Sara, the Rasa bot! At the same time I'm also the Rasa mascot 🐦
-  -  I'm both the Rasa bot and the Rasa mascot. My name is Sara!
+  -  I'm Paya, your financial assistant from PAY bank! 
+  -  I'm PAY bank financial assistant. My name is Paya!
 
 
 ## chitchat

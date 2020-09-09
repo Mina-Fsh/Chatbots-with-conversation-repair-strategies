@@ -5,7 +5,7 @@
 ## more faqs
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * faq
     - respond_faq
 * faq
@@ -14,7 +14,7 @@
 ## just check balance
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * faq
     - respond_faq
 * check_balance

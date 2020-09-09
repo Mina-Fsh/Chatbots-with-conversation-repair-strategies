@@ -5,6 +5,7 @@
 ## greet + handoff
 * greet
     - action_greet_user
+    - utter_intro
 * human_handoff
     - utter_ask_handoff
     - action_handoff_options

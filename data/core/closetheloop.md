@@ -1,7 +1,7 @@
 ## story number 1
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * out_of_scope
     - respond_out_of_scope
 pay_cc

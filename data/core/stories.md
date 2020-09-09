@@ -1,7 +1,7 @@
 ## greet/bye path
 * greet
   - action_greet_user
-  - utter_help
+  - utter_intro
 
 ## thanks
 * thank
@@ -13,9 +13,9 @@
     - utter_bye
 
 ## greet
-* greet OR inform{"name": "akela"}
+* greet OR inform{"PESRON": "akela"}
     - action_greet_user
-    - utter_help
+    - utter_intro
 
 ## anything else? - yes
     - utter_anything_else
@@ -31,7 +31,7 @@
     - utter_anything_else
 * inform
     - utter_not_sure
-    - utter_help
+    - utter_intro
 
 ## positive reaction
 * react_positive
@@ -44,7 +44,7 @@
 ## neither 
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * deny
     - utter_nohelp
 
@@ -79,7 +79,7 @@
 ## pay credit card happy path
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * pay_cc
     - cc_payment_form
     - form{"name": "cc_payment_form"}
@@ -264,7 +264,7 @@
 ## search transactions happy path
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * search_transactions
     - transact_search_form
     - form{"name": "transact_search_form"}
@@ -406,9 +406,9 @@
     - action_credit_card_balance
 
 ## greet, transfer money, feedback
-* greet OR inform{"name": "akela"}
+* greet OR inform{"PERSON": "Stefan"}
     - action_greet_user
-    - utter_help
+    - utter_intro
 * transfer_money
     - transfer_form
     - form{"name":"transfer_form"}
@@ -422,7 +422,7 @@
 ## newsletter then sales
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * transfer_money
     - transfer_form
     - form{"name":"transfer_form"}
@@ -445,7 +445,7 @@
 ## newsletter, confirm, then sales
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * check_recipients
     - action_recipients
 * check_balance{"account_type":"credit"}
@@ -469,6 +469,7 @@
 ## chitchat --> transfer money --> no email
 * greet
     - action_greet_user
+    - utter_intro
 * chitchat
     - respond_chitchat
 * chitchat

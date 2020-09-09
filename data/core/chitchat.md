@@ -11,7 +11,7 @@
 ## more chitchat
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * chitchat
     - respond_chitchat
 * chitchat
@@ -20,14 +20,14 @@
 ## greet chitchat
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * chitchat
     - respond_chitchat
 
 ## just check balance + confirm
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * chitchat
     - respond_chitchat
 * check_balance
@@ -40,7 +40,7 @@
 ## transaction search, continue, + confirm
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * search_transactions OR check_earnings
     - transact_search_form
     - form{"name": "transact_search_form"}
@@ -59,7 +59,7 @@
 ## just transaction search, don't continue, + confirm
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * search_transactions OR check_earnings
     - transact_search_form
     - form{"name": "transact_search_form"}
@@ -78,7 +78,7 @@
 ## just transaction search
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * chitchat
     - respond_chitchat
 * search_transactions OR check_earnings
@@ -90,7 +90,7 @@
 ## just transaction search, continue
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * search_transactions OR check_earnings
     - transact_search_form
     - form{"name": "transact_search_form"}
@@ -106,7 +106,7 @@
 ## just newsletter, don't continue
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * search_transactions OR check_earnings
     - transact_search_form
     - form{"name": "transact_search_form"}
@@ -122,7 +122,7 @@
 ## just transfer money
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * chitchat
     - respond_chitchat
 * transfer_money
@@ -134,7 +134,7 @@
 ## just transfer money, continue
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * transfer_money
     - transfer_form
     - form{"name":"transfer_form"}
@@ -149,7 +149,7 @@
 ## just transfer money, don't continue
 * greet
     - action_greet_user
-    - utter_help
+    - utter_intro
 * transfer_money
     - transfer_form
     - form{"name":"transfer_form"}

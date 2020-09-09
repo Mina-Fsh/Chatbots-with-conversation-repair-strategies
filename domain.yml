@@ -38,12 +38,10 @@ intents:
 - restart
 - trigger_handoff
 - human_handoff
-- handoff:
-    triggers: utter_greet
+- handoff
 - trigger_rephrase
 
 entities:
-- name
 - product
 - location
 - company
@@ -62,8 +60,6 @@ entities:
 slots:
   company:
     type: unfeaturized
-  name:
-    type: text
   product:
     type: categorical
     values:
@@ -130,12 +126,10 @@ slots:
     type: unfeaturized
 
 responses:
-  utter_greet:
-  - text: Hey there, I'm your PAY Bank financial assistant.
   utter_greet_name:
-  - text: Hi, {name}!
-  - text: Hello, {name}!
-  - text: Hey, {name}!
+  - text: Hi, {PERSON}!
+  - text: Hello, {PERSON}!
+  - text: Hey, {PERSON}!
   utter_greet_noname:
   - text: Hey!
   - text: Hi!
@@ -190,9 +184,6 @@ responses:
     - payload: /feedback{"feedback_value":"negative"}
       title: 👎
     text: How is this conversation going?
-  utter_ask_feedback_message:
-  - text: I'm sorry I couldn't help you. Please let me know if you have any suggestions
-      for how I can improve.
   utter_restart_with_button:
   - buttons:
     - payload: /restart
@@ -213,12 +204,13 @@ responses:
   - text: What else can I help you with?
   utter_anything_else:
   - text: Is there anything else I can help you with?
-  utter_help:
-  - text: "I can help you with your financial accounts.
+  utter_intro:
+  - text: "I'm Paya, your PAY Bank financial assistant. 
+        \nI can help you with your financial accounts.
         \nYou can ask me things like:
         \n- What's my account balance?
         \n- Pay off my credit card
-        \n- What did I spend at Target last month?
+        \n- What did I spend at Amazon last month?
         \n- I need to transfer money"
   utter_default:
     - text: Sorry, I didn't get that 🤷. Could you please rephrase?
