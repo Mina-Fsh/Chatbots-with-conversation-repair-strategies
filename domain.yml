@@ -334,7 +334,6 @@ actions:
 - action_restart
 - action_pause
 - action_tag_feedback
-- utter_greet
 - respond_chitchat
 - respond_faq
 - respond_out_of_scope
