@@ -47,7 +47,7 @@ def create_mock_profile():
         "netto",
     ]
 
-    start_date = utc.localize(datetime(2019, 1, 1))
+    start_date = utc.localize(datetime(2020, 1, 1))
     end_date = utc.localize(datetime.now())
     number_of_days = (end_date - start_date).days
 
@@ -80,7 +80,7 @@ def create_mock_profile():
             rand_deposit_amounts = sample(
                 [
                     round(amount, 2)
-                    for amount in list(arange(1000, 2000, 0.01))
+                    for amount in list(arange(1000, 3000, 0.01))
                 ],
                 number_of_days // 14,
             )
