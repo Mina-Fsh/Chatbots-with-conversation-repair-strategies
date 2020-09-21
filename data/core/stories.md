@@ -1,7 +1,13 @@
 ## greet/bye path
 * greet
-  - action_greet_user
-  - utter_intro
+    - action_greet_user
+    - utter_intro
+
+## configure repair stategy
+* configure_repair_strategy
+    - action_configure_repair_strategy
+* inform{"repair_strategy_preferences": "options"}
+    - utter_repair_strategy_saved
 
 ## thanks
 * thank

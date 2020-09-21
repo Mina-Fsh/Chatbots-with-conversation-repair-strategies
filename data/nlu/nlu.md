@@ -190,6 +190,12 @@
 - Mr. Sweney
 - Terri Cline
 - William Zelkind
+- [rephrase](repair_strategy_preferences)
+- [options](repair_strategy_preferences)
+- [defer](repair_strategy_preferences)
+- set fallback policy to [defer](repair_strategy_preferences)
+- in case of a fallback use [options](repair_strategy_preferences)
+- if you dont understand what I say use [rephrase](repair_strategy_preferences) policy
 
 ## intent:pay_cc
 - I would like to pay the [minimum balance](payment_amount) on my [embelm](credit_card) card
@@ -349,6 +355,12 @@
 - let me speak to a real person
 - let me speak to a real person please
 - i want to talk to a real person
+
+## intent:configure_repair_strategy
+- i want to configure the repair strategy
+- configure fallback
+- configure repair strategy
+- show me the repair strategies
 
 ## intent:restart
 - yep you can restart

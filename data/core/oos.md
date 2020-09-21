@@ -21,7 +21,7 @@
 * greet
     - action_greet_user
     - utter_intro
-* greet OR inform{"name": "akela"}
+* greet OR inform{"name": "Nina"}
     - action_greet_user
     - utter_intro
 

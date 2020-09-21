@@ -1,12 +1,12 @@
 session_config:
   session_expiration_time: 30
   carry_over_slots_to_new_session: false
-
 intents:
 - chitchat:
     use_entities: []
 - faq:
-    use_entities: ["product"]
+    use_entities:
+    - product
 - greet
 - affirm
 - deny
@@ -29,8 +29,8 @@ intents:
     use_entities: []
 - check_balance:
     use_entities:
-    - credit_card
     - account_type
+    - credit_card
 - check_earnings:
     use_entities: []
 - check_recipients
@@ -40,7 +40,7 @@ intents:
 - human_handoff
 - handoff
 - trigger_rephrase
-
+- configure_repair_strategy
 entities:
 - product
 - location
@@ -56,24 +56,11 @@ entities:
 - number
 - account_type
 - handoff_to
-
+- repair_strategy_preferences
+- name
+- PESRON
+- language
 slots:
-  company:
-    type: unfeaturized
-  product:
-    type: categorical
-    values:
-    - bank account
-    - visa card
-    - master card
-    - credit card
-  feedback_message:
-    type: unfeaturized
-  feedback_value:
-    type: categorical
-    values:
-    - positive
-    - negative
   PERSON:
     type: unfeaturized
   account_balance:
@@ -83,6 +70,8 @@ slots:
   amount_transferred:
     type: unfeaturized
     initial_value: 0
+  company:
+    type: unfeaturized
   confirm:
     type: unfeaturized
   credit_card:
@@ -95,7 +84,16 @@ slots:
     type: unfeaturized
   end_time_formatted:
     type: unfeaturized
+  feedback_message:
+    type: unfeaturized
+  feedback_value:
+    type: categorical
+    values:
+    - positive
+    - negative
   grain:
+    type: unfeaturized
+  handoff_to:
     type: unfeaturized
   known_recipients:
     type: unfeaturized
@@ -104,6 +102,16 @@ slots:
   payment_amount_type:
     type: unfeaturized
     initial_value: ''
+  product:
+    type: categorical
+    values:
+    - bank account
+    - visa card
+    - master card
+    - credit card
+  repair_strategy_preferences:
+    type: unfeaturized
+    initial_value: options
   requested_slot:
     type: unfeaturized
   search_type:
@@ -122,9 +130,6 @@ slots:
     type: unfeaturized
   vendor_name:
     type: unfeaturized
-  handoff_to:
-    type: unfeaturized
-
 responses:
   utter_greet_name:
   - text: Hi, {PERSON}!
@@ -193,7 +198,8 @@ responses:
   - text: Loading... And I've been restarted! 🤯
   - text: Congrats you've restarted me! 😉
   utter_canthelp:
-  - text: I'm sorry I couldn't help you. I'm still learning, hopefully next time you talk to me, I can answer this request.
+  - text: I'm sorry I couldn't help you. I'm still learning, hopefully next time you
+      talk to me, I can answer this request.
   utter_ask_continue:
   - text: Would you like to continue?
   utter_what_help:
@@ -203,21 +209,21 @@ responses:
   utter_anything_else:
   - text: Is there anything else I can help you with?
   utter_intro:
-  - text: "I'm Paya, your PAY Bank financial assistant. 
-        \nI can help you with your financial accounts.
-        \nYou can ask me things like:
-        \n- What's my account balance?
-        \n- Pay off my credit card
-        \n- What did I spend at Amazon last month?
-        \n- I need to transfer money"
+  - text: "I'm Paya, your PAY Bank financial assistant. \nI can help you with your\
+      \ financial accounts. \nYou can ask me things like: \n- What's my account balance?\
+      \ \n- Pay off my credit card \n- What did I spend at Amazon last month? \n-\
+      \ I need to transfer money"
   utter_default:
-    - text: Sorry, I didn't get that 🤷. Could you please rephrase?
-    - text: I didn't understand, could you rephrase that?
-    - text: I'm sorry, but I didn't understand you. Could you please rephrase what you
-        just said?
-    - text: I'm afraid I didn't get what you just said. Could you rephrase that?
-    - text: I didn't quite get that, could you rephrase your message?
-    - text: Could you rephrase your message? I didn't get it, I'm sorry.
+  - text: Sorry, I didn't get that 🤷. Could you please rephrase?
+  - text: I didn't understand, could you rephrase that?
+  - text: I'm sorry, but I didn't understand you. Could you please rephrase what you
+      just said?
+  - text: I'm afraid I didn't get what you just said. Could you rephrase that?
+  - text: I didn't quite get that, could you rephrase your message?
+  - text: Could you rephrase your message? I didn't get it, I'm sorry.
+  utter_repair_strategy_saved:
+  - text: Alright. I will use {repair_strategy_preferences} strategy to help us recover
+      from a breakdown in this conversation.
   utter_ask_transfer_form_amount_of_money:
   - text: How much money do you want to transfer?
   utter_ask_transfer_form_PERSON:
@@ -307,7 +313,8 @@ responses:
   utter_ask_continue_cc_payment:
   - text: Do you still want to pay for your credit card account?
   utter_ask_continue_transfer:
-  - text: Do you want to go ahead with transfering {currency}{amount_of_money} to {PERSON}?
+  - text: Do you want to go ahead with transfering {currency}{amount_of_money} to
+      {PERSON}?
   utter_ask_continue_transact_search:
   - text: Do you still want to search your transactions?
   utter_ask_handoff:
@@ -315,11 +322,13 @@ responses:
   utter_handoff:
   - text: Alright, I'll try to transfer you.
   utter_wouldve_handed_off:
-  - text: If you were talking to me via chatroom, I would have handed you off to {handoffhost}. 
+  - text: If you were talking to me via chatroom, I would have handed you off to {handoffhost}.
   utter_no_handoff:
-  - text: Since you haven't configured a host to hand off to, I can't send you anywhere! Please contact the phone number 01234567.
-        
+  - text: Since you haven't configured a host to hand off to, I can't send you anywhere!
+      Please contact the phone number 01234567.
 actions:
+- action_configure_repair_strategy
+- action_repair
 - action_default_ask_affirmation
 - action_default_fallback
 - action_account_balance
@@ -335,7 +344,6 @@ actions:
 - respond_chitchat
 - respond_faq
 - respond_out_of_scope
-
 forms:
 - cc_payment_form
 - transfer_form
