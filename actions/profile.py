@@ -18,9 +18,10 @@ def create_mock_profile():
     transaction_history = {"spend": {}, "deposit": {}}
 
     credit_card_db = [
-        "credit card",
-        "master card",
-        "visa card",
+        "emblem",
+        "justice bank",
+        "credit all",
+        "iron bank",
     ]
     deposit_db = [
         "employer",
@@ -29,10 +30,10 @@ def create_mock_profile():
     recipient_db = [
         "Mina Foosherian",
         "Stefan Welsandt",
-        "Nina baker",
+        "Tim baker",
     ]
     vendor_db = [
-        "Saturn",
+        "saturn",
         "starbucks",
         "amazon",
         "rewe",
@@ -42,7 +43,7 @@ def create_mock_profile():
         "netto",
     ]
 
-    start_date = utc.localize(datetime(2020, 1, 1))
+    start_date = utc.localize(datetime(2019, 1, 1))
     end_date = utc.localize(datetime.now())
     number_of_days = (end_date - start_date).days
 
