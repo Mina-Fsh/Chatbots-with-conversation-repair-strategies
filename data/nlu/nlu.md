@@ -190,12 +190,12 @@
 - Mr. Sweney
 - Terri Cline
 - William Zelkind
-- [paraphsare](repair_strategy_preferences)
+- [paraphrase](repair_strategy_preferences)
 - [options](repair_strategy_preferences)
 - [defer](repair_strategy_preferences)
 - set fallback policy to [defer](repair_strategy_preferences)
 - in case of a fallback use [options](repair_strategy_preferences)
-- if you dont understand what I say use [paraphsare](repair_strategy_preferences) policy
+- if you dont understand what I say use [paraphrase](repair_strategy_preferences) policy
 
 ## intent:pay_cc
 - I would like to pay the [minimum balance](payment_amount) on my [embelm](credit_card) card

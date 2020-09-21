@@ -21,10 +21,11 @@ pipeline:
   - amount-of-money
   - time
 - name: EntitySynonymMapper
-- name: "SpacyNLP"
-  model: "en_core_web_md"
-- name: "SpacyEntityExtractor"
-  dimensions: ["PERSON"]
+- name: SpacyNLP
+  model: en_core_web_md
+- name: SpacyEntityExtractor
+  dimensions:
+  - PERSON
 - name: ResponseSelector
   retrieval_intent: out_of_scope
   scale_loss: false
@@ -46,6 +47,6 @@ policies:
 - core_threshold: 0.3
   name: FallbackPolicy
   nlu_threshold: 0.7
-  fallback_action_name: "action_repair"
+  fallback_action_name: action_repair
 - name: FormPolicy
 - name: MappingPolicy
