@@ -8,6 +8,10 @@
     - utter_intro
 * faq
     - respond_faq
+    - utter_ask_feedback
+* affirm
+    - utter_great
+    - utter_anything_else
 * faq
     - respond_faq
 

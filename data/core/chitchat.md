@@ -7,6 +7,10 @@
     - respond_chitchat
 * deny
     - utter_nohelp
+    - utter_ask_feedback
+* deny
+    - utter_thumbsup
+    - utter_anything_else
 
 ## more chitchat
 * greet
@@ -16,6 +20,10 @@
     - respond_chitchat
 * chitchat
     - respond_chitchat
+    - utter_ask_feedback
+* affirm
+    - utter_great
+    - utter_anything_else
 
 ## greet chitchat
 * greet
@@ -145,6 +153,7 @@
     - utter_great
     - transfer_form
     - form{"name": null}
+    - utter_ask_feedback
 
 ## just transfer money, don't continue
 * greet
@@ -159,3 +168,4 @@
 * deny
     - utter_thumbsup
     - action_deactivate_form
+    - utter_ask_feedback

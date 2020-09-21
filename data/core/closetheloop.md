@@ -9,9 +9,11 @@
     - form{"name":"cc_payment_form"}
     - form{"name": null}
     - utter_ask_feedback
+* affirm
+    - utter_great
+    - utter_anything_else
 * thank
     - utter_noworries
-    - utter_anything_else
 * check_recipients
     - action_recipients
     - utter_ask_feedback
