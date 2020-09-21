@@ -19,7 +19,7 @@
     - utter_bye
 
 ## greet
-* greet OR inform{"PESRON": "akela"}
+* greet OR inform{"PERSON": "akela"}
     - action_greet_user
     - utter_intro
 

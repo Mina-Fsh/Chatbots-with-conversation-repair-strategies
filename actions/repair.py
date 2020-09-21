@@ -45,7 +45,7 @@ class ActionConfigureRepairStrategy(Action):
         buttons = [
             {
                 "title": "Ask to rephrase the request!" ,
-                "payload": "/rephrase",
+                "payload": "/paraphsare",
             },
             {
                 "title": "Show me options of highest ranked intents!",
@@ -71,7 +71,7 @@ class ActionRepair(Action):
         
         repair_strategy = tracker.get_slot("repair_strategy_preferences")
 
-        if repair_strategy == "rephrase":
+        if repair_strategy == "paraphsare":
             dispatcher.utter_message(template = "utter_default")
         elif repair_strategy == "options":
             return [FollowupAction("action_default_ask_affirmation")]

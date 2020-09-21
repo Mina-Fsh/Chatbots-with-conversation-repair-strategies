@@ -58,7 +58,6 @@ entities:
 - handoff_to
 - repair_strategy_preferences
 - name
-- PESRON
 - language
 slots:
   PERSON:

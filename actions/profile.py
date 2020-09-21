@@ -11,7 +11,7 @@ utc = pytz.UTC
 
 
 def create_mock_profile():
-    currency = "€"
+    currency = "$"
     account_balance = 0
 
     credit_card_balance = {}

@@ -543,7 +543,7 @@
 - hello sweet boy
 - hello there
 - hello world
-- hello, my name is [Charles Pfeffer](name)
+- hello, my name is [Charles Pfeffer](PERSON)
 - hello?
 - hello]
 - hellooo
@@ -576,8 +576,8 @@
 - hi friend
 - hi friends
 - hi hi
-- hi i'm [Sandra Hernandez](name)
-- hi im [Amanda Anderson](name)
+- hi i'm [Sandra Hernandez](PERSON)
+- hi im [Amanda Anderson](PERSON)
 - hi mrs rasa
 - hi pal!
 - hi sara
@@ -593,7 +593,7 @@
 - hlo
 - hola
 - howdy
-- i am [Karen Mease](name)
+- i am [Karen Mease](PERSON)
 - jojojo
 - jop
 - konichiwa

@@ -63,15 +63,15 @@
 - how much money have I earned?
 
 ## intent:inform
-- €10
+- $10
 - 5000
 - 500
-- €100
-- €500
+- $100
+- $500
 - 100 dollars
 - 1000 dollars
-- €0.00
-- €1000
+- $0.00
+- $1000
 - 0
 - 1 million
 - 1 million big ones
@@ -190,12 +190,12 @@
 - Mr. Sweney
 - Terri Cline
 - William Zelkind
-- [rephrase](repair_strategy_preferences)
+- [paraphsare](repair_strategy_preferences)
 - [options](repair_strategy_preferences)
 - [defer](repair_strategy_preferences)
 - set fallback policy to [defer](repair_strategy_preferences)
 - in case of a fallback use [options](repair_strategy_preferences)
-- if you dont understand what I say use [rephrase](repair_strategy_preferences) policy
+- if you dont understand what I say use [paraphsare](repair_strategy_preferences) policy
 
 ## intent:pay_cc
 - I would like to pay the [minimum balance](payment_amount) on my [embelm](credit_card) card
@@ -220,7 +220,7 @@
 - i want to pay off my [emblem](credit_card) [credit card](account_type)
 - I want to pay my [current balance](payment_amount) on my [embelm](credit_card) [credit card](account_type)
 - i want to pay my [current balance](payment_amount) on my [emblem](credit_card) [credit card](account_type)
-- I want to pay €500 on my [emblem](credit_card) [credit card](account_type) on Sunday
+- I want to pay $500 on my [emblem](credit_card) [credit card](account_type) on Sunday
 - I want to pay my [current balance](payment_amount) on my [emblem](credit_card) [credit card](account_type) today
 - i need to pay off my [emblm](credit_card) [credit card](account_type)
 
@@ -243,7 +243,7 @@
 
 ## intent:transfer_money
 - I want to pay John
-- I want to transfer €100 to Bob
+- I want to transfer $100 to Bob
 - can i transfer money to Sally
 - I want to transfer money
 - I want to pay someone
@@ -253,17 +253,17 @@
 - I want to pay Bill
 - pay my friend
 - transfer money
-- I want to transfer €100 to John
-- i want to transfer €400 to Akela
+- I want to transfer $100 to John
+- i want to transfer $400 to Akela
 - I want to pay Paula Handy
-- pay Katy Parrow €40 please
-- transfer €60 to John Jacob
+- pay Katy Parrow $40 please
+- transfer $60 to John Jacob
 - pay Evan Oslo 
 - pay Lisa please
 - can I transfer money to Kyle Gardner?
 - Pay Karen 60 Euros
-- pay Lisa €60
-- transfer €60 to Sally
+- pay Lisa $60
+- transfer $60 to Sally
 - transfer money
 
 ## intent:check_recipients
