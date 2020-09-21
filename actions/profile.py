@@ -29,12 +29,7 @@ def create_mock_profile():
     recipient_db = [
         "Mina Foosherian",
         "Stefan Welsandt",
-        "william baker",
-        "karen lancaster",
-        "kyle gardner",
-        "john jacob",
-        "percy donald",
-        "lisa macintyre",
+        "Nina baker",
     ]
     vendor_db = [
         "Saturn",

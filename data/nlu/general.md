@@ -611,6 +611,7 @@
 - yoo
 - ssup?
 - helleo
+- Hello I'm Mina
 
 ## intent:react_negative
 - I am feeling bad

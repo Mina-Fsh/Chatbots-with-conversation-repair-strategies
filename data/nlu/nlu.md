@@ -21,7 +21,6 @@
 - what is my account balance
 - what's my account balance?
 - what's my account balance
-- what's my balance?
 - whats my account balance
 - Account balance
 - What's my [credit card](account_type) balance
@@ -43,11 +42,11 @@
 - what's my [credit card](account_type) account balance?
 - What is my [emblem](credit_card) card balance?
 - whats my [credit card](account_type) balance
-- What is my [emblem](credit_card) card balance?
 - What is my [emblem](credit_card) balance?
 - whats my [emblm](credit_card) card balance?
 - what's my [embelm](credit_card)'s card balance?
 - what's my [emblm](credit_card) account balance?
+- what is my balance
 
 ## intent:check_earnings
 - How much money went into my account last month?
@@ -99,7 +98,6 @@
 - 3
 - 500 million
 - 500000
-- 5000
 - 500k
 - 50 p
 - 5 quid
@@ -258,13 +256,12 @@
 - I want to pay Paula Handy
 - pay Katy Parrow $40 please
 - transfer $60 to John Jacob
-- pay Evan Oslo 
+- pay Evan Oslo
 - pay Lisa please
 - can I transfer money to Kyle Gardner?
 - Pay Karen 60 Euros
 - pay Lisa $60
 - transfer $60 to Sally
-- transfer money
 
 ## intent:check_recipients
 - Who can I send money to?
@@ -280,10 +277,10 @@
 - recipient list
 
 ## intent:human_handoff
-- I want a human 
+- I want a human
 - can I speak to an agent
 - real agent please
-- real human 
+- real human
 - chat with a live agent
 - give me a person please
 - i want to talk to a human
@@ -307,7 +304,6 @@
 - i dont wanna talk to a bot
 - i want to speak to a real person
 - i want to speak to customer service
-- i want to talk to a human
 - i want to talk to a person
 - i want to talk to human
 - i want to talk to someone at rasa
@@ -361,6 +357,8 @@
 - configure fallback
 - configure repair strategy
 - show me the repair strategies
+- i want to configure the fallback policy
+- set fallback policy
 
 ## intent:restart
 - yep you can restart
@@ -373,27 +371,6 @@
 - hey, i said restart
 - restart session pls
 - restart ps
-
-## synonym:emblem
-- emblm
-- embelm
-
-## synonym:credit
-- credit card
-- credit cards
-- credit account
-- credit accounts
-
-## synonym:english
-- English
-- en
-- eng
-- Eng
-- ENGLISH
-
-## synonym:duration
-- durations
-- how long
 
 ## synonym:USA
 - US
@@ -410,6 +387,14 @@
 
 ## synonym:date
 - dates
+
+## synonym:duration
+- durations
+- how long
+
+## synonym:emblem
+- emblm
+- embelm
 
 ## synonym:english
 - English
@@ -431,7 +416,7 @@
 - [0-9]{5}
 
 ## lookup:location.txt
-data/nlu/lookups/location.txt
+  data/nlu/lookups/location.txt
 
 ## lookup:products.txt
-data/nlu/lookups/products.txt
+  data/nlu/lookups/products.txt
