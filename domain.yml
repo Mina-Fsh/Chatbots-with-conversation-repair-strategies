@@ -220,7 +220,7 @@ responses:
   - text: I didn't quite get that, could you rephrase your message?
   - text: Could you rephrase your message? I didn't get it, I'm sorry.
   utter_repair_strategy_saved:
-  - text: 'Alright. The repair strategy in this conversation is set to: {repair_strategy_preferences}.'
+  - text: "Alright. The repair strategy in this conversation is set to: {repair_strategy_preferences}."
   utter_ask_transfer_form_amount_of_money:
   - text: How much money do you want to transfer?
   utter_ask_transfer_form_PERSON:
