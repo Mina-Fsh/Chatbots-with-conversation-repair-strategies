@@ -47,6 +47,7 @@
 - what's my [embelm](credit_card)'s card balance?
 - what's my [emblm](credit_card) account balance?
 - what is my balance
+- how much is my balance
 
 ## intent:check_earnings
 - How much money went into my account last month?
@@ -194,6 +195,7 @@
 - set fallback policy to [defer](repair_strategy_preferences)
 - in case of a fallback use [options](repair_strategy_preferences)
 - if you dont understand what I say use [rephrase](repair_strategy_preferences) policy
+- last year
 
 ## intent:pay_cc
 - I would like to pay the [minimum balance](payment_amount) on my [embelm](credit_card) card
@@ -238,6 +240,8 @@
 - I want to search my transactions with [amazon](vendor_name)
 - can i seem my transactions with [Rewe](vendor_name)
 - search transactions
+- where did i spend my money?
+- how much did i spend?
 
 ## intent:transfer_money
 - I want to pay John
@@ -359,6 +363,7 @@
 - show me the repair strategies
 - i want to configure the fallback policy
 - set fallback policy
+- configure the repair strategies
 
 ## intent:restart
 - yep you can restart

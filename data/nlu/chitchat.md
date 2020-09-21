@@ -253,7 +253,6 @@
 - whats new
 - whatsapp
 - yow are you
-- how are you 
 - Hey, how's it going
 - are you cool
 
@@ -702,7 +701,6 @@
 - What exactly is PAY bank?
 - What is pay bank?
 - What is pay bank doing exactly?
-- What is pay bank?
 - What is the pay bank?
 - What's pay bank?
 - can you explain your bank?
@@ -749,7 +747,6 @@
 - what are the products of PAY bank
 - PAY IS BANK?
 - pay bank os
-- what is PAY bank
 
 ## intent:chitchat/ask_whatspossible
 - Can you explain me in one sentence what you are doing?
@@ -829,7 +826,6 @@
 - what can you answer
 - what can you do
 - what can you do for me
-- what can you do?
 - what can you do?
 - what can you offer me?
 - what can you tell me
@@ -1002,6 +998,7 @@
 - your real name friend
 - could please tell me about yourself
 - what's u name?
+- what is you name?
 
 ## intent:chitchat/handleinsult
 - FUCK
@@ -1049,7 +1046,6 @@
 - fuck u
 - fuck you
 - fuck you machine learning bot
-- fuck you
 - fuck you!
 - fucking stupid
 - fucking work
