@@ -46,7 +46,7 @@
 * transfer_money: I want to transfer money to [John](PERSON)
     - transfer_form
     - form{"name":"transfer_form"}
-* form: inform: [$60](amount-of-money:60)
+* form: inform: [€60](amount-of-money:60)
     - form: transfer_form
 * form: affirm: /affirm
     - form: transfer_form
@@ -111,7 +111,7 @@
     - form{"name":"transfer_form"}
 * form: inform: to [Paul](PERSON)
     - form: transfer_form
-* form: inform: [$45](amount-of-money:45)
+* form: inform: [€45](amount-of-money:45)
     - form: transfer_form
 * form: affirm: /affirm
     - form: transfer_form
@@ -130,7 +130,7 @@
 * affirm: yes
     - transfer_form
     - form{"name":"transfer_form"}
-* form: inform: [$35](amount-of-money:35)
+* form: inform: [€35](amount-of-money:35)
     - form: transfer_form
 * form: affirm: /affirm
     - form: transfer_form
