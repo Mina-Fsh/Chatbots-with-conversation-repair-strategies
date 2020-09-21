@@ -265,8 +265,6 @@ responses:
       {end_time_formatted}...
   utter_found_deposit_transactions:
   - text: I found {numtransacts} deposits made to your account totalling {currency}{total}
-  utter_ask_rephrase:
-  - text: I didn't quite understand that. Can you rephrase the question?
   utter_ask_switch_goal:
   - text: We haven't completed the transaction search yet. Are you sure you want to
       switch to transfer money?
