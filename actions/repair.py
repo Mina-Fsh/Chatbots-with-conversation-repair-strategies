@@ -76,7 +76,8 @@ class ActionRepair(Action):
         elif repair_strategy == "options":
             return [FollowupAction("action_default_ask_affirmation")]
         elif repair_strategy == "defer":
-            return [FollowupAction("action_handoff")]
+            message_title = "I'm sorry, but I didn't understand you.\n I want to connect you to an agen but there is no agent available at the moment.\n Please contact the phone number 01234567. "
+            dispatcher.utter_message(message_title)
         else:
             dispatcher.utter_message("I do not know this repair strategy")
         return []
