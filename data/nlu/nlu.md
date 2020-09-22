@@ -196,6 +196,11 @@
 - in case of a fallback use [options](repair_strategy_preferences)
 - if you dont understand what I say use [rephrase](repair_strategy_preferences) policy
 - last year
+- toay
+- 33
+- 333333
+- [emblm]{"entity": "credit_card", "value": "emblem"}
+- tim baker
 
 ## intent:pay_cc
 - I would like to pay the [minimum balance](payment_amount) on my [embelm](credit_card) card
@@ -223,6 +228,7 @@
 - I want to pay €500 on my [emblem](credit_card) [credit card](account_type) on Sunday
 - I want to pay my [current balance](payment_amount) on my [emblem](credit_card) [credit card](account_type) today
 - i need to pay off my [emblm](credit_card) [credit card](account_type)
+- pay [all my cards]{"entity": "credit_card", "value": "credit all"}
 
 ## intent:search_transactions
 - how much did I spend at [Lidl](vendor_name) this week?
@@ -242,6 +248,9 @@
 - search transactions
 - where did i spend my money?
 - how much did i spend?
+- How much did i send to [my father](PERSON)?
+- how much did i send to [my father](PERSON)?
+- how much did i spend in [amazon](vendor_name) last month
 
 ## intent:transfer_money
 - I want to pay John
@@ -266,6 +275,8 @@
 - Pay Karen 60 Euros
 - pay Lisa €60
 - transfer €60 to Sally
+- i want to transfer 200 euros
+- I want to transfer money to Mina Foosherian
 
 ## intent:check_recipients
 - Who can I send money to?
@@ -279,6 +290,7 @@
 - who's in my recipient list?
 - who can I transfer money to?
 - recipient list
+- to whom can i tranfer money?
 
 ## intent:human_handoff
 - I want a human
@@ -364,6 +376,9 @@
 - i want to configure the fallback policy
 - set fallback policy
 - configure the repair strategies
+- I want to set my fallback policy
+- configure fallback policy
+- i want to set the fallback policy
 
 ## intent:restart
 - yep you can restart
