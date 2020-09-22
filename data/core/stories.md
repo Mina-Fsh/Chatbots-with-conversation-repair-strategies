@@ -8,6 +8,23 @@
     - action_configure_repair_strategy
 * inform{"repair_strategy_preferences": "options"}
     - utter_repair_strategy_saved
+    - utter_ask_feedback
+
+## configure repair stategy 2
+* greet
+    - action_greet_user
+    - utter_intro
+* configure_repair_strategy
+    - action_configure_repair_strategy
+* inform{"repair_strategy_preferences":"defer"}
+    - slot{"repair_strategy_preferences":"defer"}
+    - utter_repair_strategy_saved
+    - utter_ask_feedback
+* feedback{"feedback_value": "negative"}
+    - slot{"feedback_value": "negative"}
+    - action_tag_feedback
+    - utter_thumbsup
+    - utter_anything_else
 
 ## thanks
 * thank
@@ -32,6 +49,7 @@
     - utter_anything_else
 * deny
     - utter_thumbsup
+    - utter_ask_feedback
 
 ## anything else?
     - utter_anything_else
@@ -42,10 +60,12 @@
 ## positive reaction
 * react_positive
     - utter_react_positive
+    - utter_ask_feedback
 
 ## negative reaction
 * react_negative
     - utter_react_negative
+    - utter_ask_feedback
 
 ## neither 
 * greet
@@ -559,13 +579,3 @@
     - action_tag_feedback
     - utter_thumbsup
     - utter_anything_else
-    
-
-
-
-
-
-
-
-
-
