@@ -52,6 +52,10 @@ class ActionConfigureRepairStrategy(Action):
                 "payload": "options",
             },
             {
+                "title": "In case of multiple breakdowns, help me get out of it!",
+                "payload": "cumulative",
+            },
+            {
                 "title": "Connect me to a human!",
                 "payload": "defer",
             }
@@ -74,20 +78,22 @@ class ActionRepair(Action):
         if repair_strategy == "rephrase":
             dispatcher.utter_message(template = "utter_default")
         elif repair_strategy == "options":
-            return [FollowupAction("action_default_ask_affirmation")]
+            return [FollowupAction("action_repair_options")]
+        elif repair_strategy == "cumulative":
+            return [FollowupAction("action_repair_conversation_len")]
         elif repair_strategy == "defer":
-            message_title = "I'm sorry, but I didn't understand you.\n I want to connect you to an agen but there is no agent available at the moment.\n Please contact the phone number 01234567. "
+            message_title = "I'm sorry, but I didn't understand you.\n I want to connect you to an agen but unfortunately there is no agent available at the moment.\n Please contact the phone number 01234567, or continue chatting with me! "
             dispatcher.utter_message(message_title)
         else:
             dispatcher.utter_message("I do not know this repair strategy")
         return []
 
 
-class ActionDefaultAskAffirmation(Action):
+class ActionRepairOptions(Action):
     """Asks for an affirmation of the intent if NLU threshold is not met."""
 
     def name(self) -> Text:
-        return "action_default_ask_affirmation"
+        return "action_repair_options"
 
     def __init__(self) -> None:
         import pandas as pd
@@ -185,7 +191,34 @@ class ActionDefaultAskAffirmation(Action):
 
         return button_title.format(**entities)
 
+class ActionRepairCountBreakdown(Action):
+    """Shows options in the first 5 sessions and after that asks for rephrase!"""
 
+    def name(self) -> Text:
+        return "action_repair_count_breakdwon"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[EventType]:
+
+        breakdown_counter = 0
+        action_counter = 0
+        for events in tracker.events:
+            if events["event"] == "action" and events["name"] == "action_repair": 
+                breakdown_counter +=1
+            if events["event"] == "action" and events["name"] != "action_listen": 
+                action_counter +=1
+        logger.debug(f"You already had {breakdown_counter} breakdowns in this conversation!")
+
+        if breakdown_counter <= 2:
+            return [FollowupAction("action_repair_options")]
+        elif breakdown_counter > 2:
+            dispatcher.utter_message(template = "utter_capabilities_repair")
+        return[]
+    
 class ActionDefaultFallback(Action):
     def name(self) -> Text:
         return "action_default_fallback"
@@ -201,7 +234,7 @@ class ActionDefaultFallback(Action):
         if (
             len(tracker.events) >= 4
             and tracker.events[-4].get("name")
-            == "action_default_ask_affirmation"
+            == "action_repair_options"
         ):
 
             dispatcher.utter_message(template="utter_restart_with_button")
