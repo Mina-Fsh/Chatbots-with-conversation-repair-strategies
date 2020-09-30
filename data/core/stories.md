@@ -10,6 +10,13 @@
     - utter_repair_strategy_saved
     - utter_ask_feedback
 
+## configure repair stategy
+* configure_repair_strategy
+    - action_configure_repair_strategy
+* inform{"repair_strategy_preferences": "cumulative"}
+    - utter_repair_strategy_saved
+    - utter_ask_feedback
+
 ## configure repair stategy 2
 * greet
     - action_greet_user
@@ -34,6 +41,10 @@
 ## bye
 * bye
     - utter_bye
+
+## capability check
+* capabilities
+    - utter_capabilities
 
 ## greet
 * greet OR inform{"PERSON": "akela"}

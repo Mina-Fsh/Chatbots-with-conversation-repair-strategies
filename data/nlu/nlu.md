@@ -62,6 +62,112 @@
 - how much was deposited in January
 - how much money have I earned?
 
+## intent:capabilities
+- Can you explain me in one sentence what you are doing?
+- Can you help me?
+- Could you please show me what you can
+- Great, is there anything else you can do, bot?
+- How can you help me
+- How you help me?
+- I need help
+- I need some help
+- What are my options
+- What are you able to do?
+- What can I ask you?
+- What can I do?
+- What can you demo
+- What can you do
+- What can you do for me?
+- What can you do?
+- What can you tell me?
+- What do you do
+- anything els
+- are there any other options?
+- can I ask you anything else?
+- can you do anything else?
+- can you help me
+- can you help me?
+- come back
+- cool! can I do something else here?
+- hello what can you do for me
+- help
+- help me
+- help please
+- help pls
+- help?
+- hep me
+- hi. what do you do?
+- hm that doesnt quite help me is there anything else you can do?
+- how can i use you
+- how can you help me
+- how can you help me?
+- how can you help?
+- how does this work?
+- how u can help me
+- how you help me
+- i asked you if you can do anything else
+- i don't know what i want
+- i need help
+- more info
+- now what?
+- options
+- show me the menu
+- show me what's possible
+- so now what
+- so what can you do
+- so what can you do?
+- so what can you help me with?
+- so what next?
+- talk to me
+- talk to me!
+- tell me something you can do
+- tell me what's your skill
+- um what now
+- what are all the things you understand?
+- what are the options?
+- what are you ding
+- what are you doing
+- what are you good at?
+- what can I ask ?
+- what can I ask you?
+- what can I do here
+- what can I do with you?
+- what can I do with this bot
+- what can i do here
+- what can i do now
+- what can u do
+- what can we talk about?
+- what can you answer
+- what can you do
+- what can you do for me
+- what can you do?
+- what can you offer me?
+- what can you tell me
+- what can you?
+- what cn u do for me ?
+- what do you do
+- what do you do?
+- what do you know except this?
+- what else can I do here?
+- what else can i do
+- what else can i do?
+- what else can you do?
+- what else can you help with?
+- what i have to do
+- what is this bot for
+- what u can do
+- what u can do?
+- what you can do
+- what you can do for me?
+- what you can do?
+- what you do
+- what you doing?
+- what you talk about?
+- you can hep me
+- what can you teache me?
+- Can you do calculations?
+- what you can
+
 ## intent:inform
 - €10
 - 5000
@@ -192,9 +298,11 @@
 - [rephrase](repair_strategy_preferences)
 - [options](repair_strategy_preferences)
 - [defer](repair_strategy_preferences)
+- [cumulative](repair_strategy_preferences)
 - set fallback policy to [defer](repair_strategy_preferences)
 - in case of a fallback use [options](repair_strategy_preferences)
 - if you dont understand what I say use [rephrase](repair_strategy_preferences) policy
+- change the fallback to [cumulative](repair_strategy_preferences)
 - last year
 - toay
 - 33
@@ -261,6 +369,7 @@
 - can I pay someone
 - I need to transfer money to a friend
 - can I transfer money to my mom
+- send money to my father
 - I want to pay Bill
 - pay my friend
 - transfer money
@@ -310,7 +419,6 @@
 - can I speak to a person?
 - can i please speak to a human?
 - can you forward me to your team
-- can you please connect me to a real rasa employee?
 - can you put me in touch with a human?
 - do you have human support ?
 - gimme a proper human
@@ -322,12 +430,12 @@
 - i want to speak to customer service
 - i want to talk to a person
 - i want to talk to human
-- i want to talk to someone at rasa
+- i want to talk to someone at pay bank
 - i want to talk to someone else
 - i want to talk to someone who is smarter than you
 - i would like to speak to a person
-- i'd rather speak with a real rasa employee
-- id like to talk to a real rasa employee
+- i'd rather speak with a real bank employee
+- id like to talk to a real bank employee
 - let me speak with a real person please
 - let me talk to a human
 - let me talk to a real person
@@ -379,6 +487,7 @@
 - I want to set my fallback policy
 - configure fallback policy
 - i want to set the fallback policy
+- change the repair strategy
 
 ## intent:restart
 - yep you can restart
@@ -404,6 +513,9 @@
 
 ## synonym:all
 - both
+
+## synonym:credit all
+- all my cards
 
 ## synonym:date
 - dates

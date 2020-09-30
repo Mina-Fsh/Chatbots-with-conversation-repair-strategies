@@ -1,19 +1,19 @@
 ## intent:out_of_scope/non_english
-- Wie fange ich mit Rasa an?
+- Wie fange ich mit dir an?
 - hilf mir beim start
 - tschüssikowski
 - ¿Qué pasa?
 - ça va ?
 - como te llamas
 - wer bist Du?
-- como inicio en rasa
+- como inicio en
 - come stai?
 - como estas
 - de donde eres
 - de que lugar eres?
 - epdi iruka
 - eres humana
-- kalhmera sara ti kaneis
+- kalhmera paya ti kaneis
 - kannst du auch deutsch?
 - kannst du dies auch auf deutsch?
 - oui je besoine de l'aide
@@ -36,9 +36,8 @@
 - 你是谁
 - 中文
 - kya hindi me bat kar sakate ho
-- Dumme sara
+- Dumme paya
 - αστεία λές
-- rasa codigo abierto
 - 卧槽
 
 ## intent:out_of_scope/other
@@ -119,7 +118,6 @@
 - Won't you ask me how I am?
 - You'r blue.
 - [Kristin](PERSON), I want to marry you
-- [german](language)?
 - a tamed mouse will arrive at your doorstep in the next couple of days
 - aRE YOU SINGLE
 - again?
@@ -132,15 +130,12 @@
 - are you dev?
 - are you russian?
 - are you sick
-- are you using Rasa [Core](product) and [NLU](product) ?
 - are you vegan
 - better than you
 - book a ticket
 - but I just told you that :(
-- but if rasa is open source why do you have a sales team
 - buy one please
 - buy groceries
-- call me father
 - can we keep chatting?
 - can you book dinner
 - can you cheer me up
@@ -197,14 +192,12 @@
 - how can i test this
 - how come you say ok ?
 - how do you learn
-- how good is Rasa
 - how it compares to alexa
 - how long have you been online?
 - how long will the next version will launch?
 - how many lines of codes
 - how much is 10 + 89 ?
 - how much is 10 + 89
-- how to get rasa studio
 - how to go to newyork ?
 - i am hungry
 - i am hungry, what should i do?
@@ -228,7 +221,6 @@
 - i want to buy a roomba for my grandson
 - i want to eat
 - i want to find new friends
-- i want to find out what you can build with rasa
 - i want to fly
 - i want to grab lunch
 - i want to know current situtation in pakistan
@@ -238,8 +230,6 @@
 - is [John Lewis](PERSON) still married to you
 - is it a wasteland full of broken robot parts?
 - is it allow to
-- is rasa a studio?
-- is rasa any good
 - is that any of your business
 - isn't the newsletter just spam?
 - it's a pity
@@ -269,7 +259,6 @@
 - please hjave lunchj
 - please hurry, i have deadline in two weeks to deliver the bot it is for very big company
 - please play music
-- rasa topics
 - really? you're so touchy?
 - refresh
 - region with no. of records
@@ -277,7 +266,6 @@
 - search wikipedia
 - shitmuncher
 - show me a picture of a chicken
-- silly bot
 - sing me a song
 - so, I'm helping right now to training you?
 - some thing else
@@ -306,7 +294,6 @@
 - what doing
 - what else?
 - what films do you like
-- what i do after cd starter-pack-rasa-stack?
 - what is a discourse?
 - what is a mascot
 - what is adlingo
@@ -343,7 +330,6 @@
 - which file is created first while developing chat bot
 - which is the LNU asynchronism ?
 - which kind
-- who are the engineers at rasa?
 - who are they?
 - who is [Sharon Zeches](PERSON)
 - who is the MD of samsung bangalore ?
@@ -355,7 +341,6 @@
 - who's Bill Gates?
 - whta you think about gdpr?
 - why do you need that?
-- why its called rasa ?
 - will u kill me
 - will u kill me?
 - winter is already leaving
@@ -392,11 +377,9 @@
 - your contry name
 - you girl
 - gsaf
-- expert of rasa
 - i want play ball
 - flight catch up
 - how do you like your coffee
-- Can you get analytics on who I'm chatting with when I use Rasa
 - coronavirus
 - have you heard of corona?
 - where do i type in commandy

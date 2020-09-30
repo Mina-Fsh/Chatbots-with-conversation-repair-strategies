@@ -115,11 +115,7 @@
 
 ## chitchat
 * chitchat/ask_whatisPAYbank 
-  -  PAY bank is an online international bank.
-
-## chitchat
-* chitchat/ask_whatspossible 
-  -  I can help you with your financial accounts. You can ask me things like: What's my account balance? Pay off my credit card! What did I spend at Amazon last month?
+  -  PAY bank is an international online bank. We are glad to be at your service 24/7. 
 
 ## chitchat
 * chitchat/ask_wherefrom 

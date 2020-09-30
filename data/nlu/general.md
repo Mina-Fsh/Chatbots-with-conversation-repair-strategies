@@ -110,7 +110,7 @@
 - ok good
 - ok great
 - ok i accept
-- ok sara
+- ok paya
 - ok, I behave now
 - ok, I understood
 - ok, Sara
@@ -259,8 +259,6 @@
 - it's pretty cool
 - lol
 - love you
-- okay Rasabot, you're cool
-- rasa is awesome
 - such a great demo
 - that is funny
 - that was a great interaction
@@ -310,7 +308,6 @@
 - cya
 - farewell
 - good bye
-- good bye rasa bot!
 - good night
 - goodbye
 - goodbye.
@@ -480,23 +477,19 @@
 - Hellllooooooo
 - Hello
 - Hello Bot
-- Hello Rasa
-- Hello Sara
-- Hello sara
+- Hello PAya
+- Hello paya
+- Hello PAYA
 - Hello!
 - Hey
-- Hey Sara
+- Hey Paya
 - Hey bot
 - Heya
 - Heylo
 - Hi
-- Hi Sara
-- Hi Sara!
 - Hi bot
 - Hi man
-- Hi rasa
-- Hi sara
-- Hi sara..
+- Hi paya
 - Hi there
 - Hi!
 - Hi'
@@ -521,11 +514,11 @@
 - greetings
 - hai
 - hallo
-- hallo sara
+- hallo paya
 - halloo
 - halloooo
 - halo
-- halo sara
+- halo paya
 - heeey
 - heelio
 - hell9o
@@ -538,7 +531,7 @@
 - hello is anybody there
 - hello it is me again
 - hello robot
-- hello sara
+- hello paya
 - hello sweatheart
 - hello sweet boy
 - hello there
@@ -547,22 +540,20 @@
 - hello?
 - hello]
 - hellooo
-- helloooo
+- helloooo it is [Mina](PERSON)
 - helo
-- hey
-- hey bot
+- hey i am stefan
+- hey bot i am mo
 - hey bot!
 - hey dude
 - hey hey
 - hey let's talk
-- hey rasa
-- hey sara
 - hey ther
 - hey there
 - hey there boy
 - hey there..
 - hey, let's talk
-- hey, sara!
+- hey, paya!
 - heya
 - heyho
 - heyo
@@ -578,9 +569,9 @@
 - hi hi
 - hi i'm [Sandra Hernandez](PERSON)
 - hi im [Amanda Anderson](PERSON)
-- hi mrs rasa
+- hi mrs paya
 - hi pal!
-- hi sara
+- hi paya
 - hi there
 - hi there it's me
 - hi!
@@ -598,8 +589,7 @@
 - jop
 - konichiwa
 - merhaba
-- ola sara
-- rasa hello
+- ola paya
 - salut
 - sup
 - wasssup
@@ -625,7 +615,7 @@
 - bad
 - bad boy
 - crappy joke
-- documentation of rasa is very bad
+- your bank is fucked
 - i am angry over you
 - i am feel sad
 - i am sad
@@ -634,7 +624,6 @@
 - i feel sad
 - i sad
 - i'm sad
-- rasa is bad
 - sad
 - so sad
 - so sad :(
@@ -682,7 +671,7 @@
 - danke
 - great thanks
 - ok thanks
-- ok thanks sara
+- ok thanks paya
 - ok thanks!
 - perfect thank you
 - thank u
