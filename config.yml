@@ -1,11 +1,14 @@
 language: en
 pipeline:
-- name: WhitespaceTokenizer
+- name: SpacyNLP
+  model: en_core_web_md
+  case_sensitive: False
+- name: SpacyTokenizer
+- name: SpacyFeaturizer
 - name: RegexFeaturizer
+- name: CRFEntityExtractor
+- name: SklearnIntentClassifier
 - name: LexicalSyntacticFeaturizer
-- name: CountVectorsFeaturizer
-  OOV_token: oov
-  token_pattern: (?u)\b\w+\b
 - name: CountVectorsFeaturizer
   analyzer: char_wb
   min_ngram: 1
@@ -20,8 +23,6 @@ pipeline:
   - amount-of-money
   - time
 - name: EntitySynonymMapper
-- name: SpacyNLP
-  model: en_core_web_md
 - name: SpacyEntityExtractor
   dimensions:
   - PERSON
