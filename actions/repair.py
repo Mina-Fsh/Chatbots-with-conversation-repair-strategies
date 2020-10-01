@@ -80,7 +80,7 @@ class ActionRepair(Action):
         elif repair_strategy == "options":
             return [FollowupAction("action_repair_options")]
         elif repair_strategy == "cumulative":
-            return [FollowupAction("action_repair_conversation_len")]
+            return [FollowupAction("action_repair_count_breakdwon")]
         elif repair_strategy == "defer":
             message_title = "I'm sorry, but I didn't understand you.\n I want to connect you to an agen but unfortunately there is no agent available at the moment.\n Please contact the phone number 01234567, or continue chatting with me! "
             dispatcher.utter_message(message_title)
