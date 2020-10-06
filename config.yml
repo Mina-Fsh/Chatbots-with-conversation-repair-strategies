@@ -27,9 +27,7 @@ pipeline:
   dimensions:
   - PERSON
 - name: ResponseSelector
-  retrieval_intent: out_of_scope
-  scale_loss: false
-- name: ResponseSelector
+  epochs: 100
   retrieval_intent: faq
   scale_loss: false
 - name: ResponseSelector
@@ -42,11 +40,11 @@ policies:
   batch_size:
   - 32
   - 64
-- max_history: 6
-  name: AugmentedMemoizationPolicy
-- core_threshold: 0.3
-  name: FallbackPolicy
-  nlu_threshold: 0.7
+  max_history: 6
+- name: AugmentedMemoizationPolicy
+- name: FallbackPolicy
+  nlu_threshold: 0.8
+  core_threshold: 0.6
   fallback_action_name: action_repair
 - name: FormPolicy
 - name: MappingPolicy

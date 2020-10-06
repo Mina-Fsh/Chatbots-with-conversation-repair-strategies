@@ -16,9 +16,6 @@ intents:
 - react_positive
 - thank
 - feedback
-- out_of_scope:
-    triggers: respond_out_of_scope
-    use_entities: []
 - transfer_money:
     use_entities: []
 - inform
