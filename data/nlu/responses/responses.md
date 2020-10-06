@@ -1,10 +1,18 @@
+## out of scope non english
+* out_of_scope/non_english
+  - I only understand English, I'm sorry.
+
+## out of scope other
+* out_of_scope/other
+  - I can't help you with that, I'm sorry.
+
 ## faq
 * faq/product_description
-  - All of our products and services are available only online and free of charge for the first year . 
+  - All of our products and services are available only online and free of charge for the first year. 
 
 ## faq
 * faq/product_application
-  -  You can apply for all of our product online via the app {account_balance}. 
+  -  You can apply for all of our product online via the app. 
 
 ## faq
 * faq/application_requirements
