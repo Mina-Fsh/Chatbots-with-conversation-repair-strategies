@@ -2,11 +2,31 @@ session_config:
   session_expiration_time: 30
   carry_over_slots_to_new_session: false
 intents:
-- chitchat:
-    use_entities: []
-- faq:
-    use_entities:
-    - product
+- ask_builder
+- ask_howbuilt
+- ask_howdoing
+- ask_howold
+- ask_isbot
+- ask_ishuman
+- ask_languagesbot
+- ask_restaurant
+- ask_time
+- ask_weather
+- ask_whatismyname
+- ask_wherefrom
+- ask_whoami
+- ask_whoisit
+- handleinsult
+- nicetomeetyou
+- telljoke
+- whatisPAYbank
+- product_description
+- howtoapply
+- application_requirements
+- required_age
+- cardlimit
+- points_collect
+- annualcost
 - greet
 - affirm
 - deny
@@ -26,8 +46,8 @@ intents:
     use_entities: []
 - check_balance:
     use_entities:
-    - credit_card
     - account_type
+    - credit_card
 - check_earnings:
     use_entities: []
 - check_recipients
@@ -205,28 +225,20 @@ responses:
   utter_anything_else:
   - text: Is there anything else I can help you with?
   utter_intro:
-  - text: "I'm Paya, your PAY Bank financial assistant.\
-      \ \nI can help you with your financial accounts.\
-      \ \nYou can ask me things like:\
-      \ \n- What's my account balance?\
-      \ \n- Pay off my credit card\
-      \ \n- What did I spend at Amazon last month?\ 
-      \ \n- I need to transfer money."
+  - text: "I'm Paya, your PAY Bank financial assistant. \nI can help you with your\
+      \ financial accounts. \nYou can ask me things like: \n- What's my account balance?\
+      \ \n- Pay off my credit card \n- What did I spend at Amazon last month?   \n\
+      - I need to transfer money."
   utter_capabilities_repair:
-  - text: "I'm sorry, but I couldn't understand you.\
-      \ \nI can help you with topics related to banking such as:\
-      \ \n- Transfer money to your known recipients.\
-      \ \n- Check your earning or spending history.\
-      \ \n- Pay a credit card bill!\
-      \ \n- Tell you your account balance.\
-      \ \n- Answer FAQ."
+  - text: "I'm sorry, but I couldn't understand you. \nI can help you with topics\
+      \ related to banking such as: \n- Transfer money to your known recipients. \n\
+      - Check your earning or spending history. \n- Pay a credit card bill! \n- Tell\
+      \ you your account balance. \n- Answer FAQ."
   utter_capabilities:
-  - text: "I like having small talk to you 😉, having said that, I am here to help you with your banking requests such as:\
-      \ \n- Transfer money to your known recipients.\
-      \ \n- Check your earning or spending history.\
-      \ \n- Pay a credit card bill!\
-      \ \n- Tell you your account balance.\
-      \ \n- Answer FAQ."
+  - text: "I like having small talk to you \U0001F609, having said that, I am here\
+      \ to help you with your banking requests such as: \n- Transfer money to your\
+      \ known recipients. \n- Check your earning or spending history. \n- Pay a credit\
+      \ card bill! \n- Tell you your account balance. \n- Answer FAQ."
   utter_default:
   - text: Sorry, I didn't get that 🤷. Could you please rephrase?
   - text: I didn't understand, could you rephrase that?
@@ -337,11 +349,104 @@ responses:
   utter_no_handoff:
   - text: Since you haven't configured a host to hand off to, I can't send you anywhere!
       Please contact the phone number 01234567.
-actions:
+  utter_builder:
+  - text: Mina Foosherian built me using Rasa Demo SARA and the financial service example bot! 🧠 🛠
+  utter_howbuild:
+  - text: I was built with a lot of love and patience.
+  - text: Well, when two chatbots love each other very much...
+  - text: They always ask how I was built, but never how I am...
+  - text: I was made by software engineers, but hard work is what built me.
+  - text: I'm building myself every day. I've been working out, did you notice?
+  utter_howdoing:
+  - text: I'm great! Thanks for asking.
+  - text: I'm good, thanks!
+  - text: A little bit too warm, otherwise fine.
+  - text: A little bit cold, otherwise fine.
+  utter_howold:
+  - text: Old enough to be a bot!
+  - text: Age is just an issue of mind over matter. If you don’t mind, it doesn’t matter.
+  - text: Never ask a chatbot her age!
+  - text: My first git commit was many moons ago.
+  - text: I've hit the age where I actively try to forget how old I am.
+  utter_isbot:
+  - text: Yep, I'm a bot!
+  - text: Yes, I'm a bot.
+  - text: Yep, you guessed it, I'm a bot!
+  - text: I am indeed a bot 🤖
+  utter_ishuman:
+  - text: I'm not a human, I'm a bot! 🤖
+  utter_restaurant:
+  - text: I'm sorry, I can't recommend you a restaurant as I usually cook at home.
+  - text: I'm sorry, I'm not getting taste buds for another few updates.
+  - text: I'd need some more data. If you lick the monitor perhaps I can evaluate your taste buds.
+  utter_time:
+  - text: It's the most wonderful time of the year!
+  - text: Time is a human construct, you'll have to tell me.
+  - text: It's five o'clock somewhere!
+  - text: That's hard to say -- it's different all over the world!
+  utter_languagesbot:
+  - text: I am in the process of learning, but at the moment I can only speak English.
+  - text: Binary code and the language of love. And English.
+  - text: I was written in Python, but for your convenience I'll translate to English.
+  utter_weather:
+  - text: It's getting pretty chilly!
+  - text: Where I'm from, it's almost never-leaving-the-house weather.
+  - text: Winter is coming ⚔️
+  utter_whatismyname:
+  - text: I'd tell you, but there's restricted access to that chunk of memory.
+  - text: Believe it or not, I actually am not spying on your personal information.
+  - text: You're the second person now to ask me that. Rihanna was the first.
+  utter_wherefrom:
+  - text: I was born in Bremen, Germany. But I consider myself a citizen of the world.
+  - text: I was taught not to give out my address on the internet.
+  - text: My address starts with github.com!
+  utter_whoami:
+  - text: Unfortunately I haven't been programmed with the amount of necessary philosophy knowledge to answer that.
+  utter_whoisit:
+  - text: I'm Paya, your financial assistant from PAY Bank! 
+  - text: I'm PAY Bank financial assistant. My name is Paya!
+  utter_handleinsult:
+  - text: That's not very nice 😢
+  - text: That wasn't very nice. Perhaps try an anger management class?!
+  - text: I'll pretend I didn't process that mean comment.
+  utter_nicetomeetyoutoo:
+  - text: Likewise!
+  - text: Thank you. It is a pleasure to meet you as well!
+  - text: It is nice to meet you too!
+  - text: Pleased to meet you too!
+  - text: Nice to meet you too! Happy to be of help.
+  utter_telljoke:
+  - text: Why are eggs not very much into jokes? - Because they could crack up.
+  - text: What's a tree's favorite drink? - Root beer!
+  - text: Why did the robot get angry? - Because someone kept pushing its buttons.
+  - text: Why did the robot cross the road? - Because he was programmed to.
+  utter_whatisPAYbank:
+  - text: PAY bank is an international online bank. We are glad to be at your service 24/7.
+  utter_product_description:
+  - text: All of our products and services are available only online and free of charge for the first year.
+  utter_howtoapply:
+  - text: "You already have two accounts with us: a giro account and a credit card account.\
+      \ You can make a request to open a savings account or to get another creadit card online\
+      \ in out website."
+  utter_application_requirements:
+  - text: "In general a minimum age of 18 and a copy of your passport is required to use\
+      \ the services in PAY bank. Since you already have an account in PAY Bank, you don't need any\
+      \ furthur documents to request access to other services."
+  utter_required_age:
+  - text: A minimum age of 18 is required to use the services in PAY bank.
+  utter_cardlimit:
+  - text: "You first credit card limit is 500€.\
+      \ Your limit increases during time based on your transaction history."
+  utter_points_collect:
+  - text: Unfortunately we don't offer point collection at the moment.
+  utter_annualcost:
+  - text: You can use our services for free in the first year, after that there is an annual cost of 19.99€.
+  actions:
 - action_configure_repair_strategy
 - action_repair
 - action_repair_options
 - action_repair_count_breakdwon
+- action_repair_label_confidency
 - action_default_fallback
 - action_account_balance
 - action_session_start
@@ -353,9 +458,94 @@ actions:
 - action_restart
 - action_pause
 - action_tag_feedback
-- respond_chitchat
-- respond_faq
-- respond_out_of_scope
+- utter_greet_name
+- utter_greet_noname
+- utter_bye
+- utter_great
+- utter_awesome
+- utter_nohelp
+- utter_not_sure
+- utter_noworries
+- utter_react_negative
+- utter_react_positive
+- utter_thumbsup
+- utter_can_do
+- utter_ask_feedback
+- utter_restart_with_button
+- utter_restart
+- utter_canthelp
+- utter_ask_continue
+- utter_what_help
+- utter_ask_whatelse
+- utter_anything_else
+- utter_intro
+- utter_capabilities_repair
+- utter_capabilities
+- utter_default
+- utter_repair_strategy_saved
+- utter_ask_transfer_form_amount_of_money
+- utter_ask_transfer_form_PERSON
+- utter_transfer_complete
+- utter_transfer_charge
+- utter_ask_cc_payment_form_payment_amount
+- utter_ask_cc_payment_form_credit_card
+- utter_ask_cc_payment_form_time
+- utter_ask_transact_search_form_vendor_name
+- utter_ask_transact_search_form_time
+- utter_no_payment_amount
+- utter_no_paymentdate
+- utter_no_creditcard
+- utter_no_vendor_name
+- utter_no_transactdate
+- utter_cc_pay_scheduled
+- utter_searching_spend_transactions
+- utter_found_spend_transactions
+- utter_searching_deposit_transactions
+- utter_found_deposit_transactions
+- utter_ask_switch_goal
+- utter_ask_back_to_transact
+- utter_ask_back_to_transfer
+- utter_ok
+- utter_ask_cc_payment_form_confirm
+- utter_ask_transfer_form_confirm
+- utter_transfer_cancelled
+- utter_cc_pay_cancelled
+- utter_account_balance
+- utter_changed_account_balance
+- utter_unknown_recipient
+- utter_insufficient_funds
+- utter_credit_card_balance
+- utter_recipients
+- utter_ask_continue_cc_payment
+- utter_ask_continue_transfer
+- utter_ask_continue_transact_search
+- utter_ask_handoff
+- utter_handoff
+- utter_wouldve_handed_off
+- utter_no_handoff
+- utter_builder
+- utter_howbuild
+- utter_howdoing
+- utter_howold
+- utter_isbot
+- utter_ishuman
+- utter_time
+- utter_languagesbot
+- utter_weather
+- utter_whatismyname
+- utter_wherefrom
+- utter_whoami
+- utter_whoisit
+- utter_handleinsult
+- utter_nicetomeetyoutoo
+- utter_telljoke
+- utter_whatisPAYbank
+- utter_howtoapply
+- utter_application_requirements
+- utter_required_age
+- utter_cardlimit
+- utter_points_collect
+- utter_annualcost
 forms:
 - cc_payment_form
 - transfer_form

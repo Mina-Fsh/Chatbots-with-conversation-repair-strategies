@@ -27,12 +27,6 @@ pipeline:
   dimensions:
   - PERSON
 - name: ResponseSelector
-  epochs: 100
-  retrieval_intent: faq
-  scale_loss: false
-- name: ResponseSelector
-  retrieval_intent: chitchat
-  scale_loss: false
 policies:
 - name: TEDPolicy
   max_history: 10
@@ -40,7 +34,6 @@ policies:
   batch_size:
   - 32
   - 64
-  max_history: 6
 - name: AugmentedMemoizationPolicy
 - name: FallbackPolicy
   nlu_threshold: 0.8

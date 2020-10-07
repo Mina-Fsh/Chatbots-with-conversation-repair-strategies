@@ -1,4 +1,4 @@
-## intent:chitchat/ask_builder
+## intent:ask_builder
 - By whom were you built?
 - Can I ask the name of the people who designed you?
 - Do you know who built you?
@@ -104,7 +104,7 @@
 - you are working for which company?
 - who is the author of you
 
-## intent:chitchat/ask_howbuilt
+## intent:ask_howbuilt
 - By what means were you made?
 - By what method were you fashioned?
 - Can you explain how you were created?
@@ -155,7 +155,7 @@
 - Are u developed in rasa
 - are you build with rasa ?
 
-## intent:chitchat/ask_howdoing
+## intent:ask_howdoing
 - Ahoy matey how are you?
 - Are you ok?
 - Do you feel good?
@@ -249,7 +249,7 @@
 - Hey, how's it going
 - are you cool
 
-## intent:chitchat/ask_howold
+## intent:ask_howold
 - Do you have friends the same age as you, if so, how old are they?
 - How long have you been alive?
 - How long have you been around?
@@ -305,7 +305,7 @@
 - when you were bon
 - What's your age?
 
-## intent:chitchat/ask_isbot
+## intent:ask_isbot
 - Ar you a bot ?
 - Are you a bot
 - Are you a chat bot?
@@ -343,7 +343,7 @@
 - real bot then?
 - are you really a bbot?
 
-## intent:chitchat/ask_ishuman
+## intent:ask_ishuman
 - hey are you human
 - are u human
 - r u a human
@@ -370,7 +370,7 @@
 - wow you sound like real human
 - are you human ?
 
-## intent:chitchat/ask_languagesbot
+## intent:ask_languagesbot
 - Are you familiar with more than one language?
 - Can you communicate in any other languages?
 - Can you speak more than one language?
@@ -435,7 +435,7 @@
 - can we converse in [french](language)?
 - Do you speak [italian](language)?
 
-## intent:chitchat/ask_restaurant
+## intent:ask_restaurant
 - Any good restaurants nearby?
 - Can you find a restaurant for me?
 - Can you find me a burger joint?
@@ -492,7 +492,7 @@
 - I want to find some restauant nearby
 - show me restaurents
 
-## intent:chitchat/ask_time
+## intent:ask_time
 - Can you give me the time?
 - Can you tell me the time?
 - Can you tell me what time it is?
@@ -545,7 +545,7 @@
 - what's the time
 - whats the time now
 
-## intent:chitchat/ask_weather
+## intent:ask_weather
 - Are there any meteorological changes that I need to be aware of?
 - Are we in for a scorcher?
 - Beautiful day, isn't it?
@@ -625,7 +625,7 @@
 - wheather at you location?
 - wheather be like at your place?
 
-## intent:chitchat/ask_whatismyname
+## intent:ask_whatismyname
 - Can you tell me my name?
 - Can you tell me what I am called?
 - Do I have a name?
@@ -664,84 +664,7 @@
 - what is my name?
 - what's my name?
 
-## intent:chitchat/ask_whatisPAYbank
-- Can you brief me about PAY bank
-- Can you tell me more about PAY bank?
-- Can you tell me what PAY bank does?
-- Could you tell me more about PAY bank?
-- Give me more information about PAY bank
-- How does PAY bank work?
-- I want to know about PAY bank
-- I want to know what PAY bank actually does that isn't clear to me yet
-- I want to learn what PAY bank does
-- I want to learn what PAY bank is
-- I would like to know about PAY bank
-- I would like to know more about your product
-- OK can u brief me Abt PAY bank
-- PAY bank?
-- PAY bank Is?
-- WHAT IS IT
-- WHAT IS PAY BANK
-- What Is PAY bank?
-- What can PAY bank do?
-- What do you do as a company?
-- What do you do as a bank?
-- What do you do at PAY bank?
-- What does PAY bank do?
-- What does PAY bank do exactly?
-- What exactly is PAY bank?
-- What is pay bank?
-- What is pay bank doing exactly?
-- What is the pay bank?
-- What's pay bank?
-- can you explain your bank?
-- can you pls explain what pay bank does
-- could you tell me more about your bank
-- explain me what your bank does
-- explain me what your bank is
-- how does pay bank work?
-- how does pay bank work
-- how does paybank work?
-- how paybank works ?
-- how works paybank
-- i dont get what pay bank is
-- i havent understood yet what pay bank actually is
-- i want to about pay bank
-- i want to know about paybank
-- i want to know what PAY BANK does
-- i want to learn something about pay bank
-- so how does it all work?
-- sorry tell me about pay bank
-- tell me about PAY bank
-- tell me bout PAYBANK
-- tell me more about pay bank
-- tell me more about your company
-- what can I do with your company?
-- what can i do in pay bank
-- what do you guys do at pay bank
-- what does pay bank do
-- what does pay bank do ?
-- what does pay bank do?
-- what does pay bank mean
-- what is [bank account](product)
-- what is [PAY bank](company)
-- what is [PAY bank](company) ?
-- what is in PAY bank
-- what is it for?
-- what is PAY bank
-- what is PAY bank [credit card](product)
-- what is PAY bank [master card](product)?
-- what is PAY bank actually
-- what is PAY bank?
-- whats PAY bank
-- yeah go on explaining what PAY bank is
-- what are the products of PAY bank
-- PAY IS BANK?
-- pay bank os
-
-
-
-## intent:chitchat/ask_wherefrom
+## intent:ask_wherefrom
 - Are you from around here?
 - Around where are you from?
 - Do you know where you come from?
@@ -792,7 +715,7 @@
 - where do you live?
 - where's your home town?
 
-## intent:chitchat/ask_whoami
+## intent:ask_whoami
 - Can you tell me who I am?
 - Can you tell me who am I?
 - Do you know who I am?
@@ -820,7 +743,7 @@
 - who are I ?
 - who may i ?
 
-## intent:chitchat/ask_whoisit
+## intent:ask_whoisit
 - HI, what's your name?
 - Hello. What's your name?
 - I want to know who you are
@@ -887,7 +810,7 @@
 - what's u name?
 - what is you name?
 
-## intent:chitchat/handleinsult
+## intent:handleinsult
 - FUCK
 - Fuck
 - Fuck Off
@@ -996,7 +919,7 @@
 - stupid chatbot
 - damn you
 
-## intent:chitchat/nicetomeetyou
+## intent:nicetomeetyou
 - Delighted to make your acquaintance.
 - Feels great to see you!
 - Glad to finally meet you!
@@ -1045,7 +968,7 @@
 - Thank you for this meeting. It was great to see you.
 - nice to meet you
 
-## intent:chitchat/telljoke
+## intent:telljoke
 - Can you tell a joke?
 - Can you tell me a joke.
 - Come up with a joke you think I'll find funny.
