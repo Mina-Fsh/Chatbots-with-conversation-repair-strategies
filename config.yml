@@ -37,7 +37,6 @@ policies:
 - name: AugmentedMemoizationPolicy
 - name: FallbackPolicy
   nlu_threshold: 0.8
-  core_threshold: 0.6
   fallback_action_name: action_repair
 - name: FormPolicy
 - name: MappingPolicy
