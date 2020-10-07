@@ -159,6 +159,11 @@ class ActionRepairOptions(Action):
         # can distinguish between the different sub intents
         first_intent_names = [
             intent.get("name", "")
+            if intent.get("name", "")
+            not in ["faq", "chitchat"]
+            else tracker.latest_message.get("response_selector")
+            .get(intent.get("name", ""))
+            .get("full_retrieval_intent")
             for intent in intent_ranking
         ]
 
