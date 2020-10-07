@@ -350,7 +350,8 @@ responses:
   - text: Since you haven't configured a host to hand off to, I can't send you anywhere!
       Please contact the phone number 01234567.
   utter_builder:
-  - text: Mina Foosherian built me using Rasa Demo SARA and the financial service example bot! 🧠 🛠
+  - text: Mina Foosherian built me using Rasa Demo SARA and the financial service
+      example bot! 🧠 🛠
   utter_howbuild:
   - text: I was built with a lot of love and patience.
   - text: Well, when two chatbots love each other very much...
@@ -364,7 +365,8 @@ responses:
   - text: A little bit cold, otherwise fine.
   utter_howold:
   - text: Old enough to be a bot!
-  - text: Age is just an issue of mind over matter. If you don’t mind, it doesn’t matter.
+  - text: Age is just an issue of mind over matter. If you don’t mind, it doesn’t
+      matter.
   - text: Never ask a chatbot her age!
   - text: My first git commit was many moons ago.
   - text: I've hit the age where I actively try to forget how old I am.
@@ -378,7 +380,8 @@ responses:
   utter_restaurant:
   - text: I'm sorry, I can't recommend you a restaurant as I usually cook at home.
   - text: I'm sorry, I'm not getting taste buds for another few updates.
-  - text: I'd need some more data. If you lick the monitor perhaps I can evaluate your taste buds.
+  - text: I'd need some more data. If you lick the monitor perhaps I can evaluate
+      your taste buds.
   utter_time:
   - text: It's the most wonderful time of the year!
   - text: Time is a human construct, you'll have to tell me.
@@ -401,9 +404,10 @@ responses:
   - text: I was taught not to give out my address on the internet.
   - text: My address starts with github.com!
   utter_whoami:
-  - text: Unfortunately I haven't been programmed with the amount of necessary philosophy knowledge to answer that.
+  - text: Unfortunately I haven't been programmed with the amount of necessary philosophy
+      knowledge to answer that.
   utter_whoisit:
-  - text: I'm Paya, your financial assistant from PAY Bank! 
+  - text: I'm Paya, your financial assistant from PAY Bank!
   - text: I'm PAY Bank financial assistant. My name is Paya!
   utter_handleinsult:
   - text: That's not very nice 😢
@@ -421,27 +425,30 @@ responses:
   - text: Why did the robot get angry? - Because someone kept pushing its buttons.
   - text: Why did the robot cross the road? - Because he was programmed to.
   utter_whatisPAYbank:
-  - text: PAY bank is an international online bank. We are glad to be at your service 24/7.
+  - text: PAY bank is an international online bank. We are glad to be at your service
+      24/7.
   utter_product_description:
-  - text: All of our products and services are available only online and free of charge for the first year.
+  - text: All of our products and services are available only online and free of charge
+      for the first year.
   utter_howtoapply:
-  - text: "You already have two accounts with us: a giro account and a credit card account.\
-      \ You can make a request to open a savings account or to get another creadit card online\
-      \ in out website."
+  - text: 'You already have two accounts with us: a giro account and a credit card
+      account. You can make a request to open a savings account or to get another
+      creadit card online in out website.'
   utter_application_requirements:
-  - text: "In general a minimum age of 18 and a copy of your passport is required to use\
-      \ the services in PAY bank. Since you already have an account in PAY Bank, you don't need any\
-      \ furthur documents to request access to other services."
+  - text: In general a minimum age of 18 and a copy of your passport is required to
+      use the services in PAY bank. Since you already have an account in PAY Bank,
+      you don't need any furthur documents to request access to other services.
   utter_required_age:
   - text: A minimum age of 18 is required to use the services in PAY bank.
   utter_cardlimit:
-  - text: "You first credit card limit is 500€.\
-      \ Your limit increases during time based on your transaction history."
+  - text: You first credit card limit is 500€. Your limit increases during time based
+      on your transaction history.
   utter_points_collect:
   - text: Unfortunately we don't offer point collection at the moment.
   utter_annualcost:
-  - text: You can use our services for free in the first year, after that there is an annual cost of 19.99€.
-  actions:
+  - text: You can use our services for free in the first year, after that there is
+      an annual cost of 19.99€.
+actions:
 - action_configure_repair_strategy
 - action_repair
 - action_repair_options
