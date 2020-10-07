@@ -573,20 +573,18 @@
 * greet
     - action_greet_user
     - utter_intro
-* chitchat
-    - respond_chitchat
-* chitchat
-    - respond_chitchat
+* ask_howdoing
+    - utter_howdoing
+* whatisPAYbank
+    - utter_whatisPAYbank
     - utter_ask_feedback
 * feedback{"feedback_value": "positive"}
     - slot{"feedback_value": "positive"}
     - action_tag_feedback
     - utter_great
     - utter_anything_else
-* chitchat
-    - respond_chitchat
-* chitchat
-    - respond_chitchat
+* ask_ishuman
+    - utter_ishuman
 * transfer_money
     - transfer_form
     - form{"name":"transfer_form"}
