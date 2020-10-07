@@ -2,8 +2,6 @@
 * greet
     - action_greet_user
     - utter_intro
-* out_of_scope
-    - respond_out_of_scope
 * pay_cc
     - cc_payment_form
     - form{"name":"cc_payment_form"}

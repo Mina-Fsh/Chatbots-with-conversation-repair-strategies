@@ -1,9 +1,3 @@
-## feedback1
-    - utter_ask_feedback
-* out_of_scope
-    - utter_thumbsup
-    - utter_anything_else
-
 ## feedback2
     - utter_ask_feedback
 * inform
