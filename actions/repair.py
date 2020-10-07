@@ -52,12 +52,16 @@ class ActionConfigureRepairStrategy(Action):
                 "payload": "options",
             },
             {
-                "title": "In case of multiple breakdowns, help me get out of it!",
+                "title": "In case of consecutive breakdowns, stop showing options to me!",
                 "payload": "cumulative",
             },
             {
                 "title": "Connect me to a human!",
                 "payload": "defer",
+            },
+            {
+                "title": "Labele baba!",
+                "payload": "labelConfidency",
             }
         ]
 
@@ -84,10 +88,38 @@ class ActionRepair(Action):
         elif repair_strategy == "defer":
             message_title = "I'm sorry, but I didn't understand you.\n I want to connect you to an agen but unfortunately there is no agent available at the moment.\n Please contact the phone number 01234567, or continue chatting with me! "
             dispatcher.utter_message(message_title)
+        elif repair_strategy == "labelConfidency":
+            return [FollowupAction("action_repair_label_confidency")]
         else:
             dispatcher.utter_message("I do not know this repair strategy")
         return []
 
+class ActionRepairLabelConfidency(Action):
+    """Shows options in the first 5 sessions and after that asks for rephrase!"""
+
+    def name(self) -> Text:
+        return "action_repair_label_confidency"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[EventType]:
+
+        intent_ranking = tracker.latest_message.get("intent_ranking", [])
+        if len(intent_ranking) > 1:
+            highest_ranked_intent_confidence = intent_ranking[0].get("confidence")
+            highest_ranked_intent_name = intent_ranking[0].get("name")
+            if highest_ranked_intent_confidence > 0.7:
+                label = "Highly confident"
+            elif highest_ranked_intent_confidence < 0.7 and  highest_ranked_intent_confidence > 0.5:
+                label = "slightly confident"
+            else:
+                label = "poorly confident"
+    
+        dispatcher.utter_message(f"{label}: {highest_ranked_intent_confidence}")
+        return[FollowupAction(highest_ranked_intent_name)]
 
 class ActionRepairOptions(Action):
     """Asks for an affirmation of the intent if NLU threshold is not met."""
@@ -128,7 +160,7 @@ class ActionRepairOptions(Action):
         first_intent_names = [
             intent.get("name", "")
             if intent.get("name", "")
-            not in ["out_of_scope", "faq", "chitchat"]
+            not in ["faq", "chitchat"]
             else tracker.latest_message.get("response_selector")
             .get(intent.get("name", ""))
             .get("full_retrieval_intent")
