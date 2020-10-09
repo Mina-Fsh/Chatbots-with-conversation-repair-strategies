@@ -17,28 +17,6 @@
     - utter_repair_strategy_saved
     - utter_ask_feedback
 
-## configure repair stategy
-* configure_repair_strategy
-    - action_configure_repair_strategy
-* inform{"repair_strategy_preferences": "labelConfidency"}
-    - utter_repair_strategy_saved
-
-## configure repair stategy 2
-* greet
-    - action_greet_user
-    - utter_intro
-* configure_repair_strategy
-    - action_configure_repair_strategy
-* inform{"repair_strategy_preferences":"defer"}
-    - slot{"repair_strategy_preferences":"defer"}
-    - utter_repair_strategy_saved
-    - utter_ask_feedback
-* feedback{"feedback_value": "negative"}
-    - slot{"feedback_value": "negative"}
-    - action_tag_feedback
-    - utter_thumbsup
-    - utter_anything_else
-
 ## thanks
 * thank
     - utter_noworries
@@ -68,12 +46,6 @@
     - utter_thumbsup
     - utter_ask_feedback
 
-## anything else?
-    - utter_anything_else
-* inform
-    - utter_not_sure
-    - utter_intro
-
 ## positive reaction
 * react_positive
     - utter_react_positive
@@ -90,6 +62,13 @@
     - utter_intro
 * deny
     - utter_nohelp
+
+## pay credit card no greet or thanks
+* pay_cc
+    - cc_payment_form
+    - form{"name": "cc_payment_form"}
+    - form{"name": null}
+    - utter_ask_feedback
 
 ## pay credit card and check account balance
 * pay_cc
@@ -157,13 +136,6 @@
     - action_tag_feedback
     - utter_thumbsup
     - utter_anything_else
-
-## pay credit card no greet or thanks
-* pay_cc
-    - cc_payment_form
-    - form{"name": "cc_payment_form"}
-    - form{"name": null}
-    - utter_ask_feedback
 
 ## transfer money
 * transfer_money
@@ -280,11 +252,6 @@
     - form{"name":null}
     - slot{"requested_slot":null}
     - utter_ask_feedback
-* feedback{"feedback_value": "positive"}
-    - slot{"feedback_value": "positive"}
-    - action_tag_feedback
-    - utter_great
-    - utter_anything_else
 
 ## transfer money ask account balance
 * transfer_money
