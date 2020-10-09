@@ -311,6 +311,7 @@
 - 333333
 - [emblm]{"entity": "credit_card", "value": "emblem"}
 - tim baker
+- 20 €
 
 ## intent:pay_cc
 - I would like to pay the [minimum balance](payment_amount) on my [embelm](credit_card) card
@@ -367,6 +368,12 @@
 - I want to transfer €100 to Bob
 - can i transfer money to Sally
 - I want to transfer money
+- send some cash
+- i wanna send cash
+- i want to send some cash to mina
+- can u send some cash
+- send cash
+- transfer cash
 - I want to pay someone
 - can I pay someone
 - I need to transfer money to a friend
@@ -388,6 +395,7 @@
 - transfer €60 to Sally
 - i want to transfer 200 euros
 - I want to transfer money to Mina Foosherian
+- I wanna send money to Tim
 
 ## intent:check_recipients
 - Who can I send money to?
