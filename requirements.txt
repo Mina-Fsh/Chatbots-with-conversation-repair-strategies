@@ -1,6 +1,6 @@
 -r actions/requirements-actions.txt
-rasa[spacy]~=1.10.9
-rasa-sdk~=1.10.2
+rasa[spacy]==1.10.8
+rasa-sdk~=1.10.0
 
 rasa[convert]~=1.10.0  # when updating, check the sdk version in the Dockerfile as well!
 -r actions/requirements-actions.txt
