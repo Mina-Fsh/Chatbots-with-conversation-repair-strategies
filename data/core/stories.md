@@ -1,6 +1,7 @@
 ## greet/bye path
 * greet
     - action_greet_user
+    - utter_intro
 
 ## configure repair stategy
 * configure_repair_strategy
@@ -61,6 +62,7 @@
 ## neither 
 * greet
     - action_greet_user
+    - utter_intro
 * deny
     - utter_nohelp
 
@@ -126,6 +128,7 @@
 ## pay credit card happy path
 * greet
     - action_greet_user
+    - utter_intro
 * pay_cc
     - cc_payment_form
     - form{"name": "cc_payment_form"}
@@ -316,6 +319,7 @@
 ## search transactions happy path
 * greet
     - action_greet_user
+    - utter_intro
 * search_transactions
     - transact_search_form
     - form{"name": "transact_search_form"}
@@ -482,9 +486,10 @@
     - utter_great
     - utter_anything_else
 
-## newsletter then sales
+## transfer money then pay cc
 * greet
     - action_greet_user
+    - utter_intro
 * transfer_money
     - transfer_form
     - form{"name":"transfer_form"}
@@ -509,9 +514,10 @@
     - utter_great
     - utter_anything_else
 
-## newsletter, confirm, then sales
+## check recipients, check balance, transfer money
 * greet
     - action_greet_user
+    - utter_intro
 * check_recipients
     - action_recipients
 * check_balance{"account_type":"credit"}
@@ -532,9 +538,10 @@
     - utter_great
     - utter_anything_else
 
-## chitchat --> transfer money --> no email
+## chitchat --> transfer money --> chitchat
 * greet
     - action_greet_user
+    - utter_intro
 * ask_howdoing
     - utter_howdoing
 * whatisPAYbank

@@ -583,7 +583,8 @@ class ActionSessionStart(Action):
 
         # an `action_listen` should be added at the end
         events.append(ActionExecuted("action_listen"))
-        dispatcher.utter_message(template="utter_intro")
+
+        #dispatcher.utter_message(template="utter_intro")
 
         return events
 

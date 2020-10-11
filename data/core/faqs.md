@@ -33,6 +33,7 @@
 ## more faqs
 * greet
     - action_greet_user
+    - utter_intro
 * whatisPAYbank
     - utter_whatisPAYbank
 * product_description
@@ -49,6 +50,7 @@
 ## just transfer money, continue
 * greet
     - action_greet_user
+    - utter_intro
 * transfer_money
     - transfer_form
     - form{"name":"transfer_form"}
@@ -64,6 +66,7 @@
 ## just transfer money, don't continue
 * greet
     - action_greet_user
+    - utter_intro
 * transfer_money
     - transfer_form
     - form{"name":"transfer_form"}

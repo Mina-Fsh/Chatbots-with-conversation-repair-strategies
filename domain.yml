@@ -1,5 +1,5 @@
 session_config:
-  session_expiration_time: 30
+  session_expiration_time: 10
   carry_over_slots_to_new_session: false
 intents:
 - ask_builder
@@ -143,9 +143,13 @@ slots:
     type: unfeaturized
 responses:
   utter_greet_name:
-  - text: Hi, {PERSON}! How can I help you?
+  - text: Hi, {PERSON}!	  
+  - text: Hello, {PERSON}!	
+  - text: Hey, {PERSON}!	
   utter_greet_noname:
-  - text: How can I help you?
+  - text: Hey!	  
+  - text: Hi!	
+  - text: Hey there!
   utter_bye:
   - text: Goodbye!
   - text: Bye!
@@ -216,10 +220,10 @@ responses:
   utter_anything_else:
   - text: Is there anything else I can help you with?
   utter_intro:
-  - text: "Hi, I'm Paya, your PAY Bank financial assistant. \nI can help you with your\
-      \ financial accounts. \nYou can ask me things like: \n- What's my account balance?\
-      \ \n- Pay off my credit card \n- What did I spend at Amazon last month?   \n\
-      - I need to transfer money."
+  - text: "I'm Paya, your PAY Bank financial assistant. \nI can help you with\
+      \ your financial accounts. \nYou can ask me things like: \n- What's my account\
+      \ balance? \n- Pay off my credit card \n- What did I spend at Amazon last month?\
+      \   \n- I need to transfer money."
   utter_capabilities_repair:
   - text: "I'm sorry, but I couldn't understand you. \nI can help you with topics\
       \ related to banking such as: \n- Transfer money to your known recipients. \n\
@@ -332,7 +336,9 @@ responses:
   utter_ask_continue_transact_search:
   - text: Do you still want to search your transactions?
   utter_phonenumber:
-  - text: "I want to connect you to an agent but unfortunately there is no agent available at the moment.\n Please contact the phone number 01234567, or continue chatting with me!"
+  - text: "I want to connect you to an agent but unfortunately there is no agent available\
+      \ at the moment.\n Please contact the phone number 01234567, or continue chatting\
+      \ with me!"
   utter_builder:
   - text: Mina Foosherian built me using Rasa Demo SARA and the financial service
       example bot! 🧠 🛠
@@ -447,6 +453,93 @@ actions:
 - action_restart
 - action_pause
 - action_tag_feedback
+- utter_greet_name
+- utter_greet_noname
+- utter_bye
+- utter_great
+- utter_awesome
+- utter_nohelp
+- utter_not_sure
+- utter_noworries
+- utter_react_negative
+- utter_react_positive
+- utter_thumbsup
+- utter_can_do
+- utter_ask_feedback
+- utter_restart_with_button
+- utter_restart
+- utter_canthelp
+- utter_ask_continue
+- utter_what_help
+- utter_ask_whatelse
+- utter_anything_else
+- utter_intro
+- utter_capabilities_repair
+- utter_capabilities
+- utter_default
+- utter_repair_strategy_saved
+- utter_ask_transfer_form_amount_of_money
+- utter_ask_transfer_form_PERSON
+- utter_transfer_complete
+- utter_transfer_charge
+- utter_ask_cc_payment_form_payment_amount
+- utter_ask_cc_payment_form_credit_card
+- utter_ask_cc_payment_form_time
+- utter_ask_transact_search_form_vendor_name
+- utter_ask_transact_search_form_time
+- utter_no_payment_amount
+- utter_no_paymentdate
+- utter_no_creditcard
+- utter_no_vendor_name
+- utter_no_transactdate
+- utter_cc_pay_scheduled
+- utter_searching_spend_transactions
+- utter_found_spend_transactions
+- utter_searching_deposit_transactions
+- utter_found_deposit_transactions
+- utter_ask_switch_goal
+- utter_ask_back_to_transact
+- utter_ask_back_to_transfer
+- utter_ok
+- utter_ask_cc_payment_form_confirm
+- utter_ask_transfer_form_confirm
+- utter_transfer_cancelled
+- utter_cc_pay_cancelled
+- utter_account_balance
+- utter_changed_account_balance
+- utter_unknown_recipient
+- utter_insufficient_funds
+- utter_credit_card_balance
+- utter_recipients
+- utter_ask_continue_cc_payment
+- utter_ask_continue_transfer
+- utter_ask_continue_transact_search
+- utter_phonenumber
+- utter_builder
+- utter_howbuild
+- utter_howdoing
+- utter_howold
+- utter_isbot
+- utter_ishuman
+- utter_restaurant
+- utter_time
+- utter_languagesbot
+- utter_weather
+- utter_whatismyname
+- utter_wherefrom
+- utter_whoami
+- utter_whoisit
+- utter_handleinsult
+- utter_nicetomeetyoutoo
+- utter_telljoke
+- utter_whatisPAYbank
+- utter_product_description
+- utter_howtoapply
+- utter_application_requirements
+- utter_required_age
+- utter_cardlimit
+- utter_points_collect
+- utter_annualcost
 forms:
 - cc_payment_form
 - transfer_form

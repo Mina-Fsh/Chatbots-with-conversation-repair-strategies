@@ -79,6 +79,7 @@
 ## more chitchat
 * greet
     - action_greet_user
+    - utter_intro
 * ask_ishuman
     - utter_ishuman
 * ask_howold
@@ -91,6 +92,7 @@
 ## just check balance + confirm
 * greet
     - action_greet_user
+    - utter_intro
 * ask_builder
     - utter_builder
 * check_balance
@@ -103,6 +105,7 @@
 ## transaction search, continue, + confirm
 * greet
     - action_greet_user
+    - utter_intro
 * search_transactions OR check_earnings
     - transact_search_form
     - form{"name": "transact_search_form"}
@@ -121,6 +124,7 @@
 ## just transaction search, don't continue, + confirm
 * greet
     - action_greet_user
+    - utter_intro
 * search_transactions OR check_earnings
     - transact_search_form
     - form{"name": "transact_search_form"}
@@ -139,6 +143,7 @@
 ## just transaction search
 * greet
     - action_greet_user
+    - utter_intro
 * ask_isbot
     - utter_isbot
 * search_transactions OR check_earnings
@@ -150,6 +155,7 @@
 ## just transaction search, continue
 * greet
     - action_greet_user
+    - utter_intro
 * search_transactions OR check_earnings
     - transact_search_form
     - form{"name": "transact_search_form"}
@@ -165,6 +171,7 @@
 ## just newsletter, don't continue
 * greet
     - action_greet_user
+    - utter_intro
 * search_transactions OR check_earnings
     - transact_search_form
     - form{"name": "transact_search_form"}
@@ -180,6 +187,7 @@
 ## just transfer money
 * greet
     - action_greet_user
+    - utter_intro
 * ask_isbot
     - utter_isbot
 * transfer_money
@@ -191,6 +199,7 @@
 ## just transfer money, continue
 * greet
     - action_greet_user
+    - utter_intro
 * transfer_money
     - transfer_form
     - form{"name":"transfer_form"}
@@ -206,6 +215,7 @@
 ## just transfer money, don't continue
 * greet
     - action_greet_user
+    - utter_intro
 * transfer_money
     - transfer_form
     - form{"name":"transfer_form"}

@@ -4,13 +4,15 @@
 
 ## greet + canthelp
 * greet
-    - action_greet_user 
+    - action_greet_user
+    - utter_intro
 * canthelp
     - utter_canthelp
 
 ## greet + cc payment + canthelp + continue
 * greet
     - action_greet_user
+    - utter_intro
 * pay_cc
     - utter_can_do
     - cc_payment_form
@@ -29,7 +31,8 @@
 
 ## greet + cc payment + canthelp + don't continue
 * greet
-    - action_greet_user 
+    - action_greet_user
+    - utter_intro
 * pay_cc
     - utter_can_do
     - cc_payment_form
@@ -49,6 +52,7 @@
 ## transfer money + continue
 * greet
     - action_greet_user
+    - utter_intro
 * transfer_money
     - transfer_form
     - form{"name": "transfer_form"}
@@ -67,6 +71,7 @@
 ## just sales + don't continue
 * greet
     - action_greet_user
+    - utter_intro
 * transfer_money
     - transfer_form
     - form{"name": "transfer_form"}

@@ -1,6 +1,7 @@
 ## story number 1
 * greet
     - action_greet_user
+    - utter_intro
 * pay_cc
     - cc_payment_form
     - form{"name":"cc_payment_form"}
