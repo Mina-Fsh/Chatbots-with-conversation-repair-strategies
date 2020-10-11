@@ -95,10 +95,8 @@ It also has a limited ability to switch skills mid-transaction and then return t
 
 For the purposes of illustration, the bot recognises the following fictional credit card accounts:
 
-- `emblem`
-- `justice bank`
-- `credit all`
-- `iron bank`
+- `silver`
+- `gold`
 
 It recognises the following payment amounts (besides actual currency amounts):
 

@@ -1,5 +1,5 @@
 ## intent:ask_transfer_charge
-- Will I be charged for transferring money
+- Will I be charged for transferring cash
 - do transfers cost something?
 - is there a transfer charge?
 - Is there a charge
@@ -9,6 +9,8 @@
 - is there a xfer fee
 - how much is the transfer fee
 - transaction cost
+- how much is the cost to send money 
+- is there a charge for sending money?
 
 ## intent:check_balance
 - How much money is on my account?
@@ -22,7 +24,7 @@
 - what's my account balance?
 - what's my account balance
 - whats my account balance
-- Account balance
+- account balance
 - What's my [credit card](account_type) balance
 - What's my [credit](account_type) balance
 - How much money do I owe on my [credit cards](account_type)
@@ -31,25 +33,38 @@
 - Show me my [credit accounts](account_type)
 - Whats the balance on my [credit account](account_type)
 - What's my [credit account](account_type)
-- What's my [credit all](credit_card) balance
-- What's my [emblem](credit_card) card balance
-- What's the balance on the [credit all](credit_card) account
-- Show me my [iron bank](credit_card) balance
-- What's my [justice bank](credit_card) balance
-- What's the balance on the [justice bank](credit_card) account
-- what's my [emblm](credit_card) [credit card](account_type) balance?
+- What's my [silver](credit_card) balance
+- What's my [silver](credit_card) card balance
+- What's the balance on the [gold](credit_card) account
+- Show me my [silver](credit_card) balance
+- What's my [gold](credit_card) balance
+- What's the balance on the [gold](credit_card) account
+- what's my [silver](credit_card) [credit card](account_type) balance?
 - what's my [credit card](account_type) balance?
 - what's my [credit card](account_type) account balance?
-- What is my [emblem](credit_card) card balance?
+- What is my [gold](credit_card) card balance?
 - whats my [credit card](account_type) balance
-- What is my [emblem](credit_card) balance?
-- whats my [emblm](credit_card) card balance?
-- what's my [embelm](credit_card)'s card balance?
-- what's my [emblm](credit_card) account balance?
-- what is my balance
-- how much is my balance
-- how much is my current balance
+- What is my [silver](credit_card) balance?
+- whats my [silver](credit_card) card balance?
+- what's my [gold](credit_card)'s card balance?
+- what's my [silver](credit_card) account balance?
+- How much money have i spent lately>
+- I should check my [credit card]{"entity": "account_type", "value": "credit"} balance [first](account_type)
+- check my [credit card]{"entity": "account_type", "value": "credit"} balance
+- check my [credit card]{"entity": "account_type", "value": "credit"} balance [first](account_type)
+- Can you tell me my account balance?
+- Hello, I would like to know how much money is in much money is in my account
+- hi, whats my account bal please
+- so.... what's my balance?
+- whats my [current balance](payment_amount)
+- What's my balance?
 - How much money do I have?
+- how much is my balance
+- how much do I have in my account
+- current balance?
+- how much cash do I have?
+- Yeah, I like coffee 👀 But how much money do I have?
+- Yeah, I know 😀 Since it's so nice: How much money do I have?
 
 ## intent:check_earnings
 - How much money went into my account last month?
@@ -63,6 +78,8 @@
 - total deposits over last year
 - how much was deposited in January
 - how much money have I earned?
+- what did I earn?
+- How much have i earned?
 
 ## intent:capabilities
 - Can you explain me in one sentence what you are doing?
@@ -238,39 +255,25 @@
 - the [minimum balance](payment_amount)
 - my [minimum balance](payment_amount)
 - my [current balance](payment_amount)
-- [emblem](credit_card) card
-- [credit all](credit_card) card
-- [iron bank](credit_card) card
-- [justice bank](credit_card) card
-- [emblem](credit_card)
-- [credit all](credit_card)
-- [iron bank](credit_card)
-- [justice bank](credit_card)
-- [emblem](credit_card) account
-- [credit all](credit_card) account
-- [iron bank](credit_card) account
-- [justice bank](credit_card) account
-- [emblem](credit_card) [credit card](account_type)
-- [credit all](credit_card) [credit card](account_type)
-- [iron bank](credit_card) [credit card](account_type)
-- [justice bank](credit_card) [credit card](account_type)
-- my [emblem](credit_card) [credit card](account_type)
-- my [credit all](credit_card) [credit card](account_type)
-- my [iron bank](credit_card) [credit card](account_type)
-- my [justice bank](credit_card) [credit card](account_type)
-- my [emblem](credit_card) card
-- my [credit all](credit_card) card
-- my [iron bank](credit_card) card
-- my [justice bank](credit_card) card
-- towards my [emblem](credit_card) card
-- towards my [credit all](credit_card) card
-- towards my [iron bank](credit_card) card
-- towards my [justice bank](credit_card) card
+- [silver](credit_card) card
+- [gold](credit_card) card
+- [silver](credit_card)
+- [gold](credit_card)
+- [silver](credit_card) account
+- [gold](credit_card) account
+- [silver](credit_card) [credit card](account_type)
+- [gold](credit_card) [credit card](account_type)
+- my [silver](credit_card) [credit card](account_type)
+- my [gold](credit_card) [credit card](account_type)
+- my [silver](credit_card) card
+- my [gold](credit_card) card
+- towards my [silver](credit_card) card
+- towards my [gold](credit_card) card
 - for sunday
 - for friday
 - for tomorrow
 - for saturday
-- I want to pay the [minimum balance](payment_amount) on my [emblem](credit_card) [credit card](account_type) today
+- I want to pay the [minimum balance](payment_amount) on my [silver](credit_card) [credit card](account_type) today
 - today
 - I am Christina Sullivan
 - I am Hattie Rice
@@ -311,17 +314,17 @@
 - toay
 - 33
 - 333333
-- [emblm]{"entity": "credit_card", "value": "emblem"}
+- [silver]{"entity": "credit_card", "value": "silver"}
 
 ## intent:pay_cc
-- I would like to pay the [minimum balance](payment_amount) on my [embelm](credit_card) card
+- I would like to pay the [minimum balance](payment_amount) on my [gold](credit_card) card
 - I want to pay my [credit card](account_type)
 - I want to pay my card
 - Pay my card
-- Pay my [credit all](credit_card) card
-- I want to pay my [justice bank](credit_card) bill
+- Pay my [silver](credit_card) card
+- I want to pay my [gold](credit_card) bill
 - Pay my discover
-- I want to pay my [iron bank](credit_card) bill
+- I want to pay my [silver](credit_card) bill
 - Pay my visa
 - I want to pay my visa bill
 - Pay my mastercard
@@ -329,17 +332,24 @@
 - I want to pay my [credit card](account_type) bill
 - I want to pay the [current balance](payment_amount) on my [credit card](account_type)
 - can you help me pay the [current balance](payment_amount) on my [credit card](account_type)
-- i want to pay off my [credit all](credit_card) [credit card](account_type)
+- i want to pay off my [gold](credit_card) [credit card](account_type)
 - i want to pay off my [credit card](account_type)
 - I want to pay off my [credit card](account_type)
 - i want to pay my [credit card](account_type)
-- i want to pay off my [emblem](credit_card) [credit card](account_type)
-- I want to pay my [current balance](payment_amount) on my [embelm](credit_card) [credit card](account_type)
-- i want to pay my [current balance](payment_amount) on my [emblem](credit_card) [credit card](account_type)
-- I want to pay €500 on my [emblem](credit_card) [credit card](account_type) on Sunday
-- I want to pay my [current balance](payment_amount) on my [emblem](credit_card) [credit card](account_type) today
-- i need to pay off my [emblm](credit_card) [credit card](account_type)
-- pay [all my cards]{"entity": "credit_card", "value": "credit all"}
+- i want to pay off my [gold](credit_card) [credit card](account_type)
+- I want to pay my [current balance](payment_amount) on my [gold](credit_card) [credit card](account_type)
+- i want to pay my [current balance](payment_amount) on my [silver](credit_card) [credit card](account_type)
+- I want to pay $500 on my [gold](credit_card) [credit card](account_type) on Sunday
+- I want to pay my [current balance](payment_amount) on my [silver](credit_card) [credit card](account_type) today
+- i need to pay off my [silver](credit_card) [credit card](account_type)
+- Please schedule  a payment towards my credit card for April 12th
+- Can I schedule a payment towards my credit card for tomorrow?
+- Pay off my [minimum balance](payment_amount) please
+- i would like to pay $1200 to my [credit card]{"entity": "account_type", "value": "credit"}
+- I would also like to pay my [visa](credit_card) bill
+- Pay off my [credit card]{"entity": "account_type", "value": "credit"}, please
+- I guess it is. Since it's so much, let's pay off my [credit](account_type)
+- Let's pay that [credit card]{"entity": "account_type", "value": "credit"} bill
 
 ## intent:search_transactions
 - how much did I spend at [Lidl](vendor_name) this week?
@@ -530,54 +540,11 @@
 - restart this chat
 - restart
 
-## synonym:USA
-- US
-- United States
-- U.S.
-- usa
-
-## synonym:United Kingdom
-- UK
-- U.K.
-
-## synonym:all
-- both
-
-## synonym:credit all
-- all my cards
-
-## synonym:date
-- dates
-
-## synonym:duration
-- durations
-- how long
-
-## synonym:emblem
-- emblm
-- embelm
-
-## synonym:english
-- English
-- en
-- eng
-- Eng
-- ENGLISH
-
-## synonym:money
-- amounts
-
-## synonym:name
-- names
-
-## regex:greet
-- hey[^\s]*
-
-## regex:zipcode
-- [0-9]{5}
+## synonym:credit
+- credit card
+- credit cards
+- credit account
+- credit accounts
 
 ## lookup:location.txt
   data/nlu/lookups/location.txt
-
-## lookup:products.txt
-  data/nlu/lookups/products.txt

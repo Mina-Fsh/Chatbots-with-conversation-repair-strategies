@@ -13,7 +13,7 @@
 * greet: hi
     - utter_greet
     - utter_help
-* pay_cc: i want to pay off my [emblm]{"entity": "credit_card", "value": "emblem"}
+* pay_cc: i want to pay off my [silver]{"entity": "credit_card", "value": "silver"}
     - cc_payment_form
     - form{"name":"cc_payment_form"}
 * form: inform: my [current balance](payment_amount)
@@ -26,7 +26,7 @@
 
 
 ## pay credit card and check account balance inside form
-* pay_cc: i want to pay off my [justice bank](credit_card) [credit card]{"entity":"account_type","value":"credit"}
+* pay_cc: i want to pay off my [gold](credit_card) [credit card]{"entity":"account_type","value":"credit"}
     - cc_payment_form
     - form{"name":"cc_payment_form"}
 * form: inform: my [current balance](payment_amount)

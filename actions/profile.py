@@ -18,10 +18,8 @@ def create_mock_profile():
     transaction_history = {"spend": {}, "deposit": {}}
 
     credit_card_db = [
-        "emblem",
-        "justice bank",
-        "credit all",
-        "iron bank",
+        "silver",
+        "gold",
     ]
     deposit_db = [
         "employer",
@@ -29,8 +27,11 @@ def create_mock_profile():
     ]
     recipient_db = [
         "Mina Foosherian",
-        "Stefan Welsandt",
+        "Stefan Wellsandt",
         "Tim baker",
+        "Nina Wenig",
+        "Mohammad salehi",
+        "Nima Zargham",
     ]
     vendor_db = [
         "saturn",

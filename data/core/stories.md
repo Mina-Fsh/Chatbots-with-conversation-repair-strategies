@@ -464,7 +464,7 @@
     - utter_ask_feedback
 
 ## Show specific credit account
-* check_balance{"credit_card":"emblem"}
+* check_balance{"credit_card":"silver"}
     - action_credit_card_balance
     - utter_ask_feedback
 
