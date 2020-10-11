@@ -78,20 +78,9 @@
     - cc_payment_form
     - form{"name": "cc_payment_form"}
     - form{"name": null}
-    - utter_ask_feedback
-* feedback{"feedback_value": "negative"}
-    - slot{"feedback_value": "negative"}
-    - action_tag_feedback
-    - utter_thumbsup
-    - utter_anything_else
 * check_balance
     - action_account_balance
     - utter_ask_feedback
-* feedback{"feedback_value": "positive"}
-    - slot{"feedback_value": "positive"}
-    - action_tag_feedback
-    - utter_thumbsup
-    - utter_anything_else
 
 ## pay credit card and check account balance inside form
 * pay_cc
@@ -104,11 +93,6 @@
     - cc_payment_form
     - form{"name": null}
     - utter_ask_feedback
-* feedback{"feedback_value": "positive"}
-    - slot{"feedback_value": "positive"}
-    - action_tag_feedback
-    - utter_thumbsup
-    - utter_anything_else
 
 ## pay cc happy path no greet
 * pay_cc
@@ -134,11 +118,6 @@
     - form{"name": "cc_payment_form"}
     - form{"name": null}
     - utter_ask_feedback
-* feedback{"feedback_value": "positive"}
-    - slot{"feedback_value": "positive"}
-    - action_tag_feedback
-    - utter_thumbsup
-    - utter_anything_else
 
 ## transfer money
 * transfer_money

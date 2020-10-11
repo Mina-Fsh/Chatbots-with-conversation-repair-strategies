@@ -140,20 +140,20 @@
 - with which card can I collect points
 
 ## intent:annualcost
-- What is the annual ticket price for the [credit card](account_type)?
+- What is the annual ticket price for the [credit accounts](account_type)?
 - card annual cost
 - should i pay annualy for the card service
 - does the card cost
 - is the a bank account free
-- can i get the a [credit card](account_type) for free
+- can i get the a [credit account](account_type) for free
 - how much should i pay for the a card in a year
 - is the a bank account free for students?
 - is it free for students?
 - should i pay to get it?
-- should i pay to have a gold credit card
+- should i pay to have a gold [credit card](account_type)
 - Does this product cost?
-- does the [credit card](account_type) cost?
-- what is the cost of having a silver card?
+- does the [credit cards](account_type) cost?
+- what is the cost of having a silver [credit card](account_type)?
 - should I pay annualy for the services?
 - does the services cost
 
