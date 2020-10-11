@@ -54,9 +54,7 @@ intents:
 - session_start
 - capabilities
 - restart
-- trigger_handoff
 - human_handoff
-- handoff
 - trigger_rephrase
 - configure_repair_strategy
 entities:
@@ -73,7 +71,6 @@ entities:
 - PERSON
 - number
 - account_type
-- handoff_to
 - repair_strategy_preferences
 - language
 slots:
@@ -108,8 +105,6 @@ slots:
     - positive
     - negative
   grain:
-    type: unfeaturized
-  handoff_to:
     type: unfeaturized
   known_recipients:
     type: unfeaturized
@@ -336,15 +331,8 @@ responses:
       {PERSON}?
   utter_ask_continue_transact_search:
   - text: Do you still want to search your transactions?
-  utter_ask_handoff:
-  - text: It looks like you want to be transferred to a human agent.
-  utter_handoff:
-  - text: Alright, I'll try to transfer you.
-  utter_wouldve_handed_off:
-  - text: If you were talking to me via chatroom, I would have handed you off to {handoffhost}.
-  utter_no_handoff:
-  - text: Since you haven't configured a host to hand off to, I can't send you anywhere!
-      Please contact the phone number 01234567.
+  utter_phonenumber:
+  - text: "I want to connect you to an agent but unfortunately there is no agent available at the moment.\n Please contact the phone number 01234567, or continue chatting with me!"
   utter_builder:
   - text: Mina Foosherian built me using Rasa Demo SARA and the financial service
       example bot! 🧠 🛠
@@ -455,8 +443,6 @@ actions:
 - action_session_start
 - action_credit_card_balance
 - action_recipients
-- action_handoff
-- action_handoff_options
 - action_greet_user
 - action_restart
 - action_pause
