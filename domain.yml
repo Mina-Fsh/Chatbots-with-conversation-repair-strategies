@@ -148,13 +148,9 @@ slots:
     type: unfeaturized
 responses:
   utter_greet_name:
-  - text: Hi, {PERSON}!
-  - text: Hello, {PERSON}!
-  - text: Hey, {PERSON}!
+  - text: Hi, {PERSON}! How can I help you?
   utter_greet_noname:
-  - text: Hey!
-  - text: Hi!
-  - text: Hey there!
+  - text: How can I help you?
   utter_bye:
   - text: Goodbye!
   - text: Bye!
@@ -225,7 +221,7 @@ responses:
   utter_anything_else:
   - text: Is there anything else I can help you with?
   utter_intro:
-  - text: "I'm Paya, your PAY Bank financial assistant. \nI can help you with your\
+  - text: "Hi, I'm Paya, your PAY Bank financial assistant. \nI can help you with your\
       \ financial accounts. \nYou can ask me things like: \n- What's my account balance?\
       \ \n- Pay off my credit card \n- What did I spend at Amazon last month?   \n\
       - I need to transfer money."
