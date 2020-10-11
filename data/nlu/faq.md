@@ -72,6 +72,7 @@
 - what are the products of PAY bank
 - PAY IS BANK?
 - pay bank os
+- what is [pay bank]{"entity": "company", "value": "PAY bank"}
 
 ## intent:product_description
 - what is a [credit card](product)?
@@ -91,7 +92,7 @@
 - i want this [card](product)
 - i wanna open an [account](product)
 - how can i open a [bank account](product)
-- how to apply 
+- how to apply
 - how can i get a visa card
 - how can i open a savings account
 
@@ -152,18 +153,23 @@
 - Does this product cost?
 - does the [creadit](product)
 
-## synonym:visa card
-- visa card
-- visa card
-- Visa card
-- visa
-- Visa
-- VISA
-- Visa credit card
-- VISA card
+## synonym:PAY bank
+- your bank
+- bank
+- pay bank
+
+## synonym:bank account
+- account
+- Bank account
+- Account
+- acount
+
+## synonym:credit
+- Credit card
+- credit card
+- card
 
 ## synonym:master card
-- master card
 - MASTER
 - MASTER card
 - Master card
@@ -171,22 +177,10 @@
 - Master credit card
 - MASTER credit card
 
-## synonym:credit
-- Credit card
-- credit
-- credit card
-- card
-
-## synonym:bank account
-- account
-- Bank account
-- Account
-- acount
-- bank account
-
-## synonym:PAY bank
-- PAY bank
-- your bank
-- bank
-- PAY bank
-- pay bank
+## synonym:visa card
+- Visa card
+- visa
+- Visa
+- VISA
+- Visa credit card
+- VISA card

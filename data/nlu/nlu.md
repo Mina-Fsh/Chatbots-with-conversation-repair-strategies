@@ -48,6 +48,8 @@
 - what's my [emblm](credit_card) account balance?
 - what is my balance
 - how much is my balance
+- how much is my current balance
+- How much money do I have?
 
 ## intent:check_earnings
 - How much money went into my account last month?
@@ -310,8 +312,6 @@
 - 33
 - 333333
 - [emblm]{"entity": "credit_card", "value": "emblem"}
-- tim baker
-- 20 €
 
 ## intent:pay_cc
 - I would like to pay the [minimum balance](payment_amount) on my [embelm](credit_card) card
@@ -359,8 +359,8 @@
 - search transactions
 - where did i spend my money?
 - how much did i spend?
-- How much did i send to [my father](PERSON)?
-- how much did i send to [my father](PERSON)?
+- How much did i send to [my father?
+- how much did i send to [my father?
 - how much did i spend in [amazon](vendor_name) last month
 
 ## intent:transfer_money
@@ -396,6 +396,20 @@
 - i want to transfer 200 euros
 - I want to transfer money to Mina Foosherian
 - I wanna send money to Tim
+- i wanna send cash to Tim
+- send money to Bastian
+- I want to transfer money to Nina
+- send money to Tim Baker
+- I want to send money to Sara
+- I want to send money to Mina Foosherian
+- i want to send money to Tim
+- i want to send some money
+- i want to trasfer cash to Tim
+- transfer money to Tim
+- i want to transfer money to Tim
+- send money to Mina
+- i want to send cash
+- send 200 to Stefan
 
 ## intent:check_recipients
 - Who can I send money to?
@@ -498,6 +512,8 @@
 - configure fallback policy
 - i want to set the fallback policy
 - change the repair strategy
+- change the fallback policy
+- i want to change the fallback policy
 
 ## intent:restart
 - yep you can restart
