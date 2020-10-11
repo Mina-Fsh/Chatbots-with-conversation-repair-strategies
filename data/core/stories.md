@@ -25,6 +25,10 @@
 * bye
     - utter_bye
 
+## restart
+* restart
+    - action_restart
+
 ## capability check
 * capabilities
     - utter_capabilities

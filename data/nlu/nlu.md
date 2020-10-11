@@ -526,6 +526,9 @@
 - hey, i said restart
 - restart session pls
 - restart ps
+- I said restart
+- restart this chat
+- restart
 
 ## synonym:USA
 - US
