@@ -1013,6 +1013,3 @@
 
 ## lookup:location.txt
   data/nlu/lookups/location.txt
-
-## lookup:products.txt
-  data/nlu/lookups/products.txt

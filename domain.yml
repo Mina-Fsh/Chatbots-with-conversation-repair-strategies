@@ -58,7 +58,6 @@ intents:
 - trigger_rephrase
 - configure_repair_strategy
 entities:
-- product
 - location
 - company
 - feedback_value
@@ -113,13 +112,6 @@ slots:
   payment_amount_type:
     type: unfeaturized
     initial_value: ''
-  product:
-    type: categorical
-    values:
-    - bank account
-    - visa card
-    - master card
-    - credit card
   repair_strategy_preferences:
     type: unfeaturized
     initial_value: options

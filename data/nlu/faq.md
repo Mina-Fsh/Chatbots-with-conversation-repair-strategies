@@ -57,14 +57,14 @@
 - what does pay bank do ?
 - what does pay bank do?
 - what does pay bank mean
-- what is [bank account](product)
+- what is bank account
 - what is [PAY bank](company)
 - what is [PAY bank](company) ?
 - what is in PAY bank
 - what is it for?
 - what is PAY bank
-- what is PAY bank [credit card](product)
-- what is PAY bank [master card](product)?
+- what is PAY bank [credit card](account_type)
+- what is PAY bank [visa card](account_type)?
 - what is PAY bank actually
 - what is PAY bank?
 - whats PAY bank
@@ -75,55 +75,56 @@
 - what is [pay bank]{"entity": "company", "value": "PAY bank"}
 
 ## intent:product_description
-- what is a [credit card](product)?
-- what is a [master card](product)?
-- what is a [visa card](product)?
-- tell me about your [bank](company)
-- What is [pay bank](company)
-- I want to know more about [bank accounts](product)
-- tell me about your [credit card](product)
-- tell me more about [master card](product)
-- i wanna more about [PAY bank](company)
+- what is a [visa card](account_type)?
+- what is a [master card](account_type)?
+- what is a [credit card](account_type)?
+- tell me about your bank
+- What is pay bank
+- I want to know more about bank accounts
+- tell me about your credit card
+- tell me more about master card
+- i wanna more about PAY bank
+- tell me more about your services
 
 ## intent:howtoapply
-- How can I apply for the  [Credit card](product)?
-- i wanna apply for the [Visa card](product)
-- i want the [MASTER](product)
-- i want this [card](product)
-- i wanna open an [account](product)
-- how can i open a [bank account](product)
+- How can I apply for the [credit](account_type)?
+- I wanna apply for the [visa](account_type)
+- I want the [credit card](account_type)
+- I want this card
+- I wanna open an account
+- how can I open a bank account
 - how to apply
-- how can i get a visa card
-- how can i open a savings account
+- how can I get a [credit card](account_type)
+- how can I open a savings account
 
 ## intent:application_requirements
 - What are the requirements?
-- how can i order a [credit card](product)?
-- required documents to order a [VISA card](product)
-- how to order [MASTER card](product)
-- required documents to open a [bank account](product)
+- how can I order a [credit card](account_type)?
+- required documents to order a [credit card](account_type)
+- how to order [credit](account_type)
+- required documents to open a [bank account](account_type)
 - tell me the necessary documents
 - what are the requirements
 - how can i apply for it
-- how can I apply for a [credit card](product)
+- how can I apply for a credit card
 
 ## intent:required_age
 - required age
-- can my sun order a [card](product)?
+- can my sun order a card?
 - can i order it for my baby
 - can i order it for my parents
-- i want to order a [card](product) for my kids
-- can I order an [visa card](product) for my child
-- i want to order a [card](product) for my parents
-- can i open a [bank account](product) for my family members?
+- i want to order a card for my kids
+- can I order an [credit card](account_type) for my child
+- i want to order a card for my parents
+- can i open a bank account for my family members?
 - what is the minimum required age to get it
-- what is the minimum required age to get a [master card](product)
+- what is the minimum required age to get a master card
 
 ## intent:cardlimit
-- How high is my [card](product) limit for the first purchase
-- [card](product) limit
+- How high is my card limit for the first purchase
+- card limit
 - first purchase limit?
-- any limitations for the credit
+- any limitations for the [credit card](account_type)
 - my starting credit
 - what is the starting credit
 - how much is the starting credit
@@ -135,52 +136,34 @@
 - can I collect points
 - is there any benefit with each purchase that I make with it
 - I wanna collect points
-- can I collect point
+- can I collect point with my [credit card](account_type)
 - with which card can I collect points
 
 ## intent:annualcost
-- What is the annual ticket price for the [visa card](product)?
+- What is the annual ticket price for the [credit card](account_type)?
 - card annual cost
 - should i pay annualy for the card service
 - does the card cost
-- is the a [bank account](product) free
-- can i get the a [credit card](product) for free
-- how much should i pay for the a [card](product) in a year
-- is the a [bank account](product) free for students?
+- is the a bank account free
+- can i get the a [credit card](account_type) for free
+- how much should i pay for the a card in a year
+- is the a bank account free for students?
 - is it free for students?
 - should i pay to get it?
-- should i pay for your [Visa card](product)
+- should i pay to have a gold credit card
 - Does this product cost?
-- does the [creadit](product)
+- does the [credit card](account_type) cost?
+- what is the cost of having a silver card?
+- should I pay annualy for the services?
+- does the services cost
 
 ## synonym:PAY bank
 - your bank
 - bank
 - pay bank
 
-## synonym:bank account
-- account
-- Bank account
-- Account
-- acount
-
 ## synonym:credit
-- Credit card
 - credit card
-- card
-
-## synonym:master card
-- MASTER
-- MASTER card
-- Master card
-- master credit card
-- Master credit card
-- MASTER credit card
-
-## synonym:visa card
-- Visa card
-- visa
-- Visa
-- VISA
-- Visa credit card
-- VISA card
+- credit cards
+- credit account
+- credit accounts
