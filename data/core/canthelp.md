@@ -14,7 +14,6 @@
     - action_greet_user
     - utter_intro
 * pay_cc
-    - utter_can_do
     - cc_payment_form
     - form{"name": "cc_payment_form"}
 * canthelp
@@ -34,7 +33,6 @@
     - action_greet_user
     - utter_intro
 * pay_cc
-    - utter_can_do
     - cc_payment_form
     - form{"name": "cc_payment_form"}
 * canthelp

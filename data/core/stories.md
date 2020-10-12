@@ -94,31 +94,6 @@
     - form{"name": null}
     - utter_ask_feedback
 
-## pay cc happy path no greet
-* pay_cc
-    - cc_payment_form
-    - form{"name": "cc_payment_form"}
-    - form{"name": null}
-    - utter_ask_feedback
-* feedback{"feedback_value": "positive"}
-    - slot{"feedback_value": "positive"}
-    - action_tag_feedback
-    - utter_thumbsup
-    - utter_anything_else
-* thank
-    - utter_noworries
-    - utter_anything_else
-
-## pay credit card happy path
-* greet
-    - action_greet_user
-    - utter_intro
-* pay_cc
-    - cc_payment_form
-    - form{"name": "cc_payment_form"}
-    - form{"name": null}
-    - utter_ask_feedback
-
 ## transfer money
 * transfer_money
     - transfer_form
@@ -459,11 +434,6 @@
     - transfer_form
     - form{"name":"transfer_form"}
     - utter_ask_feedback
-* feedback{"feedback_value": "positive"}
-    - slot{"feedback_value": "positive"}
-    - action_tag_feedback
-    - utter_great
-    - utter_anything_else
 
 ## transfer money then pay cc
 * greet
@@ -476,22 +446,12 @@
     - cc_payment_form
     - form{"name":"cc_payment_form"}
     - form{"name": null}
-    - utter_ask_feedback
-* feedback{"feedback_value": "positive"}
-    - slot{"feedback_value": "positive"}
-    - action_tag_feedback
-    - utter_great
     - utter_ask_back_to_transfer
 * affirm
     - transfer_form
     - form{"name":"transfer_form"}
     - form{"name": null}
     - utter_ask_feedback
-* feedback{"feedback_value": "positive"}
-    - slot{"feedback_value": "positive"}
-    - action_tag_feedback
-    - utter_great
-    - utter_anything_else
 
 ## check recipients, check balance, transfer money
 * greet
@@ -511,11 +471,6 @@
     - transfer_form
     - form{"name":"transfer_form"}
     - utter_ask_feedback
-* feedback{"feedback_value": "positive"}
-    - slot{"feedback_value": "positive"}
-    - action_tag_feedback
-    - utter_great
-    - utter_anything_else
 
 ## chitchat --> transfer money --> chitchat
 * greet
@@ -537,8 +492,3 @@
     - transfer_form
     - form{"name":"transfer_form"}
     - utter_ask_feedback
-* feedback{"feedback_value": "negative"}
-    - slot{"feedback_value": "negative"}
-    - action_tag_feedback
-    - utter_thumbsup
-    - utter_anything_else
