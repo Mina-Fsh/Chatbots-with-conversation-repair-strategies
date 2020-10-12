@@ -49,9 +49,9 @@
 - what's my [gold](credit_card)'s card balance?
 - what's my [silver](credit_card) account balance?
 - How much money have i spent lately>
-- I should check my [credit card]{"entity": "account_type", "value": "credit"} balance [first](account_type)
+- I should check my [credit card]{"entity": "account_type", "value": "credit"} balance first
 - check my [credit card]{"entity": "account_type", "value": "credit"} balance
-- check my [credit card]{"entity": "account_type", "value": "credit"} balance [first](account_type)
+- check my [credit card]{"entity": "account_type", "value": "credit"} balance first
 - Can you tell me my account balance?
 - Hello, I would like to know how much money is in much money is in my account
 - hi, whats my account bal please
@@ -314,7 +314,6 @@
 - toay
 - 33
 - 333333
-- [silver]{"entity": "credit_card", "value": "silver"}
 
 ## intent:pay_cc
 - I would like to pay the [minimum balance](payment_amount) on my [gold](credit_card) card
@@ -545,6 +544,3 @@
 - credit cards
 - credit account
 - credit accounts
-
-## lookup:location.txt
-  data/nlu/lookups/location.txt

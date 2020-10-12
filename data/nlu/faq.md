@@ -71,15 +71,15 @@
 - yeah go on explaining what PAY bank is
 - what are the products of PAY bank
 - PAY IS BANK?
-- pay bank os
+- [pay bank]{"entity": "company", "value": "PAY bank"} os
 - what is [pay bank]{"entity": "company", "value": "PAY bank"}
 
 ## intent:product_description
 - what is a [visa card](account_type)?
 - what is a [master card](account_type)?
 - what is a [credit card](account_type)?
-- tell me about your bank
-- What is pay bank
+- tell me about [your bank]{"entity": "company", "value": "PAY bank"}
+- What is this [bank]{"entity": "company", "value": "PAY bank"}
 - I want to know more about bank accounts
 - tell me about your credit card
 - tell me more about master card
@@ -150,10 +150,10 @@
 - is the a bank account free for students?
 - is it free for students?
 - should i pay to get it?
-- should i pay to have a gold [credit card](account_type)
+- should i pay to have a [gold](credit_card) [credit card](account_type)
 - Does this product cost?
 - does the [credit cards](account_type) cost?
-- what is the cost of having a silver [credit card](account_type)?
+- what is the cost of having a [silver](credit_card) [credit card](account_type)?
 - should I pay annualy for the services?
 - does the services cost
 
