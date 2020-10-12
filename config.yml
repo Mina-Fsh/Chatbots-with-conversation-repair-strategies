@@ -1,37 +1,45 @@
-# Configuration for Rasa NLU.
-# https://rasa.com/docs/rasa/nlu/components/
 language: en
 pipeline:
-  - name: WhitespaceTokenizer
-  - name: RegexFeaturizer
-  - name: LexicalSyntacticFeaturizer
-  - name: CountVectorsFeaturizer
-  - name: CountVectorsFeaturizer
-    analyzer: "char_wb"
-    min_ngram: 1
-    max_ngram: 4
-  - name: DIETClassifier
-    epochs: 150
-    random_seed: 1
-  - name: EntitySynonymMapper
-  - name: ResponseSelector
-    epochs: 100
-
-# Configuration for Rasa Core.
-# https://rasa.com/docs/rasa/core/policies/
+- name: SpacyNLP
+  model: en_core_web_md
+  case_sensitive: False
+- name: SpacyTokenizer
+- name: SpacyFeaturizer
+- name: RegexFeaturizer
+- name: CRFEntityExtractor
+- name: SklearnIntentClassifier
+- name: LexicalSyntacticFeaturizer
+- name: CountVectorsFeaturizer
+  analyzer: char_wb
+  min_ngram: 1
+  max_ngram: 4
+- name: DIETClassifier
+  epochs: 200
+  ranking_length: 5
+- name: DucklingHTTPExtractor
+  url: http://localhost:8000
+  dimensions:
+  - number
+  - amount-of-money
+  - time
+- name: ResponseSelector
+- name: EntitySynonymMapper
+- name: "SpacyNLP"
+  model: "en_core_web_md"
+- name: "SpacyEntityExtractor"
+  dimensions: ["PERSON"]
 policies:
-  - name: AugmentedMemoizationPolicy
-    max_history: 4
-  - name: TEDPolicy
-    max_history: 4
-    epochs: 100
-  - name: MappingPolicy
-  - name: FallbackPolicy
-    nlu_threshold: 0.9
-    core_threshold: 0.9
-    fallback_action_name: "action_default_fallback"
-
-importers:
-  - name: MultiProjectImporter
-imports:
-  - projects/BaseBot
+- name: TEDPolicy
+  max_history: 10
+  epochs: 20
+  batch_size:
+  - 32
+  - 64
+- max_history: 6
+  name: AugmentedMemoizationPolicy
+- core_threshold: 0.3
+  name: FallbackPolicy
+  nlu_threshold: 0.8
+  fallback_action_name: action_repair
+- name: FormPolicy
+- name: MappingPolicy
