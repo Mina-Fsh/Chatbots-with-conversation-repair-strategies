@@ -62,6 +62,10 @@ class ActionConfigureRepairStrategy(Action):
             {
                 "title": "Tell me what you think I mean!",
                 "payload": "labelConfidency",
+            },
+            {
+                "title": "Decide based on the length of my utterances!",
+                "payload": "labelUserUtteranceLenght",
             }
         ]
 
@@ -90,9 +94,40 @@ class ActionRepair(Action):
             dispatcher.utter_message(message_title)
         elif repair_strategy == "labelConfidency":
             return [FollowupAction("action_repair_label_confidency")]
+        elif repair_strategy == "labelUserUtteranceLenght":
+            return [FollowupAction("action_repair_label_user_utterance_length")]
         else:
             dispatcher.utter_message("I do not know this repair strategy")
         return []
+
+
+class ActionRepairLabelUserUtteranceLenght(Action):
+    """Shows options in the first 5 sessions and after that asks for rephrase!"""
+
+    def name(self) -> Text:
+        return "action_repair_label_user_utterance_length"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[EventType]:
+
+        user_msg = tracker.latest_message['text']
+        user_msg_len = len(user_msg.split())
+        logger.info(f"{user_msg}, {user_msg_len}")
+
+        if user_msg_len < 3:
+            message_title = "Dude I need some more explanation!"
+        elif user_msg_len < 10 and  user_msg_len > 3:
+            message_title = "🤐 Eventhough you elaborated your request nicely, I still couldn't get you. I'm sorry."
+        else:
+            message_title = "😵 You are talking a lot and it is confusing me dude!"
+
+        dispatcher.utter_message(text=message_title)
+        return []
+
 
 class ActionRepairLabelConfidency(Action):
     """Shows options in the first 5 sessions and after that asks for rephrase!"""
