@@ -60,7 +60,7 @@ class ActionConfigureRepairStrategy(Action):
                 "payload": "defer",
             },
             {
-                "title": "Labele baba!",
+                "title": "Tell me what you think I mean!",
                 "payload": "labelConfidency",
             }
         ]
@@ -99,6 +99,15 @@ class ActionRepairLabelConfidency(Action):
 
     def name(self) -> Text:
         return "action_repair_label_confidency"
+    
+    def __init__(self) -> None:
+        import pandas as pd
+
+        self.intent_mappings = pd.read_csv(INTENT_DESCRIPTION_MAPPING_PATH)
+        self.intent_mappings.fillna("", inplace=True)
+        self.intent_mappings.entities = self.intent_mappings.entities.map(
+            lambda entities: {e.strip() for e in entities.split(",")}
+        )
 
     def run(
         self,
@@ -112,14 +121,54 @@ class ActionRepairLabelConfidency(Action):
             highest_ranked_intent_confidence = intent_ranking[0].get("confidence")
             highest_ranked_intent_name = intent_ranking[0].get("name")
             if highest_ranked_intent_confidence > 0.7:
-                label = "Highly confident"
-            elif highest_ranked_intent_confidence < 0.7 and  highest_ranked_intent_confidence > 0.5:
-                label = "slightly confident"
+                message_title = "😊🧠 I'm Highly confident that this is what you mean:"
+            elif highest_ranked_intent_confidence < 0.7 and  highest_ranked_intent_confidence > 0.6:
+                message_title = "🙂 I'm somehow familiar whit this topic, I think you mean this:"
+            elif highest_ranked_intent_confidence < 0.6 and  highest_ranked_intent_confidence > 0.4:
+                message_title = "😕 You challenging me... I rely on my wisdom, you mean this:"
+            elif highest_ranked_intent_confidence < 0.4 and  highest_ranked_intent_confidence > 0.1:
+                message_title = "😵 You confusing me... maybe you mean this:"
             else:
-                label = "poorly confident"
+                message_title = "🤥 You got me with this way of talking, my guess is probably:"
+        
+        entities = tracker.latest_message.get("entities", [])
+        entities = {e["entity"]: e["value"] for e in entities}
+
+        entities_json = json.dumps(entities)
+
+        buttons = []
+        
+        button_title = self.get_button_title(highest_ranked_intent_name, entities)
+            
+        buttons.append(
+            {
+                "title": button_title,
+                "payload": f"/{highest_ranked_intent_name}{entities_json}",
+            }
+        )
+
+        dispatcher.utter_message(text=message_title, buttons=buttons)
+        return []
     
-        dispatcher.utter_message(f"{label}: {highest_ranked_intent_confidence}")
-        return[FollowupAction(highest_ranked_intent_name)]
+    def get_button_title(
+        self, intent: Text, entities: Dict[Text, Text]
+    ) -> Text:
+        default_utterance_query = self.intent_mappings.intent == intent
+        utterance_query = (
+            self.intent_mappings.entities == entities.keys()
+        ) & (default_utterance_query)
+
+        utterances = self.intent_mappings[utterance_query].button.tolist()
+
+        if len(utterances) > 0:
+            button_title = utterances[0]
+        else:
+            utterances = self.intent_mappings[
+                default_utterance_query
+            ].button.tolist()
+            button_title = utterances[0] if len(utterances) > 0 else intent
+
+        return button_title.format(**entities)
 
 class ActionRepairOptions(Action):
     """Asks for an affirmation of the intent if NLU threshold is not met."""
