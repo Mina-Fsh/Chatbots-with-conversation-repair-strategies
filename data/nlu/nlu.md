@@ -541,6 +541,10 @@
 - restart this chat
 - restart
 
+## intent:trigger_rephrase
+- rephrase
+- ask me to rephrase
+
 ## synonym:credit
 - credit card
 - credit cards
