@@ -44,11 +44,15 @@ class ActionConfigureRepairStrategy(Action):
 
         buttons = [
             {
-                "title": "Ask to rephrase the request!" ,
-                "payload": "rephrase",
+                "title": "Tell me what you are confident in!",
+                "payload": "labelConfidency",
             },
             {
-                "title": "Show me options of highest ranked intents!",
+                "title": "Decide based on the length of my utterances!",
+                "payload": "labelUserUtteranceLenght",
+            },
+            {
+                "title": "Show me options to proceed!",
                 "payload": "options",
             },
             {
@@ -60,13 +64,9 @@ class ActionConfigureRepairStrategy(Action):
                 "payload": "defer",
             },
             {
-                "title": "Tell me what you think I mean!",
-                "payload": "labelConfidency",
-            },
-            {
-                "title": "Decide based on the length of my utterances!",
-                "payload": "labelUserUtteranceLenght",
-            }
+                "title": "Ask me to rephrase my request!" ,
+                "payload": "rephrase",
+            }   
         ]
 
         dispatcher.utter_message(text=message_title, buttons=buttons)
@@ -81,7 +81,26 @@ class ActionRepair(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         
+        logger.info(f"length: { len(tracker.events) }")
+
+        # Checks a list consisting of the last four elements => starting from element -15 to the end of the list ":"
+        # https://stackoverflow.com/questions/9542738/python-find-in-list 
+        logger.info(f'clause: { next((True for event in tracker.events[-15:] if event.get("name") == "action_repair"), False) }')
+
         repair_strategy = tracker.get_slot("repair_strategy_preferences")
+
+        # Fallback caused by TwoStageFallbackPolicy
+        if (
+            len(tracker.events) >= 15 and 
+            next((True for event in tracker.events[-15:] if event.get("name") == "action_repair" and repair_strategy == "options"), False)
+        ):
+
+            dispatcher.utter_message(template="utter_restart_with_button")
+
+            return [
+                SlotSet("feedback_value", "negative"),
+            ]
+        #######
 
         if repair_strategy == "rephrase":
             dispatcher.utter_message(template = "utter_default")
@@ -102,7 +121,7 @@ class ActionRepair(Action):
 
 
 class ActionRepairLabelUserUtteranceLenght(Action):
-    """Shows options in the first 5 sessions and after that asks for rephrase!"""
+    """Responses to the user text based on the utterance's length.!"""
 
     def name(self) -> Text:
         return "action_repair_label_user_utterance_length"
@@ -119,18 +138,18 @@ class ActionRepairLabelUserUtteranceLenght(Action):
         logger.info(f"{user_msg}, {user_msg_len}")
 
         if user_msg_len < 3:
-            message_title = "Dude I need some more explanation!"
-        elif user_msg_len < 10 and  user_msg_len > 3:
-            message_title = "🤐 Eventhough you elaborated your request nicely, I still couldn't get you. I'm sorry."
+            message_title = "You expressed yourself very briefly, unfortunately I couldn't get you. 😕"
+        elif user_msg_len < 8 and  user_msg_len > 3:
+            message_title = "Eventhough you elaborated your request nicely, I still couldn't get you. I'm sorry. 🤐"
         else:
-            message_title = "😵 You are talking a lot and it is confusing me dude!"
+            message_title = "You gave me such long information and it is confusing me! 😵"
 
         dispatcher.utter_message(text=message_title)
         return []
 
 
 class ActionRepairLabelConfidency(Action):
-    """Shows options in the first 5 sessions and after that asks for rephrase!"""
+    """Responses to the user text based on it's confidency."""
 
     def name(self) -> Text:
         return "action_repair_label_confidency"
@@ -183,7 +202,7 @@ class ActionRepairLabelConfidency(Action):
         )
 
         dispatcher.utter_message(text=message_title, buttons=buttons)
-        return []
+        return [FollowupAction("action_listen")]
     
     def get_button_title(
         self, intent: Text, entities: Dict[Text, Text]
@@ -206,7 +225,7 @@ class ActionRepairLabelConfidency(Action):
         return button_title.format(**entities)
 
 class ActionRepairOptions(Action):
-    """Asks for an affirmation of the intent if NLU threshold is not met."""
+    """give options with highest ranked intents"""
 
     def name(self) -> Text:
         return "action_repair_options"
@@ -285,7 +304,7 @@ class ActionRepairOptions(Action):
 
         dispatcher.utter_message(text=message_title, buttons=buttons)
 
-        return []
+        return [FollowupAction("action_listen")]
 
     def get_button_title(
         self, intent: Text, entities: Dict[Text, Text]
@@ -350,7 +369,7 @@ class ActionDefaultFallback(Action):
         if (
             len(tracker.events) >= 4
             and tracker.events[-4].get("name")
-            == "action_repair_options"
+            == "action_repair"
         ):
 
             dispatcher.utter_message(template="utter_restart_with_button")

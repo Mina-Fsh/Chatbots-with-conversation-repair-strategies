@@ -10,6 +10,11 @@
     - utter_repair_strategy_saved
     - utter_ask_feedback
 
+## configure repair stategy directly
+* inform{"repair_strategy_preferences": "labelConfidency"}
+    - utter_repair_strategy_saved
+    - utter_ask_feedback
+
 ## thanks
 * thank
     - utter_noworries
@@ -18,6 +23,10 @@
 ## bye
 * bye
     - utter_bye
+
+## trigger_rephrase 
+* trigger_rephrase
+    - utter_default
 
 ## restart
 * restart
@@ -30,6 +39,7 @@
 ## greet
 * greet OR inform{"PERSON": "akela"}
     - action_greet_user
+    - utter_intro
 
 ## anything else? - yes
     - utter_anything_else
@@ -423,6 +433,7 @@
 ## greet, transfer money, feedback
 * greet OR inform{"PERSON": "Stefan"}
     - action_greet_user
+    - utter_intro
 * transfer_money
     - transfer_form
     - form{"name":"transfer_form"}
