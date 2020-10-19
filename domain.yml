@@ -436,6 +436,7 @@ actions:
 - action_repair_options
 - action_repair_count_breakdwon
 - action_repair_label_confidency
+- action_repair_label_user_utterance_length
 - action_default_fallback
 - action_account_balance
 - action_session_start

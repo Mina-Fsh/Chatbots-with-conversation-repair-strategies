@@ -10,10 +10,8 @@
     - utter_repair_strategy_saved
     - utter_ask_feedback
 
-## configure repair stategy
-* configure_repair_strategy
-    - action_configure_repair_strategy
-* inform{"repair_strategy_preferences": "cumulative"}
+## configure repair stategy directly
+* inform{"repair_strategy_preferences": "labelConfidency"}
     - utter_repair_strategy_saved
     - utter_ask_feedback
 
@@ -26,9 +24,14 @@
 * bye
     - utter_bye
 
+## trigger_rephrase 
+* trigger_rephrase
+    - utter_default
+
 ## restart
 * restart
     - action_restart
+    - utter_restart
 
 ## capability check
 * capabilities
@@ -37,6 +40,7 @@
 ## greet
 * greet OR inform{"PERSON": "akela"}
     - action_greet_user
+    - utter_intro
 
 ## anything else? - yes
     - utter_anything_else
@@ -430,6 +434,7 @@
 ## greet, transfer money, feedback
 * greet OR inform{"PERSON": "Stefan"}
     - action_greet_user
+    - utter_intro
 * transfer_money
     - transfer_form
     - form{"name":"transfer_form"}

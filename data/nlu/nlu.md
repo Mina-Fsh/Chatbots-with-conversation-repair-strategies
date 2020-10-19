@@ -303,13 +303,17 @@
 - [rephrase](repair_strategy_preferences)
 - [options](repair_strategy_preferences)
 - [defer](repair_strategy_preferences)
-- [cumulative](repair_strategy_preferences)
+- [dynamic](repair_strategy_preferences)
 - [labelConfidency](repair_strategy_preferences)
+- [labelUserUtteranceLenght](repair_strategy_preferences)
+- [random](repair_strategy_preferences)
+- switch to [random](repair_strategy_preferences)
 - set fallback policy to [defer](repair_strategy_preferences)
 - in case of a fallback use [options](repair_strategy_preferences)
 - if you dont understand what I say use [rephrase](repair_strategy_preferences) policy
-- change the fallback to [cumulative](repair_strategy_preferences)
+- change the fallback to [dynamic](repair_strategy_preferences)
 - change fallback to [labelConfidency](repair_strategy_preferences)
+- set the repair strategy to [labelUserUtteranceLenght](repair_strategy_preferences)
 - last year
 - toay
 - 33
@@ -538,6 +542,10 @@
 - I said restart
 - restart this chat
 - restart
+
+## intent:trigger_rephrase
+- rephrase
+- ask me to rephrase
 
 ## synonym:credit
 - credit card
