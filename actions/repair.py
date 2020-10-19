@@ -1,6 +1,7 @@
 import logging
 import json
 import requests
+import random
 from datetime import datetime
 from typing import Any, Dict, List, Text, Union, Optional
 from rasa_sdk import Tracker, Action
@@ -52,12 +53,16 @@ class ActionConfigureRepairStrategy(Action):
                 "payload": "labelUserUtteranceLenght",
             },
             {
-                "title": "Fallback with options of highest ranked intents + restart.",
+                "title": "Fallback with options of highest ranked intents + recommend restart.",
                 "payload": "options",
             },
             {
+                "title": "Randomly choose between the three fallbacks above!",
+                "payload": "random",
+            },
+            {
                 "title": "Fallback with options of highest ranked intents + rephrase.",
-                "payload": "cumulative",
+                "payload": "dynamic",
             },
             {
                 "title": "Fallback with recommending connection to a human agent.",
@@ -106,7 +111,7 @@ class ActionRepair(Action):
             dispatcher.utter_message(template = "utter_default")
         elif repair_strategy == "options":
             return [FollowupAction("action_repair_options")]
-        elif repair_strategy == "cumulative":
+        elif repair_strategy == "dynamic":
             return [FollowupAction("action_repair_count_breakdwon")]
         elif repair_strategy == "defer":
             message_title = "I'm sorry, but I didn't understand you.\n I want to connect you to an agent but unfortunately there is no agent available at the moment.\n Please contact the phone number 01234567, or continue chatting with me! "
@@ -115,6 +120,10 @@ class ActionRepair(Action):
             return [FollowupAction("action_repair_label_confidency")]
         elif repair_strategy == "labelUserUtteranceLenght":
             return [FollowupAction("action_repair_label_user_utterance_length")]
+        elif repair_strategy == "random":
+            strategy_names = ["action_repair_label_confidency", "action_repair_label_user_utterance_length", "action_repair_options"]
+            x = random.choice(strategy_names)
+            return [FollowupAction(x)]
         else:
             dispatcher.utter_message("I do not know this repair strategy")
         return []
@@ -145,7 +154,7 @@ class ActionRepairLabelUserUtteranceLenght(Action):
             message_title = "You gave me such long information and it is confusing me! 😵"
 
         dispatcher.utter_message(text=message_title)
-        return []
+        return [FollowupAction("action_listen")]
 
 
 class ActionRepairLabelConfidency(Action):
@@ -348,9 +357,9 @@ class ActionRepairCountBreakdown(Action):
                 action_counter +=1
         logger.debug(f"You already had {breakdown_counter} breakdowns in this conversation!")
 
-        if breakdown_counter <= 2:
+        if breakdown_counter <= 5:
             return [FollowupAction("action_repair_options")]
-        elif breakdown_counter > 2:
+        elif breakdown_counter > 5:
             dispatcher.utter_message(template = "utter_capabilities_repair")
         return[]
     
