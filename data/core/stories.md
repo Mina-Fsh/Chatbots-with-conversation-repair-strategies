@@ -31,6 +31,7 @@
 ## restart
 * restart
     - action_restart
+    - utter_restart
 
 ## capability check
 * capabilities
