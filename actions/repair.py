@@ -40,31 +40,31 @@ class ActionConfigureRepairStrategy(Action):
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         
-        message_title = "Which repair strategy would you like to have in this conversation?"
+        message_title = "Which repair strategy would you like to have in this conversation in case of a breakdown?"
 
         buttons = [
             {
-                "title": "Tell me what you are confident in!",
+                "title": "Fallback based on the bot confidence level.",
                 "payload": "labelConfidency",
             },
             {
-                "title": "Decide based on the length of my utterances!",
+                "title": "Fallback based on the user utterance length.",
                 "payload": "labelUserUtteranceLenght",
             },
             {
-                "title": "Show me options to proceed!",
+                "title": "Fallback with options of highest ranked intents + restart.",
                 "payload": "options",
             },
             {
-                "title": "In case of consecutive breakdowns, stop showing options to me!",
+                "title": "Fallback with options of highest ranked intents + rephrase.",
                 "payload": "cumulative",
             },
             {
-                "title": "Connect me to a human!",
+                "title": "Fallback with recommending connection to a human agent.",
                 "payload": "defer",
             },
             {
-                "title": "Ask me to rephrase my request!" ,
+                "title": "Fallback with asking user to rephrase the request." ,
                 "payload": "rephrase",
             }   
         ]
@@ -139,7 +139,7 @@ class ActionRepairLabelUserUtteranceLenght(Action):
 
         if user_msg_len < 3:
             message_title = "You expressed yourself very briefly, unfortunately I couldn't get you. 😕"
-        elif user_msg_len < 8 and  user_msg_len > 3:
+        elif user_msg_len < 10 and  user_msg_len > 3:
             message_title = "Eventhough you elaborated your request nicely, I still couldn't get you. I'm sorry. 🤐"
         else:
             message_title = "You gave me such long information and it is confusing me! 😵"
@@ -175,15 +175,15 @@ class ActionRepairLabelConfidency(Action):
             highest_ranked_intent_confidence = intent_ranking[0].get("confidence")
             highest_ranked_intent_name = intent_ranking[0].get("name")
             if highest_ranked_intent_confidence > 0.7:
-                message_title = "😊🧠 I'm Highly confident that this is what you mean:"
+                message_title = "😊 I'm Highly confident that this is what you mean:"
             elif highest_ranked_intent_confidence < 0.7 and  highest_ranked_intent_confidence > 0.6:
                 message_title = "🙂 I'm somehow familiar whit this topic, I think you mean this:"
             elif highest_ranked_intent_confidence < 0.6 and  highest_ranked_intent_confidence > 0.4:
-                message_title = "😕 You challenging me... I rely on my wisdom, you mean this:"
+                message_title = "😕 I have serious doubts about what you are saying... this is the only thing that comes to my mind:"
             elif highest_ranked_intent_confidence < 0.4 and  highest_ranked_intent_confidence > 0.1:
-                message_title = "😵 You confusing me... maybe you mean this:"
+                message_title = "😵 I'm really confused, but there is a small chance you mean this:"
             else:
-                message_title = "🤥 You got me with this way of talking, my guess is probably:"
+                message_title = "🤥 I have no idea what you mean, here is my unlucky guess:"
         
         entities = tracker.latest_message.get("entities", [])
         entities = {e["entity"]: e["value"] for e in entities}
