@@ -186,7 +186,7 @@ class ActionRepairLabelConfidency(Action):
             if highest_ranked_intent_confidence > 0.7:
                 message_title = "😊 I'm Highly confident that this is what you mean:"
             elif highest_ranked_intent_confidence < 0.7 and  highest_ranked_intent_confidence > 0.6:
-                message_title = "🙂 I'm somehow familiar whit this topic, I think you mean this:"
+                message_title = "🙂 I'm somehow familiar with this topic, I think you mean this:"
             elif highest_ranked_intent_confidence < 0.6 and  highest_ranked_intent_confidence > 0.4:
                 message_title = "😕 I have serious doubts about what you are saying... this is the only thing that comes to my mind:"
             elif highest_ranked_intent_confidence < 0.4 and  highest_ranked_intent_confidence > 0.1:
