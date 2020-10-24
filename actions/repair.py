@@ -53,6 +53,10 @@ class ActionConfigureRepairStrategy(Action):
                 "payload": "labelUserUtteranceLenght",
             },
             {
+                "title": "Fallback based on the bot's confusion and fatigue level.",
+                "payload": "LabelFatigueConfusion",
+            },
+            {
                 "title": "Fallback with options of highest ranked intents + recommend restart.",
                 "payload": "options",
             },
@@ -122,11 +126,43 @@ class ActionRepair(Action):
             return [FollowupAction("action_repair_label_user_utterance_length")]
         elif repair_strategy == "random":
             strategy_names = ["action_repair_label_confidency", "action_repair_label_user_utterance_length", "action_repair_options"]
-            x = random.choice(strategy_names)
-            return [FollowupAction(x)]
+            random_strategy = random.choice(strategy_names)
+            return [FollowupAction(random_strategy)]
+        elif repair_strategy == "LabelFatigueConfusion":
+            return [FollowupAction("action_repair_label_fatigue_confusion")]
         else:
             dispatcher.utter_message("I do not know this repair strategy")
         return []
+
+
+class ActionRepairLabelFatigueConfusion(Action):
+    """Shows options in the first 5 sessions and after that asks for rephrase!"""
+
+    def name(self) -> Text:
+        return "action_repair_label_fatigue_confusion"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[EventType]:
+
+        conv_turns = 0
+        #conv_turns = tracker.get_slot("conv_turns")
+        action_counter = 0
+        for events in tracker.events_after_latest_restart():
+            if events["event"] == "user": 
+                conv_turns +=1
+
+        logger.debug(f"There has been {conv_turns} turns in this conversation so far!")
+
+        if conv_turns <= 6:
+            return [FollowupAction("action_repair_options")]
+        elif conv_turns > 6:
+            dispatcher.utter_message(template="utter_fatigue")
+            return [FollowupAction("action_listen")]
+        return[]
 
 
 class ActionRepairLabelUserUtteranceLenght(Action):
@@ -183,13 +219,13 @@ class ActionRepairLabelConfidency(Action):
         if len(intent_ranking) > 1:
             highest_ranked_intent_confidence = intent_ranking[0].get("confidence")
             highest_ranked_intent_name = intent_ranking[0].get("name")
-            if highest_ranked_intent_confidence > 0.7:
+            if highest_ranked_intent_confidence >= 0.75:
                 message_title = "😊 I'm Highly confident that this is what you mean:"
-            elif highest_ranked_intent_confidence < 0.7 and  highest_ranked_intent_confidence > 0.6:
-                message_title = "🙂 I'm somehow familiar whit this topic, I think you mean this:"
-            elif highest_ranked_intent_confidence < 0.6 and  highest_ranked_intent_confidence > 0.4:
+            elif highest_ranked_intent_confidence < 0.75 and  highest_ranked_intent_confidence >= 0.6:
+                message_title = "🙂 I'm somehow familiar with this topic, I think you mean this:"
+            elif highest_ranked_intent_confidence < 0.6 and  highest_ranked_intent_confidence >= 0.4:
                 message_title = "😕 I have serious doubts about what you are saying... this is the only thing that comes to my mind:"
-            elif highest_ranked_intent_confidence < 0.4 and  highest_ranked_intent_confidence > 0.1:
+            elif highest_ranked_intent_confidence < 0.4 and  highest_ranked_intent_confidence >= 0.1:
                 message_title = "😵 I'm really confused, but there is a small chance you mean this:"
             else:
                 message_title = "🤥 I have no idea what you mean, here is my unlucky guess:"
