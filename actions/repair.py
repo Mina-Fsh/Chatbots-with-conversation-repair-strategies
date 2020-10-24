@@ -148,14 +148,52 @@ class ActionRepairLabelFatigueConfusion(Action):
         domain: Dict[Text, Any],
     ) -> List[EventType]:
 
+        # Calculate Fatigue based on the conversation lenght
         conv_turns = 0
         #conv_turns = tracker.get_slot("conv_turns")
         action_counter = 0
+        user_event_list =  []
         for events in tracker.events_after_latest_restart():
+            
             if events["event"] == "user": 
+                user_event_list.append(events)
                 conv_turns +=1
-
+        
+        #logger.debug(f"This is the tracker after restart: {tracker.events_after_latest_restart()}")
+        logger.debug(f"There has been these events from user so far: {user_event_list}")
         logger.debug(f"There has been {conv_turns} turns in this conversation so far!")
+
+        # Calculate confusion based on jumping from one intent to another
+        distanced_intent_list = [["greet", "bye", "nicetomeetyou", "restart"], 
+        ["ask_builder", "ask_howbuilt", "ask_isbot", "ask_ishuman", "ask_languagesbot"], 
+        ["ask_whoisit", "ask_howdoing", "ask_howold", "ask_wherefrom"], 
+        ["ask_whatismyname", "ask_whoami"], 
+        ["ask_restaurant", "ask_time", "ask_weather", "telljoke", "handleinsult"], 
+        ["whatisPAYbank", "product_description", "howtoapply", "application_requirements", "required_age", "cardlimit", "points_collect", "annualcost"], 
+        ["affirm", "deny", "react_negative", "react_positive", "thank", "inform", "canthelp", "capabilities", "human_handoff", "configure_repair_strategy", "feedback"], 
+        ["transfer_money", "pay_cc", "ask_transfer_charge", "search_transactions", "check_balance", "check_earnings", "check_recipients"]]
+
+        last_intent_ranking = user_event_list[-1].get("parse_data", []).get("intent_ranking", [])
+        last_intent_name = last_intent_ranking[0].get("name")
+
+        second_last_intent_ranking = user_event_list[-2].get("parse_data", []).get("intent_ranking", [])
+        second_last_intent_name = second_last_intent_ranking[0].get("name")
+        
+        logger.debug(f"Last intent name is: {last_intent_name}, and the intent before last is: {second_last_intent_name}")
+
+        for list in distanced_intent_list:
+            if last_intent_name in list:
+                index_1 = distanced_intent_list.index(list)
+                logger.debug(f"{index_1}")
+
+            if second_last_intent_name in list:
+                index_2 = distanced_intent_list.index(list)
+                logger.debug(f"{index_2}")
+
+        confusion_level = 0
+        if index_1 != index_2:
+            confusion_level +=1
+            logger.debug(f"{confusion_level}")
 
         if conv_turns <= 6:
             return [FollowupAction("action_repair_options")]
@@ -399,36 +437,6 @@ class ActionRepairCountBreakdown(Action):
             dispatcher.utter_message(template = "utter_capabilities_repair")
         return[]
     
-class ActionDefaultFallback(Action):
-    def name(self) -> Text:
-        return "action_default_fallback"
-
-    def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> List[EventType]:
-
-        # Fallback caused by TwoStageFallbackPolicy
-        if (
-            len(tracker.events) >= 4
-            and tracker.events[-4].get("name")
-            == "action_repair"
-        ):
-
-            dispatcher.utter_message(template="utter_restart_with_button")
-
-            return [
-                SlotSet("feedback_value", "negative"),
-                ConversationPaused(),
-            ]
-
-        # Fallback caused by Core
-        else:
-            dispatcher.utter_message(template="utter_default")
-            return [UserUtteranceReverted()]
-
 
 class ActionTagFeedback(Action):
     """Tag a conversation in Rasa X as positive or negative feedback """
