@@ -35,7 +35,6 @@ intents:
 - react_negative
 - react_positive
 - thank
-- feedback
 - transfer_money:
     use_entities: []
 - inform
@@ -46,8 +45,8 @@ intents:
     use_entities: []
 - check_balance:
     use_entities:
-    - account_type
     - credit_card
+    - account_type
 - check_earnings:
     use_entities: []
 - check_recipients
@@ -57,6 +56,7 @@ intents:
 - human_handoff
 - trigger_rephrase
 - configure_repair_strategy
+- feedback
 entities:
 - location
 - company
@@ -445,7 +445,6 @@ actions:
 - action_repair_label_confidency
 - action_repair_label_user_utterance_length
 - action_repair_label_fatigue_confusion
-- action_default_fallback
 - action_account_balance
 - action_session_start
 - action_credit_card_balance
