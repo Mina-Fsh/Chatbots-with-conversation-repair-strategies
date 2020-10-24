@@ -114,7 +114,7 @@ slots:
     initial_value: ''
   repair_strategy_preferences:
     type: unfeaturized
-    initial_value: options
+    initial_value: LabelFatigueConfusion
   requested_slot:
     type: unfeaturized
   search_type:
@@ -192,6 +192,13 @@ responses:
     - payload: /feedback{"feedback_value":"negative"}
       title: 👎
     text: How is this conversation going?
+  utter_fatigue:
+  - buttons:
+    - payload: /restart
+      title: Restart
+    text: Sorry but its hard for me to follow up, our chat is getting too long and
+      I'm tired. You could help me refresh my mind by restarting, or just continiue
+      the talk, I try my best to help you.
   utter_restart_with_button:
   - buttons:
     - payload: /restart
@@ -437,6 +444,7 @@ actions:
 - action_repair_count_breakdwon
 - action_repair_label_confidency
 - action_repair_label_user_utterance_length
+- action_repair_label_fatigue_confusion
 - action_default_fallback
 - action_account_balance
 - action_session_start
@@ -533,6 +541,7 @@ actions:
 - utter_cardlimit
 - utter_points_collect
 - utter_annualcost
+- utter_fatigue
 forms:
 - cc_payment_form
 - transfer_form
