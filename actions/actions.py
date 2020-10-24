@@ -15,6 +15,7 @@ from rasa_sdk.events import (
     UserUtteranceReverted,
     ConversationPaused,
     FollowupAction,
+    UserUttered
 )
 
 from actions.parsing import (
@@ -583,9 +584,12 @@ class ActionSessionStart(Action):
 
         # an `action_listen` should be added at the end
         events.append(ActionExecuted("action_listen"))
-
-        #dispatcher.utter_message(template="utter_intro")
-
+        
+        #evt = {'event': 'followup', 'name': 'action_greet_user'}
+        #events.append(evt)
+        #events.append(ActionExecuted("action_greet_user"))
+        #logger.debug(f"These are the events: {events[-1]}")
+        #return [events, FollowupAction("action_listen")]
         return events
 
 
@@ -623,6 +627,7 @@ class ActionGreetUser(Action):
         logger.info("The intent name is: {}".format(intent))
         name_entity = next(tracker.get_latest_entity_values("PERSON"), None)
         logger.info("The name entity is: {}".format(name_entity))
+
         if intent == "greet" or (intent == "inform" and name_entity):
             if name_entity is not None:
                 dispatcher.utter_message(template="utter_greet_name", name=name_entity)
