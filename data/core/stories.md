@@ -6,12 +6,12 @@
 ## configure repair stategy
 * configure_repair_strategy
     - action_configure_repair_strategy
-* inform{"repair_strategy_preferences": "options"}
+* inform{"repair_strategy_name": "options"}
     - utter_repair_strategy_saved
     - utter_ask_feedback
 
 ## configure repair stategy directly
-* inform{"repair_strategy_preferences": "labelConfidency"}
+* inform{"repair_strategy_name": "labelConfidencLevel"}
     - utter_repair_strategy_saved
     - utter_ask_feedback
 

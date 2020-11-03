@@ -70,7 +70,7 @@ entities:
 - PERSON
 - number
 - account_type
-- repair_strategy_preferences
+- repair_strategy_name
 - language
 slots:
   PERSON:
@@ -112,7 +112,7 @@ slots:
   payment_amount_type:
     type: unfeaturized
     initial_value: ''
-  repair_strategy_preferences:
+  repair_strategy_name:
     type: unfeaturized
     initial_value: LabelFatigueConfusion
   requested_slot:
@@ -242,7 +242,7 @@ responses:
   - text: I didn't quite get that, could you rephrase your message?
   - text: Could you rephrase your message? I didn't get it, I'm sorry.
   utter_repair_strategy_saved:
-  - text: 'Alright. The repair strategy in this conversation is set to: {repair_strategy_preferences}.'
+  - text: 'Alright. The repair strategy in this conversation is set to: {repair_strategy_name}.'
   utter_ask_transfer_form_amount_of_money:
   - text: How much money do you want to transfer?
   utter_ask_transfer_form_PERSON:
@@ -441,8 +441,9 @@ actions:
 - action_configure_repair_strategy
 - action_repair
 - action_repair_options
+- action_repair_twoStageOptions
 - action_repair_count_breakdwon
-- action_repair_label_confidency
+- action_repair_label_confidenc_level
 - action_repair_label_user_utterance_length
 - action_repair_label_fatigue_confusion
 - action_account_balance
