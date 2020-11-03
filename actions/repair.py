@@ -131,7 +131,7 @@ class ActionRepair(Action):
         elif repair_strategy == "labelUserUtteranceLenght":
             return [FollowupAction("action_repair_label_user_utterance_length")]
         elif repair_strategy == "random":
-            strategy_names = ["action_repair_label_confidenc_level", "action_repair_label_user_utterance_length", "action_repair_options", "action_repair_twoStageOptions"]
+            strategy_names = ["action_repair_label_confidenc_level", "action_repair_label_user_utterance_length", "action_repair_options", "action_repair_label_fatigue_confusion"]
             random_strategy = random.choice(strategy_names)
             return [FollowupAction(random_strategy)]
         elif repair_strategy == "LabelFatigueConfusion":
