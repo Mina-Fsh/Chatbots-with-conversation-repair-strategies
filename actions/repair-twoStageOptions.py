@@ -1,38 +1,16 @@
 import logging
 import json
-import requests
-import random
-from datetime import datetime
-from typing import Any, Dict, List, Text, Union, Optional
+from typing import Any, Dict, List, Text
 from rasa_sdk import Tracker, Action
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.forms import FormAction, REQUESTED_SLOT
 from rasa_sdk.events import (
-    SlotSet,
     EventType,
-    ActionExecuted,
-    SessionStarted,
-    Restarted,
-    UserUtteranceReverted,
-    ConversationPaused,
     FollowupAction,
 )
-
-from actions.parsing import (
-    parse_duckling_time_as_interval,
-    parse_duckling_time,
-    get_entity_details,
-    parse_duckling_currency,
-)
-
-from actions.profile import create_mock_profile
-from actions import config
-from dateutil import parser
 
 INTENT_DESCRIPTION_MAPPING_PATH = "actions/intent_description_mapping.csv"
 
 logger = logging.getLogger(__name__)
-
 
 
 class ActionRepairTwoStageOptiona(Action):

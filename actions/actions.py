@@ -1,7 +1,4 @@
 import logging
-import json
-import requests
-from datetime import datetime
 from typing import Any, Dict, List, Text, Union, Optional
 from rasa_sdk import Tracker, Action
 from rasa_sdk.executor import CollectingDispatcher
@@ -12,10 +9,8 @@ from rasa_sdk.events import (
     ActionExecuted,
     SessionStarted,
     Restarted,
-    UserUtteranceReverted,
     ConversationPaused,
     FollowupAction,
-    UserUttered
 )
 
 from actions.parsing import (
@@ -584,12 +579,12 @@ class ActionSessionStart(Action):
 
         # an `action_listen` should be added at the end
         events.append(ActionExecuted("action_listen"))
-        
-        #evt = {'event': 'followup', 'name': 'action_greet_user'}
-        #events.append(evt)
-        #events.append(ActionExecuted("action_greet_user"))
-        #logger.debug(f"These are the events: {events[-1]}")
-        #return [events, FollowupAction("action_listen")]
+
+        # evt = {'event': 'followup', 'name': 'action_greet_user'}
+        # events.append(evt)
+        # events.append(ActionExecuted("action_greet_user"))
+        # logger.debug(f"These are the events: {events[-1]}")
+        # return [events, FollowupAction("action_listen")]
         return events
 
 
@@ -615,6 +610,7 @@ class ActionPause(Action):
 
     def run(self, dispatcher, tracker, domain) -> List[EventType]:
         return [ConversationPaused()]
+
 
 class ActionGreetUser(Action):
     """Greets the user with/without Name"""

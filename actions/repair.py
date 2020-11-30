@@ -1,33 +1,15 @@
 import logging
-import json
 import requests
 import random
-from datetime import datetime
-from typing import Any, Dict, List, Text, Union, Optional
+from typing import Any, Dict, List, Text
 from rasa_sdk import Tracker, Action
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.forms import FormAction, REQUESTED_SLOT
 from rasa_sdk.events import (
     SlotSet,
     EventType,
-    ActionExecuted,
-    SessionStarted,
-    Restarted,
-    UserUtteranceReverted,
-    ConversationPaused,
     FollowupAction,
 )
-
-from actions.parsing import (
-    parse_duckling_time_as_interval,
-    parse_duckling_time,
-    get_entity_details,
-    parse_duckling_currency,
-)
-
-from actions.profile import create_mock_profile
 from actions import config
-from dateutil import parser
 
 INTENT_DESCRIPTION_MAPPING_PATH = "actions/intent_description_mapping.csv"
 
@@ -39,9 +21,15 @@ class ActionConfigureRepairStrategy(Action):
     def name(self) -> Text:
         return "action_configure_repair_strategy"
 
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
-        message_title = "Which repair strategy would you like to have in this conversation in case of a breakdown?"
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+
+        message_title = "Which repair strategy would you like to have in this \
+         conversation in case of a breakdown?"
 
         buttons = [
             {
@@ -57,7 +45,7 @@ class ActionConfigureRepairStrategy(Action):
                 "payload": "LabelFatigueConfusion",
             },
             {
-                "title": "Fallback with options of highest ranked intents + recommend restart.",
+                "title": "Fallback with options of highest ranked intents + recommending restart.",
                 "payload": "twoStageOptions",
             },
             {
@@ -69,8 +57,8 @@ class ActionConfigureRepairStrategy(Action):
                 "payload": "random",
             },
             {
-                "title": "Fallback with options of highest ranked intents + rephrase.",
-                "payload": "dynamic",
+                "title": "Fallback that counts breakdowns and either gives options or utters the bot capabilities.",
+                "payload": "countBreakdown",
             },
             {
                 "title": "Fallback with recommending connection to a human agent.",
@@ -92,12 +80,18 @@ class ActionRepair(Action):
     def name(self) -> Text:
         return "action_repair"
 
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+
         logger.info(f"length: { len(tracker.events) }")
 
-        # Checks a list consisting of the last four elements => starting from element -15 to the end of the list ":"
-        # https://stackoverflow.com/questions/9542738/python-find-in-list 
+        # Checks a list consisting of the last four elements => starting from
+        # element -15 to the end of the list ":"
+        # https://stackoverflow.com/questions/9542738/python-find-in-list
         logger.info(f'clause: { next((True for event in tracker.events[-15:] if event.get("name") == "action_repair"), False) }')
 
         repair_strategy = tracker.get_slot("repair_strategy_name")
@@ -116,22 +110,28 @@ class ActionRepair(Action):
         #######
 
         if repair_strategy == "rephrase":
-            dispatcher.utter_message(template = "utter_default")
+            dispatcher.utter_message(template="utter_default")
         elif repair_strategy == "twoStageOptions":
             return [FollowupAction("action_repair_twoStageOptions")]
         elif repair_strategy == "options":
             return [FollowupAction("action_repair_options")]
-        elif repair_strategy == "dynamic":
+        elif repair_strategy == "countBreakdown":
             return [FollowupAction("action_repair_count_breakdwon")]
         elif repair_strategy == "defer":
-            message_title = "I'm sorry, but I didn't understand you.\n I want to connect you to an agent but unfortunately there is no agent available at the moment.\n Please contact the phone number 01234567, or continue chatting with me! "
+            message_title = "I'm sorry, but I didn't understand you.\n \
+                I want to connect you to an agent but unfortunately there is \
+                no agent available at the moment.\n Please contact the phone \
+                number 01234567, or continue chatting with me! "
             dispatcher.utter_message(message_title)
         elif repair_strategy == "labelConfidencLevel":
             return [FollowupAction("action_repair_label_confidenc_level")]
         elif repair_strategy == "labelUserUtteranceLenght":
             return [FollowupAction("action_repair_label_user_utterance_length")]
         elif repair_strategy == "random":
-            strategy_names = ["action_repair_label_confidenc_level", "action_repair_label_user_utterance_length", "action_repair_options", "action_repair_label_fatigue_confusion"]
+            strategy_names = ["action_repair_label_confidenc_level",
+                              "action_repair_label_user_utterance_length",
+                              "action_repair_options",
+                              "action_repair_label_fatigue_confusion"]
             random_strategy = random.choice(strategy_names)
             return [FollowupAction(random_strategy)]
         elif repair_strategy == "LabelFatigueConfusion":

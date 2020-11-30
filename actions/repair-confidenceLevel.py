@@ -1,33 +1,13 @@
 import logging
 import json
-import requests
-import random
-from datetime import datetime
-from typing import Any, Dict, List, Text, Union, Optional
+from typing import Any, Dict, List, Text
 from rasa_sdk import Tracker, Action
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.forms import FormAction, REQUESTED_SLOT
 from rasa_sdk.events import (
-    SlotSet,
     EventType,
-    ActionExecuted,
-    SessionStarted,
-    Restarted,
-    UserUtteranceReverted,
-    ConversationPaused,
     FollowupAction,
 )
 
-from actions.parsing import (
-    parse_duckling_time_as_interval,
-    parse_duckling_time,
-    get_entity_details,
-    parse_duckling_currency,
-)
-
-from actions.profile import create_mock_profile
-from actions import config
-from dateutil import parser
 
 INTENT_DESCRIPTION_MAPPING_PATH = "actions/intent_description_mapping.csv"
 
@@ -39,7 +19,7 @@ class ActionRepairLabelConfidency(Action):
 
     def name(self) -> Text:
         return "action_repair_label_confidenc_level"
-    
+
     def __init__(self) -> None:
         import pandas as pd
 
@@ -70,16 +50,16 @@ class ActionRepairLabelConfidency(Action):
                 message_title = "😵 I'm really confused, but there is a small chance you mean this:"
             else:
                 message_title = "🤥 I have no idea what you mean, here is my unlucky guess:"
-        
+
         entities = tracker.latest_message.get("entities", [])
         entities = {e["entity"]: e["value"] for e in entities}
 
         entities_json = json.dumps(entities)
 
         buttons = []
-        
+
         button_title = self.get_button_title(highest_ranked_intent_name, entities)
-            
+
         buttons.append(
             {
                 "title": button_title,
@@ -89,7 +69,7 @@ class ActionRepairLabelConfidency(Action):
 
         dispatcher.utter_message(text=message_title, buttons=buttons)
         return [FollowupAction("action_listen")]
-    
+
     def get_button_title(
         self, intent: Text, entities: Dict[Text, Text]
     ) -> Text:
