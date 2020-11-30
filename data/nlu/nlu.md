@@ -303,7 +303,7 @@
 - [rephrase](repair_strategy_name)
 - [options](repair_strategy_name)
 - [defer](repair_strategy_name)
-- [dynamic](repair_strategy_name)
+- [countBreakdown](repair_strategy_name)
 - [labelConfidencLevel](repair_strategy_name)
 - [labelUserUtteranceLenght](repair_strategy_name)
 - [LabelFatigueConfusion](repair_strategy_name)
@@ -313,7 +313,7 @@
 - set fallback policy to [defer](repair_strategy_name)
 - in case of a fallback use [options](repair_strategy_name)
 - if you dont understand what I say use [rephrase](repair_strategy_name) policy
-- change the fallback to [dynamic](repair_strategy_name)
+- change the fallback to [countBreakdown](repair_strategy_name)
 - change fallback to [labelConfidencLevel](repair_strategy_name)
 - set the repair strategy to [labelUserUtteranceLenght](repair_strategy_name)
 - change the fallback to [LabelFatigueConfusion](repair_strategy_name)
