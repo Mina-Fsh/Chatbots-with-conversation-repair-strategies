@@ -120,7 +120,7 @@ class ActionRepairLabelFatigueConfusion(Action):
             "parse_data", []).get("intent_ranking", [])
         second_last_intent_name = second_last_intent_ranking[0].get("name")
 
-        second_last_user_message = user_event_list[-1].get("text")
+        second_last_user_message = user_event_list[-2].get("text")
 
         logger.debug(f"Last intent name is: {last_intent_name}, and the intent \
             before last is: {second_last_intent_name}")
