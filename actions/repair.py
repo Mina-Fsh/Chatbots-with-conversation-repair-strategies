@@ -139,32 +139,4 @@ class ActionRepair(Action):
         else:
             dispatcher.utter_message("I do not know this repair strategy")
         return []
-
-
-class ActionTagFeedback(Action):
-    """Tag a conversation in Rasa X as positive or negative feedback """
-
-    def name(self):
-        return "action_tag_feedback"
-
-    def run(self, dispatcher, tracker, domain) -> List[EventType]:
-
-        feedback = tracker.get_slot("feedback_value")
-
-        if feedback == "positive":
-            label = '[{"value":"postive feedback","color":"76af3d"}]'
-        elif feedback == "negative":
-            label = '[{"value":"negative feedback","color":"ff0000"}]'
-        else:
-            return []
-
-        tag_convo(tracker, label)
-
-        return []
-
-
-def tag_convo(tracker: Tracker, label: Text) -> None:
-    """Tag a conversation in Rasa X with a given label"""
-    endpoint = f"http://{config.rasa_x_host}/api/conversations/{tracker.sender_id}/tags"
-    requests.post(url=endpoint, data=label)
-    return
+        

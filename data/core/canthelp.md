@@ -21,10 +21,6 @@
     - utter_great
     - cc_payment_form
     - form{"name": null}
-    - utter_ask_feedback
-* affirm
-    - utter_great
-    - utter_anything_else
 
 ## greet + cc payment + canthelp + don't continue
 * greet
@@ -39,10 +35,6 @@
     - utter_thumbsup
     - action_deactivate_form
     - form{"name": null}
-    - utter_ask_feedback
-* deny
-    - utter_thumbsup
-    - utter_anything_else
 
 ## transfer money + continue
 * greet
@@ -57,10 +49,6 @@
     - utter_great
     - transfer_form
     - form{"name": null}
-    - utter_ask_feedback
-* deny
-    - utter_thumbsup
-    - utter_anything_else
 
 ## greet + transfer + canthelp + don't continue
 * greet
@@ -75,7 +63,3 @@
     - utter_thumbsup
     - action_deactivate_form
     - form{"name": null}
-    - utter_ask_feedback
-* deny
-    - utter_thumbsup
-    - utter_anything_else

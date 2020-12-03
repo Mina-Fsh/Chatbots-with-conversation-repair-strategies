@@ -71,10 +71,6 @@
     - utter_isbot
 * deny
     - utter_nohelp
-    - utter_ask_feedback
-* deny
-    - utter_thumbsup
-    - utter_anything_else
 
 ## more chitchat
 * greet
@@ -83,10 +79,6 @@
     - utter_ishuman
 * ask_howold
     - utter_howold
-    - utter_ask_feedback
-* affirm
-    - utter_great
-    - utter_anything_else
 
 ## just check balance + confirm
 * greet
@@ -95,10 +87,6 @@
     - utter_builder
 * check_balance
     - action_account_balance
-    - utter_ask_feedback
-* affirm
-    - utter_thumbsup
-    - utter_anything_else
 
 ## transaction search, continue, + confirm
 * greet
@@ -113,10 +101,6 @@
     - utter_great
     - transact_search_form
     - form{"name": null}
-    - utter_ask_feedback
-* affirm
-    - utter_thumbsup
-    - utter_anything_else
 
 ## just transaction search, don't continue, + confirm
 * greet
@@ -131,10 +115,6 @@
     - utter_thumbsup
     - action_deactivate_form
     - form{"name": null}
-    - utter_ask_feedback
-* affirm
-    - utter_thumbsup
-    - utter_anything_else
 
 ## just transaction search
 * greet
@@ -145,7 +125,6 @@
     - transact_search_form
     - form{"name": "transact_search_form"}
     - form{"name": null}
-    - utter_ask_feedback
 
 ## just transaction search, continue
 * greet
@@ -160,7 +139,6 @@
     - utter_great
     - transact_search_form
     - form{"name": null}
-    - utter_ask_feedback
 
 ## just newsletter, don't continue
 * greet
@@ -175,7 +153,6 @@
     - utter_thumbsup
     - action_deactivate_form
     - form{"name": null}
-    - utter_ask_feedback
 
 ## just transfer money
 * greet
@@ -186,7 +163,6 @@
     - transfer_form
     - form{"name":"transfer_form"}
     - form{"name": null}
-    - utter_ask_feedback
 
 ## just transfer money, continue
 * greet
@@ -201,7 +177,6 @@
     - utter_great
     - transfer_form
     - form{"name": null}
-    - utter_ask_feedback
 
 ## just transfer money, don't continue
 * greet
@@ -215,4 +190,3 @@
 * deny
     - utter_thumbsup
     - action_deactivate_form
-    - utter_ask_feedback

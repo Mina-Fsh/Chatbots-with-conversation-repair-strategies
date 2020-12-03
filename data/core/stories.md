@@ -7,12 +7,10 @@
     - action_configure_repair_strategy
 * inform{"repair_strategy_name": "options"}
     - utter_repair_strategy_saved
-    - utter_ask_feedback
 
 ## configure repair stategy directly
 * inform{"repair_strategy_name": "labelConfidencLevel"}
     - utter_repair_strategy_saved
-    - utter_ask_feedback
 
 ## thanks
 * thank
@@ -49,17 +47,14 @@
     - utter_anything_else
 * deny
     - utter_thumbsup
-    - utter_ask_feedback
 
 ## positive reaction
 * react_positive
     - utter_react_positive
-    - utter_ask_feedback
 
 ## negative reaction
 * react_negative
     - utter_react_negative
-    - utter_ask_feedback
 
 ## neither 
 * greet
@@ -72,7 +67,6 @@
     - cc_payment_form
     - form{"name": "cc_payment_form"}
     - form{"name": null}
-    - utter_ask_feedback
 
 ## pay credit card and check account balance
 * pay_cc
@@ -81,7 +75,7 @@
     - form{"name": null}
 * check_balance
     - action_account_balance
-    - utter_ask_feedback
+    - utter_anything_else
 
 ## pay credit card and check account balance inside form
 * pay_cc
@@ -93,19 +87,17 @@
 * affirm
     - cc_payment_form
     - form{"name": null}
-    - utter_ask_feedback
+    - utter_anything_else
 
 ## transfer money
 * transfer_money
     - transfer_form
     - form{"name": "transfer_form"}
     - form{"name": null}
-    - utter_ask_feedback
 
 ## is there a transfer charge
 * ask_transfer_charge
     - utter_transfer_charge
-    - utter_ask_feedback
 
 ## transfer money ask transfer charge
 * transfer_money
@@ -116,7 +108,6 @@
     - transfer_form
     - form{"name": "transfer_form"}
     - form{"name": null}
-    - utter_ask_feedback
   
 ## transfer money ask known recipients
 * transfer_money
@@ -127,7 +118,7 @@
     - transfer_form
     - form{"name": "transfer_form"}
     - form{"name": null}
-    - utter_ask_feedback
+    - utter_anything_else
 
 ## transfer money ask known recipients and transfer charge
 * transfer_money
@@ -142,7 +133,7 @@
     - transfer_form
     - form{"name": "transfer_form"}
     - form{"name": null}
-    - utter_ask_feedback
+    - utter_anything_else
 
 ## transfer money ask known recipients and transfer charge
 * transfer_money
@@ -157,7 +148,7 @@
     - transfer_form
     - form{"name": "transfer_form"}
     - form{"name": null}
-    - utter_ask_feedback
+    - utter_anything_else
 
 ## transfer money ask account balance
 * transfer_money
@@ -169,7 +160,7 @@
     - form{"name": "transfer_form"}
     - form{"name":null}
     - slot{"requested_slot":null}
-    - utter_ask_feedback
+    - utter_anything_else
 
 ## transfer money ask account balance
 * transfer_money
@@ -189,7 +180,7 @@
     - form{"name": "transfer_form"}
     - form{"name":null}
     - slot{"requested_slot":null}
-    - utter_ask_feedback
+    - utter_anything_else
 
 ## transfer money ask account balance
 * transfer_money
@@ -209,7 +200,7 @@
     - form{"name": "transfer_form"}
     - form{"name":null}
     - slot{"requested_slot":null}
-    - utter_ask_feedback
+    - utter_anything_else
 
 ## transfer money ask account balance
 * transfer_money
@@ -229,7 +220,7 @@
     - form{"name": "transfer_form"}
     - form{"name":null}
     - slot{"requested_slot":null}
-    - utter_ask_feedback
+    - utter_anything_else
 
 ## transfer money ask account balance
 * transfer_money
@@ -249,7 +240,7 @@
     - form{"name": "transfer_form"}
     - form{"name":null}
     - slot{"requested_slot":null}
-    - utter_ask_feedback
+    - utter_anything_else
 
 ## transfer money ask account balance
 * transfer_money
@@ -269,7 +260,7 @@
     - form{"name": "transfer_form"}
     - form{"name":null}
     - slot{"requested_slot":null}
-    - utter_ask_feedback
+    - utter_anything_else
 
 ## search transactions happy path
 * greet
@@ -278,7 +269,6 @@
     - transact_search_form
     - form{"name": "transact_search_form"}
     - form{"name": null}
-    - utter_ask_feedback
 
 
 ## search transactions happy path no greet
@@ -286,7 +276,6 @@
     - transact_search_form
     - form{"name": "transact_search_form"}
     - form{"name": null}
-    - utter_ask_feedback
 * thank
     - utter_noworries
     - utter_anything_else
@@ -296,7 +285,6 @@
     - transact_search_form
     - form{"name": "transact_search_form"}
     - form{"name": null}
-    - utter_ask_feedback
 
 ## search transactions switch to transfer money
 * search_transactions OR check_earnings
@@ -313,7 +301,7 @@
     - transact_search_form
     - form{"name": "transact_search_form"}
     - form{"name": null}
-    - utter_ask_feedback
+    - utter_anything_else
 
 ## search transactions switch to transfer money, deny
 * search_transactions OR check_earnings
@@ -325,7 +313,7 @@
     - transact_search_form
     - form{"name": "transact_search_form"}
     - form{"name": null}
-    - utter_ask_feedback
+    - utter_anything_else
 
 ## search transactions switch to transfer money, don't continue transactions
 * search_transactions OR check_earnings
@@ -340,7 +328,7 @@
     - utter_ask_back_to_transact
 * deny
     - utter_ok
-    - utter_ask_feedback
+    - utter_anything_else
 
 ## Transfer money ask account balance
 * transfer_money
@@ -351,7 +339,6 @@
     - transfer_form
     - form{"name":null}
     - slot{"requested_slot":null}
-    - utter_ask_feedback
 
 ## Pay CC ask account balance
 * pay_cc
@@ -364,7 +351,6 @@
     - utter_ok
     - form{"name": null}
     - slot{"requested_slot":null}
-    - utter_ask_feedback
 
 ## Pay CC ask account balance
 * pay_cc
@@ -377,7 +363,6 @@
     - cc_payment_form
     - form{"name": null}
     - slot{"requested_slot":null}
-    - utter_ask_feedback
 
 ## Transfer money pay credit card
 * transfer_money
@@ -392,7 +377,6 @@
     - transfer_form
     - form{"name":"transfer_form"}
     - form{"name": null}
-    - utter_ask_feedback
 
 ## Transfer money pay credit card
 * transfer_money
@@ -405,27 +389,22 @@
     - utter_ask_back_to_transfer
 * deny
     - utter_ok
-    - utter_ask_feedback
 
 ## Show list of known recipients
 * check_recipients
     - action_recipients
-    - utter_ask_feedback
 
 ## Show credit accounts
 * check_balance{"account_type":"credit"}
     - action_credit_card_balance
-    - utter_ask_feedback
 
 ## Show specific credit account
 * check_balance{"credit_card":"silver"}
     - action_credit_card_balance
-    - utter_ask_feedback
 
 ## Show credit accounts
 * check_balance{"account_type":"credit","credit_card":"credit card"}
     - action_credit_card_balance
-    - utter_ask_feedback
 
 ## greet, transfer money, feedback
 * greet OR inform{"PERSON": "Stefan"}
@@ -433,7 +412,6 @@
 * transfer_money
     - transfer_form
     - form{"name":"transfer_form"}
-    - utter_ask_feedback
 
 ## transfer money then pay cc
 * greet
@@ -450,7 +428,6 @@
     - transfer_form
     - form{"name":"transfer_form"}
     - form{"name": null}
-    - utter_ask_feedback
 
 ## check recipients, check balance, transfer money
 * greet
@@ -459,16 +436,10 @@
     - action_recipients
 * check_balance{"account_type":"credit"}
     - action_credit_card_balance
-    - utter_ask_feedback
-* feedback{"feedback_value": "negative"}
-    - slot{"feedback_value": "negative"}
-    - action_tag_feedback
-    - utter_thumbsup
     - utter_anything_else
 * transfer_money
     - transfer_form
     - form{"name":"transfer_form"}
-    - utter_ask_feedback
 
 ## chitchat --> transfer money --> chitchat
 * greet
@@ -477,15 +448,19 @@
     - utter_howdoing
 * whatisPAYbank
     - utter_whatisPAYbank
-    - utter_ask_feedback
-* feedback{"feedback_value": "positive"}
-    - slot{"feedback_value": "positive"}
-    - action_tag_feedback
-    - utter_great
     - utter_anything_else
 * ask_ishuman
     - utter_ishuman
 * transfer_money
     - transfer_form
     - form{"name":"transfer_form"}
-    - utter_ask_feedback
+
+## story number 1
+* greet
+    - action_greet_user
+* pay_cc
+    - cc_payment_form
+    - form{"name":"cc_payment_form"}
+    - form{"name": null}
+* check_recipients
+    - action_recipients

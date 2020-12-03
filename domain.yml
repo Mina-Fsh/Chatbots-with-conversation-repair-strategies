@@ -185,13 +185,6 @@ responses:
   - text: Sure thing!
   - text: Can do!
   - text: You got it. 👍
-  utter_ask_feedback:
-  - buttons:
-    - payload: /feedback{"feedback_value":"positive"}
-      title: 👍
-    - payload: /feedback{"feedback_value":"negative"}
-      title: 👎
-    text: How is this conversation going?
   utter_fatigue:
   - buttons:
     - payload: /restart
@@ -242,8 +235,8 @@ responses:
   - text: I didn't quite get that, could you rephrase your message?
   - text: Could you rephrase your message? I didn't get it, I'm sorry.
   utter_ask_rephrase:
-  - text: "Please rephrase your previous request."
-  - text: "Could you please rephrase your previous message."
+  - text: Please rephrase your previous request.
+  - text: Could you please rephrase your previous message.
   utter_repair_strategy_saved:
   - text: 'Alright. The repair strategy in this conversation is set to: {repair_strategy_name}.'
   utter_ask_transfer_form_amount_of_money:
@@ -456,7 +449,6 @@ actions:
 - action_greet_user
 - action_restart
 - action_pause
-- action_tag_feedback
 - utter_greet_name
 - utter_greet_noname
 - utter_bye
@@ -469,7 +461,6 @@ actions:
 - utter_react_positive
 - utter_thumbsup
 - utter_can_do
-- utter_ask_feedback
 - utter_restart_with_button
 - utter_restart
 - utter_canthelp
