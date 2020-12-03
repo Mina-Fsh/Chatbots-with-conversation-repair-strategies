@@ -170,7 +170,7 @@ class ActionRepairLabelFatigueConfusion(Action):
                         # bot is not confused
                         message_title = f"I'm Highly confident what you mean by: \
                             {last_user_message}. But our conversation is \
-                            getting long and I'm tired."
+                            getting long and I'm tired. Sorry."
                     else:
                         # bot is confused
                         message_title = f"I'm Highly confident what you mean by: \
@@ -178,7 +178,7 @@ class ActionRepairLabelFatigueConfusion(Action):
                              {second_last_user_message}. Switching between \
                              topics like this can confuse me in future. \
                              Our conversation is also getting long \
-                             and I'm tired."
+                             and I'm tired. Sorry."
             else:
                 if conv_turns <= 10:
                     # bot is not tired, and is not sure about the intent.
@@ -198,8 +198,8 @@ class ActionRepairLabelFatigueConfusion(Action):
                         # bot is not confused
                         message_title = f"I'm not so sure about what you mean by: \
                             {last_user_message}. Our conversation is \
-                            getting long and I'm tired. maybe that's \
-                            why I can't get you."
+                            getting long and I'm tired. Maybe that's \
+                            why I can't get you. Sorry."
                     else:
                         # bot is confused
                         message_title = f"I'm not so sure about what you mean by: \
@@ -207,7 +207,7 @@ class ActionRepairLabelFatigueConfusion(Action):
                             {second_last_user_message}. Switching between \
                             these topics confused me. \
                             Our conversation is also getting long and I'm \
-                            tired. could be also why I can't get you."
+                            tired. Could be also why I can't get you. Sorry."
 
         dispatcher.utter_message(text=message_title)
         return [FollowupAction("action_listen")]
