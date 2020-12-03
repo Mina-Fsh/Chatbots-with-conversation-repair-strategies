@@ -114,9 +114,13 @@ class ActionRepairLabelFatigueConfusion(Action):
             "parse_data", []).get("intent_ranking", [])
         last_intent_name = last_intent_ranking[0].get("name")
 
+        last_user_message = user_event_list[-1].get("text")
+
         second_last_intent_ranking = user_event_list[-2].get(
             "parse_data", []).get("intent_ranking", [])
         second_last_intent_name = second_last_intent_ranking[0].get("name")
+
+        second_last_user_message = user_event_list[-1].get("text")
 
         logger.debug(f"Last intent name is: {last_intent_name}, and the intent \
             before last is: {second_last_intent_name}")
@@ -156,49 +160,52 @@ class ActionRepairLabelFatigueConfusion(Action):
                             {last_intent_name}."
                     else:
                         # bot is confused
-                        message_title = f"I'm Highly confident that you mean \
-                            {last_intent_name}. but you switched the topic \
-                            from {second_last_intent_name}. this can confuse \
-                            me in future. "
+                        message_title = f"I'm Highly confident what you mean by: \
+                            {last_user_message}. But before that you said: \
+                             {second_last_user_message}. Switching between \
+                             topics like this can confuse me in future. "
                 else:
                     # bot is tired, and is somehow sure about the intent.
                     if confusion_level < 1:
                         # bot is not confused
-                        message_title = f"I'm Highly confident that you mean \
-                            {last_intent_name}. but our conversation is \
+                        message_title = f"I'm Highly confident what you mean by: \
+                            {last_user_message}. But our conversation is \
                             getting long and I'm tired."
                     else:
                         # bot is confused
-                        message_title = f"I'm Highly confident that you mean \
-                            {last_intent_name}. but you switched the topic \
-                            from {second_last_intent_name}. this can confuse \
-                            me in future. Our conversation is also getting \
-                            long and I'm tired."
+                        message_title = f"I'm Highly confident what you mean by: \
+                            {last_user_message}. But before that you said: \
+                             {second_last_user_message}. Switching between \
+                             topics like this can confuse me in future. \
+                             Our conversation is also getting long \
+                             and I'm tired."
             else:
                 if conv_turns <= 10:
                     # bot is not tired, and is not sure about the intent.
                     if confusion_level < 1:
                         # bot is not foncused
-                        message_title = f"I'm not so sure if you mean \
-                            {last_intent_name}."
+                        message_title = f"I'm not so sure about what you mean by: \
+                            {last_user_message}."
                     else:
                         # bot is confused
-                        message_title = f"I'm not so sure if you mean \
-                            {last_intent_name}. but you switched the topic \
-                            from {second_last_intent_name}. this confused me ."
+                        message_title = f"I'm not so sure about what you mean by: \
+                            {last_user_message}. But before that you said: \
+                             {second_last_user_message}. Switching between \
+                             these topics confused me."
                 else:
                     # bot is tired, and is not sure about the intent.
                     if confusion_level < 1:
                         # bot is not confused
-                        message_title = f"I'm not so sure if you mean \
-                            {last_intent_name}. Our conversation is \
+                        message_title = f"I'm not so sure about what you mean by: \
+                            {last_user_message}. Our conversation is \
                             getting long and I'm tired. maybe that's \
                             why I can't get you."
                     else:
                         # bot is confused
-                        message_title = f"I'm not so sure if you mean \
-                            {last_intent_name}. but you switched the topic \
-                            from {second_last_intent_name}. this confused me. \
+                        message_title = f"I'm not so sure about what you mean by: \
+                            {last_user_message}. But before that you said: \
+                            {second_last_user_message}. Switching between \
+                            these topics confused me. \
                             Our conversation is also getting long and I'm \
                             tired. could be also why I can't get you."
 
