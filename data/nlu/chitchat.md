@@ -663,6 +663,7 @@
 - what is my name
 - what is my name?
 - what's my name?
+- do you know my name?
 
 ## intent:ask_wherefrom
 - Are you from around here?
@@ -742,6 +743,10 @@
 - who am i
 - who are I ?
 - who may i ?
+- who am I?
+- who am i?
+- who am i 
+- tell me who i am
 
 ## intent:ask_whoisit
 - HI, what's your name?

@@ -546,6 +546,19 @@
 - restart this chat
 - restart
 
+## intent:repeat
+- repeat
+- what?
+- what did you say?
+- say it again
+- please say it again
+- please repeat
+- repeat your response
+- I didn't get you
+- say it once more
+- I cant understand you
+- I couldn't get you
+
 ## intent:trigger_rephrase
 - rephrase
 - ask me to rephrase
