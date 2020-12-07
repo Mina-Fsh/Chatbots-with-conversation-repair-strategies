@@ -33,24 +33,20 @@
 ## more faqs
 * greet
     - action_greet_user
-    - utter_intro
 * whatisPAYbank
     - utter_whatisPAYbank
 * product_description
     - utter_product_description
-    - utter_ask_feedback
 
 ## just check balance
 * cardlimit
     - utter_cardlimit
 * check_balance
     - action_account_balance
-    - utter_ask_feedback
 
 ## just transfer money, continue
 * greet
     - action_greet_user
-    - utter_intro
 * transfer_money
     - transfer_form
     - form{"name":"transfer_form"}
@@ -61,12 +57,10 @@
     - utter_great
     - transfer_form
     - form{"name": null}
-    - utter_ask_feedback
 
 ## just transfer money, don't continue
 * greet
     - action_greet_user
-    - utter_intro
 * transfer_money
     - transfer_form
     - form{"name":"transfer_form"}
@@ -76,4 +70,3 @@
 * deny
     - utter_thumbsup
     - action_deactivate_form
-    - utter_ask_feedback

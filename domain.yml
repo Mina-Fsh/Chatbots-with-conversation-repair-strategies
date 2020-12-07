@@ -35,7 +35,6 @@ intents:
 - react_negative
 - react_positive
 - thank
-- feedback
 - transfer_money:
     use_entities: []
 - inform
@@ -46,8 +45,8 @@ intents:
     use_entities: []
 - check_balance:
     use_entities:
-    - account_type
     - credit_card
+    - account_type
 - check_earnings:
     use_entities: []
 - check_recipients
@@ -57,6 +56,7 @@ intents:
 - human_handoff
 - trigger_rephrase
 - configure_repair_strategy
+- feedback
 entities:
 - location
 - company
@@ -70,7 +70,7 @@ entities:
 - PERSON
 - number
 - account_type
-- repair_strategy_preferences
+- repair_strategy_name
 - language
 slots:
   PERSON:
@@ -112,9 +112,9 @@ slots:
   payment_amount_type:
     type: unfeaturized
     initial_value: ''
-  repair_strategy_preferences:
+  repair_strategy_name:
     type: unfeaturized
-    initial_value: LabelFatigueConfusion
+    initial_value: labelConfidencLevel
   requested_slot:
     type: unfeaturized
   search_type:
@@ -185,13 +185,6 @@ responses:
   - text: Sure thing!
   - text: Can do!
   - text: You got it. 👍
-  utter_ask_feedback:
-  - buttons:
-    - payload: /feedback{"feedback_value":"positive"}
-      title: 👍
-    - payload: /feedback{"feedback_value":"negative"}
-      title: 👎
-    text: How is this conversation going?
   utter_fatigue:
   - buttons:
     - payload: /restart
@@ -241,8 +234,11 @@ responses:
   - text: I'm afraid I didn't get what you just said. Could you rephrase that?
   - text: I didn't quite get that, could you rephrase your message?
   - text: Could you rephrase your message? I didn't get it, I'm sorry.
+  utter_ask_rephrase:
+  - text: Please rephrase your previous request.
+  - text: Could you please rephrase your previous message.
   utter_repair_strategy_saved:
-  - text: 'Alright. The repair strategy in this conversation is set to: {repair_strategy_preferences}.'
+  - text: 'Alright. The repair strategy in this conversation is set to: {repair_strategy_name}.'
   utter_ask_transfer_form_amount_of_money:
   - text: How much money do you want to transfer?
   utter_ask_transfer_form_PERSON:
@@ -441,11 +437,11 @@ actions:
 - action_configure_repair_strategy
 - action_repair
 - action_repair_options
+- action_repair_twoStageOptions
 - action_repair_count_breakdwon
-- action_repair_label_confidency
+- action_repair_label_confidenc_level
 - action_repair_label_user_utterance_length
 - action_repair_label_fatigue_confusion
-- action_default_fallback
 - action_account_balance
 - action_session_start
 - action_credit_card_balance
@@ -453,7 +449,6 @@ actions:
 - action_greet_user
 - action_restart
 - action_pause
-- action_tag_feedback
 - utter_greet_name
 - utter_greet_noname
 - utter_bye
@@ -466,7 +461,6 @@ actions:
 - utter_react_positive
 - utter_thumbsup
 - utter_can_do
-- utter_ask_feedback
 - utter_restart_with_button
 - utter_restart
 - utter_canthelp
@@ -478,6 +472,7 @@ actions:
 - utter_capabilities_repair
 - utter_capabilities
 - utter_default
+- utter_ask_rephrase
 - utter_repair_strategy_saved
 - utter_ask_transfer_form_amount_of_money
 - utter_ask_transfer_form_PERSON
