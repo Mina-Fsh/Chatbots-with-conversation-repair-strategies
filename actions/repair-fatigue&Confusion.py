@@ -29,7 +29,7 @@ class ActionRepairLabelFatigueConfusion(Action):
         # Calculate Fatigue based on the conversation lenght
         conv_turns = 0
         # conv_turns = tracker.get_slot("conv_turns")
-        action_counter = 0
+        # action_counter = 0
         user_event_list = []
         for events in tracker.events_after_latest_restart():
 
@@ -51,26 +51,18 @@ class ActionRepairLabelFatigueConfusion(Action):
                 "greet",
                 "bye",
                 "nicetomeetyou",
-                "restart"
-            ],
-            [
+                "restart",
                 "ask_builder",
                 "ask_howbuilt",
                 "ask_isbot",
                 "ask_ishuman",
-                "ask_languagesbot"
-            ],
-            [
+                "ask_languagesbot",
                 "ask_whoisit",
                 "ask_howdoing",
                 "ask_howold",
-                "ask_wherefrom"
-            ],
-            [
+                "ask_wherefrom",
                 "ask_whatismyname",
-                "ask_whoami"
-            ],
-            [
+                "ask_whoami",
                 "ask_restaurant",
                 "ask_time",
                 "ask_weather",
@@ -88,56 +80,58 @@ class ActionRepairLabelFatigueConfusion(Action):
                 "annualcost"
             ],
             [
-                "affirm",
-                "deny",
-                "react_negative",
-                "react_positive",
-                "thank",
-                "inform",
-                "canthelp",
-                "capabilities",
-                "human_handoff",
-                "configure_repair_strategy",
-                "feedback"
-            ],
-            [
                 "transfer_money",
                 "pay_cc",
                 "ask_transfer_charge",
                 "search_transactions",
                 "check_balance",
                 "check_earnings",
-                "check_recipients"
-            ]]
+                "check_recipients",
+                "inform"
+            ]
+        ]
 
+        # get the ranking of the last user message
         last_intent_ranking = user_event_list[-1].get(
             "parse_data", []).get("intent_ranking", [])
+
+        # get the name of the matched intent for last user message
         last_intent_name = last_intent_ranking[0].get("name")
 
+        # get the text of the last user message
         last_user_message = user_event_list[-1].get("text")
 
+        # get the ranking of the second last user message
         second_last_intent_ranking = user_event_list[-2].get(
             "parse_data", []).get("intent_ranking", [])
+
+        # get the name of the matched intent for second last user message
         second_last_intent_name = second_last_intent_ranking[0].get("name")
 
+        # get the text of the second last user message
         second_last_user_message = user_event_list[-2].get("text")
 
-        logger.debug(f"Last intent name is: {last_intent_name}, and the intent \
-            before last is: {second_last_intent_name}")
+        # logger.debug(f"Last intent name is: {last_intent_name}, and the \
+        #  intent before last is: {second_last_intent_name}")
 
         for list in distanced_intent_list:
             if last_intent_name in list:
                 index_1 = distanced_intent_list.index(list)
                 logger.debug(f"{last_intent_name} is in group {index_1}.")
+            else:
+                index_1 = None
 
             if second_last_intent_name in list:
                 index_2 = distanced_intent_list.index(list)
                 logger.debug(f"{second_last_intent_name} is in group {index_2}.")
+            else:
+                index_2 = None
 
         confusion_level = 0
-        if index_1 != index_2:
-            confusion_level += 1
-            logger.debug(f"The confusion level is: {confusion_level}")
+        if index_1 is not None and index_2 is not None:
+            if index_1 != index_2:
+                confusion_level += 1
+                logger.debug(f"The confusion level is: {confusion_level}")
 
         # if conv_turns <= 6:
         #     return [FollowupAction("action_repair_options")]
@@ -150,7 +144,7 @@ class ActionRepairLabelFatigueConfusion(Action):
         if len(intent_ranking) > 1:
             highest_ranked_intent_confidence = intent_ranking[0].get(
                 "confidence")
-            highest_ranked_intent_name = intent_ranking[0].get("name")
+            # highest_ranked_intent_name = intent_ranking[0].get("name")
             if highest_ranked_intent_confidence >= 0.75:
                 if conv_turns <= 10:
                     # bot is not tired, and is somehow sure about the intent.
