@@ -28,7 +28,10 @@
 ## restart
 * restart
     - action_restart
-    - utter_restart
+
+## repeat
+* repeat
+  - action_repeat
 
 ## capability check
 * capabilities

@@ -53,6 +53,7 @@ intents:
 - session_start
 - capabilities
 - restart
+- repeat
 - human_handoff
 - trigger_rephrase
 - configure_repair_strategy
@@ -448,6 +449,7 @@ actions:
 - action_recipients
 - action_greet_user
 - action_restart
+- action_repeat
 - action_pause
 - utter_greet_name
 - utter_greet_noname

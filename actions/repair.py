@@ -1,15 +1,12 @@
 import logging
-import requests
 import random
 from typing import Any, Dict, List, Text
 from rasa_sdk import Tracker, Action
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import (
     SlotSet,
-    EventType,
     FollowupAction,
 )
-from actions import config
 
 INTENT_DESCRIPTION_MAPPING_PATH = "actions/intent_description_mapping.csv"
 
@@ -33,39 +30,41 @@ class ActionConfigureRepairStrategy(Action):
 
         buttons = [
             {
-                "title": "Fallback based on the bot confidence level.",
+                "title": "Based on the bot confidence level.",
                 "payload": "labelConfidencLevel",
             },
             {
-                "title": "Fallback based on the user utterance length.",
-                "payload": "labelUserUtteranceLenght",
-            },
-            {
-                "title": "Fallback based on the bot's confusion and fatigue level.",
+                "title": "Based on the bot's confusion and fatigue level.",
                 "payload": "LabelFatigueConfusion",
             },
             {
-                "title": "Fallback with options of highest ranked intents + recommending restart.",
+                "title": "Give me options of highest ranked intents + rephrase \
+                + recommend restart.",
                 "payload": "twoStageOptions",
             },
             {
-                "title": "Fallback with options of highest ranked intents.",
-                "payload": "options",
-            },
-            {
-                "title": "Randomly choose between the fallbacks above!",
+                "title": "Randomly choose between the above strategies!",
                 "payload": "random",
             },
             {
-                "title": "Fallback that counts breakdowns and either gives options or utters the bot capabilities.",
+                "title": "Give me options of highest ranked intents.",
+                "payload": "options",
+            },
+            {
+                "title": "Based on the user utterance length.",
+                "payload": "labelUserUtteranceLenght",
+            },
+            {
+                "title": "Give me options in the first 2 breakdowns, \
+                after that it utters the bot capabilities.",
                 "payload": "countBreakdown",
             },
             {
-                "title": "Fallback with recommending connection to a human agent.",
+                "title": "Recommend connection to a human agent.",
                 "payload": "defer",
             },
             {
-                "title": "Fallback with asking user to rephrase the request." ,
+                "title": "Ask me to rephrase my request.",
                 "payload": "rephrase",
             }   
         ]
@@ -98,7 +97,7 @@ class ActionRepair(Action):
 
         # Fallback caused by TwoStageFallbackPolicy
         if (
-            len(tracker.events) >= 15 and 
+            len(tracker.events) >= 15 and
             next((True for event in tracker.events[-15:] if event.get("name") == "action_repair" and repair_strategy == "twoStageOptions"), False)
         ):
 
@@ -129,8 +128,7 @@ class ActionRepair(Action):
             return [FollowupAction("action_repair_label_user_utterance_length")]
         elif repair_strategy == "random":
             strategy_names = ["action_repair_label_confidenc_level",
-                              "action_repair_label_user_utterance_length",
-                              "action_repair_options",
+                              "action_repair_twoStageOptions",
                               "action_repair_label_fatigue_confusion"]
             random_strategy = random.choice(strategy_names)
             return [FollowupAction(random_strategy)]
@@ -139,4 +137,3 @@ class ActionRepair(Action):
         else:
             dispatcher.utter_message("I do not know this repair strategy")
         return []
-        
