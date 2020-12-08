@@ -300,23 +300,17 @@
 - Mr. Sweney
 - Terri Cline
 - William Zelkind
-- [rephrase](repair_strategy_name)
-- [options](repair_strategy_name)
-- [defer](repair_strategy_name)
-- [countBreakdown](repair_strategy_name)
-- [labelConfidencLevel](repair_strategy_name)
-- [labelUserUtteranceLenght](repair_strategy_name)
-- [LabelFatigueConfusion](repair_strategy_name)
-- [random](repair_strategy_name)
-- [twoStageOptions](repair_strategy_name)
-- switch to [random](repair_strategy_name)
-- set fallback policy to [defer](repair_strategy_name)
-- in case of a fallback use [options](repair_strategy_name)
-- if you dont understand what I say use [rephrase](repair_strategy_name) policy
-- change the fallback to [countBreakdown](repair_strategy_name)
-- change fallback to [labelConfidencLevel](repair_strategy_name)
-- set the repair strategy to [labelUserUtteranceLenght](repair_strategy_name)
-- change the fallback to [LabelFatigueConfusion](repair_strategy_name)
+- [self_assisted_repair](repair_strategy_name)
+- [system_repair](repair_strategy_name)
+- [mix_repair](repair_strategy_name)
+- switch to [system_repair](repair_strategy_name)
+- set fallback policy to [self_assisted_repair](repair_strategy_name)
+- in case of a fallback use [mix_repair](repair_strategy_name)
+- if you dont understand what I say use [mix_repair](repair_strategy_name) policy
+- change the fallback to [system_repair](repair_strategy_name)
+- change fallback to [self_assisted_repair](repair_strategy_name)
+- set the repair strategy to [system_repair](repair_strategy_name)
+- change the fallback to [system_repair](repair_strategy_name)
 - last year
 - toay
 - 33
@@ -348,8 +342,8 @@
 - I want to pay $500 on my [gold](credit_card) [credit card](account_type) on Sunday
 - I want to pay my [current balance](payment_amount) on my [silver](credit_card) [credit card](account_type) today
 - i need to pay off my [silver](credit_card) [credit card](account_type)
-- Please schedule  a payment towards my credit card for April 12th
-- Can I schedule a payment towards my credit card for tomorrow?
+- Please pay towards my credit card for April 12th
+- Can I plan a payment towards my credit card for tomorrow?
 - Pay off my [minimum balance](payment_amount) please
 - i would like to pay $1200 to my [credit card]{"entity": "account_type", "value": "credit"}
 - I would also like to pay my [visa](credit_card) bill
@@ -545,6 +539,7 @@
 - I said restart
 - restart this chat
 - restart
+- Restart
 
 ## intent:repeat
 - repeat
