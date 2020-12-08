@@ -13,7 +13,8 @@ logger = logging.getLogger(__name__)
 
 
 class ActionRepairCountBreakdown(Action):
-    """Shows options in the first 5 sessions and after that asks for rephrase!"""
+    """Shows options in the first 5
+    sessions and after that asks for rephrase!"""
 
     def name(self) -> Text:
         return "action_repair_count_breakdwon"
@@ -28,11 +29,18 @@ class ActionRepairCountBreakdown(Action):
         breakdown_counter = 0
         action_counter = 0
         for events in tracker.events:
-            if events["event"] == "action" and events["name"] == "action_repair": 
+            if (events["event"] == "action" and
+               events["name"] == "action_repair"):
+
                 breakdown_counter += 1
-            if events["event"] == "action" and events["name"] != "action_listen": 
+
+            if (events["event"] == "action" and
+               events["name"] != "action_listen"):
+
                 action_counter += 1
-        logger.debug(f"You already had {breakdown_counter} breakdowns in this conversation!")
+
+        logger.debug(f"You already had {breakdown_counter} \
+        breakdowns in this conversation!")
 
         if breakdown_counter <= 5:
             return [FollowupAction("action_repair_options")]
