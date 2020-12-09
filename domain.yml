@@ -45,8 +45,8 @@ intents:
     use_entities: []
 - check_balance:
     use_entities:
-    - account_type
     - credit_card
+    - account_type
 - check_earnings:
     use_entities: []
 - check_recipients
@@ -57,11 +57,9 @@ intents:
 - human_handoff
 - trigger_rephrase
 - configure_repair_strategy
-- feedback
 entities:
 - location
 - company
-- feedback_value
 - amount-of-money
 - payment_amount
 - credit_card
@@ -97,13 +95,6 @@ slots:
     type: unfeaturized
   end_time_formatted:
     type: unfeaturized
-  feedback_message:
-    type: unfeaturized
-  feedback_value:
-    type: categorical
-    values:
-    - positive
-    - negative
   grain:
     type: unfeaturized
   known_recipients:
@@ -115,7 +106,7 @@ slots:
     initial_value: ''
   repair_strategy_name:
     type: unfeaturized
-    initial_value: system_repair
+    initial_value: self_assisted_repair
   requested_slot:
     type: unfeaturized
   search_type:
