@@ -409,7 +409,7 @@
 * check_balance{"account_type":"credit","credit_card":"credit card"}
     - action_credit_card_balance
 
-## greet, transfer money, feedback
+## greet, transfer money
 * greet OR inform{"PERSON": "Stefan"}
     - action_greet_user
 * transfer_money
