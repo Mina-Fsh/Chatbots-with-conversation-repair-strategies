@@ -29,14 +29,10 @@ class ActionSelfAssistedRepair(Action):
         confusion_level = self.get_confusion_level(tracker)
         conversation_turns = self.count_turns(tracker)
 
-        last_intent_name = self.get_user_message_info(tracker)[
-            "last_intent_name"]
         last_user_message = self.get_user_message_info(tracker)[
             "last_user_message"]
         last_intent_confidence = self.get_user_message_info(tracker)[
             "last_intent_confidence"]
-        second_last_intent_name = self.get_user_message_info(tracker)[
-            "second_last_intent_name"]
         second_last_user_message = self.get_user_message_info(tracker)[
             "second_last_user_message"]
         second_last_intent_confidence = self.get_user_message_info(tracker)[
