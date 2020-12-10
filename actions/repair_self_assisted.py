@@ -300,7 +300,7 @@ class ActionSelfAssistedRepair(Action):
                 "check_earnings",
                 "check_recipients",
                 "capabilities",
-                "session_start"
+                "session_start",
                 "human_handoff",
                 "trigger_rephrase",
                 "telljoke",
@@ -327,20 +327,22 @@ class ActionSelfAssistedRepair(Action):
         for list in intent_list:
             if last_intent_name in list:
                 intent_group_index = intent_list.index(list)
-                logger.debug(f"Intent {last_intent_name} is \
-                    in {intent_group_index}.")
+                logger.debug(f"Intent {last_intent_name} is\
+                    in group index {intent_group_index}.")
+                if intent_group_index == 0:
+                    intent_type = "long"
+                    logger.debug(f"Intent {last_intent_name} is in\
+                        group category {intent_type}.")
+                elif intent_group_index == 1:
+                    intent_type = "short"
+                    logger.debug(f"Intent {last_intent_name} is in\
+                        group {intent_type}.")
+                else:
+                    intent_group_index = None
+                    intent_type = None
+                    logger.debug("Error in short long intent categorization.")
             else:
-                intent_group_index = None
-
-        intent_type = ""
-        if intent_group_index == 0:
-            intent_type == "long"
-            logger.debug(f"Intent {last_intent_name} is in {intent_type}.")
-        elif intent_group_index == 1:
-            intent_type == "short"
-            logger.debug(f"Intent {last_intent_name} is in {intent_type}.")
-        else:
-            logger.debug("Error in short long intent categorization.")
+                logger.debug("Intent is not in the list of intents!")
 
         return intent_type
 

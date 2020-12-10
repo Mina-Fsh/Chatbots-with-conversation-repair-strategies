@@ -85,7 +85,7 @@ class ActionRepair(Action):
         elif repair_strategy == "self_assisted_repair":
             return [FollowupAction("action_self_assisted_repair")]
         elif repair_strategy == "mix_repair":
-            return [FollowupAction("action_self_assisted_repair")]
+            return [FollowupAction("action_mix_repair")]
         else:
             dispatcher.utter_message("I do not know this repair strategy")
         return []
