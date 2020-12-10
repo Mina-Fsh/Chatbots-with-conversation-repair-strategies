@@ -45,52 +45,189 @@ class ActionSelfAssistedRepair(Action):
         if second_last_intent_confidence is not None:
             # If the very first user message triggers fallback
             # there will be no second last intent
-            if (last_intent_confidence >= 0.75 and
-                    second_last_intent_confidence >= 0.75):
-                # The last two user intents are probably recognized by the bot.
-                # Here it is possible to mention the confusion level.
-                logger.debug(f"The number of turns after restart is \
-                {conversation_turns}. The confusion level is \
-                {confusion_level}. The confidence levels are \
-                {last_intent_confidence} and {second_last_intent_confidence}.")
-
-                if confusion_level > 0:
-                    # The bot is confused.
-                    message_title = f"I don't know exactly what you mean by: \
-                                {last_user_message}. Before that you said: \
-                                {second_last_user_message}. I am not trained \
-                                enough to handle switching between topics \
-                                like this. I'm sorry."
-                else:
-                    # The bot is not confused. both last two
-                    # intents have high confidence level.
-                    # check turns? 
-                    # 
-                    logger.debug("")
-                    message_title = ""
-            elif (last_intent_confidence >= 0.75 and
-                    second_last_intent_confidence < 0.75):
-                # Bot is not so sure about the second last intent.
-                # Here it is not possible to mention the confusion level.
-                # Here we can mention user text length
-                last_intent_category = self.get_intent_length_category(tracker)
-                if last_intent_category == "long":
-                    user_msg = tracker.latest_message['text']
-                    user_msg_len = len(user_msg.split())
-                    if user_msg_len < 3:
-                        message_title = f"I don't know exactly what you mean by: \
-                                {last_user_message}. I can help you better \
-                                with more elaboration."
+            if last_intent_confidence >= 0.75:
+                # Bot is in breakdown with high CL
+                # Confusion, user text length, fatigue or
+                # multiple breakdowns can be relevant.
+                if second_last_intent_confidence >= 0.9:
+                    # Bot was not in breakdown is second last intent
+                    # Multiple breakdowns not relevant.
+                    # Confusion, user text length or fatigue can be relevant.
+                    if confusion_level > 0:
+                        # The bot is confused.
+                        message_title = f"I'm not compeletely sure what you mean by: \
+                            {last_user_message}. Before that you said: \
+                            {second_last_user_message}. I am not trained \
+                            enough to handle switching between topics \
+                            like this. I'm sorry."
                     else:
-                        message_title = f"Last intent category is long. User \
-                            text length is {user_msg_len}"
-                else:
-                    message_title = f"Last intent category is short. User text \
-                        length is {user_msg_len}"
+                        # Bot is not confused.
+                        # user text length or fatigue can be relevant.
+                        # First check user text lenght
+                        last_intent_category = self.get_intent_length_category(
+                            tracker)
+                        if last_intent_category == "long":
+                            logger.info("intent is long")
+                            user_msg = tracker.latest_message['text']
+                            user_msg_len = len(user_msg.split())
+                            if user_msg_len < 3:
+                                message_title = f"I don't know exactly what you mean by: \
+                                    {last_user_message}. I need more \
+                                    explanation to handle such a request."
+                            else:
+                                # Fatigue can be relevant
+                                if conversation_turns > 20:
+                                    message_title = f"I don't know exactly what you mean by: \
+                                    {last_user_message}. Eventhough we had a \
+                                    nice long conversation, I would like to \
+                                    have a coffee break."
+                                else:
+                                    message_title = f"I don't know exactly what you mean by: \
+                                    {last_user_message}. Excuse me; I can't \
+                                    see what caused this breakdown."
+                        elif last_intent_category == "short":
+                            logger.info("intent is long")
+                            user_msg = tracker.latest_message['text']
+                            user_msg_len = len(user_msg.split())
+                            if user_msg_len > 3:
+                                message_title = f"I don't know exactly what you mean by: \
+                                    {last_user_message}. I am trained to \
+                                    handle such a request with shorter \
+                                    sentences."
+                            else:
+                                # Fatigue can be relevant
+                                if conversation_turns > 20:
+                                    message_title = f"I don't know exactly what you mean by: \
+                                    {last_user_message}. Eventhough we had a \
+                                    nice long conversation, I would like to \
+                                    have a coffee break."
+                                else:
+                                    message_title = f"I don't know exactly what you mean by: \
+                                    {last_user_message}. Excuse me; I can't \
+                                    see what caused this breakdown."
+                        else:
+                            # Intent is neither short not long!
+                            # This shouldn't happen.
+                            logger.debug("I am stuck here")
+                            pass
+                elif 0.75 <= second_last_intent_confidence < 0.9:
+                    # Bot has had two breakdowns in a row with high CL
+                    # Multiple breakdowns, confusion, user text length or
+                    # fatigue can be relevant.
+                    if confusion_level > 0:
+                        # The bot is confused.
+                        message_title = f"I'm not compeletely sure what you mean by: \
+                            {last_user_message}. Before that you said: \
+                            {second_last_user_message}. I am not trained \
+                            enough to handle switching between topics \
+                            like this. I'm sorry."
+                    else:
+                        # Bot is not confused.
+                        # user text length , fatigue or multiple breakdown
+                        # can be relevant.
+                        # First check user text lenght
+                        last_intent_category = self.get_intent_length_category(
+                            tracker)
+                        if last_intent_category == "long":
+                            user_msg = tracker.latest_message['text']
+                            user_msg_len = len(user_msg.split())
+                            if user_msg_len < 3:
+                                message_title = f"I don't know exactly what you mean by: \
+                                    {last_user_message}. I need more \
+                                    explanation to handle such a request."
+                            else:
+                                # Fatigue can be relevant
+                                if conversation_turns > 20:
+                                    message_title = f"I don't know exactly what you mean by: \
+                                    {last_user_message}. Eventhough we had a \
+                                    nice long conversation, I would like to \
+                                    have a coffee break."
+                                else:
+                                    # multiple breakdown
+                                    message_title = f"I don't know exactly what you mean by: \
+                                    {last_user_message}. I'm sorry that I \
+                                    wasn't able to help you in last two \
+                                    turns. \n \
+                                    I can help you with topics related to \
+                                    banking such as: \n- Transfer money to \
+                                    known recipients. \n- Check the earning \
+                                    or spending history. \n- Pay a credit \
+                                    card bill! \n- Tell the account balance. \
+                                    \n- Answer FAQ."
+                        elif last_intent_category == "short":
+                            user_msg = tracker.latest_message['text']
+                            user_msg_len = len(user_msg.split())
+                            if user_msg_len > 3:
+                                message_title = f"I don't know exactly what you mean by: \
+                                    {last_user_message}. I am trained to \
+                                    handle such a request with shorter \
+                                    sentences."
+                            else:
+                                # Fatigue or mutiple breakdown can be relevant
+                                if conversation_turns > 20:
+                                    # Fatigue
+                                    message_title = f"I don't know exactly what you mean by: \
+                                    {last_user_message}. Eventhough we had a \
+                                    nice long conversation, I would like to \
+                                    have a coffee break."
+                                else:
+                                    # multiple breakdown
+                                    message_title = f"I don't know exactly what you mean by: \
+                                    {last_user_message}. I'm sorry that I \
+                                    wasn't able to help you in last two \
+                                    turns. \n \
+                                    I can help you with topics related to \
+                                    banking such as: \n- Transfer money to \
+                                    known recipients. \n- Check the earning \
+                                    or spending history. \n- Pay a credit \
+                                    card bill! \n- Tell the account balance. \
+                                    \n- Answer FAQ."
+                        else:
+                            # Intent is neither short not long!
+                            # This shouldn't happen.
+                            pass
             else:
-                message_title = "This part should be coded!"
+                # Bot is in breakdown with low CL
+                # Confusion and user text length not relevant
+                # Fatigue or multiple breakdowns can be relevant.
+                if second_last_intent_confidence >= 0.9:
+                    # fatigue can be relevant
+                    if conversation_turns > 20:
+                        # Fatigue
+                        message_title = f"I don't know what you mean by: \
+                        {last_user_message}. Eventhough we had a \
+                        nice long conversation, I would like to \
+                        have a coffee break."
+                    else:
+                        message_title = f"I don't know exactly what you mean by: \
+                        {last_user_message}. Excuse me; I can't \
+                        see what caused this breakdown. Maybe your request is \
+                        out of my scope."
+                else:
+                    # Fatigue or multiple breakdowns can be relevant.
+                    if conversation_turns > 20:
+                        # Fatigue
+                        message_title = f"I don't know what you mean by: \
+                        {last_user_message}. Eventhough we had a \
+                        nice long conversation, I would like to \
+                        have a coffee break."
+                    else:
+                        # multiple breakdown
+                        message_title = f"I don't know exactly what you mean by: \
+                            {last_user_message}. I'm sorry that I \
+                            wasn't able to help you in last two \
+                            turns. \n \
+                            I can help you with topics related to \
+                            banking such as: \n- Transfer money to \
+                            known recipients. \n- Check the earning \
+                            or spending history. \n- Pay a credit \
+                            card bill! \n- Tell the account balance. \
+                            \n- Answer FAQ."
         else:
-            message_title = "Second last intent confidence is None!"
+            # Very first user message caused breakdown.
+            # Say Hi to the user
+            message_title = "I'm afraid I didn't get what you just said. \
+                Maybe we can start with saying Hi!"
 
         dispatcher.utter_message(text=message_title)
 
@@ -166,6 +303,7 @@ class ActionSelfAssistedRepair(Action):
                 "session_start"
                 "human_handoff",
                 "trigger_rephrase",
+                "telljoke",
                 "configure_repair_strategy"
             ],
             [
@@ -173,7 +311,6 @@ class ActionSelfAssistedRepair(Action):
                 "affirm",
                 "deny",
                 "bye",
-                "telljoke",
                 "canthelp",
                 "react_negative",
                 "react_positive",
@@ -190,7 +327,8 @@ class ActionSelfAssistedRepair(Action):
         for list in intent_list:
             if last_intent_name in list:
                 intent_group_index = intent_list.index(list)
-                logger.debug(f"Intent {last_intent_name} is in {intent_group_index}.")
+                logger.debug(f"Intent {last_intent_name} is \
+                    in {intent_group_index}.")
             else:
                 intent_group_index = None
 
