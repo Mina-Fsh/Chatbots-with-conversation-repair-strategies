@@ -57,11 +57,9 @@ intents:
 - human_handoff
 - trigger_rephrase
 - configure_repair_strategy
-- feedback
 entities:
 - location
 - company
-- feedback_value
 - amount-of-money
 - payment_amount
 - credit_card
@@ -97,13 +95,6 @@ slots:
     type: unfeaturized
   end_time_formatted:
     type: unfeaturized
-  feedback_message:
-    type: unfeaturized
-  feedback_value:
-    type: categorical
-    values:
-    - positive
-    - negative
   grain:
     type: unfeaturized
   known_recipients:
@@ -115,7 +106,7 @@ slots:
     initial_value: ''
   repair_strategy_name:
     type: unfeaturized
-    initial_value: labelConfidencLevel
+    initial_value: self_assisted_repair
   requested_slot:
     type: unfeaturized
   search_type:
@@ -160,7 +151,7 @@ responses:
   - text: Thanks! 👌
   - text: Cool, thank you!
   utter_nohelp:
-  - text: For now that's all I can do, so feel free to try it out. If you have any
+  - text: For now, that's all I can do, so feel free to try it out. If you have any
       suggestions for what I should learn, let me know!
   utter_not_sure:
   - text: Hmm, not sure what you mean...
@@ -190,20 +181,21 @@ responses:
   - buttons:
     - payload: /restart
       title: Restart
-    text: Sorry but its hard for me to follow up, our chat is getting too long and
-      I'm tired. You could help me refresh my mind by restarting, or just continiue
-      the talk, I try my best to help you.
+    text: Sorry, but it is getting hard for me to follow up; our chat is getting too
+      long, and I'm tired. You could help me refresh my mind by restarting or just
+      continue the talk. I try my best to help you.
   utter_restart_with_button:
   - buttons:
     - payload: /restart
       title: Restart
-    text: Click the button below if you want to start over.
+    text: Sorry. I am not sure what you mean. Click the button below if you want to
+      start over.
   utter_restart:
   - text: Loading... And I've been restarted! 🤯
   - text: Congrats you've restarted me! 😉
   utter_canthelp:
-  - text: I'm sorry I couldn't help you. I'm still learning, hopefully next time you
-      talk to me, I can answer this request.
+  - text: I'm sorry I couldn't help you. I'm still learning. hopefully, next time
+      you talk to me, I can answer this request.
   utter_ask_continue:
   - text: Would you like to continue?
   utter_what_help:
@@ -219,21 +211,21 @@ responses:
       - I need to transfer money."
   utter_capabilities_repair:
   - text: "I'm sorry, but I couldn't understand you. \nI can help you with topics\
-      \ related to banking such as: \n- Transfer money to your known recipients. \n\
-      - Check your earning or spending history. \n- Pay a credit card bill! \n- Tell\
-      \ you your account balance. \n- Answer FAQ."
+      \ related to banking such as: \n- Transfer money to known recipients. \n- Check\
+      \ the earning or spending history. \n- Pay a credit card bill! \n- Tell the\
+      \ account balance. \n- Answer FAQ."
   utter_capabilities:
-  - text: "I like having small talk to you \U0001F609, having said that, I am here\
-      \ to help you with your banking requests such as: \n- Transfer money to your\
-      \ known recipients. \n- Check your earning or spending history. \n- Pay a credit\
-      \ card bill! \n- Tell you your account balance. \n- Answer FAQ."
+  - text: "I like having a small talk to you \U0001F609, having said that, I am here\
+      \ to help you with your banking requests such as: \n- Transfer money to known\
+      \ recipients. \n- Check the earning or spending history. \n- Pay a credit card\
+      \ bill! \n- Tell the account balance. \n- Answer FAQ."
   utter_default:
-  - text: Sorry, I didn't get that 🤷. Could you please rephrase?
-  - text: I didn't understand, could you rephrase that?
+  - text: Sorry, I didn't get that 🤷. Could you please, rephrase?
+  - text: I didn't understand. Could you rephrase that?
   - text: I'm sorry, but I didn't understand you. Could you please rephrase what you
       just said?
   - text: I'm afraid I didn't get what you just said. Could you rephrase that?
-  - text: I didn't quite get that, could you rephrase your message?
+  - text: I didn't quite get that. Could you rephrase your message?
   - text: Could you rephrase your message? I didn't get it, I'm sorry.
   utter_ask_rephrase:
   - text: Please rephrase your previous request.
@@ -243,12 +235,12 @@ responses:
   utter_ask_transfer_form_amount_of_money:
   - text: How much money do you want to transfer?
   utter_ask_transfer_form_PERSON:
-  - text: Who do you want to transfer money to?
+  - text: To whom do you want to transfer money?
   utter_transfer_complete:
   - text: Successfully transferred {currency}{amount_of_money} to {PERSON}.
   utter_transfer_charge:
   - text: You are entitled to six transfers within a statement cycle before being
-      charged. For subsequent transfers you will be charged {currency}10 per transaction.
+      charged. For subsequent transfers, we will charge you {currency}10 per transaction.
   utter_ask_cc_payment_form_payment_amount:
   - text: How much do you want to pay?
   utter_ask_cc_payment_form_credit_card:
@@ -256,7 +248,7 @@ responses:
   utter_ask_cc_payment_form_time:
   - text: For which date would you like to schedule the payment?
   utter_ask_transact_search_form_vendor_name:
-  - text: For which vendor do you want to see transactions?  e.g Starbucks, Rewe,
+  - text: For which vendor do you want to see transactions?  e.g. Starbucks, Rewe,
       Amazon!
   utter_ask_transact_search_form_time:
   - text: In which timeframe would you like to search for transactions?
@@ -308,9 +300,9 @@ responses:
       title: No, cancel the transaction
     text: Would you like to transfer {currency}{amount_of_money} to {PERSON}?
   utter_transfer_cancelled:
-  - text: Transfer cancelled.
+  - text: Transfer canceled.
   utter_cc_pay_cancelled:
-  - text: Credit card account payment cancelled.
+  - text: Credit card account payment canceled.
   utter_account_balance:
   - text: Your balance is {currency}{init_account_balance}.
   utter_changed_account_balance:
@@ -341,14 +333,9 @@ responses:
   utter_howbuild:
   - text: I was built with a lot of love and patience.
   - text: Well, when two chatbots love each other very much...
-  - text: They always ask how I was built, but never how I am...
-  - text: I was made by software engineers, but hard work is what built me.
-  - text: I'm building myself every day. I've been working out, did you notice?
   utter_howdoing:
   - text: I'm great! Thanks for asking.
-  - text: I'm good, thanks!
-  - text: A little bit too warm, otherwise fine.
-  - text: A little bit cold, otherwise fine.
+  - text: A little bit cold; otherwise fine.
   utter_howold:
   - text: Old enough to be a bot!
   - text: Age is just an issue of mind over matter. If you don’t mind, it doesn’t
@@ -360,14 +347,12 @@ responses:
   - text: Yep, I'm a bot!
   - text: Yes, I'm a bot.
   - text: Yep, you guessed it, I'm a bot!
-  - text: I am indeed a bot 🤖
+  - text: I am indeed a bot.
   utter_ishuman:
-  - text: I'm not a human, I'm a bot! 🤖
+  - text: I'm not a human, I'm a bot!
   utter_restaurant:
-  - text: I'm sorry, I can't recommend you a restaurant as I usually cook at home.
+  - text: I'm sorry, I can't recommend a restaurant as I usually cook at home.
   - text: I'm sorry, I'm not getting taste buds for another few updates.
-  - text: I'd need some more data. If you lick the monitor perhaps I can evaluate
-      your taste buds.
   utter_time:
   - text: It's the most wonderful time of the year!
   - text: Time is a human construct, you'll have to tell me.
@@ -376,32 +361,33 @@ responses:
   utter_languagesbot:
   - text: I am in the process of learning, but at the moment I can only speak English.
   - text: Binary code and the language of love. And English.
-  - text: I was written in Python, but for your convenience I'll translate to English.
+  - text: I was written in Python, but for your convenience, I'll translate it into
+      English.
   utter_weather:
   - text: It's getting pretty chilly!
   - text: Where I'm from, it's almost never-leaving-the-house weather.
   - text: Winter is coming ⚔️
   utter_whatismyname:
   - text: I'd tell you, but there's restricted access to that chunk of memory.
-  - text: Believe it or not, I actually am not spying on your personal information.
+  - text: Believe it or not, I am not spying on your personal information.
   - text: You're the second person now to ask me that. Rihanna was the first.
   utter_wherefrom:
   - text: I was born in Bremen, Germany. But I consider myself a citizen of the world.
   - text: I was taught not to give out my address on the internet.
   - text: My address starts with github.com!
   utter_whoami:
-  - text: Unfortunately I haven't been programmed with the amount of necessary philosophy
+  - text: Unfortunately, I haven't been programmed with the amount of necessary philosophy
       knowledge to answer that.
   utter_whoisit:
-  - text: I'm Paya, your financial assistant from PAY Bank!
-  - text: I'm PAY Bank financial assistant. My name is Paya!
+  - text: I'm PAYA, your financial assistant from PAY Bank!
+  - text: I'm PAY Bank's financial assistant. My name is PAYA!
   utter_handleinsult:
   - text: That's not very nice 😢
   - text: That wasn't very nice. Perhaps try an anger management class?!
   - text: I'll pretend I didn't process that mean comment.
   utter_nicetomeetyoutoo:
   - text: Likewise!
-  - text: Thank you. It is a pleasure to meet you as well!
+  - text: Thank you. It is a pleasure to meet you, as well!
   - text: It is nice to meet you too!
   - text: Pleased to meet you too!
   - text: Nice to meet you too! Happy to be of help.
@@ -418,31 +404,28 @@ responses:
       for the first year.
   utter_howtoapply:
   - text: 'You already have two accounts with us: a giro account and a credit card
-      account. You can make a request to open a savings account or to get another
-      creadit card online in out website.'
+      account. You can request to open a savings account or get another credit card
+      online via our website.'
   utter_application_requirements:
-  - text: In general a minimum age of 18 and a copy of your passport is required to
-      use the services in PAY bank. Since you already have an account in PAY Bank,
-      you don't need any furthur documents to request access to other services.
+  - text: In general, a minimum age of 18 and a copy of your passport are required
+      to use PAY bank services. Since you already have an account in PAY Bank, you
+      don't need any further documents to request access to other services.
   utter_required_age:
   - text: A minimum age of 18 is required to use the services in PAY bank.
   utter_cardlimit:
-  - text: You first credit card limit is 500€. Your limit increases during time based
+  - text: Your first credit card limit is 500€. Your limit increases during time based
       on your transaction history.
   utter_points_collect:
-  - text: Unfortunately we don't offer point collection at the moment.
+  - text: Unfortunately, we don't offer point collection at the moment.
   utter_annualcost:
   - text: You can use our services for free in the first year, after that there is
       an annual cost of 19.99€.
 actions:
 - action_configure_repair_strategy
 - action_repair
-- action_repair_options
-- action_repair_twoStageOptions
-- action_repair_count_breakdwon
-- action_repair_label_confidenc_level
-- action_repair_label_user_utterance_length
-- action_repair_label_fatigue_confusion
+- action_system_repair
+- action_self_assisted_repair
+- action_mix_repair
 - action_account_balance
 - action_session_start
 - action_credit_card_balance

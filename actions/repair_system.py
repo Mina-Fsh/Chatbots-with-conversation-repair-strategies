@@ -8,17 +8,17 @@ from rasa_sdk.events import (
     FollowupAction,
 )
 
-
 INTENT_DESCRIPTION_MAPPING_PATH = "actions/intent_description_mapping.csv"
 
 logger = logging.getLogger(__name__)
 
 
-class ActionRepairLabelConfidency(Action):
-    """Responses to the user text based on it's confidency."""
+class ActionSystemRepair(Action):
+    """This action gives options with highest ranked intents
+    + asks for rephrase + offer restart."""
 
     def name(self) -> Text:
-        return "action_repair_label_confidenc_level"
+        return "action_system_repair"
 
     def __init__(self) -> None:
         import pandas as pd
@@ -38,18 +38,23 @@ class ActionRepairLabelConfidency(Action):
 
         intent_ranking = tracker.latest_message.get("intent_ranking", [])
         if len(intent_ranking) > 1:
-            highest_ranked_intent_confidence = intent_ranking[0].get("confidence")
-            highest_ranked_intent_name = intent_ranking[0].get("name")
-            if highest_ranked_intent_confidence >= 0.75:
-                message_title = "😊 I'm Highly confident that this is what you mean:"
-            elif highest_ranked_intent_confidence < 0.75 and  highest_ranked_intent_confidence >= 0.6:
-                message_title = "🙂 I'm somehow familiar with this topic, I think you mean this:"
-            elif highest_ranked_intent_confidence < 0.6 and  highest_ranked_intent_confidence >= 0.4:
-                message_title = "😕 I have serious doubts about what you are saying... this is the only thing that comes to my mind:"
-            elif highest_ranked_intent_confidence < 0.4 and  highest_ranked_intent_confidence >= 0.1:
-                message_title = "😵 I'm really confused, but there is a small chance you mean this:"
+            diff_intent_confidence = intent_ranking[0].get(
+                "confidence"
+            ) - intent_ranking[1].get("confidence")
+            if diff_intent_confidence < 0.2:
+                intent_ranking = intent_ranking[:2]
             else:
-                message_title = "🤥 I have no idea what you mean, here is my unlucky guess:"
+                intent_ranking = intent_ranking[:1]
+
+        first_intent_names = [
+            intent.get("name", "")
+            for intent in intent_ranking
+        ]
+
+        message_title = (
+            "Sorry, I'm not sure I've understood "
+            "you correctly 🤔 Do you mean..."
+        )
 
         entities = tracker.latest_message.get("entities", [])
         entities = {e["entity"]: e["value"] for e in entities}
@@ -57,17 +62,21 @@ class ActionRepairLabelConfidency(Action):
         entities_json = json.dumps(entities)
 
         buttons = []
-
-        button_title = self.get_button_title(highest_ranked_intent_name, entities)
+        for intent in first_intent_names:
+            button_title = self.get_button_title(intent, entities)
+            buttons.append(
+                {
+                    "title": button_title,
+                    "payload": f"/{intent}{entities_json}",
+                }
+            )
 
         buttons.append(
-            {
-                "title": button_title,
-                "payload": f"/{highest_ranked_intent_name}{entities_json}",
-            }
+            {"title": "Something else!", "payload": "/trigger_rephrase"}
         )
 
         dispatcher.utter_message(text=message_title, buttons=buttons)
+
         return [FollowupAction("action_listen")]
 
     def get_button_title(

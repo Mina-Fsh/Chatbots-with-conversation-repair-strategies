@@ -5,11 +5,11 @@
 ## configure repair stategy
 * configure_repair_strategy
     - action_configure_repair_strategy
-* inform{"repair_strategy_name": "options"}
+* inform{"repair_strategy_name": "system_repair"}
     - utter_repair_strategy_saved
 
 ## configure repair stategy directly
-* inform{"repair_strategy_name": "labelConfidencLevel"}
+* inform{"repair_strategy_name": "self_assisted_repair"}
     - utter_repair_strategy_saved
 
 ## thanks
@@ -409,7 +409,7 @@
 * check_balance{"account_type":"credit","credit_card":"credit card"}
     - action_credit_card_balance
 
-## greet, transfer money, feedback
+## greet, transfer money
 * greet OR inform{"PERSON": "Stefan"}
     - action_greet_user
 * transfer_money
