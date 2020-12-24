@@ -1,0 +1,169 @@
+version: "2.0"
+stories:
+
+
+- story: deny chitchat
+  steps:
+  - intent: ask_restaurant
+  - action: utter_isbot
+  - intent: deny
+  - action: utter_nohelp
+
+- story: just transfer money, continue
+  steps:
+  - intent: greet
+  - action: action_greet_user
+  - intent: transfer_money
+  - action: transfer_form
+  - active_loop: transfer_form
+  - intent: points_collect
+  - action: utter_points_collect
+  - action: utter_ask_continue_transfer
+  - intent: affirm
+  - action: utter_great
+  - action: transfer_form
+  - active_loop: null
+
+- story: just transfer money, don't continue
+  steps:
+  - intent: greet
+  - action: action_greet_user
+  - intent: transfer_money
+  - action: transfer_form
+  - active_loop: transfer_form
+  - intent: points_collect
+  - action: utter_points_collect
+  - action: utter_ask_continue_transfer
+  - intent: deny
+  - action: utter_thumbsup
+  - action: action_deactivate_loop
+
+- story: just check balance + confirm
+  steps:
+  - intent: greet
+  - action: action_greet_user
+  - intent: ask_builder
+  - action: utter_builder
+  - intent: check_balance
+  - action: action_account_balance
+
+- story: transaction search, continue, + confirm
+  steps:
+  - intent: greet
+  - action: action_greet_user
+  - or:
+    - intent: search_transactions
+    - intent: check_earnings
+  - action: transact_search_form
+  - active_loop: transact_search_form
+  - intent: ask_isbot
+  - action: utter_isbot
+  - action: utter_ask_continue_transact_search
+  - intent: affirm
+  - action: utter_great
+  - action: transact_search_form
+  - active_loop: null
+
+- story: just transaction search, don't continue, + confirm
+  steps:
+  - intent: greet
+  - action: action_greet_user
+  - or:
+    - intent: search_transactions
+    - intent: check_earnings
+  - action: transact_search_form
+  - active_loop: transact_search_form
+  - intent: ask_isbot
+  - action: utter_isbot
+  - action: utter_ask_continue_transact_search
+  - intent: deny
+  - action: utter_thumbsup
+  - action: action_deactivate_loop
+  - active_loop: null
+
+- story: just transaction search
+  steps:
+  - intent: greet
+  - action: action_greet_user
+  - intent: ask_isbot
+  - action: utter_isbot
+  - or:
+    - intent: search_transactions
+    - intent: check_earnings
+  - action: transact_search_form
+  - active_loop: transact_search_form
+  - active_loop: null
+
+- story: just transaction search, continue
+  steps:
+  - intent: greet
+  - action: action_greet_user
+  - or:
+    - intent: search_transactions
+    - intent: check_earnings
+  - action: transact_search_form
+  - active_loop: transact_search_form
+  - intent: ask_howdoing
+  - action: utter_howdoing
+  - action: utter_ask_continue_transact_search
+  - intent: affirm
+  - action: utter_great
+  - action: transact_search_form
+  - active_loop: null
+
+- story: just newsletter, don't continue
+  steps:
+  - intent: greet
+  - action: action_greet_user
+  - or:
+    - intent: search_transactions
+    - intent: check_earnings
+  - action: transact_search_form
+  - active_loop: transact_search_form
+  - intent: ask_ishuman
+  - action: utter_ishuman
+  - action: utter_ask_continue_transact_search
+  - intent: deny
+  - action: utter_thumbsup
+  - action: action_deactivate_loop
+  - active_loop: null
+
+- story: just transfer money
+  steps:
+  - intent: greet
+  - action: action_greet_user
+  - intent: ask_isbot
+  - action: utter_isbot
+  - intent: transfer_money
+  - action: transfer_form
+  - active_loop: transfer_form
+  - active_loop: null
+
+- story: just transfer money, continue
+  steps:
+  - intent: greet
+  - action: action_greet_user
+  - intent: transfer_money
+  - action: transfer_form
+  - active_loop: transfer_form
+  - intent: ask_ishuman
+  - action: utter_ishuman
+  - action: utter_ask_continue_transfer
+  - intent: affirm
+  - action: utter_great
+  - action: transfer_form
+  - active_loop: null
+
+- story: just transfer money, don't continue
+  steps:
+  - intent: greet
+  - action: action_greet_user
+  - intent: transfer_money
+  - action: transfer_form
+  - active_loop: transfer_form
+  - intent: telljoke
+  - action: utter_telljoke
+  - action: utter_ask_continue_transfer
+  - intent: deny
+  - action: utter_thumbsup
+  - action: action_deactivate_loop

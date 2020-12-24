@@ -40,12 +40,14 @@ python -m spacy link en_core_web_md en
 
 Use `rasa train` to train a model.
 
-Then, to run, first set up your action server in one terminal window:
+Then, to run, first set up your action server in one terminal window, listening on port 5056:
 ```bash
-rasa run actions
+rasa run actions --port 5056
 ```
+ avoid a conflict when you also run the helpdesk bot as described below in the `handoff` section.
 
 In another window, run the duckling server (for entity extraction):
+
 ```bash
 docker run -p 8000:8000 rasa/duckling
 ```
@@ -107,9 +109,11 @@ It recognises the following vendors (for spending history):
 
 - `Starbucks`
 - `Amazon`
-- `Target`
+- `Rewe`
 
 You can change any of these by modifying `actions.py` and the corresponding NLU data.
+
+If configured, the bot can also hand off to another bot in response to the user asking for handoff. More [details on handoff](#handoff) below.
 
 ## Testing the bot
 

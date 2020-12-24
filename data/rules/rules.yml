@@ -1,0 +1,285 @@
+version: "2.0"
+
+rules:
+
+- rule: Rule to handle messages with low NLU confidence (automated conversion from 'FallbackPolicy')
+  steps:
+  - intent: nlu_fallback
+  - action: action_repair
+
+- rule: greet
+  steps:
+  - intent: greet
+  - action: action_greet_user
+
+- rule: greet or say your name
+  steps:
+  - or:
+    - intent: greet
+    - intent: inform
+      entities:
+      - PERSON: akela
+  - action: action_greet_user
+
+- rule: say goodbye
+  steps:
+  - intent: bye
+  - action: utter_bye
+
+- rule: thankyou
+  steps:
+  - intent: thank
+  - action: utter_noworries
+  - action: utter_anything_else
+
+- rule: restart
+  steps:
+  - intent: restart
+  - action: action_restart
+
+- rule: repeat
+  steps:
+  - intent: repeat
+  - action: action_repeat
+
+- rule: capability check
+  steps:
+  - intent: capabilities
+  - action: utter_capabilities
+
+- rule: trigger_rephrase
+  steps:
+  - intent: trigger_rephrase
+  - action: utter_ask_rephrase
+
+- rule: can't help
+  steps:
+  - intent: canthelp
+  - action: utter_canthelp
+
+- rule: anything else? - yes
+  steps:
+  - action: utter_anything_else
+  - intent: affirm
+  - action: utter_what_help
+
+- rule: anything else? - no
+  steps:
+  - action: utter_anything_else
+  - intent: deny
+  - action: utter_thumbsup
+
+- rule: positive reaction
+  steps:
+  - intent: react_positive
+  - action: utter_react_positive
+
+- rule: negative reaction
+  steps:
+  - intent: react_negative
+  - action: utter_react_negative
+
+- rule: chitchat ask builder
+  steps:
+  - intent: ask_builder
+  - action: utter_builder
+
+- rule: chitchat - ask_howbuilt
+  steps:
+  - intent: ask_howbuilt
+  - action: utter_howbuild
+
+- rule: chitchat - ask_howdoing
+  steps:
+  - intent: ask_howdoing
+  - action: utter_howdoing
+
+- rule: chitchat - ask_howold
+  steps:
+  - intent: ask_howold
+  - action: utter_howold
+
+- rule: chitchat - ask_isbot
+  steps:
+  - intent: ask_isbot
+  - action: utter_isbot
+
+- rule: chitchat - ask_ishuman
+  steps:
+  - intent: ask_ishuman
+  - action: utter_ishuman
+
+- rule: chitchat - ask_restaurant
+  steps:
+  - intent: ask_restaurant
+  - action: utter_restaurant
+
+- rule: chitchat - ask_time
+  steps:
+  - intent: ask_time
+  - action: utter_time
+
+- rule: chitchat - ask_languagesbot
+  steps:
+  - intent: ask_languagesbot
+  - action: utter_languagesbot
+
+- rule: chitchat - ask_weather
+  steps:
+  - intent: ask_weather
+  - action: utter_weather
+
+- rule: chitchat - ask_whatismyname
+  steps:
+  - intent: ask_whatismyname
+  - action: utter_whatismyname
+
+- rule: chitchat - ask_wherefrom
+  steps:
+  - intent: ask_wherefrom
+  - action: utter_wherefrom
+
+- rule: chitchat - ask_whoami
+  steps:
+  - intent: ask_whoami
+  - action: utter_whoami
+
+- rule: chitchat - ask_whoisit
+  steps:
+  - intent: ask_whoisit
+  - action: utter_whoisit
+
+- rule: chitchat - handleinsult
+  steps:
+  - intent: handleinsult
+  - action: utter_handleinsult
+
+- rule: chitchat - nicetomeetyou
+  steps:
+  - intent: nicetomeetyou
+  - action: utter_nicetomeetyoutoo
+
+- rule: chitchat - telljoke
+  steps:
+  - intent: telljoke
+  - action: utter_telljoke
+
+- rule: faq - whatisPAYbank
+  steps:
+  - intent: whatisPAYbank
+  - action: utter_whatisPAYbank
+
+- rule: faq - product_description
+  steps:
+  - intent: product_description
+  - action: utter_product_description
+
+- rule: faq - howtoapply
+  steps:
+  - intent: howtoapply
+  - action: utter_howtoapply
+
+- rule: faq - application_requirements
+  steps:
+  - intent: application_requirements
+  - action: utter_application_requirements
+
+- rule: faq - required_age
+  steps:
+  - intent: required_age
+  - action: utter_required_age
+
+- rule: faq - cardlimit
+  steps:
+  - intent: cardlimit
+  - action: utter_cardlimit
+
+- rule: faq - points_collect
+  steps:
+  - intent: points_collect
+  - action: utter_points_collect
+
+- rule: faq - annualcost
+  steps:
+  - intent: annualcost
+  - action: utter_annualcost
+  
+- rule: is there a transfer charge
+  steps:
+  - intent: ask_transfer_charge
+  - action: action_show_transfer_charge
+  
+- rule: Show list of known recipients
+  steps:
+  - intent: check_recipients
+  - action: action_show_recipients
+  
+- rule: Show balance (bank account or credit card, based on account_type)
+  steps:
+  - intent: check_balance
+  - action: action_show_balance
+        
+- rule: Activate cc_payment_form when no other form is active
+  condition:
+  # this condition allows stories to handle form switching
+  - active_loop: null
+  steps:
+  - intent: pay_cc
+  - action: cc_payment_form
+  - active_loop: cc_payment_form
+  
+- rule: Activate transfer_money_form when no other form is active
+  condition:
+  # this condition allows stories to handle form switching
+  - active_loop: null
+  steps:
+  - intent: transfer_money
+  - action: transfer_money_form
+  - active_loop: transfer_money_form
+  
+- rule: Activate transaction_search_form when no other form is active
+  condition:
+  # this condition allows stories to handle form switching
+  - active_loop: null
+  steps:
+  - or:
+    - intent: search_transactions
+    - intent: check_earnings
+  - action: transaction_search_form
+  - active_loop: transaction_search_form
+  
+- rule: Submit cc_payment_form while not switched from previous form
+  condition:
+  - active_loop: cc_payment_form
+  - slot_was_set:
+    - previous_form_name: null
+  steps:
+  - action: cc_payment_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_pay_cc
+  
+- rule: Submit transfer_money_form while not switched from previous form
+  condition:
+  - active_loop: transfer_money_form
+  - slot_was_set:
+    - previous_form_name: null
+  steps:
+  - action: transfer_money_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_transfer_money
+  
+- rule: Submit transaction_search_form while not switched from previous form
+  condition:
+  - active_loop: transaction_search_form
+  - slot_was_set:
+    - previous_form_name: null
+  steps:
+  - action: transaction_search_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_transaction_search
