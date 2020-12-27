@@ -68,11 +68,10 @@ entities:
 - number
 - account_type
 - location
-- company
 - repair_strategy_name
 - language
 slots:
-    AA_CONTINUE_FORM:
+  AA_CONTINUE_FORM:
     type: any
     influence_conversation: false
   PERSON:
@@ -158,9 +157,6 @@ slots:
   zz_confirm_form:
     type: any
     influence_conversation: false
-  company:
-    type: any
-    influence_conversation: false
   repair_strategy_name:
     type: any
     influence_conversation: false
@@ -235,8 +231,6 @@ responses:
   utter_canthelp:
   - text: I'm sorry I couldn't help you. I'm still learning. hopefully, next time
       you talk to me, I can answer this request.
-  utter_ask_continue:
-  - text: Would you like to continue?
   utter_what_help:
   - text: Ok, what can I help you with?
   utter_ask_whatelse:

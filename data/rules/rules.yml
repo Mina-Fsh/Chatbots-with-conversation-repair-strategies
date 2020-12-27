@@ -79,6 +79,11 @@ rules:
   - intent: react_negative
   - action: utter_react_negative
 
+- rule: hand off request
+  steps:
+  - intent: human_handoff
+  - action: utter_phonenumber
+
 - rule: chitchat ask builder
   steps:
   - intent: ask_builder
