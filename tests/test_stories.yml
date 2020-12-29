@@ -7,7 +7,7 @@ stories:
       hi
     intent: greet
   - action: utter_greet
-  - action: utter_help
+  - action: utter_capabilities
   - user: |
       bye
     intent: bye
@@ -26,13 +26,6 @@ stories:
       how do I use this
     intent: capabilities
   - action: utter_capabilities
-
-- story: out of scope
-  steps:
-  - user: |
-      I want to order a pizza
-    intent: out_of_scope
-  - action: utter_out_of_scope
   
 - story: is there a transfer charge
   steps:
@@ -86,7 +79,7 @@ stories:
       hello
     intent: greet
   - action: utter_greet
-  - action: utter_help
+  - action: utter_capabilities
   - user: |
       Thanks!
     intent: thank
@@ -103,11 +96,11 @@ stories:
       hello
     intent: greet
   - action: utter_greet
-  - action: utter_help
+  - action: utter_capabilities
   - user: |
       That sounds good
     intent: affirm
-  - action: utter_ok
+  - action: utter_thumbsup
 
 - story: pay credit card happy path
   steps:
@@ -169,7 +162,7 @@ stories:
       hi
     intent: greet
   - action: utter_greet
-  - action: utter_help
+  - action: utter_capabilities
   - user: |
       I want to search my spending history'
     intent: search_transactions
@@ -225,7 +218,7 @@ stories:
   - user: |
       Ok
     intent: affirm
-  - action: utter_ok
+  - action: utter_thumbsup
   - user: |
       i want to transfer money
     intent: transfer_money
@@ -243,7 +236,7 @@ stories:
   - user: |
       Ok
     intent: affirm
-  - action: utter_ok
+  - action: utter_thumbsup
   - user: |
       Who can I send money to?
     intent: check_recipients
@@ -251,7 +244,7 @@ stories:
   - user: |
       Ok
     intent: affirm
-  - action: utter_ok
+  - action: utter_thumbsup
   - user: |
       is there a transfer charge
     intent: ask_transfer_charge
@@ -259,7 +252,7 @@ stories:
   - user: |
       Ok
     intent: affirm
-  - action: utter_ok
+  - action: utter_thumbsup
   - user: |
       i want to transfer money
     intent: transfer_money
@@ -277,7 +270,7 @@ stories:
   - user: |
       Ok
     intent: affirm
-  - action: utter_ok
+  - action: utter_thumbsup
   - user: |
       i want to pay off my [emblm]{"entity": "credit_card", "value": "emblem"}
     intent: pay_cc

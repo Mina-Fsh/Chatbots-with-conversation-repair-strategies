@@ -1,0 +1,88 @@
+version: "2.0"
+
+stories:
+
+- story: cc payment + cant help + continue
+  steps:
+  - intent: pay_cc
+  - action: cc_payment_form
+  - active_loop: cc_payment_form
+  - intent: canthelp
+  - action: utter_canthelp
+  - action: utter_ask_cc_payment_form_AA_CONTINUE_FORM
+  - intent: affirm
+  - action: cc_payment_form
+  - active_loop: cc_payment_form
+
+- story: cc payment + canthelp + dont continue
+  steps:
+  - intent: pay_cc
+  - action: cc_payment_form
+  - active_loop: cc_payment_form
+  - intent: canthelp
+  - action: utter_canthelp
+  - action: utter_ask_cc_payment_form_AA_CONTINUE_FORM
+  - intent: deny
+  - action: utter_thumbsup
+  - action: utter_ask_whatelse
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+
+- story: transfer money + cant help + continue
+  steps:
+  - intent: transfer_money
+  - action: transfer_money_form
+  - active_loop: transfer_money_form
+  - intent: canthelp
+  - action: utter_canthelp
+  - action: utter_ask_transfer_money_form_AA_CONTINUE_FORM
+  - intent: affirm
+  - action: transfer_money_form
+  - active_loop: transfer_money_form
+
+- story: transfer money + cant help + dont continue
+  steps:
+  - intent: transfer_money
+  - action: transfer_money_form
+  - active_loop: transfer_money_form
+  - intent: canthelp
+  - action: utter_canthelp
+  - action: utter_ask_transfer_money_form_AA_CONTINUE_FORM
+  - intent: deny
+  - action: utter_thumbsup
+  - action: utter_ask_whatelse
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+
+- story: search transactions + cant help + continue
+  steps:
+  - or:
+    - intent: search_transactions
+    - intent: check_earnings
+  - action: transaction_search_form
+  - active_loop: transaction_search_form
+  - intent: canthelp
+  - action: utter_canthelp
+  - action: utter_ask_transaction_search_form_AA_CONTINUE_FORM
+  - intent: affirm
+  - action: transaction_search_form
+  - active_loop: transaction_search_form
+
+- story: search transactions + cant help + dont continue
+  steps:
+  - or:
+    - intent: search_transactions
+    - intent: check_earnings
+  - action: transaction_search_form
+  - active_loop: transaction_search_form
+  - intent: canthelp
+  - action: utter_canthelp
+  - action: utter_ask_transaction_search_form_AA_CONTINUE_FORM
+  - intent: deny
+  - action: utter_thumbsup
+  - action: utter_ask_whatelse
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
