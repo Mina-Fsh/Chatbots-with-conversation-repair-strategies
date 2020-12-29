@@ -8,13 +8,13 @@ stories:
   - action: action_configure_repair_strategy
   - intent: inform
     entities:
-    - repair_strategy_name: options
+    - repair_strategy_name: system_repair
   - action: utter_repair_strategy_saved
 
 - story: configure repair stategy directly
   steps:
-  - intent: inform
+  - intent: configure_repair_strategy
     entities:
-    - repair_strategy_name: labelConfidencLevel
+    - repair_strategy_name: self_assisted_repair
   - action: utter_repair_strategy_saved
 

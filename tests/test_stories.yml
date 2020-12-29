@@ -10,22 +10,22 @@ stories:
   - action: utter_help
   - user: |
       bye
-    intent: goodbye
+    intent: bye
   - action: utter_goodbye
 
 - story: say goodbye
   steps:
   - user: |
       bye
-    intent: goodbye
+    intent: bye
   - action: utter_goodbye
 
 - story: help
   steps:
   - user: |
       how do I use this
-    intent: help
-  - action: utter_help
+    intent: capabilities
+  - action: utter_capabilities
 
 - story: out of scope
   steps:
@@ -80,8 +80,8 @@ stories:
   steps:
   - user: |
       help
-    intent: help
-  - action: utter_help
+    intent: capabilities
+  - action: utter_capabilities
   - user: |
       hello
     intent: greet
@@ -89,15 +89,16 @@ stories:
   - action: utter_help
   - user: |
       Thanks!
-    intent: thankyou
+    intent: thank
   - action: utter_noworries
+  - action: utter_anything_else
 
 - story: from Rasa X 56efe3eaf7c0456db86a6669421f885c (if intent were right)
   steps:
   - user: |
       help
-    intent: help
-  - action: utter_help
+    intent: capabilities
+  - action: utter_capabilities
   - user: |
       hello
     intent: greet
@@ -178,8 +179,9 @@ stories:
   - action: action_transaction_search
   - user: |
       Thanks!
-    intent: thankyou
+    intent: thank
   - action: utter_noworries
+  - action: utter_anything_else
 
 - story: Show bank account balance + transfer money
   steps:
@@ -203,8 +205,9 @@ stories:
   - action: action_show_balance
   - user: |
       Thanks!
-    intent: thankyou
+    intent: thank
   - action: utter_noworries
+  - action: utter_anything_else
   - user: |
       i want to transfer money
     intent: transfer_money
