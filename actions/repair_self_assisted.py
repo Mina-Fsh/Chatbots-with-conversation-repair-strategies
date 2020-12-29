@@ -7,8 +7,6 @@ from rasa_sdk.events import (
     FollowupAction,
 )
 
-INTENT_DESCRIPTION_MAPPING_PATH = "actions/intent_description_mapping.csv"
-
 logger = logging.getLogger(__name__)
 
 
@@ -31,6 +29,9 @@ class ActionSelfAssistedRepair(Action):
 
         last_user_message = self.get_user_message_info(tracker)[
             "last_user_message"]
+        last_intent_name = self.get_user_message_info(tracker)[
+            "last_intent_name"]
+        logger.info(f"last intent name is: {last_intent_name}")
         last_intent_confidence = self.get_user_message_info(tracker)[
             "last_intent_confidence"]
         second_last_user_message = self.get_user_message_info(tracker)[
@@ -60,52 +61,33 @@ class ActionSelfAssistedRepair(Action):
                         # Bot is not confused.
                         # user text length or fatigue can be relevant.
                         # First check user text lenght
-                        last_intent_category = self.get_intent_length_category(
-                            tracker)
-                        if last_intent_category == "long":
-                            logger.info("intent is long")
-                            user_msg = tracker.latest_message['text']
-                            user_msg_len = len(user_msg.split())
-                            if user_msg_len < 3:
-                                message_title = f"I don't know exactly what you mean by: \
-                                    {last_user_message}. I need more \
-                                    explanation to handle such a request."
-                            else:
-                                # Fatigue can be relevant
-                                if conversation_turns > 20:
-                                    message_title = f"I don't know exactly what you mean by: \
-                                    {last_user_message}. Eventhough we had a \
-                                    nice long conversation, I would like to \
-                                    have a coffee break."
-                                else:
-                                    message_title = f"I don't know exactly what you mean by: \
-                                    {last_user_message}. Excuse me; I can't \
-                                    see what caused this breakdown."
-                        elif last_intent_category == "short":
-                            logger.info("intent is long")
-                            user_msg = tracker.latest_message['text']
-                            user_msg_len = len(user_msg.split())
-                            if user_msg_len > 3:
-                                message_title = f"I don't know exactly what you mean by: \
-                                    {last_user_message}. I am trained to \
-                                    handle such a request with shorter \
-                                    sentences."
-                            else:
-                                # Fatigue can be relevant
-                                if conversation_turns > 20:
-                                    message_title = f"I don't know exactly what you mean by: \
-                                    {last_user_message}. Eventhough we had a \
-                                    nice long conversation, I would like to \
-                                    have a coffee break."
-                                else:
-                                    message_title = f"I don't know exactly what you mean by: \
-                                    {last_user_message}. Excuse me; I can't \
-                                    see what caused this breakdown."
+                        last_intent_nlu_mean = self.get_intent_mean_sd(
+                            tracker)["mean"]
+                        last_intent_nlu_std = self.get_intent_mean_sd(
+                            tracker)["std"]
+                        user_msg = tracker.latest_message['text']
+                        user_msg_len = len(user_msg.split())
+
+                        if user_msg_len <= (last_intent_nlu_mean - 2 * (last_intent_nlu_std)):
+                            message_title = f"I don't know exactly what you mean by: \
+                                {last_user_message}. I am trained on longer examples \
+                                for similar requests."
+                        elif user_msg_len >= (last_intent_nlu_mean + 2 * (last_intent_nlu_std)):
+                            message_title = f"I don't know exactly what you mean by: \
+                                {last_user_message}. I am trained on shorter examples \
+                                for similar requests."
+                        elif conversation_turns > 20:
+                            # user text length is ok
+                            # check fatigue
+                            # Fatigue can be relevant
+                            message_title = f"I don't know exactly what you mean by: \
+                                {last_user_message}. Eventhough we had a \
+                                nice long conversation, I would like to \
+                                have a coffee break."
                         else:
-                            # Intent is neither short not long!
-                            # This shouldn't happen.
-                            logger.debug("I am stuck here")
-                            pass
+                            message_title = f"I don't know exactly what you mean by: \
+                                {last_user_message}. Excuse me; I can't \
+                                see what caused this breakdown."
                 elif 0.75 <= second_last_intent_confidence < 0.9:
                     # Bot has had two breakdowns in a row with high CL
                     # Multiple breakdowns, confusion, user text length or
@@ -122,66 +104,41 @@ class ActionSelfAssistedRepair(Action):
                         # user text length , fatigue or multiple breakdown
                         # can be relevant.
                         # First check user text lenght
-                        last_intent_category = self.get_intent_length_category(
-                            tracker)
-                        if last_intent_category == "long":
-                            user_msg = tracker.latest_message['text']
-                            user_msg_len = len(user_msg.split())
-                            if user_msg_len < 3:
-                                message_title = f"I don't know exactly what you mean by: \
-                                    {last_user_message}. I need more \
-                                    explanation to handle such a request."
-                            else:
-                                # Fatigue can be relevant
-                                if conversation_turns > 20:
-                                    message_title = f"I don't know exactly what you mean by: \
-                                    {last_user_message}. Eventhough we had a \
-                                    nice long conversation, I would like to \
-                                    have a coffee break."
-                                else:
-                                    # multiple breakdown
-                                    message_title = f"I don't know exactly what you mean by: \
-                                    {last_user_message}. I'm sorry that I \
-                                    wasn't able to help you in last two \
-                                    turns. \n \
-                                    I can help you with topics related to \
-                                    banking such as: \n- Transfer money to \
-                                    known recipients. \n- Check the earning \
-                                    or spending history. \n- Pay a credit \
-                                    card bill! \n- Tell the account balance. \
-                                    \n- Answer FAQ."
-                        elif last_intent_category == "short":
-                            user_msg = tracker.latest_message['text']
-                            user_msg_len = len(user_msg.split())
-                            if user_msg_len > 3:
-                                message_title = f"I don't know exactly what you mean by: \
-                                    {last_user_message}. I am trained to \
-                                    handle such a request with shorter \
-                                    sentences."
-                            else:
-                                # Fatigue or mutiple breakdown can be relevant
-                                if conversation_turns > 20:
-                                    # Fatigue
-                                    message_title = f"I don't know exactly what you mean by: \
-                                    {last_user_message}. Eventhough we had a \
-                                    nice long conversation, I would like to \
-                                    have a coffee break."
-                                else:
-                                    # multiple breakdown
-                                    message_title = f"I don't know exactly what you mean by: \
-                                    {last_user_message}. I'm sorry that I \
-                                    wasn't able to help you in last two \
-                                    turns. \n \
-                                    I can help you with topics related to \
-                                    banking such as: \n- Transfer money to \
-                                    known recipients. \n- Check the earning \
-                                    or spending history. \n- Pay a credit \
-                                    card bill! \n- Tell the account balance. \
-                                    \n- Answer FAQ."
+                        last_intent_nlu_mean = self.get_intent_mean_sd(
+                            tracker)["mean"]
+                        last_intent_nlu_std = self.get_intent_mean_sd(
+                            tracker)["std"]
+                        user_msg = tracker.latest_message['text']
+                        user_msg_len = len(user_msg.split())
+
+                        if user_msg_len <= (last_intent_nlu_mean - 2 * (last_intent_nlu_std)):
+                            message_title = f"I don't know exactly what you mean by: \
+                                {last_user_message}. I am trained on longer examples \
+                                for similar requests."
+                        elif user_msg_len >= (last_intent_nlu_mean + 2 * (last_intent_nlu_std)):
+                            message_title = f"I don't know exactly what you mean by: \
+                                {last_user_message}. I am trained on shorter examples \
+                                for similar requests."
+                        elif conversation_turns > 20:
+                            # user text length is ok
+                            # check fatigue
+                            # Fatigue can be relevant
+                            message_title = f"I don't know exactly what you mean by: \
+                                {last_user_message}. Eventhough we had a \
+                                nice long conversation, I would like to \
+                                have a coffee break."
                         else:
-                            # Intent is neither short not long!
-                            # This shouldn't happen.
-                            pass
+                            # multiple breakdown
+                            message_title = f"I don't know exactly what you mean by: \
+                                {last_user_message}. I'm sorry that I \
+                                wasn't able to help you in last two \
+                                turns. \n \
+                                I can help you with topics related to \
+                                banking such as: \n- Transfer money to \
+                                known recipients. \n- Check the earning \
+                                or spending history. \n- Pay a credit \
+                                card bill! \n- Tell the account balance. \
+                                \n- Answer FAQ."
             else:
                 # Bot is in breakdown with low CL
                 # Confusion and user text length not relevant
@@ -254,93 +211,111 @@ class ActionSelfAssistedRepair(Action):
 
         return user_msg_len
 
-    def get_intent_length_category(
+    def get_intent_mean_sd(
         self,
         tracker: Tracker
-    ) -> Text:
+    ) -> Dict[Text, float]:
 
-        '''This functions gets returns short or long, as a category
-        for intents.'''
+        '''This functions gets the mean value and the
+        standard deviation of the training data example lengths
+        for an intent'''
 
-        intent_list = [
-            [
-                "ask_builder",
-                "ask_howbuilt",
-                "ask_howdoing",
-                "ask_howold",
-                "ask_isbot",
-                "ask_ishuman",
-                "ask_languagesbot",
-                "ask_restaurant",
-                "ask_time",
-                "ask_weather",
-                "ask_whatismyname",
-                "ask_wherefrom",
-                "ask_whoami",
-                "ask_whoisit",
-                "handleinsult",
-                "nicetomeetyou",
-                "whatisPAYbank",
-                "product_description",
-                "howtoapply",
-                "application_requirements",
-                "required_age",
-                "cardlimit",
-                "points_collect",
-                "annualcost",
-                "transfer_money",
-                "pay_cc",
-                "ask_transfer_charge",
-                "search_transactions",
-                "check_balance",
-                "check_earnings",
-                "check_recipients",
-                "capabilities",
-                "session_start",
-                "human_handoff",
-                "trigger_rephrase",
-                "telljoke",
-                "configure_repair_strategy"
-            ],
-            [
-                "greet",
-                "affirm",
-                "deny",
-                "bye",
-                "canthelp",
-                "react_negative",
-                "react_positive",
-                "thank",
-                "inform",
-                "restart",
-                "repeat"
-            ]
-        ]
+        import spacy
+        import yaml
+        import string
+        import numpy as np # for statistics
+        import re # for advanced string operations
 
         last_intent_name = self.get_user_message_info(tracker)[
             "last_intent_name"]
 
-        for list in intent_list:
-            if last_intent_name in list:
-                intent_group_index = intent_list.index(list)
-                logger.debug(f"Intent {last_intent_name} is\
-                    in group index {intent_group_index}.")
-                if intent_group_index == 0:
-                    intent_type = "long"
-                    logger.debug(f"Intent {last_intent_name} is in\
-                        group category {intent_type}.")
-                elif intent_group_index == 1:
-                    intent_type = "short"
-                    logger.debug(f"Intent {last_intent_name} is in\
-                        group {intent_type}.")
-                else:
-                    intent_group_index = None
-                    intent_type = None
-                    logger.debug("Error in short long intent categorization.")
-            else:
-                logger.debug("Intent is not in the list of intents!")
+        with open('data/nlu/nlu.yml') as file:
+            # The FullLoader parameter handles the conversion from YAML
+            # scalar values to Python the dictionary format
+            nlu_dic = yaml.load(file, Loader=yaml.FullLoader)
+            nlu_list = nlu_dic["nlu"]
+            res = next((sub for sub in nlu_list if sub['intent'] == last_intent_name), None)
+            intent_nlu_examples = res["examples"]
+            logger.info(f"{res}")
+            logger.info(f"Intent examples: {intent_nlu_examples}")
 
-        return intent_type
+        nlp = spacy.load("en_core_web_sm")
+        doc = nlp(intent_nlu_examples)
+
+        # for chunk in doc.noun_chunks:
+        # logger.info(chunk.text, chunk.root.text, chunk.root.dep_,
+        #       chunk.root.head.text)
+
+        # clean string from annotations
+        # https://stackabuse.com/using-regex-for-text-manipulation-in-python/
+        # https://regexr.com/ 
+
+        annotation_pattern = "\(.*\)|\{.*\}"
+
+        cleaned_string = re.sub(annotation_pattern, "", intent_nlu_examples)
+
+        logger.info(f"NLU example string without annotations: {cleaned_string}")
+
+        # split string
+        nlu_example_list = cleaned_string.split("- ")
+
+        logger.info(f"NLU example list: {nlu_example_list}")
+
+        # clean string
+
+        # remove examples with empty strings from the list.
+        clean_nlu_example_list = [x for x in nlu_example_list if x]
+
+        # remove line breaks for each example string.
+        clean_nlu_example_list = [x.replace('\n', ' ').replace('\r', '') for x in clean_nlu_example_list]
+
+        logger.info(f"Clean NLU example list: {clean_nlu_example_list}")
+
+        list = []
+
+        # removes all punctuations in the example string.
+        # https://stackoverflow.com/questions/265960/best-way-to-strip-punctuation-from-a-string
+        for example in clean_nlu_example_list:
+            result = example.translate(str.maketrans('', '', string.punctuation))
+            list.append(result)
+
+        clean_nlu_example_list = list
+
+        logger.info(f"No punctuation NLU example list: {clean_nlu_example_list}")
+
+        # remove stop words
+        # https://stackabuse.com/removing-stop-words-from-strings-in-python/#usingthespacylibrary 
+
+        all_stopwords = nlp.Defaults.stop_words
+
+        example_lengths = []
+
+        for example in clean_nlu_example_list:
+
+            text_tokens = nlp(example)
+
+            tokens_without_sw = [word for word in text_tokens if not word in all_stopwords]
+
+            logger.info(f"String without stopwords: {tokens_without_sw}")
+
+            # count length of remaining example and store in list.
+
+            length = len(tokens_without_sw)
+            example_lengths.append(length)
+
+            logger.info(f"example length is: {example_lengths}")
+
+        # calculate the mean value and the standard deviation of the list items
+        # https://numpy.org/doc/stable/reference/generated/numpy.std.html#:~:text=The%20standard%20deviation%20is%20the,N%20%3D%20len(x)%20.
+
+        mean = np.mean(example_lengths)
+
+        std = np.std(example_lengths)
+
+        logger.info(f"Mean: {mean}")
+        logger.info(f"Standard deviation: {std}")
+
+        return {"mean": mean, "std": std}
 
     def get_user_message_info(
             self,
@@ -389,7 +364,7 @@ class ActionSelfAssistedRepair(Action):
             "second_last_intent_name": second_last_intent_name,
             "second_last_user_message": second_last_user_message,
             "second_last_intent_confidence": second_last_intent_confidence
-            }
+                }
 
     def get_confusion_level(
         self,
