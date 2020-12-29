@@ -291,6 +291,8 @@ nlu:
     - 900 euros
     - 90k
     - 99
+    - 33
+    - 333333
     - tomorrow
     - next week
     - yesterday
@@ -299,6 +301,13 @@ nlu:
     - the past month
     - the past two days
     - the last two weeks
+    - for sunday
+    - for friday
+    - for tomorrow
+    - for saturday
+    - today
+    - last year
+    - toay
     - at [amazon](vendor_name)
     - [starbucks](vendor_name)
     - at [penny](vendor_name)
@@ -307,9 +316,9 @@ nlu:
     - [Amazon](vendor_name)
     - [Starbucks](vendor_name)
     - [netto](vendor_name)
-    - I want to pay the [current balance](payment_amount)
     - [current balance](payment_amount)
     - [minimum balance](payment_amount)
+    - I want to pay the [current balance](payment_amount)
     - I want to pay the [minimum balance](payment_amount)
     - the [current balance](payment_amount)
     - the [minimum balance](payment_amount)
@@ -329,27 +338,6 @@ nlu:
     - my [gold](credit_card) card
     - towards my [silver](credit_card) card
     - towards my [gold](credit_card) card
-    - for sunday
-    - for friday
-    - for tomorrow
-    - for saturday
-    - I want to pay the [minimum balance](payment_amount) on my [silver](credit_card) [credit card](account_type) today
-    - today
-    - I am [Christina Sullivan](PERSON)
-    - I am [Hattie Rice](PERSON)
-    - I am [Robert Starks](PERSON)
-    - I am [Aniket](PERSON)
-    - My name is [Ashleigh Mees](PERSON)
-    - My name is [chelsea Parker](PERSON)
-    - My name is [jessie maglione](PERSON)
-    - My name is [Kenneth Sherman](PERSON)
-    - My name is [Lee George](PERSON)
-    - My name is [Louise Caudill](PERSON)
-    - My name is [Richard smith](PERSON)
-    - My name is [Shane Goodyear](PERSON)
-    - My name is [Sondra Boyd](PERSON)
-    - My name si [tom Harbin](PERSON)
-    - My name is [manuel](PERSON)
     - [Elise](PERSON)
     - [Jamie Moore](PERSON)
     - [Jane Baines](PERSON)
@@ -360,27 +348,9 @@ nlu:
     - [Mr. Sweney](PERSON)
     - [Terri Cline](PERSON)
     - [William Zelkind](PERSON)
-    - [rephrase](repair_strategy_name)
-    - [options](repair_strategy_name)
-    - [defer](repair_strategy_name)
-    - [countBreakdown](repair_strategy_name)
-    - [labelConfidencLevel](repair_strategy_name)
-    - [labelUserUtteranceLenght](repair_strategy_name)
-    - [LabelFatigueConfusion](repair_strategy_name)
-    - [random](repair_strategy_name)
-    - [twoStageOptions](repair_strategy_name)
-    - switch to [random](repair_strategy_name)
-    - set fallback policy to [defer](repair_strategy_name)
-    - in case of a fallback use [options](repair_strategy_name)
-    - if you dont understand what I say use [rephrase](repair_strategy_name) policy
-    - change the fallback to [countBreakdown](repair_strategy_name)
-    - change fallback to [labelConfidencLevel](repair_strategy_name)
-    - set the repair strategy to [labelUserUtteranceLenght](repair_strategy_name)
-    - change the fallback to [LabelFatigueConfusion](repair_strategy_name)
-    - last year
-    - toay
-    - 33
-    - 333333
+    - [self_assisted_repair](repair_strategy_name)
+    - [system_repair](repair_strategy_name)
+    - [mix_repair](repair_strategy_name)
 - intent: pay_cc
   examples: |
     - I would like to pay the [minimum balance](amount-of-money) on my [gold](credit_card) [card](account_type)
@@ -588,6 +558,14 @@ nlu:
     - change the repair strategy
     - change the fallback policy
     - i want to change the fallback policy
+    - switch to [self_assisted_repair](repair_strategy_name)
+    - set fallback policy to [system_repair](repair_strategy_name)
+    - in case of a fallback use [mix_repair](repair_strategy_name)
+    - if you dont understand what I say use [mix_repair](repair_strategy_name) policy
+    - change the fallback to [self_assisted_repair](repair_strategy_name)
+    - change fallback to [mix_repair](repair_strategy_name)
+    - set the repair strategy to [mix_repair](repair_strategy_name)
+    - change the fallback to [system_repair](repair_strategy_name)
 - intent: affirm
   examples: |
     - Accept
@@ -1102,6 +1080,21 @@ nlu:
     - helleo
     - Hello I'm [Mina](PERSON)
     - hey here is [Mo](PERSON)
+    - I am [Christina Sullivan](PERSON)
+    - I am [Hattie Rice](PERSON)
+    - I am [Robert Starks](PERSON)
+    - I am [Aniket](PERSON)
+    - My name is [Ashleigh Mees](PERSON)
+    - My name is [chelsea Parker](PERSON)
+    - My name is [jessie maglione](PERSON)
+    - My name is [Kenneth Sherman](PERSON)
+    - My name is [Lee George](PERSON)
+    - My name is [Louise Caudill](PERSON)
+    - My name is [Richard smith](PERSON)
+    - My name is [Shane Goodyear](PERSON)
+    - My name is [Sondra Boyd](PERSON)
+    - My name si [tom Harbin](PERSON)
+    - My name is [manuel](PERSON)
 - intent: react_positive
   examples: |
     - Cool
