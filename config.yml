@@ -11,8 +11,6 @@ pipeline:
     max_ngram: 4
   - name: DIETClassifier
     epochs: 100
-  - name: FallbackClassifier
-    threshold: 0.7
   - name: DucklingEntityExtractor
     url: http://localhost:8000
     dimensions:

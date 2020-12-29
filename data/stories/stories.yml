@@ -26,36 +26,24 @@ stories:
 
 - story: say ok when user affirms after action_show_balance
   steps:
-  - intent: greet
-  - action: action_greet_user
-  - action: utter_capabilities
   - action: action_show_balance
   - intent: affirm
   - action: utter_thumbsup
 
 - story: say ok when user affirms after action_show_recipients
   steps:
-  - intent: greet
-  - action: action_greet_user
-  - action: utter_capabilities
   - action: action_show_recipients
   - intent: affirm
   - action: utter_thumbsup
   
 - story: say ok when user affirms after action_show_transfer_charge
   steps:
-  - intent: greet
-  - action: action_greet_user
-  - action: utter_capabilities
   - action: action_show_transfer_charge
   - intent: affirm
   - action: utter_thumbsup
 
 - story: deny chitchat
   steps:
-  - intent: greet
-  - action: action_greet_user
-  - action: utter_capabilities
   - intent: ask_restaurant
   - action: utter_restaurant
   - intent: deny
@@ -63,9 +51,6 @@ stories:
 
 - story: just check balance + confirm
   steps:
-  - intent: greet
-  - action: action_greet_user
-  - action: utter_capabilities
   - intent: ask_builder
   - action: utter_builder
   - intent: check_balance
@@ -75,7 +60,6 @@ stories:
   steps:
   - intent: greet
   - action: action_greet_user
-  - action: utter_capabilities
   - intent: inform
   - action: utter_not_sure
   - action: utter_possibilities
@@ -87,7 +71,6 @@ stories:
   steps:
   - intent: greet
   - action: action_greet_user
-  - action: utter_capabilities
   - intent: greet
   - action: action_greet_user
   - intent: ask_isbot
@@ -99,7 +82,6 @@ stories:
   steps:
   - intent: greet
   - action: action_greet_user
-  - action: utter_capabilities
   - intent: handleinsult
   - action: utter_handleinsult
   - intent: inform

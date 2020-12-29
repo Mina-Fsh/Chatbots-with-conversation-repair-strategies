@@ -1,4 +1,3 @@
-version: "2.0"
 session_config:
   session_expiration_time: 10
   carry_over_slots_to_new_session: false
@@ -46,8 +45,8 @@ intents:
     use_entities: []
 - check_balance:
     use_entities:
-    - credit_card
     - account_type
+    - credit_card
 - check_earnings:
     use_entities: []
 - check_recipients
@@ -248,16 +247,19 @@ responses:
   - text: "I'm sorry, but I couldn't understand you. \nI can help you with topics\
       \ related to banking such as: \n- Transfer money to known recipients. \n- Check\
       \ the earning or spending history. \n- Pay a credit card bill! \n- Tell the\
-      \ account balance. \n- Answer FAQ such as product description, card limit, collecting points, etc.\n"
+      \ account balance. \n- Answer FAQ such as product description, card limit, collecting\
+      \ points, etc.\n"
   utter_capabilities:
   - text: "I like having a small talk to you \U0001F609, having said that, I am here\
       \ to help you with your banking requests such as: \n- Transfer money to known\
       \ recipients. \n- Check the earning or spending history. \n- Pay a credit card\
-      \ bill! \n- Tell the account balance. \n- Answer FAQ such as product description, card limit, collecting points, etc.\n"
+      \ bill! \n- Tell the account balance. \n- Answer FAQ such as product description,\
+      \ card limit, collecting points, etc.\n"
   utter_possibilities:
   - text: "You can ask me about:\n- Transfer money to known recipients. \n- Check\
       \ the earning or spending history. \n- Pay a credit card bill! \n- Tell the\
-      \ account balance. \n- Answer FAQ such as product description, card limit, collecting points, etc.\n"
+      \ account balance. \n- Answer FAQ such as product description, card limit, collecting\
+      \ points, etc.\n"
   utter_default:
   - text: Sorry, I didn't get that 🤷. Could you please, rephrase?
   - text: I didn't understand. Could you rephrase that?
