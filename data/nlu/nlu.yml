@@ -308,6 +308,7 @@ nlu:
     - today
     - last year
     - toay
+    - Please schedule it for the first of next month
     - at [amazon](vendor_name)
     - [starbucks](vendor_name)
     - at [penny](vendor_name)
@@ -316,14 +317,17 @@ nlu:
     - [Amazon](vendor_name)
     - [Starbucks](vendor_name)
     - [netto](vendor_name)
-    - [current balance](payment_amount)
-    - [minimum balance](payment_amount)
-    - I want to pay the [current balance](payment_amount)
-    - I want to pay the [minimum balance](payment_amount)
-    - the [current balance](payment_amount)
-    - the [minimum balance](payment_amount)
-    - my [minimum balance](payment_amount)
-    - my [current balance](payment_amount)
+    - I want to pay the [current balance](amount-of-money)
+    - [current balance](amount-of-money)
+    - [full](amount-of-money)
+    - in [full](amount-of-money)
+    - the [full balance](amount-of-money)
+    - [minimum balance](amount-of-money)
+    - I want to pay the [minimum balance](amount-of-money)
+    - the [current balance](amount-of-money)
+    - the [minimum balance](amount-of-money)
+    - my [minimum balance](amount-of-money)
+    - my [current balance](amount-of-money)
     - [silver](credit_card) card
     - [gold](credit_card) card
     - [silver](credit_card)
@@ -338,6 +342,20 @@ nlu:
     - my [gold](credit_card) card
     - towards my [silver](credit_card) card
     - towards my [gold](credit_card) card
+    - [Bob](PERSON)
+    - [bill](PERSON)
+    - [anusha](PERSON)
+    - [John](PERSON)
+    - [gary](PERSON)
+    - [Claire](PERSON)
+    - [Imani](PERSON)
+    - [darnell](PERSON)
+    - [Guangchen](PERSON)
+    - [cheng](PERSON)
+    - to my [brother](PERSON)
+    - to my [sister](PERSON)
+    - my [dad](PERSON)
+    - A friend.
     - [Elise](PERSON)
     - [Jamie Moore](PERSON)
     - [Jane Baines](PERSON)
