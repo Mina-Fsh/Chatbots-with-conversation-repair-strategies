@@ -10,7 +10,8 @@ pipeline:
     min_ngram: 1
     max_ngram: 4
   - name: DIETClassifier
-    epochs: 100
+    epochs: 200
+    ranking_length: 5
   - name: DucklingEntityExtractor
     url: http://localhost:8000
     dimensions:
@@ -30,12 +31,16 @@ pipeline:
   - name: EntitySynonymMapper
   - name: FallbackClassifier
     threshold: 0.9
-    ambiguity_threshold: 0.1
 policies:
-- name: AugmentedMemoizationPolicy
 - name: TEDPolicy
-  epochs: 40
+  max_history: 10
+  epochs: 20
+  batch_size:
+  - 32
+  - 64
+- max_history: 6
+  name: AugmentedMemoizationPolicy
 - name: RulePolicy
-  core_fallback_threshold: 0.4
+  core_fallback_threshold: 0.6
   core_fallback_action_name: action_repair
   enable_fallback_prediction: True
