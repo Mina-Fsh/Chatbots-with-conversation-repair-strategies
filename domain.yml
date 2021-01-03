@@ -45,8 +45,8 @@ intents:
     use_entities: []
 - check_balance:
     use_entities:
-    - account_type
     - credit_card
+    - account_type
 - check_earnings:
     use_entities: []
 - check_recipients
@@ -159,7 +159,7 @@ slots:
     influence_conversation: false
   repair_strategy_name:
     type: any
-    initial_value: self_assisted_repair
+    initial_value: system_repair
     influence_conversation: false
 responses:
   utter_greet_name:

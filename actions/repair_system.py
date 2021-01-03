@@ -37,14 +37,15 @@ class ActionSystemRepair(Action):
     ) -> List[EventType]:
 
         intent_ranking = tracker.latest_message.get("intent_ranking", [])
-        if len(intent_ranking) > 1:
-            diff_intent_confidence = intent_ranking[0].get(
+        logger.info(f"Intent ranking is: {intent_ranking}")
+        if len(intent_ranking) > 2:
+            diff_intent_confidence = intent_ranking[1].get(
                 "confidence"
-            ) - intent_ranking[1].get("confidence")
+            ) - intent_ranking[2].get("confidence")
             if diff_intent_confidence < 0.2:
-                intent_ranking = intent_ranking[:2]
+                intent_ranking = intent_ranking[1:3]
             else:
-                intent_ranking = intent_ranking[:1]
+                intent_ranking = intent_ranking[1:2]
 
         first_intent_names = [
             intent.get("name", "")
