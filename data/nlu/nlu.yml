@@ -308,7 +308,7 @@ nlu:
     - today
     - last year
     - toay
-    - Please schedule it for the first of next month
+    - Please plan it for the first of next month
     - at [amazon](vendor_name)
     - [starbucks](vendor_name)
     - at [penny](vendor_name)
@@ -394,8 +394,8 @@ nlu:
     - I want to pay €500 on my [silver](credit_card) [credit card](account_type) on Sunday
     - I want to pay my [current balance](amount-of-money) on my [gold](credit_card) [credit card](account_type) today
     - i need to pay off my [silver](credit_card) [credit card](account_type)
-    - Please schedule  a payment towards my [credit card](account_type) for April 12th
-    - Can I schedule a payment towards my [credit card](account_type) for tomorrow?
+    - Please plan a payment towards my [credit card](account_type) for April 12th
+    - Can I plan a payment towards my [credit card](account_type) for tomorrow?
     - Pay off my [minimum balance](amount-of-money) please
     - i would like to pay €1200 to my [credit card]{"entity": "account_type", "value": "credit"}
     - I would also like to pay my [visa](credit_card) bill

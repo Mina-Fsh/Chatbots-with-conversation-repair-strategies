@@ -18,6 +18,18 @@ stories:
     - repair_strategy_name: self_assisted_repair
   - action: utter_repair_strategy_saved
 
+- story: anything else? - yes
+  steps:
+  - action: utter_anything_else
+  - intent: affirm
+  - action: utter_what_help
+
+- story: anything else? - no
+  steps:
+  - action: utter_anything_else
+  - intent: deny
+  - action: utter_thumbsup
+
 - story: say ok when user affirms after utter_capabilities
   steps:
   - action: utter_capabilities
@@ -56,17 +68,6 @@ stories:
   - intent: check_balance
   - action: action_show_balance
 
-- story: meaningless informing
-  steps:
-  - intent: greet
-  - action: action_greet_user
-  - intent: inform
-  - action: utter_not_sure
-  - action: utter_possibilities
-  - intent: inform
-  - action: utter_not_sure
-  - action: utter_possibilities
-
 - story: greet + greet + chitchat
   steps:
   - intent: greet
@@ -77,13 +78,3 @@ stories:
   - action: utter_isbot
   - intent: ask_weather
   - action: utter_weather
-
-- story: greet + chitchat + inform
-  steps:
-  - intent: greet
-  - action: action_greet_user
-  - intent: handleinsult
-  - action: utter_handleinsult
-  - intent: inform
-  - action: utter_not_sure
-  - action: utter_possibilities

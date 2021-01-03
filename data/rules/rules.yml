@@ -48,18 +48,6 @@ rules:
   - intent: canthelp
   - action: utter_canthelp
 
-- rule: anything else? - yes
-  steps:
-  - action: utter_anything_else
-  - intent: affirm
-  - action: utter_what_help
-
-- rule: anything else? - no
-  steps:
-  - action: utter_anything_else
-  - intent: deny
-  - action: utter_thumbsup
-
 - rule: positive reaction
   steps:
   - intent: react_positive
