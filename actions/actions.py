@@ -11,7 +11,6 @@ from rasa_sdk.events import (
     Restarted,
     FollowupAction,
     UserUtteranceReverted,
-    Restarted,
     ConversationPaused,
     AllSlotsReset,
 )
@@ -672,11 +671,11 @@ class ActionRestart(Action):
         domain: Dict[Text, Any],
     ) -> List[EventType]:
         """Executes the custom action"""
+        dispatcher.utter_message(template="utter_restart")
         return [
             AllSlotsReset(),
-            Restarted(),
-            FollowupAction("action_session_start")
-            ]
+            Restarted()
+        ]
 
 
 class ActionAskTransactionSearchFormConfirm(Action):
