@@ -45,8 +45,8 @@ intents:
     use_entities: []
 - check_balance:
     use_entities:
-    - credit_card
     - account_type
+    - credit_card
 - check_earnings:
     use_entities: []
 - check_recipients
@@ -159,7 +159,7 @@ slots:
     influence_conversation: false
   repair_strategy_name:
     type: any
-    initial_value: system_repair
+    initial_value: self_assisted_repair
     influence_conversation: false
 responses:
   utter_greet_name:
@@ -213,22 +213,14 @@ responses:
   - text: Sure thing!
   - text: Can do!
   - text: You got it. 👍
-  utter_fatigue:
-  - buttons:
-    - payload: /restart
-      title: Restart
-    text: Sorry, but it is getting hard for me to follow up; our chat is getting too
-      long, and I'm tired. You could help me refresh my mind by restarting or just
-      continue the talk. I try my best to help you.
   utter_restart_with_button:
   - buttons:
     - payload: /restart
       title: Restart
-    text: Sorry. I am not sure what you mean. Click the button below if you want to
+    text: Sorry. I still don't understand you. Click the button below if you want to
       start over.
   utter_restart:
-  - text: Loading... And I've been restarted! 🤯
-  - text: Congrats you've restarted me! 😉
+  - text: Loading... And I've been restarted!
   utter_canthelp:
   - text: I'm sorry I couldn't help you. I'm still learning. hopefully, next time
       you talk to me, I can answer this request.
@@ -278,8 +270,7 @@ responses:
       \ at the moment.\n Please contact the phone number 01234567, or continue chatting\
       \ with me!"
   utter_builder:
-  - text: Mina Foosherian built me using Rasa Demo SARA and the financial service
-      example bot! 🧠 🛠
+  - text: "Mina Foosherian built me based on two of Rasa example bots: SARA and Financial Demo! 🧠 🛠"
   utter_howbuild:
   - text: I was built with a lot of love and patience.
   - text: Well, when two chatbots love each other very much...
@@ -353,9 +344,9 @@ responses:
   - text: All of our products and services are available only online and free of charge
       for the first year.
   utter_howtoapply:
-  - text: 'You already have two accounts with us: a giro account and a credit card
-      account. You can request to open a savings account or get another credit card
-      online via our website.'
+  - text: 'You already have the following accounts with us: a giro account, a Gold credit card
+      and a Silver credit card. You can request to open a savings account or get another credit card
+      online via our website: www.paybank.org'
   utter_application_requirements:
   - text: In general, a minimum age of 18 and a copy of your passport are required
       to use PAY bank services. Since you already have an account in PAY Bank, you
