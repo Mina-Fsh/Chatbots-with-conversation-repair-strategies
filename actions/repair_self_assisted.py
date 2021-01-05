@@ -9,6 +9,8 @@ from rasa_sdk.events import (
 
 logger = logging.getLogger(__name__)
 
+INTENT_DESCRIPTION_MAPPING_PATH = "actions/intent_description_mapping.csv"
+
 
 class ActionSelfAssistedRepair(Action):
     """This repair strategy uses different factors to explain
@@ -17,6 +19,15 @@ class ActionSelfAssistedRepair(Action):
     def name(self) -> Text:
         return "action_self_assisted_repair"
 
+    def __init__(self) -> None:
+        import pandas as pd
+
+        self.intent_mappings = pd.read_csv(INTENT_DESCRIPTION_MAPPING_PATH)
+        self.intent_mappings.fillna("", inplace=True)
+        self.intent_mappings.entities = self.intent_mappings.entities.map(
+            lambda entities: {e.strip() for e in entities.split(",")}
+        )
+
     def run(
         self,
         dispatcher: CollectingDispatcher,
@@ -24,20 +35,67 @@ class ActionSelfAssistedRepair(Action):
         domain: Dict[Text, Any],
     ) -> List[EventType]:
 
-        confusion_level = self.get_confusion_level(tracker)
-        conversation_turns = self.count_turns(tracker)
-
         last_user_message = self.get_user_message_info(tracker)[
             "last_user_message"]
+        logger.info(f"last user message is: {last_user_message}")
         last_intent_name = self.get_user_message_info(tracker)[
             "last_intent_name"]
         logger.info(f"last intent name is: {last_intent_name}")
         last_intent_confidence = self.get_user_message_info(tracker)[
             "last_intent_confidence"]
+        last_intent_confidence_percentage = round(self.get_user_message_info(tracker)[
+            "last_intent_confidence"] * 100, 2)
+        logger.info(f"last intent confidence is: {last_intent_confidence}")
         second_last_user_message = self.get_user_message_info(tracker)[
             "second_last_user_message"]
+        logger.info(f"second last user message is: {second_last_user_message}")
+        second_last_intent_name = self.get_user_message_info(tracker)[
+            "second_last_intent_name"]
+        logger.info(f"second last intent name is: {second_last_intent_name}")
         second_last_intent_confidence = self.get_user_message_info(tracker)[
             "second_last_intent_confidence"]
+        logger.info(f"second last intent confidence is: {second_last_intent_confidence}")
+
+        confusion_level = self.get_confusion_level(tracker)
+        logger.info(f"confusion level is: {confusion_level}")
+        if confusion_level is True:
+            confusion_warning = "\n- In this conversation we have switched between \
+                different topics."
+        else:
+            confusion_warning = ""
+
+        conversation_turns = self.count_turns(tracker)
+        logger.info(f"conv turns is: {conversation_turns}")
+        if conversation_turns > 20:
+            fatigue_warning = "\n- Our conversation has got too long."
+        else:
+            fatigue_warning = ""
+
+        two_breakdowns_in_a_row = self.get_user_message_info(tracker)[
+            "two_breakdowns_in_a_row"]
+        logger.info(f"two breakdows is {two_breakdowns_in_a_row}")
+        if two_breakdowns_in_a_row is True:
+            multiple_breakdowns_warning = "\n- I have not understood your last 2 request. The keywords you used might have been unfamiliar for me."
+        else:
+            multiple_breakdowns_warning = ""
+
+        number_of_breakdowns = self.count_breakdowns(tracker)
+        logger.info(f"number of breakdowns: {number_of_breakdowns}")
+
+        mean_std_dic = {}
+        mean_std_dic = self.get_intent_mean_sd(
+            tracker)
+        last_intent_nlu_mean = mean_std_dic["mean"]
+        last_intent_nlu_std = mean_std_dic["std"]
+        user_msg_len = mean_std_dic["user_msg_len"]
+        intent_description = self.get_intent_description(last_intent_name)
+
+        if user_msg_len <= (last_intent_nlu_mean - 2 * (last_intent_nlu_std)):
+            length_warning = f'\n- I have learned requests similar to "{intent_description}" with longer sentences containing more information.'
+        elif user_msg_len >= (last_intent_nlu_mean + 2 * (last_intent_nlu_std)):
+            length_warning = f'\n- I have learned requests similar to "{intent_description}" with shorter sentences containing less information.'
+        else:
+            length_warning = ""
 
         if second_last_intent_confidence is not None:
             # If the very first user message triggers fallback
@@ -46,136 +104,17 @@ class ActionSelfAssistedRepair(Action):
                 # Bot is in breakdown with high CL
                 # Confusion, user text length, fatigue or
                 # multiple breakdowns can be relevant.
-                if second_last_intent_confidence >= 0.9:
-                    # Bot was not in breakdown is second last intent
-                    # Multiple breakdowns not relevant.
-                    # Confusion, user text length or fatigue can be relevant.
-                    if confusion_level > 0:
-                        # The bot is confused.
-                        message_title = f"I'm not compeletely sure what you mean by: \
-                            {last_user_message}. Before that you said: \
-                            {second_last_user_message}. I am not trained \
-                            enough to handle switching between topics \
-                            like this. I'm sorry."
-                    else:
-                        # Bot is not confused.
-                        # user text length or fatigue can be relevant.
-                        # First check user text lenght
-                        last_intent_nlu_mean = self.get_intent_mean_sd(
-                            tracker)["mean"]
-                        last_intent_nlu_std = self.get_intent_mean_sd(
-                            tracker)["std"]
-                        user_msg = tracker.latest_message['text']
-                        user_msg_len = len(user_msg.split())
-
-                        if user_msg_len <= (last_intent_nlu_mean - 2 * (last_intent_nlu_std)):
-                            message_title = f"I don't know exactly what you mean by: \
-                                {last_user_message}. I am trained on longer examples \
-                                for similar requests."
-                        elif user_msg_len >= (last_intent_nlu_mean + 2 * (last_intent_nlu_std)):
-                            message_title = f"I don't know exactly what you mean by: \
-                                {last_user_message}. I am trained on shorter examples \
-                                for similar requests."
-                        elif conversation_turns > 20:
-                            # user text length is ok
-                            # check fatigue
-                            # Fatigue can be relevant
-                            message_title = f"I don't know exactly what you mean by: \
-                                {last_user_message}. Eventhough we had a \
-                                nice long conversation, I would like to \
-                                have a coffee break."
-                        else:
-                            message_title = f"I don't know exactly what you mean by: \
-                                {last_user_message}. Excuse me; I can't \
-                                see what caused this breakdown."
-                elif 0.75 <= second_last_intent_confidence < 0.9:
-                    # Bot has had two breakdowns in a row with high CL
-                    # Multiple breakdowns, confusion, user text length or
-                    # fatigue can be relevant.
-                    if confusion_level > 0:
-                        # The bot is confused.
-                        message_title = f"I'm not compeletely sure what you mean by: \
-                            {last_user_message}. Before that you said: \
-                            {second_last_user_message}. I am not trained \
-                            enough to handle switching between topics \
-                            like this. I'm sorry."
-                    else:
-                        # Bot is not confused.
-                        # user text length , fatigue or multiple breakdown
-                        # can be relevant.
-                        # First check user text lenght
-                        last_intent_nlu_mean = self.get_intent_mean_sd(
-                            tracker)["mean"]
-                        last_intent_nlu_std = self.get_intent_mean_sd(
-                            tracker)["std"]
-                        user_msg = tracker.latest_message['text']
-                        user_msg_len = len(user_msg.split())
-
-                        if user_msg_len <= (last_intent_nlu_mean - 2 * (last_intent_nlu_std)):
-                            message_title = f"I don't know exactly what you mean by: \
-                                {last_user_message}. I am trained on longer examples \
-                                for similar requests."
-                        elif user_msg_len >= (last_intent_nlu_mean + 2 * (last_intent_nlu_std)):
-                            message_title = f"I don't know exactly what you mean by: \
-                                {last_user_message}. I am trained on shorter examples \
-                                for similar requests."
-                        elif conversation_turns > 20:
-                            # user text length is ok
-                            # check fatigue
-                            # Fatigue can be relevant
-                            message_title = f"I don't know exactly what you mean by: \
-                                {last_user_message}. Eventhough we had a \
-                                nice long conversation, I would like to \
-                                have a coffee break."
-                        else:
-                            # multiple breakdown
-                            message_title = f"I don't know exactly what you mean by: \
-                                {last_user_message}. I'm sorry that I \
-                                wasn't able to help you in last two \
-                                turns. \n \
-                                I can help you with topics related to \
-                                banking such as: \n- Transfer money to \
-                                known recipients. \n- Check the earning \
-                                or spending history. \n- Pay a credit \
-                                card bill! \n- Tell the account balance. \
-                                \n- Answer FAQ."
+                message = f"I'm not compeletely sure what you mean by: '{last_user_message}'. Here are more information about this breakdown:"
+                message_two = f"I am {last_intent_confidence_percentage} percent sure you meant: '{intent_description}'."
+                message_title = message + message_two + length_warning + confusion_warning + fatigue_warning + multiple_breakdowns_warning
             else:
                 # Bot is in breakdown with low CL
                 # Confusion and user text length not relevant
                 # Fatigue or multiple breakdowns can be relevant.
-                if second_last_intent_confidence >= 0.9:
-                    # fatigue can be relevant
-                    if conversation_turns > 20:
-                        # Fatigue
-                        message_title = f"I don't know what you mean by: \
-                        {last_user_message}. Eventhough we had a \
-                        nice long conversation, I would like to \
-                        have a coffee break."
-                    else:
-                        message_title = f"I don't know exactly what you mean by: \
-                        {last_user_message}. Excuse me; I can't \
-                        see what caused this breakdown. Maybe your request is \
-                        out of my scope."
-                else:
-                    # Fatigue or multiple breakdowns can be relevant.
-                    if conversation_turns > 20:
-                        # Fatigue
-                        message_title = f"I don't know what you mean by: \
-                        {last_user_message}. Eventhough we had a \
-                        nice long conversation, I would like to \
-                        have a coffee break."
-                    else:
-                        # multiple breakdown
-                        message_title = f"I don't know exactly what you mean by: \
-                            {last_user_message}. I'm sorry that I \
-                            wasn't able to help you in last two \
-                            turns. \n \
-                            I can help you with topics related to \
-                            banking such as: \n- Transfer money to \
-                            known recipients. \n- Check the earning \
-                            or spending history. \n- Pay a credit \
-                            card bill! \n- Tell the account balance. \
-                            \n- Answer FAQ."
+                message = f"I don't know exactly what you mean by: \
+                        '{last_user_message}'. Here are the possible reasons behind this breakdown that come to my mind: "
+                message_two = "\n- Your request is out of banking scope. "
+                message_title = message + fatigue_warning + multiple_breakdowns_warning + message_two
         else:
             # Very first user message caused breakdown.
             # Say Hi to the user
@@ -205,9 +144,10 @@ class ActionSelfAssistedRepair(Action):
         tracker: Tracker
     ) -> int:
 
-        user_msg = tracker.latest_message['text']
+        user_msg = self.get_user_message_info(tracker)[
+            "last_user_message"]
         user_msg_len = len(user_msg.split())
-        logger.info(f"{user_msg}, {user_msg_len}")
+        logger.info(f"User message is :{user_msg}, and the length is: {user_msg_len}")
 
         return user_msg_len
 
@@ -286,7 +226,8 @@ class ActionSelfAssistedRepair(Action):
         # remove stop words
         # https://stackabuse.com/removing-stop-words-from-strings-in-python/#usingthespacylibrary 
 
-        all_stopwords = nlp.Defaults.stop_words
+        # all_stopwords = nlp.Defaults.stop_words
+        all_stopwords = spacy.lang.en.stop_words.STOP_WORDS
 
         example_lengths = []
 
@@ -294,7 +235,9 @@ class ActionSelfAssistedRepair(Action):
 
             text_tokens = nlp(example)
 
-            tokens_without_sw = [word for word in text_tokens if not word in all_stopwords]
+            tokens_without_sw = [token.text for token in text_tokens if not token.is_stop]
+
+            # tokens_without_sw = [word for word in text_tokens if not token.is_stop]
 
             logger.info(f"String without stopwords: {tokens_without_sw}")
 
@@ -303,7 +246,7 @@ class ActionSelfAssistedRepair(Action):
             length = len(tokens_without_sw)
             example_lengths.append(length)
 
-            logger.info(f"example length is: {example_lengths}")
+        logger.info(f"example length is: {example_lengths}")
 
         # calculate the mean value and the standard deviation of the list items
         # https://numpy.org/doc/stable/reference/generated/numpy.std.html#:~:text=The%20standard%20deviation%20is%20the,N%20%3D%20len(x)%20.
@@ -315,7 +258,13 @@ class ActionSelfAssistedRepair(Action):
         logger.info(f"Mean: {mean}")
         logger.info(f"Standard deviation: {std}")
 
-        return {"mean": mean, "std": std}
+        user_msg = tracker.latest_message['text']
+        user_text_tokens = nlp(user_msg)
+        user_tokens_without_sw = [token.text for token in user_text_tokens if not token.is_stop]
+        logger.info(f"User message without stopwords: {user_tokens_without_sw}")
+        user_msg_len = len(user_tokens_without_sw)
+
+        return {"mean": mean, "std": std, "user_msg_len": user_msg_len}
 
     def get_user_message_info(
             self,
@@ -335,27 +284,38 @@ class ActionSelfAssistedRepair(Action):
             "parse_data", []).get("intent_ranking", [])
 
         # get the name of the matched intent for last user message
-        last_intent_name = last_intent_ranking[0].get("name")
+        # the first one in rasa 2 is always nlu_fallback
+        last_intent_name = last_intent_ranking[1].get("name")
         # get the text of the last user message
         last_user_message = user_event_list[-1].get("text")
         # get the confidence level of the last user message
-        last_intent_confidence = last_intent_ranking[0].get("confidence")
+        last_intent_confidence = last_intent_ranking[1].get("confidence")
 
         # get the ranking of the second last user message
+        # check for multiple breakdowns
         if len(user_event_list) > 1:
             second_last_intent_ranking = user_event_list[-2].get(
                 "parse_data", []).get("intent_ranking", [])
             # get the name of the matched intent for second last user message
-            second_last_intent_name = second_last_intent_ranking[0].get("name")
+            # get the confidence level of the last user message
+            if second_last_intent_ranking[0].get("name") == "nlu_fallback":
+                second_last_intent_name = second_last_intent_ranking[1].get("name")
+                second_last_intent_confidence = second_last_intent_ranking[1].get(
+                    "confidence")
+                two_breakdowns_in_a_row = True
+            else:
+                second_last_intent_name = second_last_intent_ranking[0].get("name")
+                second_last_intent_confidence = second_last_intent_ranking[0].get(
+                    "confidence")
+                two_breakdowns_in_a_row = False
+
             # get the text of the second last user message
             second_last_user_message = user_event_list[-2].get("text")
-            # get the confidence level of the last user message
-            second_last_intent_confidence = second_last_intent_ranking[0].get(
-                "confidence")
         else:
             second_last_intent_name = None
             second_last_user_message = None
             second_last_intent_confidence = None
+            two_breakdowns_in_a_row = False
 
         return {
             "last_intent_name": last_intent_name,
@@ -363,22 +323,19 @@ class ActionSelfAssistedRepair(Action):
             "last_intent_confidence": last_intent_confidence,
             "second_last_intent_name": second_last_intent_name,
             "second_last_user_message": second_last_user_message,
-            "second_last_intent_confidence": second_last_intent_confidence
+            "second_last_intent_confidence": second_last_intent_confidence,
+            "two_breakdowns_in_a_row": two_breakdowns_in_a_row
                 }
 
     def get_confusion_level(
         self,
         tracker: Tracker
-    ) -> int:
+    ) -> bool:
 
         # Calculate confusion based on jumping from one intent to another
         # Grouping the intents based on their similarity in context
         distanced_intent_list = [
             [
-                "greet",
-                "bye",
-                "nicetomeetyou",
-                "restart",
                 "ask_builder",
                 "ask_howbuilt",
                 "ask_isbot",
@@ -431,22 +388,20 @@ class ActionSelfAssistedRepair(Action):
             else:
                 index_1 = None
 
-            if (second_last_intent_name is not None and
-                    second_last_intent_name in list):
+            if (second_last_intent_name is not None and second_last_intent_name in list):
                 index_2 = distanced_intent_list.index(list)
                 logger.debug(f"{second_last_intent_name} is in \
                     group {index_2}.")
             else:
                 index_2 = None
 
-        confusion_level = 0
         logger.debug(f"index 1 is {index_1}")
         logger.debug(f"index 2 is {index_2}")
 
         if index_1 is not None and index_2 is not None:
-            if index_1 != index_2:
-                confusion_level += 1
-                logger.debug(f"The confusion level is: {confusion_level}")
+            confusion_level = True if index_1 != index_2 else False
+        else:
+            confusion_level = False
 
         return confusion_level
 
@@ -457,11 +412,26 @@ class ActionSelfAssistedRepair(Action):
 
         breakdown_counter = 0
         for events in tracker.events_after_latest_restart():
-            if (events["event"] == "action" and
-                    events["name"] == "action_repair"):
+            if (events["event"] == "action" and events["name"] == "action_repair"):
                 breakdown_counter += 1
 
-        logger.debug(f"You already had {breakdown_counter} \
-        breakdowns in this conversation!")
+        logger.debug(f"You already had {breakdown_counter} breakdowns in this conversation!")
 
         return breakdown_counter
+
+    def get_intent_description(
+        self, intent: Text
+    ) -> Text:
+        utterance_query = self.intent_mappings.intent == intent
+
+        utterances = self.intent_mappings[utterance_query].button.tolist()
+
+        if len(utterances) > 0:
+            intent_description = utterances[0]
+        else:
+            utterances = self.intent_mappings[
+                utterance_query
+            ].button.tolist()
+            intent_description = utterances[0] if len(utterances) > 0 else intent
+
+        return intent_description.format()
