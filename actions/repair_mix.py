@@ -37,15 +37,59 @@ class ActionMixRepair(Action):
         domain: Dict[Text, Any],
     ) -> List[EventType]:
 
-        conversation_turns = self.count_turns(tracker)
         last_user_message = self.get_user_message_info(tracker)[
             "last_user_message"]
-        last_intent_confidence = self.get_user_message_info(tracker)[
-            "last_intent_confidence"]
+        logger.info(f"last user message is: {last_user_message}")
         last_intent_name = self.get_user_message_info(tracker)[
             "last_intent_name"]
+        logger.info(f"last intent name is: {last_intent_name}")
+        last_intent_confidence = self.get_user_message_info(tracker)[
+            "last_intent_confidence"]
+        last_intent_confidence_percentage = round(self.get_user_message_info(tracker)[
+            "last_intent_confidence"] * 100, 2)
         second_last_intent_confidence = self.get_user_message_info(tracker)[
             "second_last_intent_confidence"]
+
+        confusion_level = self.get_confusion_level(tracker)
+        logger.info(f"confusion level is: {confusion_level}")
+        if confusion_level is True:
+            confusion_warning = "\n- In this conversation we have switched between different topics."
+        else:
+            confusion_warning = ""
+
+        conversation_turns = self.count_turns(tracker)
+        logger.info(f"conv turns is: {conversation_turns}")
+        if conversation_turns > 20:
+            fatigue_warning = "\n- Our conversation has got too long."
+        else:
+            fatigue_warning = ""
+
+        two_breakdowns_in_a_row = self.get_user_message_info(tracker)[
+            "two_breakdowns_in_a_row"]
+        logger.info(f"two breakdows is {two_breakdowns_in_a_row}")
+        if two_breakdowns_in_a_row is True:
+            multiple_breakdowns_warning = "\n- I have not understood your last 2 request. The keywords you used might have been unfamiliar for me."
+        else:
+            multiple_breakdowns_warning = ""
+
+        number_of_breakdowns = self.count_breakdowns(tracker)
+        logger.info(f"number of breakdowns: {number_of_breakdowns}")
+
+        mean_std_dic = {}
+        mean_std_dic = self.get_intent_mean_sd(
+            tracker)
+        last_intent_nlu_mean = mean_std_dic["mean"]
+        last_intent_nlu_std = mean_std_dic["std"]
+        user_msg_len = mean_std_dic["user_msg_len"]
+        intent_description = self.get_intent_description(last_intent_name)
+
+        if user_msg_len <= (last_intent_nlu_mean - 2 * (last_intent_nlu_std)):
+            length_warning = f'\n- I have learned requests similar to "{intent_description}" with longer sentences containing more information.'
+        elif user_msg_len >= (last_intent_nlu_mean + 2 * (last_intent_nlu_std)):
+            length_warning = f'\n- I have learned requests similar to "{intent_description}" with shorter sentences containing less information.'
+        else:
+            length_warning = ""
+
         buttons = []
 
         if second_last_intent_confidence is not None:
@@ -55,8 +99,9 @@ class ActionMixRepair(Action):
                 # Bot is in breakdown with high CL
                 # Confusion, user text length, fatigue or
                 # multiple breakdowns can be relevant.
-                message_title = "😊 I'm Highly confident that this is what you \
-                    mean:"
+                message = f"I'm {last_intent_confidence_percentage} percent confident that this is what you \
+                    mean, however for different reasons I am confused:"
+                message_title = message + length_warning + confusion_warning + fatigue_warning + multiple_breakdowns_warning
 
                 entities = tracker.latest_message.get("entities", [])
                 entities = {e["entity"]: e["value"] for e in entities}
@@ -78,43 +123,15 @@ class ActionMixRepair(Action):
                         "payload": "/trigger_rephrase"
                     }
                 )
+
             else:
                 # Bot is in breakdown with low CL
                 # Confusion and user text length not relevant
                 # Fatigue or multiple breakdowns can be relevant.
-                if second_last_intent_confidence >= 0.9:
-                    # fatigue can be relevant
-                    if conversation_turns > 20:
-                        # Fatigue
-                        message_title = f"I don't know what you mean by: \
-                        {last_user_message}. Eventhough we had a \
-                        nice long conversation, I would like to \
-                        have a coffee break."
-                    else:
-                        message_title = f"I don't know exactly what you mean by: \
-                        {last_user_message}. Excuse me; I can't \
-                        see what caused this breakdown. Maybe your request is \
-                        out of my scope."
-                else:
-                    # Fatigue or multiple breakdowns can be relevant.
-                    if conversation_turns > 20:
-                        # Fatigue
-                        message_title = f"I don't know what you mean by: \
-                        {last_user_message}. Eventhough we had a \
-                        nice long conversation, I would like to \
-                        have a coffee break."
-                    else:
-                        # multiple breakdown
-                        message_title = f"I don't know exactly what you mean by: \
-                            {last_user_message}. I'm sorry that I \
-                            wasn't able to help you in last two \
-                            turns. \n \
-                            I can help you with topics related to \
-                            banking such as: \n- Transfer money to \
-                            known recipients. \n- Check the earning \
-                            or spending history. \n- Pay a credit \
-                            card bill! \n- Tell the account balance. \
-                            \n- Answer FAQ."
+                message = f"I don't know exactly what you mean by: \
+                        '{last_user_message}'. Here are the possible reasons behind this breakdown that come to my mind: "
+                message_two = "\n- Your request is out of banking scope. "
+                message_title = message + fatigue_warning + multiple_breakdowns_warning + message_two
         else:
             # Very first user message caused breakdown.
             # Say Hi to the user
@@ -144,99 +161,127 @@ class ActionMixRepair(Action):
         tracker: Tracker
     ) -> int:
 
-        user_msg = tracker.latest_message['text']
+        user_msg = self.get_user_message_info(tracker)[
+            "last_user_message"]
         user_msg_len = len(user_msg.split())
-        logger.info(f"{user_msg}, {user_msg_len}")
+        logger.info(f"User message is :{user_msg}, and the length is: {user_msg_len}")
 
         return user_msg_len
 
-    def get_intent_length_category(
+    def get_intent_mean_sd(
         self,
         tracker: Tracker
-    ) -> Text:
+    ) -> Dict[Text, float]:
 
-        '''This functions gets returns short or long, as a category
-        for intents.'''
+        '''This functions gets the mean value and the
+        standard deviation of the training data example lengths
+        for an intent'''
 
-        intent_list = [
-            [
-                "ask_builder",
-                "ask_howbuilt",
-                "ask_howdoing",
-                "ask_howold",
-                "ask_isbot",
-                "ask_ishuman",
-                "ask_languagesbot",
-                "ask_restaurant",
-                "ask_time",
-                "ask_weather",
-                "ask_whatismyname",
-                "ask_wherefrom",
-                "ask_whoami",
-                "ask_whoisit",
-                "handleinsult",
-                "nicetomeetyou",
-                "whatisPAYbank",
-                "product_description",
-                "howtoapply",
-                "application_requirements",
-                "required_age",
-                "cardlimit",
-                "points_collect",
-                "annualcost",
-                "transfer_money",
-                "pay_cc",
-                "ask_transfer_charge",
-                "search_transactions",
-                "check_balance",
-                "check_earnings",
-                "check_recipients",
-                "capabilities",
-                "session_start",
-                "human_handoff",
-                "trigger_rephrase",
-                "telljoke",
-                "configure_repair_strategy"
-            ],
-            [
-                "greet",
-                "affirm",
-                "deny",
-                "bye",
-                "canthelp",
-                "react_negative",
-                "react_positive",
-                "thank",
-                "inform",
-                "restart",
-                "repeat"
-            ]
-        ]
+        import spacy
+        import yaml
+        import string
+        import numpy as np # for statistics
+        import re # for advanced string operations
 
         last_intent_name = self.get_user_message_info(tracker)[
             "last_intent_name"]
 
-        for list in intent_list:
-            if last_intent_name in list:
-                intent_group_index = intent_list.index(list)
-                logger.debug(f"Intent {last_intent_name} is\
-                    in group index {intent_group_index}.")
-                if intent_group_index == 0:
-                    intent_type = "long"
-                    logger.debug(f"Intent {last_intent_name} is in\
-                        group category {intent_type}.")
-                elif intent_group_index == 1:
-                    intent_type = "short"
-                    logger.debug(f"Intent {last_intent_name} is in\
-                        group {intent_type}.")
-                else:
-                    intent_group_index = None
-                    intent_type = None
-                    logger.debug("Error in short long intent categorization.")
-            else:
-                logger.debug("Intent is not in the list of intents!")
+        with open('data/nlu/nlu.yml') as file:
+            # The FullLoader parameter handles the conversion from YAML
+            # scalar values to Python the dictionary format
+            nlu_dic = yaml.load(file, Loader=yaml.FullLoader)
+            nlu_list = nlu_dic["nlu"]
+            res = next((sub for sub in nlu_list if sub['intent'] == last_intent_name), None)
+            intent_nlu_examples = res["examples"]
+            logger.info(f"{res}")
+            logger.info(f"Intent examples: {intent_nlu_examples}")
 
-        return intent_type
+        nlp = spacy.load("en_core_web_sm")
+        doc = nlp(intent_nlu_examples)
+
+        # for chunk in doc.noun_chunks:
+        # logger.info(chunk.text, chunk.root.text, chunk.root.dep_,
+        #       chunk.root.head.text)
+
+        # clean string from annotations
+        # https://stackabuse.com/using-regex-for-text-manipulation-in-python/
+        # https://regexr.com/ 
+
+        annotation_pattern = "\(.*\)|\{.*\}"
+
+        cleaned_string = re.sub(annotation_pattern, "", intent_nlu_examples)
+
+        logger.info(f"NLU example string without annotations: {cleaned_string}")
+
+        # split string
+        nlu_example_list = cleaned_string.split("- ")
+
+        logger.info(f"NLU example list: {nlu_example_list}")
+
+        # clean string
+
+        # remove examples with empty strings from the list.
+        clean_nlu_example_list = [x for x in nlu_example_list if x]
+
+        # remove line breaks for each example string.
+        clean_nlu_example_list = [x.replace('\n', ' ').replace('\r', '') for x in clean_nlu_example_list]
+
+        logger.info(f"Clean NLU example list: {clean_nlu_example_list}")
+
+        list = []
+
+        # removes all punctuations in the example string.
+        # https://stackoverflow.com/questions/265960/best-way-to-strip-punctuation-from-a-string
+        for example in clean_nlu_example_list:
+            result = example.translate(str.maketrans('', '', string.punctuation))
+            list.append(result)
+
+        clean_nlu_example_list = list
+
+        logger.info(f"No punctuation NLU example list: {clean_nlu_example_list}")
+
+        # remove stop words
+        # https://stackabuse.com/removing-stop-words-from-strings-in-python/#usingthespacylibrary 
+
+        # all_stopwords = nlp.Defaults.stop_words
+        all_stopwords = spacy.lang.en.stop_words.STOP_WORDS
+
+        example_lengths = []
+
+        for example in clean_nlu_example_list:
+
+            text_tokens = nlp(example)
+
+            tokens_without_sw = [token.text for token in text_tokens if not token.is_stop]
+
+            # tokens_without_sw = [word for word in text_tokens if not token.is_stop]
+
+            logger.info(f"String without stopwords: {tokens_without_sw}")
+
+            # count length of remaining example and store in list.
+
+            length = len(tokens_without_sw)
+            example_lengths.append(length)
+
+        logger.info(f"example length is: {example_lengths}")
+
+        # calculate the mean value and the standard deviation of the list items
+        # https://numpy.org/doc/stable/reference/generated/numpy.std.html#:~:text=The%20standard%20deviation%20is%20the,N%20%3D%20len(x)%20.
+
+        mean = np.mean(example_lengths)
+
+        std = np.std(example_lengths)
+
+        logger.info(f"Mean: {mean}")
+        logger.info(f"Standard deviation: {std}")
+
+        user_msg = tracker.latest_message['text']
+        user_text_tokens = nlp(user_msg)
+        user_tokens_without_sw = [token.text for token in user_text_tokens if not token.is_stop]
+        logger.info(f"User message without stopwords: {user_tokens_without_sw}")
+        user_msg_len = len(user_tokens_without_sw)
+
+        return {"mean": mean, "std": std, "user_msg_len": user_msg_len}
 
     def get_user_message_info(
             self,
@@ -256,27 +301,38 @@ class ActionMixRepair(Action):
             "parse_data", []).get("intent_ranking", [])
 
         # get the name of the matched intent for last user message
-        last_intent_name = last_intent_ranking[0].get("name")
+        # the first one in rasa 2 is always nlu_fallback
+        last_intent_name = last_intent_ranking[1].get("name")
         # get the text of the last user message
         last_user_message = user_event_list[-1].get("text")
         # get the confidence level of the last user message
-        last_intent_confidence = last_intent_ranking[0].get("confidence")
+        last_intent_confidence = last_intent_ranking[1].get("confidence")
 
         # get the ranking of the second last user message
+        # check for multiple breakdowns
         if len(user_event_list) > 1:
             second_last_intent_ranking = user_event_list[-2].get(
                 "parse_data", []).get("intent_ranking", [])
             # get the name of the matched intent for second last user message
-            second_last_intent_name = second_last_intent_ranking[0].get("name")
+            # get the confidence level of the last user message
+            if second_last_intent_ranking[0].get("name") == "nlu_fallback":
+                second_last_intent_name = second_last_intent_ranking[1].get("name")
+                second_last_intent_confidence = second_last_intent_ranking[1].get(
+                    "confidence")
+                two_breakdowns_in_a_row = True
+            else:
+                second_last_intent_name = second_last_intent_ranking[0].get("name")
+                second_last_intent_confidence = second_last_intent_ranking[0].get(
+                    "confidence")
+                two_breakdowns_in_a_row = False
+
             # get the text of the second last user message
             second_last_user_message = user_event_list[-2].get("text")
-            # get the confidence level of the last user message
-            second_last_intent_confidence = second_last_intent_ranking[0].get(
-                "confidence")
         else:
             second_last_intent_name = None
             second_last_user_message = None
             second_last_intent_confidence = None
+            two_breakdowns_in_a_row = False
 
         return {
             "last_intent_name": last_intent_name,
@@ -284,22 +340,19 @@ class ActionMixRepair(Action):
             "last_intent_confidence": last_intent_confidence,
             "second_last_intent_name": second_last_intent_name,
             "second_last_user_message": second_last_user_message,
-            "second_last_intent_confidence": second_last_intent_confidence
-            }
+            "second_last_intent_confidence": second_last_intent_confidence,
+            "two_breakdowns_in_a_row": two_breakdowns_in_a_row
+                }
 
     def get_confusion_level(
         self,
         tracker: Tracker
-    ) -> int:
+    ) -> bool:
 
         # Calculate confusion based on jumping from one intent to another
         # Grouping the intents based on their similarity in context
         distanced_intent_list = [
             [
-                "greet",
-                "bye",
-                "nicetomeetyou",
-                "restart",
                 "ask_builder",
                 "ask_howbuilt",
                 "ask_isbot",
@@ -352,22 +405,20 @@ class ActionMixRepair(Action):
             else:
                 index_1 = None
 
-            if (second_last_intent_name is not None and
-                    second_last_intent_name in list):
+            if (second_last_intent_name is not None and second_last_intent_name in list):
                 index_2 = distanced_intent_list.index(list)
                 logger.debug(f"{second_last_intent_name} is in \
                     group {index_2}.")
             else:
                 index_2 = None
 
-        confusion_level = 0
         logger.debug(f"index 1 is {index_1}")
         logger.debug(f"index 2 is {index_2}")
 
         if index_1 is not None and index_2 is not None:
-            if index_1 != index_2:
-                confusion_level += 1
-                logger.debug(f"The confusion level is: {confusion_level}")
+            confusion_level = True if index_1 != index_2 else False
+        else:
+            confusion_level = False
 
         return confusion_level
 
@@ -378,14 +429,29 @@ class ActionMixRepair(Action):
 
         breakdown_counter = 0
         for events in tracker.events_after_latest_restart():
-            if (events["event"] == "action" and
-                    events["name"] == "action_repair"):
+            if (events["event"] == "action" and events["name"] == "action_repair"):
                 breakdown_counter += 1
 
-        logger.debug(f"You already had {breakdown_counter} \
-        breakdowns in this conversation!")
+        logger.debug(f"You already had {breakdown_counter} breakdowns in this conversation!")
 
         return breakdown_counter
+
+    def get_intent_description(
+        self, intent: Text
+    ) -> Text:
+        utterance_query = self.intent_mappings.intent == intent
+
+        utterances = self.intent_mappings[utterance_query].button.tolist()
+
+        if len(utterances) > 0:
+            intent_description = utterances[0]
+        else:
+            utterances = self.intent_mappings[
+                utterance_query
+            ].button.tolist()
+            intent_description = utterances[0] if len(utterances) > 0 else intent
+
+        return intent_description.format()
 
     def get_button_title(
         self, intent: Text, entities: Dict[Text, Text]
