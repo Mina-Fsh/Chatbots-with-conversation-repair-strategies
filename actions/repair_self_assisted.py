@@ -169,7 +169,7 @@ class ActionSelfAssistedRepair(Action):
         last_intent_name = self.get_user_message_info(tracker)[
             "last_intent_name"]
 
-        with open('data/nlu/nlu.yml') as file:
+        with open('actions/nlu/nlu.yml') as file:
             # The FullLoader parameter handles the conversion from YAML
             # scalar values to Python the dictionary format
             nlu_dic = yaml.load(file, Loader=yaml.FullLoader)
