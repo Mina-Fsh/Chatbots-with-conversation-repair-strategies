@@ -75,7 +75,7 @@ class ActionSelfAssistedRepair(Action):
             "two_breakdowns_in_a_row"]
         logger.info(f"two breakdows is {two_breakdowns_in_a_row}")
         if two_breakdowns_in_a_row is True:
-            multiple_breakdowns_warning = "\n- I have not understood your last 2 request. The keywords you used might have been unfamiliar for me."
+            multiple_breakdowns_warning = "\n- I have not understood your last 2 requests. The keywords you used might have been unfamiliar for me."
         else:
             multiple_breakdowns_warning = ""
 
@@ -105,7 +105,7 @@ class ActionSelfAssistedRepair(Action):
                 # Confusion, user text length, fatigue or
                 # multiple breakdowns can be relevant.
                 message = f"I'm not compeletely sure what you mean by: '{last_user_message}'. Here are more information about this breakdown:"
-                message_two = f"I am {last_intent_confidence_percentage} percent sure you meant: '{intent_description}'."
+                message_two = f"\n-I am {last_intent_confidence_percentage} percent sure you meant something like: '{intent_description}'."
                 message_title = message + message_two + length_warning + confusion_warning + fatigue_warning + multiple_breakdowns_warning
             else:
                 # Bot is in breakdown with low CL
@@ -156,9 +156,9 @@ class ActionSelfAssistedRepair(Action):
         tracker: Tracker
     ) -> Dict[Text, float]:
 
-        '''This functions gets the mean value and the
+        '''This function gets the mean value and the
         standard deviation of the training data example lengths
-        for an intent'''
+        for an intent, it also removes the stop words from the user message'''
 
         import spacy
         import yaml
@@ -244,7 +244,8 @@ class ActionSelfAssistedRepair(Action):
             # count length of remaining example and store in list.
 
             length = len(tokens_without_sw)
-            example_lengths.append(length)
+
+            example_lengths.append(length) if (length > 0) else next
 
         logger.info(f"example length is: {example_lengths}")
 
