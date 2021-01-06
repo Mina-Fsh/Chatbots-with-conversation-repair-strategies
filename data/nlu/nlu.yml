@@ -105,17 +105,6 @@ nlu:
     - what are the requirements
     - how can i apply for it
     - how can I apply for a [credit accounts](account_type)
-- intent: application_requirements
-  examples: |
-    - What are the requirements?
-    - how can I order a [gold](credit_card) [card](account_type)?
-    - required documents to order a [credit card](account_type)
-    - how to order [credit](account_type)
-    - required documents to open a [bank account](account_type)
-    - tell me the necessary documents
-    - what are the requirements
-    - how can i apply for it
-    - how can I apply for a credit card
 - intent: required_age
   examples: |
     - required age
@@ -286,7 +275,6 @@ nlu:
     - 500 million
     - 500000
     - 500k
-    - 50 p
     - 5 quid
     - 6000000
     - 900 euros
@@ -587,21 +575,16 @@ nlu:
     - change the fallback to [system_repair](repair_strategy_name)
 - intent: affirm
   examples: |
-    - Accept
     - Awesome!
     - Good
     - Great
-    - I accept
-    - I accept.
     - I agree
     - I am using it
-    - I changed my mind. I want to accept it
+    - I changed my mind. I say yes
     - I do
     - I get it
     - I guess so
-    - I have used it in the past
     - I will
-    - I'd absolutely love that
     - I'm sure I will!
     - I'm using it
     - Nice
@@ -625,17 +608,14 @@ nlu:
     - Yeah
     - Yeah sure
     - Yep
-    - Yep that's fine
     - Yep!
     - Yepp
     - Yes
     - Yes I do
     - Yes please
     - Yes please!
-    - Yes, I accept
     - Yes.
     - Yup
-    - a little
     - absolutely
     - accept
     - accepted
@@ -648,8 +628,6 @@ nlu:
     - awesome
     - awesome!
     - confirm
-    - cool story bro
-    - definitely yes without a doubt
     - done
     - fair enough
     - fcourse
@@ -685,7 +663,6 @@ nlu:
     - lets do this
     - not bad
     - of course
-    - ofcoure i do
     - ofcourse
     - oh awesome!
     - oh cool
@@ -699,9 +676,6 @@ nlu:
     - ok great
     - ok i accept
     - ok paya
-    - ok, I behave now
-    - ok, I understood
-    - ok, Sara
     - ok...
     - okay
     - okay cool
@@ -729,7 +703,6 @@ nlu:
     - uh-huh
     - very much
     - well yes
-    - y
     - ya
     - ya cool
     - ya go for it
@@ -742,18 +715,16 @@ nlu:
     - yas
     - yay
     - ye
-    - ye splease
+    - ye please
     - yea
     - yeah
     - yeah do that
     - yeah sure
-    - yeah'=
     - yeah, why not
     - yeeeeezzzzz
     - yeeees
     - yep
     - yep i want that
-    - yep if i have to
     - yep please
     - yep that's nice
     - yep thats cool
@@ -761,17 +732,12 @@ nlu:
     - yep. :/
     - yes
     - yes ...
-    - yes I do
-    - yes accept please
     - yes baby
     - yes cool
-    - yes give me information
     - yes go ahead
     - yes go for it
     - yes great
-    - yes i accept
     - yes i agree
-    - yes i have built a bot before
     - yes i have!
     - yes it is
     - yes it was okay
@@ -787,39 +753,20 @@ nlu:
     - yes'
     - yes, I'd love to
     - yes, cool
-    - yes, give me information, please
-    - yes,i am
-    - yes.
     - yesh
     - yess
     - yessoo
     - yesss
     - yesssss
-    - yesyestyes
-    - yesyesyes
     - yez
     - yop
-    - you asked me a yes or no question, which i answered with yes
-    - you got me, I accept, if you want me to
-    - yres
-    - ys
     - yup
-    - yyeeeh
-    - Okay cool
-    - ok..
-    - considering
-    - More a less
-    - cool beans
     - sounds good!
-    - really
 - intent: deny
   examples: |
     - I don't want to
-    - I don't want to give it to you
     - I don't want to say
     - I dont want to tell
-    - I'm not giving you my email address
-    - I'm not going to give it to you
     - NEIN
     - NO
     - NO DON"T WANT THIS!
@@ -839,11 +786,8 @@ nlu:
     - definitely not
     - deny
     - i decline
-    - i don not like this
     - i don't think so
-    - i don't want either of those
     - i don't want to
-    - i don't want to give you my email
     - i dont want to
     - i dont want to accept :P lol
     - i guess it means - no
@@ -867,14 +811,11 @@ nlu:
     - no
     - no :(
     - no I dont want
-    - no I haven't decided yet if I want to sign up
     - no and no again
     - no bots at all
     - no go
     - no i can't
-    - no i don't accept
     - no i dont want to
-    - no i dont want to accept :P lol
     - no i won't
     - no ma'am
     - no sir
@@ -886,7 +827,6 @@ nlu:
     - no you did it wrong
     - no!!!!
     - no, i hate it
-    - no, my frst time
     - no, thank you
     - no, thanks
     - no, thankyou
@@ -906,14 +846,10 @@ nlu:
     - sorry not right now
     - still dont want to tell
     - thanks but no thanks
-    - this sucks
     - very bad
-    - I do not need help installing
-    - I don't wanna tell the name of my company
     - no stop
     - stop it, i do not care!!!
     - none of them
-    - I don't agree
 - intent: bye
   examples: |
     - Bye
@@ -965,12 +901,12 @@ nlu:
     - Good morning
     - Good mourning
     - Guten Morgen
-    - HELLO
-    - HEY
+    - HELLO paya
+    - HEY 
     - HEllo
-    - HI
-    - Hallo
-    - Hei
+    - HI Paya
+    - Hallo paya
+    - Hei paya
     - Hellllooooooo
     - Hello
     - Hello Bot
@@ -989,7 +925,7 @@ nlu:
     - Hi paya
     - Hi there
     - Hi!
-    - Hi'
+    - Hi paya
     - Hi,
     - Hi, bot
     - Hieee
@@ -1001,7 +937,6 @@ nlu:
     - Whats up
     - Whats up my bot
     - Whats up?
-    - ayyyy whaddup
     - bonjour
     - ey boss
     - good evening
@@ -1083,11 +1018,8 @@ nlu:
     - howdy
     - i am [Karen Mease](PERSON)
     - jojojo
-    - jop
-    - konichiwa
     - merhaba
     - ola paya
-    - salut
     - sup
     - wasssup
     - wasssup!
@@ -1102,7 +1034,7 @@ nlu:
     - I am [Christina Sullivan](PERSON)
     - I am [Hattie Rice](PERSON)
     - I am [Robert Starks](PERSON)
-    - I am [Aniket](PERSON)
+    - i am [Aniket](PERSON)
     - my name is [Ashleigh Mees](PERSON)
     - my name is [chelsea Parker](PERSON)
     - my name is [jessie maglione](PERSON)
@@ -1114,6 +1046,8 @@ nlu:
     - My name is [Sondra Boyd](PERSON)
     - My name si [tom Harbin](PERSON)
     - My name is [manuel](PERSON)
+    - i am [Christina](PERSON)
+    - i'm [lola](PERSON)
 - intent: react_positive
   examples: |
     - Cool
@@ -1257,7 +1191,7 @@ nlu:
     - Cool. Thanks
     - Great, thanks
     - Thank you
-    - Thank you Sara
+    - Thank you paya
     - Thank you so much
     - Thank's!
     - Thanks
@@ -2087,11 +2021,6 @@ nlu:
     - What is my first name?
     - What is my full name?
     - What is my name?
-    - What is the name I was given?
-    - What name do I go by?
-    - What name should I recognize for myself?
-    - What was I named?
-    - What would be the name on my tombstone?
     - can you tell me my name?
     - what is my name
     - what is my name?
