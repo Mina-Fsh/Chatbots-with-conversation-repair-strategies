@@ -159,7 +159,7 @@ slots:
     influence_conversation: false
   repair_strategy_name:
     type: any
-    initial_value: self_assisted_repair
+    initial_value: mix_repair
     influence_conversation: false
 responses:
   utter_greet_name:
