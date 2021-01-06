@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 class ActionMixRepair(Action):
     """Responses to the user text based on it's confidency.
     if it is confidence it gives option, otherwise it checks for
-    Fatigue and Multiple breakdowns"""
+    the technical reasons behind the breakdown."""
 
     def name(self) -> Text:
         return "action_mix_repair"
@@ -68,7 +68,7 @@ class ActionMixRepair(Action):
             "two_breakdowns_in_a_row"]
         logger.info(f"two breakdows is {two_breakdowns_in_a_row}")
         if two_breakdowns_in_a_row is True:
-            multiple_breakdowns_warning = "\n- I have not understood your last 2 request. The keywords you used might have been unfamiliar for me."
+            multiple_breakdowns_warning = "\n- I have not understood your last 2 requests. The keywords you used might have been unfamiliar for me."
         else:
             multiple_breakdowns_warning = ""
 
@@ -173,9 +173,9 @@ class ActionMixRepair(Action):
         tracker: Tracker
     ) -> Dict[Text, float]:
 
-        '''This functions gets the mean value and the
+        '''This function gets the mean value and the
         standard deviation of the training data example lengths
-        for an intent'''
+        for an intent, it also removes the stop words from the user message'''
 
         import spacy
         import yaml
@@ -261,7 +261,7 @@ class ActionMixRepair(Action):
             # count length of remaining example and store in list.
 
             length = len(tokens_without_sw)
-            example_lengths.append(length)
+            example_lengths.append(length) if (length > 0) else next
 
         logger.info(f"example length is: {example_lengths}")
 
