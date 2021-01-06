@@ -104,7 +104,7 @@ class ActionSelfAssistedRepair(Action):
                 # Bot is in breakdown with high CL
                 # Confusion, user text length, fatigue or
                 # multiple breakdowns can be relevant.
-                message = f"I'm not compeletely sure what you mean by: '{last_user_message}'. Here are more information about this breakdown:"
+                message = f"I'm not compeletely sure what you mean by: '{last_user_message}'. Here is more information about this breakdown:"
                 message_two = f"\n-I am {last_intent_confidence_percentage} percent sure you meant something like: '{intent_description}'."
                 message_title = message + message_two + length_warning + confusion_warning + fatigue_warning + multiple_breakdowns_warning
             else:
