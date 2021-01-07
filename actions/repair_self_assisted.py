@@ -59,8 +59,7 @@ class ActionSelfAssistedRepair(Action):
         confusion_level = self.get_confusion_level(tracker)
         logger.info(f"confusion level is: {confusion_level}")
         if confusion_level is True:
-            confusion_warning = "\n- In this conversation we have switched between \
-                different topics."
+            confusion_warning = "\n- In this conversation we have switched between different topics."
         else:
             confusion_warning = ""
 
@@ -111,15 +110,13 @@ class ActionSelfAssistedRepair(Action):
                 # Bot is in breakdown with low CL
                 # Confusion and user text length not relevant
                 # Fatigue or multiple breakdowns can be relevant.
-                message = f"I don't know exactly what you mean by: \
-                        '{last_user_message}'. Here are the possible reasons behind this breakdown that come to my mind: "
+                message = f"I don't know exactly what you mean by: '{last_user_message}'. Here are the possible reasons behind this breakdown that come to my mind: "
                 message_two = "\n- Your request is out of banking scope. "
                 message_title = message + fatigue_warning + multiple_breakdowns_warning + message_two
         else:
             # Very first user message caused breakdown.
             # Say Hi to the user
-            message_title = "I'm afraid I didn't get what you just said. \
-                Maybe we can start with saying Hi!"
+            message_title = "I'm afraid I didn't get what you just said. Maybe we can start with saying Hi!"
 
         dispatcher.utter_message(text=message_title)
 
