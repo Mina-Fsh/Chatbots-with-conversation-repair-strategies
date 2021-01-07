@@ -41,6 +41,6 @@ policies:
 - max_history: 6
   name: AugmentedMemoizationPolicy
 - name: RulePolicy
-  core_fallback_threshold: 0.8
+  core_fallback_threshold: 0.7
   core_fallback_action_name: action_repair
   enable_fallback_prediction: True
