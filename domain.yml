@@ -253,16 +253,12 @@ responses:
       \ account balance. \n- Answer FAQ such as product description, card limit, collecting\
       \ points, etc.\n"
   utter_default:
-  - text: Sorry, I didn't get that 🤷. Could you please, rephrase?
   - text: I didn't understand. Could you rephrase that?
   - text: I'm sorry, but I didn't understand you. Could you please rephrase what you
       just said?
   - text: I'm afraid I didn't get what you just said. Could you rephrase that?
   - text: I didn't quite get that. Could you rephrase your message?
   - text: Could you rephrase your message? I didn't get it, I'm sorry.
-  utter_ask_rephrase:
-  - text: Please rephrase your previous request.
-  - text: Could you please rephrase your previous message.
   utter_repair_strategy_saved:
   - text: 'Alright. The repair strategy in this conversation is set to: {repair_strategy_name}.'
   utter_phonenumber:
