@@ -104,4 +104,4 @@ def parse_duckling_currency(entity: Dict[Text, Any]) -> Optional[Dict[Text, Any]
         return {"amount-of-money": f"{amount:.2f}", "currency": currency}
     elif entity.get("entity") == "number":
         amount = entity.get("value")
-        return {"amount-of-money": f"{amount:.2f}", "currency": "$"}
+        return {"amount-of-money": f"{amount:.2f}", "currency": "€"}
