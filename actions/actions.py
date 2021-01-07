@@ -140,7 +140,7 @@ class ValidatePayCCForm(CustomFormValidationAction):
             return {
                 "amount-of-money": f"{amount:.2f}",
                 "payment_amount_type": amount_type,
-                "currency": "$",
+                "currency": "€",
             }
 
         dispatcher.utter_message(template="utter_no_payment_amount")
