@@ -99,8 +99,7 @@ class ActionMixRepair(Action):
                 # Bot is in breakdown with high CL
                 # Confusion, user text length, fatigue or
                 # multiple breakdowns can be relevant.
-                message = f"I'm {last_intent_confidence_percentage} percent confident that this is what you \
-                    mean, however for different reasons I am confused:"
+                message = f"I'm {last_intent_confidence_percentage} percent confident that this is what you mean, however for different reasons I am confused:"
                 message_title = message + length_warning + confusion_warning + fatigue_warning + multiple_breakdowns_warning
 
                 entities = tracker.latest_message.get("entities", [])
@@ -128,15 +127,13 @@ class ActionMixRepair(Action):
                 # Bot is in breakdown with low CL
                 # Confusion and user text length not relevant
                 # Fatigue or multiple breakdowns can be relevant.
-                message = f"I don't know exactly what you mean by: \
-                        '{last_user_message}'. Here are the possible reasons behind this breakdown that come to my mind: "
+                message = f"I don't know exactly what you mean by: '{last_user_message}'. Here are the possible reasons behind this breakdown that come to my mind: "
                 message_two = "\n- Your request is out of banking scope. "
                 message_title = message + fatigue_warning + multiple_breakdowns_warning + message_two
         else:
             # Very first user message caused breakdown.
             # Say Hi to the user
-            message_title = "I'm afraid I didn't get what you just said. \
-                Maybe we can start with saying Hi!"
+            message_title = "I'm afraid I didn't get what you just said. Maybe we can start with saying Hi!"
 
         dispatcher.utter_message(text=message_title, buttons=buttons)
 
