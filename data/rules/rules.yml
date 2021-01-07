@@ -38,11 +38,6 @@ rules:
   - intent: capabilities
   - action: utter_capabilities
 
-- rule: trigger_rephrase
-  steps:
-  - intent: trigger_rephrase
-  - action: utter_ask_rephrase
-
 - rule: can't help
   steps:
   - intent: canthelp
