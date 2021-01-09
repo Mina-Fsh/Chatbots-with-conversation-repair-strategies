@@ -23,9 +23,8 @@ rules:
 - rule: say goodbye
   steps:
   - intent: bye
+  - action: action_deactivate_loop
   - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
   - action: utter_bye
   - action: action_restart
 
