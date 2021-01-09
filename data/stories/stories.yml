@@ -18,6 +18,11 @@ stories:
     - repair_strategy_name: self_assisted_repair
   - action: utter_repair_strategy_saved
 
+- story: can't help
+  steps:
+  - intent: canthelp
+  - action: utter_canthelp
+
 - story: anything else? - yes
   steps:
   - action: utter_anything_else
@@ -58,10 +63,12 @@ stories:
   steps:
   - intent: ask_restaurant
   - action: utter_restaurant
-  - intent: deny
+  - or:
+    - intent: deny
+    - intent: canthelp
   - action: utter_nohelp
 
-- story: just check balance + confirm
+- story: chitchat + show balance
   steps:
   - intent: ask_builder
   - action: utter_builder
@@ -72,9 +79,9 @@ stories:
   steps:
   - intent: greet
   - action: action_greet_user
-  - intent: greet
-  - action: action_greet_user
+  - action: utter_intro
   - intent: ask_isbot
   - action: utter_isbot
   - intent: ask_weather
   - action: utter_weather
+
