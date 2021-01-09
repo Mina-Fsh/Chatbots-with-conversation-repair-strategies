@@ -7,8 +7,10 @@ stories:
   - intent: pay_cc
   - action: cc_payment_form
   - active_loop: cc_payment_form
-  - intent: canthelp
-  - action: utter_canthelp
+  - or:
+    - intent: deny
+    - intent: canthelp
+  - action: utter_nohelp
   - action: utter_ask_cc_payment_form_AA_CONTINUE_FORM
   - intent: affirm
   - action: cc_payment_form
@@ -19,23 +21,27 @@ stories:
   - intent: pay_cc
   - action: cc_payment_form
   - active_loop: cc_payment_form
-  - intent: canthelp
-  - action: utter_canthelp
+  - or:
+    - intent: deny
+    - intent: canthelp
+  - action: utter_nohelp
   - action: utter_ask_cc_payment_form_AA_CONTINUE_FORM
   - intent: deny
-  - action: utter_thumbsup
-  - action: utter_ask_whatelse
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
+  - action: utter_thumbsup
+  - action: utter_ask_whatelse
 
 - story: transfer money + cant help + continue
   steps:
   - intent: transfer_money
   - action: transfer_money_form
   - active_loop: transfer_money_form
-  - intent: canthelp
-  - action: utter_canthelp
+  - or:
+    - intent: deny
+    - intent: canthelp
+  - action: utter_nohelp
   - action: utter_ask_transfer_money_form_AA_CONTINUE_FORM
   - intent: affirm
   - action: transfer_money_form
@@ -46,15 +52,17 @@ stories:
   - intent: transfer_money
   - action: transfer_money_form
   - active_loop: transfer_money_form
-  - intent: canthelp
-  - action: utter_canthelp
+  - or:
+    - intent: deny
+    - intent: canthelp
+  - action: utter_nohelp
   - action: utter_ask_transfer_money_form_AA_CONTINUE_FORM
   - intent: deny
-  - action: utter_thumbsup
-  - action: utter_ask_whatelse
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
+  - action: utter_thumbsup
+  - action: utter_ask_whatelse
 
 - story: search transactions + cant help + continue
   steps:
@@ -63,8 +71,10 @@ stories:
     - intent: check_earnings
   - action: transaction_search_form
   - active_loop: transaction_search_form
-  - intent: canthelp
-  - action: utter_canthelp
+  - or:
+    - intent: deny
+    - intent: canthelp
+  - action: utter_nohelp
   - action: utter_ask_transaction_search_form_AA_CONTINUE_FORM
   - intent: affirm
   - action: transaction_search_form
@@ -77,15 +87,19 @@ stories:
     - intent: check_earnings
   - action: transaction_search_form
   - active_loop: transaction_search_form
-  - intent: canthelp
-  - action: utter_canthelp
+  - or:
+    - intent: deny
+    - intent: canthelp
+  - action: utter_nohelp
   - action: utter_ask_transaction_search_form_AA_CONTINUE_FORM
   - intent: deny
-  - action: utter_thumbsup
-  - action: utter_ask_whatelse
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
+  - action: utter_thumbsup
+  - action: utter_ask_whatelse
+
+
 
 - story: cc payment + chitchat + continue
   steps:
@@ -108,11 +122,11 @@ stories:
   - action: utter_cardlimit
   - action: utter_ask_cc_payment_form_AA_CONTINUE_FORM
   - intent: deny
-  - action: utter_thumbsup
-  - action: utter_ask_whatelse
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
+  - action: utter_thumbsup
+  - action: utter_ask_whatelse
 
 - story: transfer money + FAQ + continue
   steps:
@@ -135,11 +149,11 @@ stories:
   - action: action_show_transfer_charge
   - action: utter_ask_transfer_money_form_AA_CONTINUE_FORM
   - intent: deny
-  - action: utter_thumbsup
-  - action: utter_ask_whatelse
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
+  - action: utter_thumbsup
+  - action: utter_ask_whatelse
 
 - story: search transactions + chitchat + continue
   steps:
@@ -166,8 +180,8 @@ stories:
   - action: utter_required_age
   - action: utter_ask_transaction_search_form_AA_CONTINUE_FORM
   - intent: deny
-  - action: utter_thumbsup
-  - action: utter_ask_whatelse
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
+  - action: utter_thumbsup
+  - action: utter_ask_whatelse
