@@ -2,7 +2,7 @@ intent,button,entities
 affirm,Yes,
 deny,No,
 bye,Bye!,
-greet,"Say ""Hi!"" ",
+greet,Hi!,
 thank,Thanks!,
 react_negative,I'm sad!,
 react_positive,I'm happy!,

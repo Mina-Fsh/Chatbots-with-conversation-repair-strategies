@@ -27,9 +27,8 @@ stories:
   - action: utter_nohelp
   - action: utter_ask_cc_payment_form_AA_CONTINUE_FORM
   - intent: deny
+  - action: action_deactivate_loop
   - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
   - action: utter_thumbsup
   - action: utter_ask_whatelse
 
@@ -58,9 +57,8 @@ stories:
   - action: utter_nohelp
   - action: utter_ask_transfer_money_form_AA_CONTINUE_FORM
   - intent: deny
+  - action: action_deactivate_loop
   - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
   - action: utter_thumbsup
   - action: utter_ask_whatelse
 
@@ -93,9 +91,8 @@ stories:
   - action: utter_nohelp
   - action: utter_ask_transaction_search_form_AA_CONTINUE_FORM
   - intent: deny
+  - action: action_deactivate_loop
   - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
   - action: utter_thumbsup
   - action: utter_ask_whatelse
 
@@ -122,9 +119,8 @@ stories:
   - action: utter_cardlimit
   - action: utter_ask_cc_payment_form_AA_CONTINUE_FORM
   - intent: deny
+  - action: action_deactivate_loop
   - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
   - action: utter_thumbsup
   - action: utter_ask_whatelse
 
@@ -149,9 +145,8 @@ stories:
   - action: action_show_transfer_charge
   - action: utter_ask_transfer_money_form_AA_CONTINUE_FORM
   - intent: deny
+  - action: action_deactivate_loop
   - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
   - action: utter_thumbsup
   - action: utter_ask_whatelse
 
@@ -180,8 +175,7 @@ stories:
   - action: utter_required_age
   - action: utter_ask_transaction_search_form_AA_CONTINUE_FORM
   - intent: deny
+  - action: action_deactivate_loop
   - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
   - action: utter_thumbsup
   - action: utter_ask_whatelse
