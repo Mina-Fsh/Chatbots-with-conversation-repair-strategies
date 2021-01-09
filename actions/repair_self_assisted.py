@@ -43,8 +43,8 @@ class ActionSelfAssistedRepair(Action):
         logger.info(f"last intent name is: {last_intent_name}")
         last_intent_confidence = self.get_user_message_info(tracker)[
             "last_intent_confidence"]
-        last_intent_confidence_percentage = round(self.get_user_message_info(tracker)[
-            "last_intent_confidence"] * 100, 2)
+        last_intent_confidence_percentage = int(self.get_user_message_info(tracker)[
+            "last_intent_confidence"] * 100)
         logger.info(f"last intent confidence is: {last_intent_confidence}")
         second_last_user_message = self.get_user_message_info(tracker)[
             "second_last_user_message"]
@@ -59,14 +59,17 @@ class ActionSelfAssistedRepair(Action):
         confusion_level = self.get_confusion_level(tracker)
         logger.info(f"confusion level is: {confusion_level}")
         if confusion_level is True:
-            confusion_warning = "\n- In this conversation we have switched between different topics."
+            confusion_warning = (
+                "\n- In this conversation, we have switched between different topics. "
+                "Which means we have taken off an expected conversation flow."
+            )
         else:
             confusion_warning = ""
 
         conversation_turns = self.count_turns(tracker)
         logger.info(f"conv turns is: {conversation_turns}")
         if conversation_turns > 20:
-            fatigue_warning = "\n- Our conversation has got too long."
+            fatigue_warning = "\n- Our conversation has gotten too long, which means I have saved many keywords from our conversation history in my memory; this could mislead me."
         else:
             fatigue_warning = ""
 
@@ -74,7 +77,7 @@ class ActionSelfAssistedRepair(Action):
             "two_breakdowns_in_a_row"]
         logger.info(f"two breakdows is {two_breakdowns_in_a_row}")
         if two_breakdowns_in_a_row is True:
-            multiple_breakdowns_warning = "\n- I have not understood your last 2 requests. The keywords you used might have been unfamiliar for me."
+            multiple_breakdowns_warning = "\n- I have not understood your last two requests. The keywords you have used might have been unfamiliar to me."
         else:
             multiple_breakdowns_warning = ""
 
@@ -90,7 +93,7 @@ class ActionSelfAssistedRepair(Action):
         intent_description = self.get_intent_description(last_intent_name)
 
         if user_msg_len <= (last_intent_nlu_mean - 2 * (last_intent_nlu_std)):
-            length_warning = f'\n- I have learned requests similar to "{intent_description}" with longer sentences containing more information.'
+            length_warning = f'\n- I have learned requests similar to "{intent_description}" with longer sentences containing more precise keywords.'
         elif user_msg_len >= (last_intent_nlu_mean + 2 * (last_intent_nlu_std)):
             length_warning = f'\n- I have learned requests similar to "{intent_description}" with shorter sentences containing less information.'
         else:
@@ -103,15 +106,15 @@ class ActionSelfAssistedRepair(Action):
                 # Bot is in breakdown with high CL
                 # Confusion, user text length, fatigue or
                 # multiple breakdowns can be relevant.
-                message = f"I'm not compeletely sure what you mean by: '{last_user_message}'. Here is more information about this breakdown:"
-                message_two = f"\n-I am {last_intent_confidence_percentage} percent sure you meant something like: '{intent_description}'."
+                message = f"Sorry, I'm not compeletely sure what you mean by: '{last_user_message}'. Here is more information about this breakdown:"
+                message_two = f"\n- I am {last_intent_confidence_percentage} percent sure you mean something like: '{intent_description}'"
                 message_title = message + message_two + length_warning + confusion_warning + fatigue_warning + multiple_breakdowns_warning
             else:
                 # Bot is in breakdown with low CL
                 # Confusion and user text length not relevant
                 # Fatigue or multiple breakdowns can be relevant.
-                message = f"I don't know exactly what you mean by: '{last_user_message}'. Here are the possible reasons behind this breakdown that come to my mind: "
-                message_two = "\n- Your request is out of banking scope. "
+                message = f"Sorry, I have severe doubts about what you mean by '{last_user_message}'.\n Here are the possible reasons behind this breakdown that comes to my mind: "
+                message_two = "\n- Your request might be out of my scope. You can ask for my capabilities to get familiar with my skills."
                 message_title = message + fatigue_warning + multiple_breakdowns_warning + message_two
         else:
             # Very first user message caused breakdown.
@@ -120,7 +123,7 @@ class ActionSelfAssistedRepair(Action):
 
         dispatcher.utter_message(text=message_title)
 
-        return [FollowupAction("action_listen")]
+        return []
 
     def count_turns(
         self,
@@ -160,8 +163,8 @@ class ActionSelfAssistedRepair(Action):
         import spacy
         import yaml
         import string
-        import numpy as np # for statistics
-        import re # for advanced string operations
+        import numpy as np  # for statistics
+        import re  # for advanced string operations
 
         last_intent_name = self.get_user_message_info(tracker)[
             "last_intent_name"]

@@ -11,11 +11,16 @@ rules:
   steps:
   - intent: greet
   - action: action_greet_user
+  - action: utter_intro
 
 - rule: say goodbye
   steps:
   - intent: bye
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
   - action: utter_bye
+  - action: action_restart
 
 - rule: thankyou
   steps:
@@ -41,12 +46,12 @@ rules:
 - rule: trigger rephrase
   steps:
   - intent: trigger_rephrase
-  - action: utter_default
+  - action: utter_rephrase_sr
 
-- rule: can't help
+- rule: trigger rephrase with explanations
   steps:
-  - intent: canthelp
-  - action: utter_canthelp
+  - intent: trigger_rephrase_mr
+  - action: utter_rephrase_mr
 
 - rule: positive reaction
   steps:
