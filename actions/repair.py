@@ -67,14 +67,14 @@ class ActionRepair(Action):
 
         events = tracker.events[-15:]
         logger.info(f"Events are: {events}")
-        logger.info(f'clause: {next((True for event in tracker.events[-9:] if event.get("name") == "action_system_repair"), False) }')
+        logger.info(f'clause: {next((True for event in tracker.events[-12:] if event.get("name") == "action_system_repair"), False) }')
 
         repair_strategy = tracker.get_slot("repair_strategy_name")
 
         # Fallback caused by TwoStageFallbackPolicy
         if (
             len(tracker.events) >= 4
-            and next((True for event in tracker.events[-9:] if event.get("name") == "action_system_repair"), False)
+            and next((True for event in tracker.events[-12:] if event.get("name") == "action_system_repair"), False)
         ):
 
             dispatcher.utter_message(template="utter_restart_with_button")
