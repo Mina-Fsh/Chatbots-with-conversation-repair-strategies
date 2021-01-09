@@ -7,11 +7,18 @@ rules:
   - intent: nlu_fallback
   - action: action_repair
 
-- rule: greet
+- rule: Say `hello` and utter intro when the user starts a conversation with intent `greet`
+  conversation_start: true
   steps:
   - intent: greet
   - action: action_greet_user
   - action: utter_intro
+
+- rule: Say `hello` and do NOT utter intro when the user greets in the middle of the conversation
+  conversation_start: false
+  steps:
+  - intent: greet
+  - action: action_greet_user
 
 - rule: say goodbye
   steps:
