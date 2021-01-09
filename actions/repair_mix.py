@@ -4,6 +4,7 @@ from typing import Any, Dict, List, Text
 from rasa_sdk import Tracker, Action
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import (
+    SlotSet,
     EventType,
     FollowupAction,
 )
@@ -45,22 +46,23 @@ class ActionMixRepair(Action):
         logger.info(f"last intent name is: {last_intent_name}")
         last_intent_confidence = self.get_user_message_info(tracker)[
             "last_intent_confidence"]
-        last_intent_confidence_percentage = round(self.get_user_message_info(tracker)[
-            "last_intent_confidence"] * 100, 2)
         second_last_intent_confidence = self.get_user_message_info(tracker)[
             "second_last_intent_confidence"]
 
         confusion_level = self.get_confusion_level(tracker)
         logger.info(f"confusion level is: {confusion_level}")
         if confusion_level is True:
-            confusion_warning = "\n- In this conversation we have switched between different topics."
+            confusion_warning = (
+                "\n- In this conversation, we have switched between different topics. "
+                "Which means we have taken off an expected conversation flow."
+            )
         else:
             confusion_warning = ""
 
         conversation_turns = self.count_turns(tracker)
         logger.info(f"conv turns is: {conversation_turns}")
         if conversation_turns > 20:
-            fatigue_warning = "\n- Our conversation has got too long."
+            fatigue_warning = "\n- Our conversation has gotten too long, which means I have saved many keywords from our conversation history in my memory; this could mislead me."
         else:
             fatigue_warning = ""
 
@@ -68,7 +70,7 @@ class ActionMixRepair(Action):
             "two_breakdowns_in_a_row"]
         logger.info(f"two breakdows is {two_breakdowns_in_a_row}")
         if two_breakdowns_in_a_row is True:
-            multiple_breakdowns_warning = "\n- I have not understood your last 2 requests. The keywords you used might have been unfamiliar for me."
+            multiple_breakdowns_warning = "\n- I have not understood your last two requests. The keywords you have used might have been unfamiliar to me."
         else:
             multiple_breakdowns_warning = ""
 
@@ -84,12 +86,19 @@ class ActionMixRepair(Action):
         intent_description = self.get_intent_description(last_intent_name)
 
         if user_msg_len <= (last_intent_nlu_mean - 2 * (last_intent_nlu_std)):
-            length_warning = f'\n- I have learned requests similar to "{intent_description}" with longer sentences containing more information.'
+            length_warning = f'\n- I have learned requests similar to "{intent_description}" with longer sentences containing more precise keywords.'
         elif user_msg_len >= (last_intent_nlu_mean + 2 * (last_intent_nlu_std)):
             length_warning = f'\n- I have learned requests similar to "{intent_description}" with shorter sentences containing less information.'
         else:
             length_warning = ""
 
+        list_of_messages = [length_warning, fatigue_warning, confusion_warning, multiple_breakdowns_warning]
+        if not any(s.strip() for s in list_of_messages):
+            rephrase_mr_message = "Try to express your request in other words."
+        else:
+            rephrase_mr_message = "I think one of these can help you:" + length_warning + confusion_warning + fatigue_warning + multiple_breakdowns_warning + "\n Try to express your request in other words."
+
+        logger.info(f"The message slot is: {rephrase_mr_message}")
         buttons = []
 
         if second_last_intent_confidence is not None:
@@ -99,8 +108,10 @@ class ActionMixRepair(Action):
                 # Bot is in breakdown with high CL
                 # Confusion, user text length, fatigue or
                 # multiple breakdowns can be relevant.
-                message = f"I'm {last_intent_confidence_percentage} percent confident that this is what you mean, however for different reasons I am confused:"
-                message_title = message + length_warning + confusion_warning + fatigue_warning + multiple_breakdowns_warning
+                message_title = (
+                    "Sorry, I'm not sure I've understood "
+                    "you correctly 🤔 Do you mean..."
+                )
 
                 entities = tracker.latest_message.get("entities", [])
                 entities = {e["entity"]: e["value"] for e in entities}
@@ -119,7 +130,7 @@ class ActionMixRepair(Action):
                 buttons.append(
                     {
                         "title": "Something else!",
-                        "payload": "/trigger_rephrase"
+                        "payload": "/trigger_rephrase_mr"
                     }
                 )
 
@@ -127,8 +138,8 @@ class ActionMixRepair(Action):
                 # Bot is in breakdown with low CL
                 # Confusion and user text length not relevant
                 # Fatigue or multiple breakdowns can be relevant.
-                message = f"I don't know exactly what you mean by: '{last_user_message}'. Here are the possible reasons behind this breakdown that come to my mind: "
-                message_two = "\n- Your request is out of banking scope. "
+                message = f"Sorry, I have severe doubts about what you mean by '{last_user_message}'.\n Here are the possible reasons behind this breakdown that comes to my mind: "
+                message_two = "\n- Your request might be out of my scope. You can ask for my capabilities to get familiar with my skills."
                 message_title = message + fatigue_warning + multiple_breakdowns_warning + message_two
         else:
             # Very first user message caused breakdown.
@@ -137,7 +148,7 @@ class ActionMixRepair(Action):
 
         dispatcher.utter_message(text=message_title, buttons=buttons)
 
-        return [FollowupAction("action_listen")]
+        return [SlotSet("rephrase_mr_message", rephrase_mr_message)]
 
     def count_turns(
         self,
@@ -177,8 +188,8 @@ class ActionMixRepair(Action):
         import spacy
         import yaml
         import string
-        import numpy as np # for statistics
-        import re # for advanced string operations
+        import numpy as np  # for statistics
+        import re  # for advanced string operations
 
         last_intent_name = self.get_user_message_info(tracker)[
             "last_intent_name"]
@@ -202,7 +213,7 @@ class ActionMixRepair(Action):
 
         # clean string from annotations
         # https://stackabuse.com/using-regex-for-text-manipulation-in-python/
-        # https://regexr.com/ 
+        # https://regexr.com/
 
         annotation_pattern = "\(.*\)|\{.*\}"
 

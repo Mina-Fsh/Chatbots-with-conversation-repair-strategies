@@ -78,7 +78,7 @@ class ActionSystemRepair(Action):
 
         dispatcher.utter_message(text=message_title, buttons=buttons)
 
-        return [FollowupAction("action_listen")]
+        return []
 
     def get_button_title(
         self, intent: Text, entities: Dict[Text, Text]

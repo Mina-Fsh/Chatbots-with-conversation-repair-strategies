@@ -45,8 +45,8 @@ intents:
     use_entities: []
 - check_balance:
     use_entities:
-    - credit_card
     - account_type
+    - credit_card
 - check_earnings:
     use_entities: []
 - check_recipients
@@ -56,6 +56,7 @@ intents:
 - repeat
 - human_handoff
 - trigger_rephrase
+- trigger_rephrase_mr
 - configure_repair_strategy
 - nlu_fallback
 entities:
@@ -161,6 +162,9 @@ slots:
     type: any
     initial_value: self_assisted_repair
     influence_conversation: false
+  rephrase_mr_message:
+    type: text
+    influence_conversation: false
 responses:
   utter_greet_name:
   - text: Hi, {PERSON}!
@@ -231,27 +235,19 @@ responses:
   utter_anything_else:
   - text: Is there anything else I can help you with?
   utter_intro:
-  - text: "I'm Paya, your PAY Bank financial assistant. \nI can help you with your\
-      \ financial accounts. \nYou can ask me things like: \n- What's my account balance?\
-      \ \n- Pay off my credit card \n- What did I spend at Amazon last month?   \n\
-      - I need to transfer money."
-  utter_capabilities_repair:
-  - text: "I'm sorry, but I couldn't understand you. \nI can help you with topics\
-      \ related to banking such as: \n- Transfer money to known recipients. \n- Check\
-      \ the earning or spending history. \n- Pay a credit card bill! \n- Tell the\
-      \ account balance. \n- Answer FAQ such as product description, card limit, collecting\
-      \ points, etc.\n"
+  - text: "I'm Paya, your PAY Bank financial assistant. I can help you with your financial\
+      \ inquiries, such as: \n- Transfering money to known recipients. \n- Checking\
+      \ the earnings or spendings history. \n- Paying a credit card bill! \n- Showing\
+      \ the account balance. \n- Answering frequently asked questions such as first\
+      \ credit card limit, the annual cost of credit card, possibility to collect\
+      \ bonus points, etc.\n \n I also like having a small talk with you \U0001F609."
   utter_capabilities:
-  - text: "I like having a small talk to you \U0001F609, having said that, I am here\
-      \ to help you with your banking requests such as: \n- Transfer money to known\
-      \ recipients. \n- Check the earning or spending history. \n- Pay a credit card\
-      \ bill! \n- Tell the account balance. \n- Answer FAQ such as product description,\
-      \ card limit, collecting points, etc.\n"
-  utter_possibilities:
-  - text: "You can ask me about:\n- Transfer money to known recipients. \n- Check\
-      \ the earning or spending history. \n- Pay a credit card bill! \n- Tell the\
-      \ account balance. \n- Answer FAQ such as product description, card limit, collecting\
-      \ points, etc.\n"
+  - text: "I like having a small talk with you \U0001F609, having said that, I am\
+      \ here to help you with your banking requests such as: \n- Transfering money\
+      \ to known recipients. \n- Checking the earnings or spendings history. \n- Paying\
+      \ a credit card bill! \n- Showing the account balance. \n- Answering frequently\
+      \ asked questions such as first credit card limit, the annual cost of credit\
+      \ card, possibility to collect bonus points, etc."
   utter_default:
   - text: I didn't understand. Could you rephrase that?
   - text: I'm sorry, but I didn't understand you. Could you please rephrase what you
@@ -259,12 +255,17 @@ responses:
   - text: I'm afraid I didn't get what you just said. Could you rephrase that?
   - text: I didn't quite get that. Could you rephrase your message?
   - text: Could you rephrase your message? I didn't get it, I'm sorry.
+  utter_rephrase_sr:
+  - text: I'm sorry that I couldn't understand you. Try to express your request in
+      other words.
+  utter_rephrase_mr:
+  - text: I'm sorry that I couldn't understand you. {rephrase_mr_message}
   utter_repair_strategy_saved:
   - text: 'Alright. The repair strategy in this conversation is set to: {repair_strategy_name}.'
   utter_phonenumber:
-  - text: "I want to connect you to an agent but unfortunately there is no agent available\
-      \ at the moment.\n Please contact the phone number 01234567, or continue chatting\
-      \ with me!"
+  - text: "I want to connect you to an agent, but unfortunately, there is no agent\
+      \ available at the moment. \nPlease contact the phone number 01234567, or continue\
+      \ talking with me!"
   utter_builder:
   - text: 'Mina Foosherian built me based on two of Rasa example bots: SARA and Financial
       Demo! 🧠 🛠'
@@ -276,7 +277,7 @@ responses:
   - text: A little bit cold; otherwise fine.
   utter_howold:
   - text: Old enough to be a bot!
-  - text: Age is just an issue of mind over matter. If you don’t mind, it doesn’t
+  - text: Age is just an issue of mind over matter. If you don't mind, it doesn't
       matter.
   - text: Never ask a chatbot her age!
   - text: My first git commit was many moons ago.
@@ -292,12 +293,12 @@ responses:
   - text: I'm sorry, I can't recommend a restaurant as I usually cook at home.
   - text: I'm sorry, I'm not getting taste buds for another few updates.
   utter_time:
-  - text: It's the most wonderful time of the year!
+  - text: It's the most beautiful time of the year!
   - text: Time is a human construct, you'll have to tell me.
   - text: It's five o'clock somewhere!
   - text: That's hard to say -- it's different all over the world!
   utter_languagesbot:
-  - text: I am in the process of learning, but at the moment I can only speak English.
+  - text: I am in the process of learning, but at the moment, I can only speak English.
   - text: Binary code and the language of love. And English.
   - text: I was written in Python, but for your convenience, I'll translate it into
       English.
@@ -342,8 +343,8 @@ responses:
       for the first year.
   utter_howtoapply:
   - text: 'You already have the following accounts with us: a giro account, a Gold
-      credit card and a Silver credit card. You can request to open a savings account
-      or get another credit card online via our website: www.paybank.org'
+      credit card, and a Silver credit card. You can request to open a savings account
+      or get another credit card online via our website: www.paybank.org.'
   utter_application_requirements:
   - text: In general, a minimum age of 18 and a copy of your passport are required
       to use PAY bank services. Since you already have an account in PAY Bank, you
