@@ -239,7 +239,7 @@ responses:
       \ the earnings or spendings history. \n- Paying a credit card bill! \n- Showing\
       \ the account balance. \n- Answering frequently asked questions such as first\
       \ credit card limit, the annual cost of credit card, possibility to collect\
-      \ bonus points, etc.\n \n I also like having a small talk with you \U0001F609."
+      \ bonus points, etc.\n\nI also like having a small talk with you \U0001F609."
   utter_capabilities:
   - text: "I like having a small talk with you \U0001F609, having said that, I am\
       \ here to help you with your banking requests such as: \n- Transfering money\
@@ -260,7 +260,7 @@ responses:
   utter_rephrase_mr:
   - text: I'm sorry that I couldn't understand you. {rephrase_mr_message}
   utter_phonenumber:
-  - text: "I want to connect you to an agent, but unfortunately, there is no agent\
+  - text: "I want to connect you to an agent, but unfortunately there is no agent\
       \ available at the moment. \nPlease contact the phone number 01234567, or continue\
       \ talking with me!"
   utter_builder:

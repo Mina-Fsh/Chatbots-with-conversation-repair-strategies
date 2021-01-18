@@ -96,7 +96,7 @@ class ActionMixRepair(Action):
         if not any(s.strip() for s in list_of_messages):
             rephrase_mr_message = "Try to express your request in other words."
         else:
-            rephrase_mr_message = "I think one of these can help you:" + length_warning + confusion_warning + fatigue_warning + multiple_breakdowns_warning + "\n Try to express your request in other words."
+            rephrase_mr_message = "I think one of these can help you:" + length_warning + confusion_warning + fatigue_warning + multiple_breakdowns_warning + "\nTry to express your request in other words."
 
         logger.info(f"The message slot is: {rephrase_mr_message}")
         buttons = []
@@ -138,7 +138,7 @@ class ActionMixRepair(Action):
                 # Bot is in breakdown with low CL
                 # Confusion and user text length not relevant
                 # Fatigue or multiple breakdowns can be relevant.
-                message = f"Sorry, I have severe doubts about what you mean by '{last_user_message}'.\n Here are the possible reasons behind this breakdown that comes to my mind: "
+                message = f"Sorry, I have severe doubts about what you mean by '{last_user_message}'.\nHere are the possible reasons behind this breakdown that comes to my mind: "
                 message_two = "\n- Your request might be out of my scope. You can ask for my capabilities to get familiar with my skills."
                 message_title = message + fatigue_warning + multiple_breakdowns_warning + message_two
         else:

@@ -113,7 +113,7 @@ class ActionSelfAssistedRepair(Action):
                 # Bot is in breakdown with low CL
                 # Confusion and user text length not relevant
                 # Fatigue or multiple breakdowns can be relevant.
-                message = f"Sorry, I have severe doubts about what you mean by '{last_user_message}'.\n Here are the possible reasons behind this breakdown that comes to my mind: "
+                message = f"Sorry, I have severe doubts about what you mean by '{last_user_message}'.\nHere are the possible reasons behind this breakdown that comes to my mind: "
                 message_two = "\n- Your request might be out of my scope. You can ask for my capabilities to get familiar with my skills."
                 message_title = message + fatigue_warning + multiple_breakdowns_warning + message_two
         else:
