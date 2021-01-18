@@ -11,42 +11,6 @@ INTENT_DESCRIPTION_MAPPING_PATH = "actions/intent_description_mapping.csv"
 logger = logging.getLogger(__name__)
 
 
-class ActionConfigureRepairStrategy(Action):
-
-    def name(self) -> Text:
-        return "action_configure_repair_strategy"
-
-    def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any]
-    ) -> List[Dict[Text, Any]]:
-
-        message_title = "Which repair strategy would you like to have in this \
-         conversation in case of a breakdown?"
-
-        buttons = [
-            {
-                "title": "Give me directions to proceed.",
-                "payload": "system_repair",
-            },
-            {
-                "title": "Explain me possible reasons behind the breakdown.",
-                "payload": "self_assisted_repair",
-            },
-            {
-                "title": "Give me directions to proceed, or if relevant \
-                    explain me possible reasons behind the breakdown..",
-                "payload": "mix_repair",
-            }  
-        ]
-
-        dispatcher.utter_message(text=message_title, buttons=buttons)
-
-        return []
-
-
 class ActionRepair(Action):
 
     def name(self) -> Text:
