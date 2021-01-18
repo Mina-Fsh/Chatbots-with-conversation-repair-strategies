@@ -57,7 +57,6 @@ intents:
 - human_handoff
 - trigger_rephrase
 - trigger_rephrase_mr
-- configure_repair_strategy
 - nlu_fallback
 entities:
 - amount-of-money
@@ -260,8 +259,6 @@ responses:
       other words.
   utter_rephrase_mr:
   - text: I'm sorry that I couldn't understand you. {rephrase_mr_message}
-  utter_repair_strategy_saved:
-  - text: 'Alright. The repair strategy in this conversation is set to: {repair_strategy_name}.'
   utter_phonenumber:
   - text: "I want to connect you to an agent, but unfortunately, there is no agent\
       \ available at the moment. \nPlease contact the phone number 01234567, or continue\
@@ -475,7 +472,6 @@ actions:
 - validate_cc_payment_form
 - validate_transfer_money_form
 - validate_transaction_search_form
-- action_configure_repair_strategy
 - action_repair
 - action_system_repair
 - action_self_assisted_repair

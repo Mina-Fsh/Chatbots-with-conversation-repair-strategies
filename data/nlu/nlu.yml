@@ -355,9 +355,6 @@ nlu:
     - [Mr. Sweney](PERSON)
     - [Terri Cline](PERSON)
     - [William Zelkind](PERSON)
-    - [self_assisted_repair](repair_strategy_name)
-    - [system_repair](repair_strategy_name)
-    - [mix_repair](repair_strategy_name)
 - intent: pay_cc
   examples: |
     - I would like to pay the [minimum balance](amount-of-money) on my [gold](credit_card) [card](account_type)
@@ -550,29 +547,6 @@ nlu:
     - let me speak to a real person
     - let me speak to a real person please
     - i want to talk to a real person
-- intent: configure_repair_strategy
-  examples: |
-    - i want to configure the repair strategy
-    - configure fallback
-    - configure repair strategy
-    - show me the repair strategies
-    - i want to configure the fallback policy
-    - set fallback policy
-    - configure the repair strategies
-    - I want to set my fallback policy
-    - configure fallback policy
-    - i want to set the fallback policy
-    - change the repair strategy
-    - change the fallback policy
-    - i want to change the fallback policy
-    - switch to [self_assisted_repair](repair_strategy_name)
-    - set fallback policy to [system_repair](repair_strategy_name)
-    - in case of a fallback use [mix_repair](repair_strategy_name)
-    - if you dont understand what I say use [mix_repair](repair_strategy_name) policy
-    - change the fallback to [self_assisted_repair](repair_strategy_name)
-    - change fallback to [mix_repair](repair_strategy_name)
-    - set the repair strategy to [mix_repair](repair_strategy_name)
-    - change the fallback to [system_repair](repair_strategy_name)
 - intent: affirm
   examples: |
     - Awesome!
