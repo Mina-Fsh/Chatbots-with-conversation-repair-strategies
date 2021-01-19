@@ -75,11 +75,11 @@ class ActionMixRepair(Action):
         else:
             length_warning = ""
 
-        list_of_messages = [length_warning, multiple_breakdowns_warning]
+        list_of_messages = [multiple_breakdowns_warning]
         if not any(s.strip() for s in list_of_messages):
             rephrase_mr_message = "Try to express your request in other words."
         else:
-            rephrase_mr_message = "I think this information can help you:" + length_warning + multiple_breakdowns_warning + "\nTry to express your request in other words."
+            rephrase_mr_message = "I think this information can help you:" + multiple_breakdowns_warning + "\nTry to express your request in other words."
 
         logger.info(f"The message slot is: {rephrase_mr_message}")
         buttons = []
@@ -91,10 +91,9 @@ class ActionMixRepair(Action):
                 # Bot is in breakdown with high CL
                 # Confusion, user text length, fatigue or
                 # multiple breakdowns can be relevant.
-                message_title = (
-                    "Sorry, I'm not sure I've understood "
-                    "you correctly 🤔 Do you mean..."
-                )
+                message = f'Sorry, I\'m not compeletely sure what you mean by "{last_user_message}". Here is more information:'
+                message_two = f'\n- I\'m quite confident that you mean something like: "{intent_description}"'
+                message_title = message + message_two + length_warning
 
                 entities = tracker.latest_message.get("entities", [])
                 entities = {e["entity"]: e["value"] for e in entities}
