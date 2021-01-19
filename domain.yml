@@ -247,8 +247,6 @@ responses:
       \ a credit card bill! \n- Showing the account balance. \n- Answering frequently\
       \ asked questions such as first credit card limit, the annual cost of credit\
       \ card, possibility to collect bonus points, etc."
-  utter_default:
-  - text: Hmm... I'm afraid I didn't get what you just said.
   utter_rephrase_sr:
   - text: I'm sorry that I couldn't understand you. Try to express your request in other words.
   utter_rephrase_mr:
