@@ -49,23 +49,6 @@ class ActionMixRepair(Action):
         second_last_intent_confidence = self.get_user_message_info(tracker)[
             "second_last_intent_confidence"]
 
-        confusion_level = self.get_confusion_level(tracker)
-        logger.info(f"confusion level is: {confusion_level}")
-        if confusion_level is True:
-            confusion_warning = (
-                "\n- In this conversation, we have switched between different topics. "
-                "Which means we have taken off an expected conversation flow."
-            )
-        else:
-            confusion_warning = ""
-
-        conversation_turns = self.count_turns(tracker)
-        logger.info(f"conv turns is: {conversation_turns}")
-        if conversation_turns > 20:
-            fatigue_warning = "\n- Our conversation has gotten too long, which means I have saved many keywords from our conversation history in my memory; this could mislead me."
-        else:
-            fatigue_warning = ""
-
         two_breakdowns_in_a_row = self.get_user_message_info(tracker)[
             "two_breakdowns_in_a_row"]
         logger.info(f"two breakdows is {two_breakdowns_in_a_row}")
@@ -86,17 +69,17 @@ class ActionMixRepair(Action):
         intent_description = self.get_intent_description(last_intent_name)
 
         if user_msg_len <= (last_intent_nlu_mean - 2 * (last_intent_nlu_std)):
-            length_warning = f'\n- I have learned requests similar to "{intent_description}" with longer sentences containing more precise keywords.'
+            length_warning = f'\n- I have learned requests similar to "{intent_description}" with longer sentences.'
         elif user_msg_len >= (last_intent_nlu_mean + 2 * (last_intent_nlu_std)):
-            length_warning = f'\n- I have learned requests similar to "{intent_description}" with shorter sentences containing less information.'
+            length_warning = f'\n- I have learned requests similar to "{intent_description}" with shorter sentences.'
         else:
             length_warning = ""
 
-        list_of_messages = [length_warning, fatigue_warning, confusion_warning, multiple_breakdowns_warning]
+        list_of_messages = [length_warning, multiple_breakdowns_warning]
         if not any(s.strip() for s in list_of_messages):
             rephrase_mr_message = "Try to express your request in other words."
         else:
-            rephrase_mr_message = "I think one of these can help you:" + length_warning + confusion_warning + fatigue_warning + multiple_breakdowns_warning + "\nTry to express your request in other words."
+            rephrase_mr_message = "I think this information can help you:" + length_warning + multiple_breakdowns_warning + "\nTry to express your request in other words."
 
         logger.info(f"The message slot is: {rephrase_mr_message}")
         buttons = []
@@ -138,9 +121,9 @@ class ActionMixRepair(Action):
                 # Bot is in breakdown with low CL
                 # Confusion and user text length not relevant
                 # Fatigue or multiple breakdowns can be relevant.
-                message = f"Sorry, I have severe doubts about what you mean by '{last_user_message}'.\nHere are the possible reasons behind this breakdown that comes to my mind: "
+                message = f'Sorry, I have severe doubts about what you mean by "{last_user_message}".\nHere are the possible reasons behind this breakdown that comes to my mind:'
                 message_two = "\n- Your request might be out of my scope. You can ask for my capabilities to get familiar with my skills."
-                message_title = message + fatigue_warning + multiple_breakdowns_warning + message_two
+                message_title = message + multiple_breakdowns_warning + message_two
         else:
             # Very first user message caused breakdown.
             # Say Hi to the user
@@ -149,20 +132,6 @@ class ActionMixRepair(Action):
         dispatcher.utter_message(text=message_title, buttons=buttons)
 
         return [SlotSet("rephrase_mr_message", rephrase_mr_message)]
-
-    def count_turns(
-        self,
-        tracker: Tracker
-    ) -> int:
-
-        conv_turns = 0
-        user_event_list = []
-        for events in tracker.events_after_latest_restart():
-            if events["event"] == "user":
-                user_event_list.append(events)
-                conv_turns += 1
-
-        return conv_turns
 
     def get_user_utterance_length(
         self,
@@ -351,84 +320,6 @@ class ActionMixRepair(Action):
             "second_last_intent_confidence": second_last_intent_confidence,
             "two_breakdowns_in_a_row": two_breakdowns_in_a_row
                 }
-
-    def get_confusion_level(
-        self,
-        tracker: Tracker
-    ) -> bool:
-
-        # Calculate confusion based on jumping from one intent to another
-        # Grouping the intents based on their similarity in context
-        distanced_intent_list = [
-            [
-                "ask_builder",
-                "ask_howbuilt",
-                "ask_isbot",
-                "ask_ishuman",
-                "ask_languagesbot",
-                "ask_whoisit",
-                "ask_howdoing",
-                "ask_howold",
-                "ask_wherefrom",
-                "ask_whatismyname",
-                "ask_whoami",
-                "ask_restaurant",
-                "ask_time",
-                "ask_weather",
-                "telljoke",
-                "handleinsult"
-            ],
-            [
-                "whatisPAYbank",
-                "product_description",
-                "howtoapply",
-                "application_requirements",
-                "required_age",
-                "cardlimit",
-                "points_collect",
-                "annualcost"
-            ],
-            [
-                "transfer_money",
-                "pay_cc",
-                "ask_transfer_charge",
-                "search_transactions",
-                "check_balance",
-                "check_earnings",
-                "check_recipients",
-                "inform"
-            ]
-        ]
-
-        last_intent_name = self.get_user_message_info(tracker)[
-            "last_intent_name"]
-        second_last_intent_name = self.get_user_message_info(tracker)[
-            "second_last_intent_name"]
-
-        for list in distanced_intent_list:
-            if last_intent_name in list:
-                index_1 = distanced_intent_list.index(list)
-                logger.debug(f"{last_intent_name} is in \
-                    group {index_1}.")
-            else:
-                index_1 = None
-
-            if (second_last_intent_name is not None and second_last_intent_name in list):
-                index_2 = distanced_intent_list.index(list)
-                logger.debug(f"{second_last_intent_name} is in \
-                    group {index_2}.")
-            else:
-                index_2 = None
-
-        logger.debug(f"index 1 is {index_1}")
-        logger.debug(f"index 2 is {index_2}")
-
-        if index_1 is not None and index_2 is not None:
-            confusion_level = True if index_1 != index_2 else False
-        else:
-            confusion_level = False
-
-        return confusion_level
 
     def count_breakdowns(
             self,

@@ -37,7 +37,7 @@ class ActionRepair(Action):
 
         # Fallback caused by TwoStageFallbackPolicy
         if (
-            len(tracker.events) >= 4
+            len(tracker.events) >= 12
             and next((True for event in tracker.events[-12:] if event.get("name") == "action_system_repair"), False)
         ):
 
@@ -53,5 +53,5 @@ class ActionRepair(Action):
         elif repair_strategy == "mix_repair":
             return [FollowupAction("action_mix_repair")]
         else:
-            dispatcher.utter_message("I do not know this repair strategy")
+            return [FollowupAction("action_system_repair")]
         return []
