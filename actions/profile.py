@@ -27,11 +27,10 @@ def create_mock_profile():
     ]
     recipient_db = [
         "Mina Foosherian",
-        "Stefan Wellsandt",
-        "Tim baker",
-        "Nina Wenig",
-        "Mohammad salehi",
-        "Nima Zargham",
+        "Amy Winehouse",
+        "Freddie Mercury",
+        "Michael Jackson",
+        "John Lennon",
     ]
     vendor_db = [
         "saturn",
