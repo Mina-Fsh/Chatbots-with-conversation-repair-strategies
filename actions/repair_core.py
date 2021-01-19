@@ -41,7 +41,7 @@ class ActionDefaultFallback(Action):
         # Fallback caused by Core
         else:
             if repair_strategy == "system_repair":
-                message = "Hmm... I'm afraid I didn't get what you just said."
+                message_title = "Hmm... I'm afraid I didn't get what you just said."
             else:
                 conversation_turns = self.count_turns(tracker)
                 logger.info(f"conv turns is: {conversation_turns}")
@@ -58,7 +58,6 @@ class ActionDefaultFallback(Action):
                 message_title = message + confusion_warning + fatigue_warning
 
             dispatcher.utter_message(text=message_title)
-            # dispatcher.utter_message(template="utter_default")
             return [UserUtteranceReverted()]
 
     def count_turns(
