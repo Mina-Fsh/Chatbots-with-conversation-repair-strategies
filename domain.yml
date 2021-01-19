@@ -239,30 +239,22 @@ responses:
       \ the earnings or spendings history. \n- Paying a credit card bill! \n- Showing\
       \ the account balance. \n- Answering frequently asked questions such as first\
       \ credit card limit, the annual cost of credit card, possibility to collect\
-      \ bonus points, etc.\n \n I also like having a small talk with you \U0001F609."
+      \ bonus points, etc.\n\nI also like having a small talk with you. \U0001F609"
   utter_capabilities:
-  - text: "I like having a small talk with you \U0001F609, having said that, I am\
+  - text: "I like having a small talk with you. \U0001F609 Having said that, I am\
       \ here to help you with your banking requests such as: \n- Transfering money\
       \ to known recipients. \n- Checking the earnings or spendings history. \n- Paying\
       \ a credit card bill! \n- Showing the account balance. \n- Answering frequently\
       \ asked questions such as first credit card limit, the annual cost of credit\
       \ card, possibility to collect bonus points, etc."
   utter_default:
-  - text: I didn't understand. Could you rephrase that?
-  - text: I'm sorry, but I didn't understand you. Could you please rephrase what you
-      just said?
-  - text: I'm afraid I didn't get what you just said. Could you rephrase that?
-  - text: I didn't quite get that. Could you rephrase your message?
-  - text: Could you rephrase your message? I didn't get it, I'm sorry.
+  - text: Hmm... I'm afraid I didn't get what you just said.
   utter_rephrase_sr:
-  - text: I'm sorry that I couldn't understand you. Try to express your request in
-      other words.
+  - text: I'm sorry that I couldn't understand you. Try to express your request in other words.
   utter_rephrase_mr:
   - text: I'm sorry that I couldn't understand you. {rephrase_mr_message}
   utter_phonenumber:
-  - text: "I want to connect you to an agent, but unfortunately, there is no agent\
-      \ available at the moment. \nPlease contact the phone number 01234567, or continue\
-      \ talking with me!"
+  - text: "I want to connect you to an agent, but unfortunately there is no agent available at the moment. \nPlease contact the phone number 01234567, or continue talking with me!"
   utter_builder:
   - text: 'Mina Foosherian built me based on two of Rasa example bots: SARA and Financial
       Demo! 🧠 🛠'

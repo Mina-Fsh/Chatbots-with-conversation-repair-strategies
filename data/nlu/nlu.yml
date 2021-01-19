@@ -9,7 +9,6 @@ nlu:
     - Give me more information about PAY bank
     - How does PAY bank work?
     - I want to know about PAY bank
-    - I want to know what PAY bank actually does that isn't clear to me yet
     - I want to learn what PAY bank does
     - I want to learn what PAY bank is
     - I would like to know about PAY bank
@@ -69,7 +68,6 @@ nlu:
     - what is PAY bank?
     - whats PAY bank
     - yeah go on explaining what PAY bank is
-    - what are the products of PAY bank
 - intent: product_description
   examples: |
     - what is a [visa card](account_type)?
@@ -81,6 +79,7 @@ nlu:
     - what is PAY bank [credit card](account_type)
     - what is PAY bank [silver](credit_card) [card](account_type)?
     - tell me more about your services
+    - tell me more about your products
     - your products are?
     - and what products do you have?
 - intent: howtoapply
@@ -472,6 +471,9 @@ nlu:
     - who can I transfer money to?
     - recipient list
     - to whom can i tranfer money?
+    - show me the list of the people I can send money to
+    - which list of recipient?
+    - show me the list of valid payee
 - intent: human_handoff
   examples: |
     - I want a human
