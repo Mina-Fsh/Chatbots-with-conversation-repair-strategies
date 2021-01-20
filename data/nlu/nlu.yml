@@ -365,8 +365,8 @@ nlu:
     - I want to pay my [silver](credit_card) bill
     - Pay my [visa](credit_card)
     - I want to pay my [visa](credit_card) bill
-    - Pay my [mastercard](credit_card)
-    - I want to pay my [MasterCard](credit_card) bill
+    - Pay my [master](credit_card)
+    - I want to pay my [Master](credit_card) bill
     - I want to pay my [credit card](account_type) bill
     - I want to pay the [current balance](amount-of-money) on my [credit card](account_type)
     - can you help me pay the [current balance](amount-of-money) on my [credit card](account_type)
@@ -388,7 +388,7 @@ nlu:
     - I guess it is. Since it's so much, let's pay off my [credit](account_type)
     - Let's pay that [credit card]{"entity": "account_type", "value": "credit"} bill
     - I want to pay 100 dollars toward my [gold](credit_card) [card](account_type), tomorrow
-    - pay 100 towards [silver](credit_card) [card](account_type), tomorrow
+    - pay 100 towards [Visa](credit_card) [card](account_type), tomorrow
 - intent: search_transactions
   examples: |
     - how much did I spend at [Lidl](vendor_name) this week?
@@ -2366,6 +2366,14 @@ nlu:
     - balance
     - full
     - full balance
+- synonym: gold
+  examples: |
+    - visa
+    - Visa
+- synonym: silver
+  examples: |
+    - master
+    - Master
 - lookup: location
   examples: |
     - San Francisco
