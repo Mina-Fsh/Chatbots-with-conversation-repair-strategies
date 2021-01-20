@@ -28,37 +28,25 @@ class ActionDefaultFallback(Action):
 
         repair_strategy = tracker.get_slot("repair_strategy_name")
 
-        # Fallback caused by TwoStageFallbackPolicy
-        if (
-            len(tracker.events) >= 12
-            and tracker.events[-12].get("name") == "action_system_repair"
-        ):
-
-            dispatcher.utter_message(template="utter_restart_with_button")
-
-            return [FollowupAction("action_listen")]
-
-        # Fallback caused by Core
+        if repair_strategy == "system_repair":
+            message_title = "Hmm... I'm afraid I didn't get what you just said."
         else:
-            if repair_strategy == "system_repair":
-                message_title = "Hmm... I'm afraid I didn't get what you just said."
+            conversation_turns = self.count_turns(tracker)
+            logger.info(f"conv turns is: {conversation_turns}")
+            if conversation_turns > 20:
+                fatigue_warning = "\n- Our conversation has gotten too long, which means I have saved many keywords from our conversation history in my memory; this could mislead me."
             else:
-                conversation_turns = self.count_turns(tracker)
-                logger.info(f"conv turns is: {conversation_turns}")
-                if conversation_turns > 20:
-                    fatigue_warning = "\n- Our conversation has gotten too long, which means I have saved many keywords from our conversation history in my memory; this could mislead me."
-                else:
-                    fatigue_warning = ""
+                fatigue_warning = ""
 
-                confusion_warning = (
+            confusion_warning = (
                         "\n- In this conversation, we have taken off an expected conversation flow."
                     )
-                message = "Hmm... I'm afraid I didn't get what you just said. I think this information can help you:"
+            message = "Hmm... I'm afraid I didn't get what you just said. I think this information can help you:"
 
-                message_title = message + confusion_warning + fatigue_warning
+            message_title = message + confusion_warning + fatigue_warning
 
-            dispatcher.utter_message(text=message_title)
-            return [UserUtteranceReverted()]
+        dispatcher.utter_message(text=message_title)
+        return [UserUtteranceReverted()]
 
     def count_turns(
         self,
