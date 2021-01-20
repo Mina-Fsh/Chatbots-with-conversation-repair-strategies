@@ -248,11 +248,14 @@ responses:
       \ asked questions such as first credit card limit, the annual cost of credit\
       \ card, possibility to collect bonus points, etc."
   utter_rephrase_sr:
-  - text: I'm sorry that I couldn't understand you. Try to express your request in other words.
+  - text: I'm sorry that I couldn't understand you. Try to express your request in
+      other words.
   utter_rephrase_mr:
   - text: I'm sorry that I couldn't understand you. {rephrase_mr_message}
   utter_phonenumber:
-  - text: "I want to connect you to an agent, but unfortunately there is no agent available at the moment. \nPlease contact the phone number 01234567, or continue talking with me!"
+  - text: "I want to connect you to an agent, but unfortunately there is no agent\
+      \ available at the moment. \nPlease contact the phone number 01234567, or continue\
+      \ talking with me!"
   utter_builder:
   - text: 'Mina Foosherian built me based on two of Rasa example bots: SARA and Financial
       Demo! 🧠 🛠'
@@ -469,6 +472,7 @@ actions:
 - action_greet_user
 - action_repeat
 - action_pause
+- action_default_fallback
 forms:
   cc_payment_form:
     AA_CONTINUE_FORM:
