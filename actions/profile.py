@@ -12,7 +12,7 @@ utc = pytz.UTC
 
 def create_mock_profile():
     currency = "€"
-    account_balance = 3000
+    account_balance = 1000
 
     credit_card_balance = {}
     transaction_history = {"spend": {}, "deposit": {}}
