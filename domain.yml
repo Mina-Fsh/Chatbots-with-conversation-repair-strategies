@@ -92,6 +92,7 @@ slots:
     influence_conversation: false
   credit_card:
     type: any
+    initial_value: gold
     influence_conversation: false
   credit_card_balance:
     type: any

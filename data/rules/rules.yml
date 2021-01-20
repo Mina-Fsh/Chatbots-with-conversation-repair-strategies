@@ -5,8 +5,6 @@ rules:
 - rule: Rule to handle messages with low NLU confidence (automated conversion from 'FallbackPolicy')
   steps:
   - intent: nlu_fallback
-  - action: action_deactivate_loop
-  - active_loop: null
   - action: action_repair
 
 - rule: Say `hello` and utter intro when the user starts a conversation with intent `greet`
