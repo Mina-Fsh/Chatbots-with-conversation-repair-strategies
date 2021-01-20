@@ -169,8 +169,8 @@ class ActionMixRepair(Action):
             nlu_list = nlu_dic["nlu"]
             res = next((sub for sub in nlu_list if sub['intent'] == last_intent_name), None)
             intent_nlu_examples = res["examples"]
-            logger.info(f"{res}")
-            logger.info(f"Intent examples: {intent_nlu_examples}")
+            # logger.info(f"{res}")
+            # logger.info(f"Intent examples: {intent_nlu_examples}")
 
         nlp = spacy.load("en_core_web_sm")
         doc = nlp(intent_nlu_examples)
@@ -187,12 +187,12 @@ class ActionMixRepair(Action):
 
         cleaned_string = re.sub(annotation_pattern, "", intent_nlu_examples)
 
-        logger.info(f"NLU example string without annotations: {cleaned_string}")
+        # logger.info(f"NLU example string without annotations: {cleaned_string}")
 
         # split string
         nlu_example_list = cleaned_string.split("- ")
 
-        logger.info(f"NLU example list: {nlu_example_list}")
+        # logger.info(f"NLU example list: {nlu_example_list}")
 
         # clean string
 
@@ -202,7 +202,7 @@ class ActionMixRepair(Action):
         # remove line breaks for each example string.
         clean_nlu_example_list = [x.replace('\n', ' ').replace('\r', '') for x in clean_nlu_example_list]
 
-        logger.info(f"Clean NLU example list: {clean_nlu_example_list}")
+        # logger.info(f"Clean NLU example list: {clean_nlu_example_list}")
 
         list = []
 
@@ -214,7 +214,7 @@ class ActionMixRepair(Action):
 
         clean_nlu_example_list = list
 
-        logger.info(f"No punctuation NLU example list: {clean_nlu_example_list}")
+        # logger.info(f"No punctuation NLU example list: {clean_nlu_example_list}")
 
         # remove stop words
         # https://stackabuse.com/removing-stop-words-from-strings-in-python/#usingthespacylibrary 
@@ -232,14 +232,14 @@ class ActionMixRepair(Action):
 
             # tokens_without_sw = [word for word in text_tokens if not token.is_stop]
 
-            logger.info(f"String without stopwords: {tokens_without_sw}")
+            # logger.info(f"String without stopwords: {tokens_without_sw}")
 
             # count length of remaining example and store in list.
 
             length = len(tokens_without_sw)
             example_lengths.append(length) if (length > 0) else next
 
-        logger.info(f"example length is: {example_lengths}")
+        # logger.info(f"example length is: {example_lengths}")
 
         # calculate the mean value and the standard deviation of the list items
         # https://numpy.org/doc/stable/reference/generated/numpy.std.html#:~:text=The%20standard%20deviation%20is%20the,N%20%3D%20len(x)%20.
@@ -248,8 +248,8 @@ class ActionMixRepair(Action):
 
         std = np.std(example_lengths)
 
-        logger.info(f"Mean: {mean}")
-        logger.info(f"Standard deviation: {std}")
+        # logger.info(f"Mean: {mean}")
+        # logger.info(f"Standard deviation: {std}")
 
         user_msg = tracker.latest_message['text']
         user_text_tokens = nlp(user_msg)
