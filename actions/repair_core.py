@@ -29,10 +29,13 @@ class ActionDefaultFallback(Action):
         repair_strategy = tracker.get_slot("repair_strategy_name")
 
         if repair_strategy == "system_repair":
+            logging.info("I'm in the system repair core fallback!")
             message_title = "Hmm... I'm afraid I didn't get what you just said."
         else:
+            logging.info("I'm in core fallback!")
             conversation_turns = self.count_turns(tracker)
             logger.info(f"conv turns is: {conversation_turns}")
+
             if conversation_turns > 20:
                 fatigue_warning = "\n- Our conversation has gotten too long, which means I have saved many keywords from our conversation history in my memory; this could mislead me."
             else:
