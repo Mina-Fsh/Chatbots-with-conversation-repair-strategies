@@ -671,9 +671,16 @@ class ActionRestart(Action):
         domain: Dict[Text, Any],
     ) -> List[EventType]:
         """Executes the custom action"""
+        
         dispatcher.utter_message(template="utter_restart")
         return [
             AllSlotsReset(),
+            SlotSet('requested_slot', None),
+            SlotSet('AA_CONTINUE_FORM', None),
+            SlotSet('next_form_name', None),
+            SlotSet('previous_form_name', None),
+            SlotSet('repeated_validation_failures', None),
+            SlotSet('zz_confirm_form', None),
             Restarted()
         ]
 
