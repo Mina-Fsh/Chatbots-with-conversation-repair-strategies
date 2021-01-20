@@ -36,7 +36,7 @@ class ActionDefaultFallback(Action):
 
             dispatcher.utter_message(template="utter_restart_with_button")
 
-            return []
+            return [FollowupAction("action_listen")]
 
         # Fallback caused by Core
         else:
