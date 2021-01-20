@@ -641,7 +641,7 @@ class ActionSessionStart(Action):
         # the session should begin with a `session_started` event
         events = [SessionStarted()]
 
-        events.extend(self._slot_set_events_from_tracker(tracker))
+        # events.extend(self._slot_set_events_from_tracker(tracker))
 
         # create mock profile
         user_profile = create_mock_profile()
@@ -671,16 +671,9 @@ class ActionRestart(Action):
         domain: Dict[Text, Any],
     ) -> List[EventType]:
         """Executes the custom action"""
-        
+
         dispatcher.utter_message(template="utter_restart")
         return [
-            AllSlotsReset(),
-            SlotSet('requested_slot', None),
-            SlotSet('AA_CONTINUE_FORM', None),
-            SlotSet('next_form_name', None),
-            SlotSet('previous_form_name', None),
-            SlotSet('repeated_validation_failures', None),
-            SlotSet('zz_confirm_form', None),
             Restarted()
         ]
 
