@@ -130,7 +130,7 @@ class ActionMixRepair(Action):
 
         dispatcher.utter_message(text=message_title, buttons=buttons)
 
-        return [SlotSet("rephrase_mr_message", None), FollowupAction("action_listen")]
+        return [SlotSet("rephrase_mr_message", None)]
 
     def get_user_utterance_length(
         self,
