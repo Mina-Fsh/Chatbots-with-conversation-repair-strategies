@@ -49,7 +49,7 @@ class ActionDefaultFallback(Action):
             message_title = message + confusion_warning + fatigue_warning
 
         dispatcher.utter_message(text=message_title)
-        return [UserUtteranceReverted()]
+        return [UserUtteranceReverted(), FollowupAction("action_listen")]
 
     def count_turns(
         self,
