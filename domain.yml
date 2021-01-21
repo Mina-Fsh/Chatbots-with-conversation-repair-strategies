@@ -56,7 +56,6 @@ intents:
 - repeat
 - human_handoff
 - trigger_rephrase
-- trigger_rephrase_mr
 - nlu_fallback
 entities:
 - amount-of-money
@@ -161,9 +160,6 @@ slots:
     type: any
     initial_value: mix_repair
     influence_conversation: false
-  rephrase_mr_message:
-    type: text
-    influence_conversation: false
 responses:
   utter_greet_name:
   - text: Hi, {PERSON}!
@@ -247,11 +243,9 @@ responses:
       \ a credit card bill! \n- Showing the account balance. \n- Answering frequently\
       \ asked questions such as first credit card limit, the annual cost of credit\
       \ card, possibility to collect bonus points, etc."
-  utter_rephrase_sr:
+  utter_rephrase:
   - text: I'm sorry that I couldn't understand you. Try to express your request in
       other words.
-  utter_rephrase_mr:
-  - text: I'm sorry that I couldn't understand you. {rephrase_mr_message}
   utter_phonenumber:
   - text: "I want to connect you to an agent, but unfortunately there is no agent\
       \ available at the moment. \nPlease contact the phone number 01234567, or continue\
