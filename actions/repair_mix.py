@@ -75,6 +75,7 @@ class ActionMixRepair(Action):
         else:
             length_warning = ""
 
+        buttons = []
         if second_last_intent_confidence is not None:
             # If the very first user message triggers fallback
             # there will be no second last intent
@@ -91,7 +92,7 @@ class ActionMixRepair(Action):
 
                 entities_json = json.dumps(entities)
 
-                buttons = []
+                
                 button_title = self.get_button_title(last_intent_name,
                                                      entities)
 
