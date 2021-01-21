@@ -12,7 +12,7 @@ utc = pytz.UTC
 
 def create_mock_profile():
     currency = "€"
-    account_balance = 0
+    account_balance = 1000
 
     credit_card_balance = {}
     transaction_history = {"spend": {}, "deposit": {}}
@@ -76,7 +76,7 @@ def create_mock_profile():
             rand_deposit_amounts = sample(
                 [
                     round(amount, 2)
-                    for amount in list(arange(1000, 3000, 0.01))
+                    for amount in list(arange(1500, 3000, 0.01))
                 ],
                 number_of_days // 14,
             )

@@ -145,8 +145,8 @@ class ActionSelfAssistedRepair(Action):
             nlu_list = nlu_dic["nlu"]
             res = next((sub for sub in nlu_list if sub['intent'] == last_intent_name), None)
             intent_nlu_examples = res["examples"]
-            logger.info(f"{res}")
-            logger.info(f"Intent examples: {intent_nlu_examples}")
+            # logger.info(f"{res}")
+            # logger.info(f"Intent examples: {intent_nlu_examples}")
 
         nlp = spacy.load("en_core_web_sm")
         doc = nlp(intent_nlu_examples)
@@ -163,12 +163,12 @@ class ActionSelfAssistedRepair(Action):
 
         cleaned_string = re.sub(annotation_pattern, "", intent_nlu_examples)
 
-        logger.info(f"NLU example string without annotations: {cleaned_string}")
+        # logger.info(f"NLU example string without annotations: {cleaned_string}")
 
         # split string
         nlu_example_list = cleaned_string.split("- ")
 
-        logger.info(f"NLU example list: {nlu_example_list}")
+        # logger.info(f"NLU example list: {nlu_example_list}")
 
         # clean string
 
@@ -178,7 +178,7 @@ class ActionSelfAssistedRepair(Action):
         # remove line breaks for each example string.
         clean_nlu_example_list = [x.replace('\n', ' ').replace('\r', '') for x in clean_nlu_example_list]
 
-        logger.info(f"Clean NLU example list: {clean_nlu_example_list}")
+        # logger.info(f"Clean NLU example list: {clean_nlu_example_list}")
 
         list = []
 
@@ -190,7 +190,7 @@ class ActionSelfAssistedRepair(Action):
 
         clean_nlu_example_list = list
 
-        logger.info(f"No punctuation NLU example list: {clean_nlu_example_list}")
+        # logger.info(f"No punctuation NLU example list: {clean_nlu_example_list}")
 
         # remove stop words
         # https://stackabuse.com/removing-stop-words-from-strings-in-python/#usingthespacylibrary 
