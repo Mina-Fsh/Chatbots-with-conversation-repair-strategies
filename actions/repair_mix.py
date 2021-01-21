@@ -92,7 +92,6 @@ class ActionMixRepair(Action):
 
                 entities_json = json.dumps(entities)
 
-                
                 button_title = self.get_button_title(last_intent_name,
                                                      entities)
 
