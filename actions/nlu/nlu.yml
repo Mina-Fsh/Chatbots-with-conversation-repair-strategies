@@ -1234,6 +1234,11 @@ nlu:
   examples: |
     - rephrase
     - ask me to rephrase
+    - something else
+    - Something else
+    - this is not what I meant
+    - I meant something else
+    - i mean something else
 - intent: capabilities
   examples: |
     - what are you capable of doing?

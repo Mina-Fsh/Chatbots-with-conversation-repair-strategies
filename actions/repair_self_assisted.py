@@ -43,8 +43,8 @@ class ActionSelfAssistedRepair(Action):
         logger.info(f"last intent name is: {last_intent_name}")
         last_intent_confidence = self.get_user_message_info(tracker)[
             "last_intent_confidence"]
-        last_intent_confidence_percentage = int(self.get_user_message_info(tracker)[
-            "last_intent_confidence"] * 100)
+        # last_intent_confidence_percentage = int(self.get_user_message_info(tracker)[
+        #    "last_intent_confidence"] * 100)
         logger.info(f"last intent confidence is: {last_intent_confidence}")
         second_last_user_message = self.get_user_message_info(tracker)[
             "second_last_user_message"]
@@ -89,12 +89,12 @@ class ActionSelfAssistedRepair(Action):
                 # Bot is in breakdown with high CL
                 # Confusion, user text length, fatigue or
                 # multiple breakdowns can be relevant.
-                message = f'Sorry, I\'m not compeletely sure what you mean by "{last_user_message}". Here is more information about this breakdown:'
+                message = f'Sorry, I\'m not compeletely sure what you mean by "{last_user_message}". Here is more information:'
                 message_two = f'\n- I\'m quite confident that you mean something like: "{intent_description}"'
                 message_title = message + message_two + length_warning + multiple_breakdowns_warning
             else:
                 # Bot is in breakdown with low CL
-                # Confusion and user text length not relevant
+                # user text length not relevant
                 # Fatigue or multiple breakdowns can be relevant.
                 message = f'Sorry, I have severe doubts about what you mean by "{last_user_message}".\nHere are the possible reasons behind this breakdown that comes to my mind:'
                 message_two = "\n- Your request might be out of my scope. You can ask for my capabilities to get familiar with my skills."

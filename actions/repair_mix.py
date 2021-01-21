@@ -75,16 +75,6 @@ class ActionMixRepair(Action):
         else:
             length_warning = ""
 
-        # list_of_messages = [multiple_breakdowns_warning]
-        # if not any(s.strip() for s in list_of_messages):
-        if len(multiple_breakdowns_warning) == 0:
-            rephrase_mr_message = "Try to express your request in other words."
-        else:
-            rephrase_mr_message = "I think this information can help you:" + multiple_breakdowns_warning + "\nTry to express your request in other words."
-
-        logger.info(f"The message slot is: {rephrase_mr_message}")
-        buttons = []
-
         if second_last_intent_confidence is not None:
             # If the very first user message triggers fallback
             # there will be no second last intent
@@ -94,13 +84,14 @@ class ActionMixRepair(Action):
                 # multiple breakdowns can be relevant.
                 message = f'Sorry, I\'m not compeletely sure what you mean by "{last_user_message}". Here is more information:'
                 message_two = f'\n- I\'m quite confident that you mean something like: "{intent_description}"'
-                message_title = message + message_two + length_warning
+                message_title = message + message_two + length_warning + multiple_breakdowns_warning
 
                 entities = tracker.latest_message.get("entities", [])
                 entities = {e["entity"]: e["value"] for e in entities}
 
                 entities_json = json.dumps(entities)
 
+                buttons = []
                 button_title = self.get_button_title(last_intent_name,
                                                      entities)
 
@@ -113,13 +104,13 @@ class ActionMixRepair(Action):
                 buttons.append(
                     {
                         "title": "Something else!",
-                        "payload": "/trigger_rephrase_mr"
+                        "payload": "/trigger_rephrase"
                     }
                 )
 
             else:
                 # Bot is in breakdown with low CL
-                # Confusion and user text length not relevant
+                # user text length not relevant
                 # Fatigue or multiple breakdowns can be relevant.
                 message = f'Sorry, I have severe doubts about what you mean by "{last_user_message}".\nHere are the possible reasons behind this breakdown that comes to my mind:'
                 message_two = "\n- Your request might be out of my scope. You can ask for my capabilities to get familiar with my skills."
@@ -131,7 +122,7 @@ class ActionMixRepair(Action):
 
         dispatcher.utter_message(text=message_title, buttons=buttons)
 
-        return [SlotSet("rephrase_mr_message", rephrase_mr_message)]
+        return []
 
     def get_user_utterance_length(
         self,

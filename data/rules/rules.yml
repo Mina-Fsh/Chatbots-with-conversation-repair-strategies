@@ -52,12 +52,7 @@ rules:
 - rule: trigger rephrase
   steps:
   - intent: trigger_rephrase
-  - action: utter_rephrase_sr
-
-- rule: trigger rephrase with explanations
-  steps:
-  - intent: trigger_rephrase_mr
-  - action: utter_rephrase_mr
+  - action: utter_rephrase
 
 - rule: positive reaction
   steps:

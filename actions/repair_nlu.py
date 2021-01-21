@@ -29,16 +29,17 @@ class ActionRepair(Action):
         # element -15 to the end of the list ":"
         # https://stackoverflow.com/questions/9542738/python-find-in-list
 
+        restart_repairs = ["action_system_repair", "action_mix_repair"]
         events = tracker.events[-15:]
         logger.info(f"Events are: {events}")
-        logger.info(f'clause: {next((True for event in tracker.events[-12:] if event.get("name") == "action_system_repair"), False) }')
+        logger.info(f'clause: {next((True for event in tracker.events[-12:] if event.get("name") in restart_repairs), False) }')
 
         repair_strategy = tracker.get_slot("repair_strategy_name")
 
         # Fallback caused by TwoStageFallbackPolicy
         if (
             len(tracker.events) >= 12
-            and next((True for event in tracker.events[-12:] if event.get("name") == "action_system_repair"), False)
+            and next((True for event in tracker.events[-12:] if event.get("name") in restart_repairs), False)
         ):
 
             dispatcher.utter_message(template="utter_restart_with_button")
