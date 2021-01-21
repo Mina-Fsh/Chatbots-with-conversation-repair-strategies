@@ -75,8 +75,9 @@ class ActionMixRepair(Action):
         else:
             length_warning = ""
 
-        list_of_messages = [multiple_breakdowns_warning]
-        if not any(s.strip() for s in list_of_messages):
+        # list_of_messages = [multiple_breakdowns_warning]
+        # if not any(s.strip() for s in list_of_messages):
+        if len(multiple_breakdowns_warning) == 0:
             rephrase_mr_message = "Try to express your request in other words."
         else:
             rephrase_mr_message = "I think this information can help you:" + multiple_breakdowns_warning + "\nTry to express your request in other words."
