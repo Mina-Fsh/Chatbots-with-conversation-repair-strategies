@@ -37,12 +37,12 @@ class ActionDefaultFallback(Action):
             logger.info(f"conv turns is: {conversation_turns}")
 
             if conversation_turns > 20:
-                fatigue_warning = "\n- Our conversation has gotten too long, which means I have saved many keywords from our conversation history in my memory; this could mislead me."
+                fatigue_warning = "\n- Our conversation has gotten too long, which means <b>I have saved many keywords from our conversation history in my memory</b>; this could mislead me."
             else:
                 fatigue_warning = ""
 
             confusion_warning = (
-                        "\n- In this conversation, we have taken off an expected conversation flow."
+                        "\n- In this conversation, <b>we have taken off an expected conversation flow.</b>"
                     )
             message = "Hmm... I'm afraid I didn't get what you just said. I think this information can help you:"
 
