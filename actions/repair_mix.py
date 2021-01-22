@@ -53,7 +53,7 @@ class ActionMixRepair(Action):
             "two_breakdowns_in_a_row"]
         logger.info(f"two breakdows is {two_breakdowns_in_a_row}")
         if two_breakdowns_in_a_row is True:
-            multiple_breakdowns_warning = "\n- I have not understood your last two requests. The keywords you have used might have been unfamiliar to me."
+            multiple_breakdowns_warning = "\n- I have not understood your last two requests. The <b>keywords</b> you have used might have been unfamiliar to me."
         else:
             multiple_breakdowns_warning = ""
 
@@ -69,9 +69,9 @@ class ActionMixRepair(Action):
         intent_description = self.get_intent_description(last_intent_name)
 
         if user_msg_len <= (last_intent_nlu_mean - 2 * (last_intent_nlu_std)):
-            length_warning = f'\n- I have learned requests similar to "{intent_description}" with longer sentences.'
+            length_warning = f'\n- I have learned requests similar to "{intent_description}" with <b>longer sentences</b>.'
         elif user_msg_len >= (last_intent_nlu_mean + 2 * (last_intent_nlu_std)):
-            length_warning = f'\n- I have learned requests similar to "{intent_description}" with shorter sentences.'
+            length_warning = f'\n- I have learned requests similar to "{intent_description}" with <b>shorter sentences</b>.'
         else:
             length_warning = ""
 
