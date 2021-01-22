@@ -59,7 +59,7 @@ stories:
   - intent: check_balance
   - action: action_show_balance
 
-- story: greet + greet + chitchat
+- story: greet + chitchat
   steps:
   - intent: greet
   - action: action_greet_user
@@ -69,3 +69,30 @@ stories:
   - intent: ask_weather
   - action: utter_weather
 
+- story: greet + react positive + chitchat
+  steps:
+  - intent: greet
+  - action: action_greet_user
+  - action: utter_intro
+  - intent: react_positive
+  - action: utter_react_positive
+  - intent: ask_howdoing
+  - action: utter_howdoing
+
+- story: react positive + chitchat
+  steps:
+  - intent: react_positive
+  - action: utter_react_positive
+  - intent: ask_howdoing
+  - action: utter_howdoing
+  - intent: ask_howold
+  - action: utter_howold
+
+- story: ask is human + react negative + human hand off
+  steps:
+  - intent: ask_ishuman
+  - action: utter_ishuman
+  - intent: react_negative
+  - action: utter_react_negative
+  - intent: human_handoff
+  - action: utter_phonenumber
