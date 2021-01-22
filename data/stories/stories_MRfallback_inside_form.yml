@@ -1,0 +1,196 @@
+version: "2.0"
+
+stories:
+
+- story: transfer money + fallback + ask continue
+  steps:
+  - intent: transfer_money
+  - action: transfer_money_form
+  - active_loop: transfer_money_form
+  - slot_was_set:
+    - AA_CONTINUE_FORM: yes
+  - slot_was_set:
+    - requested_slot: PERSON
+  - intent: inform
+    entities:
+    - PERSON: Mina
+  - slot_was_set:
+    - PERSON: Mina
+  - action: transfer_money_form
+  - slot_was_set:
+    - PERSON: Mina Foosherian
+  - slot_was_set:
+    - repeated_validation_failures: 0
+  - slot_was_set:
+    - requested_slot: amount-of-money
+  - intent: nlu_fallback
+  - action: action_repair
+  - action: action_mix_repair
+  - intent: inform
+    entities:
+    - amount-of-money: 10
+  - slot_was_set:
+    - amount-of-money: 10
+  - action: transfer_money_form
+  - slot_was_set:
+    - amount-of-money: '10.00'
+  - slot_was_set:
+    - currency: EUR
+  - slot_was_set:
+    - repeated_validation_failures: 0
+  - slot_was_set:
+    - requested_slot: zz_confirm_form
+
+- story: transfer money + fallback + ask continue
+  steps:
+  - intent: transfer_money
+    entities:
+    - PERSON: Mina
+  - slot_was_set:
+    - PERSON: Mina
+  - action: transfer_money_form
+  - active_loop: transfer_money_form
+  - slot_was_set:
+    - AA_CONTINUE_FORM: yes
+  - slot_was_set:
+    - PERSON: Mina Foosherian
+  - slot_was_set:
+    - AA_CONTINUE_FORM: yes
+  - slot_was_set:
+    - PERSON: Mina Foosherian
+  - slot_was_set:
+    - requested_slot: amount-of-money
+  - intent: nlu_fallback
+  - action: action_repair
+  - action: action_mix_repair
+  - intent: transfer_money
+    entities:
+    - amount-of-money: 10
+  - slot_was_set:
+    - amount-of-money: 10
+  - action: transfer_money_form
+  - slot_was_set:
+    - amount-of-money: '10.00'
+  - slot_was_set:
+    - currency: EUR
+  - slot_was_set:
+    - repeated_validation_failures: 0
+  - slot_was_set:
+    - requested_slot: zz_confirm_form
+  - intent: affirm
+  - action: transfer_money_form
+  - slot_was_set:
+    - zz_confirm_form: yes
+  - slot_was_set:
+    - repeated_validation_failures: 0
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_transfer_money
+
+- story: pay cc + fallback + ask continue
+  steps:
+  - intent: pay_cc
+    entities:
+    - credit_card: gold
+    - account_type: credit
+  - slot_was_set:
+    - account_type: credit
+  - slot_was_set:
+    - credit_card: gold
+  - action: cc_payment_form
+  - active_loop: cc_payment_form
+  - slot_was_set:
+    - AA_CONTINUE_FORM: yes
+  - slot_was_set:
+    - credit_card: Gold
+  - slot_was_set:
+    - AA_CONTINUE_FORM: yes
+  - slot_was_set:
+    - credit_card: Gold
+  - slot_was_set:
+    - requested_slot: amount-of-money
+  - intent: nlu_fallback
+  - action: action_repair
+  - action: action_mix_repair
+  - intent: inform
+    entities:
+    - amount-of-money: 100
+  - slot_was_set:
+    - amount-of-money: 100
+  - action: cc_payment_form
+  - slot_was_set:
+    - amount-of-money: '100.00'
+  - slot_was_set:
+    - currency: EUR
+  - slot_was_set:
+    - repeated_validation_failures: 0
+  - slot_was_set:
+    - requested_slot: time
+
+- story: transfer money + fallback + ask continue
+  steps:
+  - intent: pay_cc
+    entities:
+    - account_type: gold
+    - account_type: credit
+  - slot_was_set:
+    - account_type: credit
+  - action: cc_payment_form
+  - active_loop: cc_payment_form
+  - slot_was_set:
+    - AA_CONTINUE_FORM: yes
+  - slot_was_set:
+    - requested_slot: amount-of-money
+  - intent: inform
+    entities:
+    - number: 100
+  - slot_was_set:
+    - number: 100
+  - action: cc_payment_form
+  - slot_was_set:
+    - amount-of-money: '100.00'
+  - slot_was_set:
+    - currency: €
+  - slot_was_set:
+    - repeated_validation_failures: 0
+  - slot_was_set:
+    - requested_slot: credit_card
+  - intent: nlu_fallback
+  - action: action_repair
+  - action: action_mix_repair
+  - intent: trigger_rephrase
+  - action: utter_rephrase
+  - intent: inform
+    entities:
+    - credit_card: gold
+    - account_type: credit
+  - slot_was_set:
+    - account_type: credit
+  - slot_was_set:
+    - credit_card: gold
+  - action: cc_payment_form
+  - slot_was_set:
+    - credit_card: Gold
+  - slot_was_set:
+    - repeated_validation_failures: 0
+  - slot_was_set:
+    - requested_slot: time
+
+- story: pay cc + fallback + ask continue
+  steps:
+  - intent: check_earnings
+  - action: transaction_search_form
+  - active_loop: transaction_search_form
+  - slot_was_set:
+    - AA_CONTINUE_FORM: yes
+  - slot_was_set:
+    - search_type: deposit
+  - slot_was_set:
+    - requested_slot: time
+  - intent: nlu_fallback
+  - action: action_repair
+  - action: action_mix_repair
+  - intent: react_negative
+  - action: utter_react_negative
+  - action: utter_ask_cc_payment_form_AA_CONTINUE_FORM
