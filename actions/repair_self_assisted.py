@@ -60,7 +60,7 @@ class ActionSelfAssistedRepair(Action):
             "two_breakdowns_in_a_row"]
         logger.info(f"two breakdows is {two_breakdowns_in_a_row}")
         if two_breakdowns_in_a_row is True:
-            multiple_breakdowns_warning = "\n- I have not understood your last two requests. The keywords you have used might have been unfamiliar to me."
+            multiple_breakdowns_warning = "\n- I have not understood your last two requests. The <b>keywords</b> you have used might have been <b>unfamiliar to me</b>."
         else:
             multiple_breakdowns_warning = ""
 
@@ -76,9 +76,9 @@ class ActionSelfAssistedRepair(Action):
         intent_description = self.get_intent_description(last_intent_name)
 
         if user_msg_len <= (last_intent_nlu_mean - 2 * (last_intent_nlu_std)):
-            length_warning = f'\n- I have learned requests similar to "{intent_description}" with longer sentences.'
+            length_warning = f'\n- I have learned requests similar to "{intent_description}" with <b>longer sentences</b>.'
         elif user_msg_len >= (last_intent_nlu_mean + 2 * (last_intent_nlu_std)):
-            length_warning = f'\n- I have learned requests similar to "{intent_description}" with shorter sentences.'
+            length_warning = f'\n- I have learned requests similar to "{intent_description}" with <b>shorter sentences</b>.'
         else:
             length_warning = ""
 
@@ -87,17 +87,16 @@ class ActionSelfAssistedRepair(Action):
             # there will be no second last intent
             if last_intent_confidence >= 0.75:
                 # Bot is in breakdown with high CL
-                # Confusion, user text length, fatigue or
-                # multiple breakdowns can be relevant.
+                # user text length or multiple breakdowns can be relevant.
                 message = f'Sorry, I\'m not compeletely sure what you mean by "{last_user_message}". Here is more information:'
-                message_two = f'\n- I\'m quite confident that you mean something like: "{intent_description}"'
+                message_two = f'\n- I\'m <b>quite confident</b> that you mean something like: "{intent_description}"'
                 message_title = message + message_two + length_warning + multiple_breakdowns_warning
             else:
                 # Bot is in breakdown with low CL
                 # user text length not relevant
-                # Fatigue or multiple breakdowns can be relevant.
-                message = f'Sorry, I have severe doubts about what you mean by "{last_user_message}".\nHere are the possible reasons behind this breakdown that comes to my mind:'
-                message_two = "\n- Your request might be out of my scope. You can ask for my capabilities to get familiar with my skills."
+                # Multiple breakdowns can be relevant.
+                message = f'Sorry, I have <b>severe doubts</b> about what you mean by "{last_user_message}".\nHere are the possible reasons behind this breakdown that comes to my mind:'
+                message_two = "\n- Your request might be <b>out of my scope</b>. You can <b>ask for my capabilities</b> to get familiar with my skills."
                 message_title = message + multiple_breakdowns_warning + message_two
         else:
             # Very first user message caused breakdown.
