@@ -9,6 +9,39 @@ rules:
   - intent: nlu_fallback
   - action: action_repair
 
+- rule: NLU fallback in transfer_money_form
+  condition:
+  - active_loop: transfer_money_form
+  steps:
+  - intent: nlu_fallback
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_repair
+
+- rule: NLU fallback in transaction_search_form
+  condition:
+  - active_loop: transaction_search_form
+  steps:
+  - intent: nlu_fallback
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_repair
+
+- rule: NLU fallback in cc_payment_form
+  condition:
+  - active_loop: cc_payment_form
+  steps:
+  - intent: nlu_fallback
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_repair
+
 - rule: Say `hello` and utter intro when the user starts a conversation with intent `greet`
   conversation_start: true
   steps:
