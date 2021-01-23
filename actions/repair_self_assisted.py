@@ -107,17 +107,7 @@ class ActionSelfAssistedRepair(Action):
 
         dispatcher.utter_message(text=message_title)
 
-        events = []
-        active_form_name = tracker.active_form.get("name")
-        if active_form_name:
-            # keep the tracker clean for the predictions with form switch stories
-            events.append(UserUtteranceReverted())
-            # trigger utter_ask_{form}_AA_CONTINUE_FORM, by making it the requested_slot
-            events.append(SlotSet("AA_CONTINUE_FORM", None))
-            # # avoid that bot goes in listen mode after UserUtteranceReverted
-            events.append(FollowupAction(active_form_name))
-
-        return events
+        return []
 
     def get_user_utterance_length(
         self,
