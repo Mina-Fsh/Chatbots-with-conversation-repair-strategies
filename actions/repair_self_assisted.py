@@ -5,6 +5,8 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import (
     EventType,
     FollowupAction,
+    SlotSet,
+    UserUtteranceReverted,
 )
 
 logger = logging.getLogger(__name__)
@@ -28,7 +30,7 @@ class ActionSelfAssistedRepair(Action):
             lambda entities: {e.strip() for e in entities.split(",")}
         )
 
-    def run(
+    async def run(
         self,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
