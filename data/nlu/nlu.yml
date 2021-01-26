@@ -1,5 +1,15 @@
 version: "2.0"
 nlu:
+- intent: nlu_fallback
+  examples: |
+    - the maximum outstanding balance I can have on a credit card.
+    - the maximum balance for a credit card.
+    - is there a service fee?
+    - do you charge me in a year for services?
+    - yearly charge for services
+    - I want to know if there is a transaction fee
+    - is there a transaction fee
+    - what is the transaction fee
 - intent: whatisPAYbank
   examples: |
     - Can you brief me about PAY bank
