@@ -337,12 +337,12 @@ responses:
   - text: A minimum age of 18 is required to use the services in PAY bank.
   utter_cardlimit:
   - text: Your first credit card limit is 500€. Your limit increases during time based
-      on your transaction history.
+      on your transaction history. Your current credit card balance is 700€.
   utter_points_collect:
   - text: Unfortunately, we don't offer point collection at the moment.
   utter_annualcost:
   - text: You can use our services for free in the first year, after that there is
-      an annual cost of 19.99€.
+      an annual cost of 19.99€ for each credit card that you hold.
   utter_ask_transfer_money_form_amount-of-money:
   - text: How much money do you want to transfer?
   utter_ask_transfer_money_form_PERSON:
