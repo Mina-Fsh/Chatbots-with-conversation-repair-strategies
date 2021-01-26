@@ -119,14 +119,16 @@ nlu:
 - intent: cardlimit
   examples: |
     - How high is my card limit for the first purchase
-    - card limit
     - first purchase limit?
     - any limitations for the [credit card](account_type)
     - any limitations for the [gold](credit_card) [credit card](account_type)
     - my starting credit
     - what is the starting credit
     - how much is the starting credit
-    - preliminary card limit
+    - preliminary credit card limit
+    - what is the credit card limit
+    - what is the maximum amount of money I can get out of my credit card?
+    - How much can I have as first credit card limit
 - intent: points_collect
   examples: |
     - Where do I collect bonus points?
@@ -141,11 +143,10 @@ nlu:
     - What is the annual ticket price for the [credit accounts](account_type)?
     - card annual cost
     - should i pay annualy for the card service
-    - does the card cost
-    - is the a bank account free
+    - is the bank account free
     - can i get the a [credit account](account_type) for free
-    - how much should i pay for the a card in a year
-    - is the a bank account free for students?
+    - how much should i pay for the a card annualy
+    - is the bank account free for students?
     - is it free for students?
     - should i pay to get it?
     - should i pay to have a [gold](credit_card) [credit card](account_type)
@@ -154,28 +155,30 @@ nlu:
     - what is the cost of having a [silver](credit_card) [credit card](account_type)?
     - should I pay annualy for the [cards](account_type)?
     - does the services cost
+    - does PAY bank charge me for my credit card?
+    - are these services for free?
+    - are your services free of charge?
+    - should i pay annually for the services and products of PAY bank?
 - intent: ask_transfer_charge
   examples: |
-    - Will I be charged for transferring cash
+    - Will I be charged for transfering cash
     - do transfers cost something?
     - is there a transfer charge?
     - Is there a charge
-    - will i be charged for a transaction?
+    - will i be charged for transfering money?
     - do xfers cost something?
-    - is there a transfer fee
-    - is there a xfer fee
-    - how much is the transfer fee
-    - transaction cost
-    - how much is the cost to send money
-    - is there a charge for sending money?
+    - is there a transfer cost
+    - is there a xfer cost
+    - how much is the transfer charge
+    - how much is the cost of transfering
+    - is there a charge for transfering money?
+    - will I be charges for transfering money?
 - intent: check_balance
   examples: |
     - How much money is on my account?
     - How much money is on my [bank](account_type) account?
     - what's my [balance](amount-of-money)?
     - what's my [current balance](amount-of-money)?
-    - What's left on that account?
-    - How much do I have on that account?
     - What's the [balance](amount-of-money) on that account?
     - How much money is left on that account?
     - what is my account [balance](amount-of-money)
@@ -212,29 +215,28 @@ nlu:
     - check my [credit card]{"entity": "account_type", "value": "credit"} [balance](amount-of-money)
     - check my [credit card]{"entity": "account_type", "value": "credit"} [balance](amount-of-money) [first](account_type)
     - Can you tell me my account [balance](amount-of-money)?
-    - Hello, I would like to know how much money is in much money is in my account
+    - Hello, I would like to know how much money is in my account
     - hi, whats my account bal please
     - so.... what's my [balance](amount-of-money)?
     - whats my [current balance](amount-of-money)
     - What's my [balance](amount-of-money)?
     - How much money do I have?
-    - Yeah, I like coffee 👀 But how much money do I have?
-    - Yeah, I know 😀 Since it's so nice: How much money do I have?
 - intent: check_earnings
   examples: |
-    - How much money went into my account last month?
-    - How much money did I make last year?
-    - What did I earn last month?
-    - How much did I make last month?
-    - How much money did I make last week?
+    - search my deposites
+    - any deposites into my account?
     - how much was deposited in my account last month?
     - how much was deposited in my account in the last two weeks?
     - check deposits for last week
     - total deposits over last year
     - how much was deposited in January
-    - how much money have I earned?
-    - what did I earn?
-    - How much have i earned?
+    - deposites in my account
+    - any deposits?
+    - how much was deposited
+    - account depositions?
+    - any money added to my account last two weeks?
+    - have I got my salary?
+    - did anyone send me some money?
 - intent: inform
   examples: |
     - €10
@@ -422,7 +424,7 @@ nlu:
   examples: |
     - I want to pay [John](PERSON)
     - I want to transfer €100 to [Bob](PERSON)
-    - can i transfer money to [Sally](PERSON)
+    - can i send money to [Amy](PERSON)
     - I want to transfer money
     - I want to pay someone
     - can I pay someone
@@ -430,10 +432,11 @@ nlu:
     - can I transfer money to my [mom](PERSON)
     - I want to pay [Bert](PERSON)
     - pay my friend
+    - send money to someone
     - transfer money
     - I want to transfer €100 to [Tommy](PERSON)
     - i want to transfer €400 to [Akela](PERSON)
-    - I want to pay [Paula Handy](PERSON)
+    - I want to pay [John](PERSON)
     - pay Katy Parrow €40 please
     - transfer €60 to [Jason Jacob](PERSON)
     - pay [Evan Oslo](PERSON)
@@ -444,14 +447,14 @@ nlu:
     - transfer €60 to [Sally](PERSON)
     - need to transfer money
     - II want to transfer to [Kelly](PERSON)
-    - Pay [Percy](PERSON) €50
+    - Pay [Michael](PERSON) €50
     - Pay €50 to [Pat](PERSON)
     - Ok pay [Emma](PERSON)
-    - pay [Emanual](PERSON)
+    - pay [Freddie](PERSON)
     - i want to transfer €100 to [Jane smith](PERSON)
     - i want to transfer €100 to my [daughter](PERSON)
     - i want to transfer money please
-    - i mean i want to transfer money
+    - i mean i want to send money
     - I need to pay a friend.
     - transfer money to [ethan oswald](PERSON)
     - transfer money to [sara](PERSON)
@@ -459,11 +462,10 @@ nlu:
     - i want to transfer money to [Latisha](PERSON)
 - intent: check_recipients
   examples: |
-    - Who can I send money to?
+    - Who can I transfer money to?
     - Who are my known recipients
     - Show me my list of recipients
     - Show the recipient list
-    - Show me people I can send money to
     - Who is a valid payee
     - who can I pay?
     - who can I transfer money?
@@ -471,7 +473,6 @@ nlu:
     - who can I transfer money to?
     - recipient list
     - to whom can i tranfer money?
-    - show me the list of the people I can send money to
     - which list of recipient?
     - show me the list of valid payee
 - intent: human_handoff
@@ -1233,7 +1234,6 @@ nlu:
 - intent: trigger_rephrase
   examples: |
     - rephrase
-    - ask me to rephrase
     - something else
 - intent: capabilities
   examples: |
@@ -2185,7 +2185,6 @@ nlu:
     - You're a dunce.
     - You're an idiot.
     - You're foolish.
-    - Your intelligence is laughable.
     - Your mindset is naive.
     - a baby knows more than you
     - are u dump?
@@ -2201,7 +2200,6 @@ nlu:
     - fuck pay bank
     - fuck u
     - fuck you
-    - fuck you machine learning bot
     - fuck you!
     - fucking stupid
     - fucking work
@@ -2217,7 +2215,6 @@ nlu:
     - insult you
     - ok fuck you
     - ok shut up
-    - you look like a burnt sparrow
     - shit
     - shit bot
     - shut up asshole
@@ -2225,7 +2222,7 @@ nlu:
     - so fucking dumb
     - sucker
     - that wasn't very funny
-    - thta was a terrible fucking joke
+    - that was a terrible fucking joke
     - u r a piece of junk
     - ur a pussy
     - what fuck
@@ -2234,8 +2231,6 @@ nlu:
     - you are a stupid bot
     - you are an idiot
     - you are dumb
-    - you are fucking stupid
-    - you are fucking stupid guy！
     - you are idiot
     - you are idiotic
     - you are so ignorant
@@ -2252,7 +2247,6 @@ nlu:
     - you're dumb
     - you're not smart
     - you're so dumb
-    - you're the most moronic person I know
     - you are annoying
     - you are ugly
     - you are insane
