@@ -25,6 +25,7 @@ intents:
 - application_requirements
 - required_age
 - cardlimit
+- firstcardlimit
 - points_collect
 - annualcost
 - greet
@@ -336,8 +337,10 @@ responses:
   utter_required_age:
   - text: A minimum age of 18 is required to use the services in PAY bank.
   utter_cardlimit:
-  - text: Your first credit card limit is 500€. Your limit increases during time based
-      on your transaction history. Your current credit card balance is 700€.
+  - text: Your current credit card limit is 1000€ for the Gold card and 800€ for the Silver card.
+  utter_firstcardlimit:
+  - text: The preliminary credit card limit is 500€. This limit increases during time based
+      on your transaction history.
   utter_points_collect:
   - text: Unfortunately, we don't offer point collection at the moment.
   utter_annualcost:

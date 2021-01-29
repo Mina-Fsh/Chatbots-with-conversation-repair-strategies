@@ -2,11 +2,8 @@ version: "2.0"
 nlu:
 - intent: nlu_fallback
   examples: |
-    - the maximum outstanding balance I can have on a credit card.
+    - what is the maximum outstanding balance I can have on a credit card.
     - the maximum balance for a credit card.
-    - is there a service fee?
-    - do you charge me in a year for services?
-    - yearly charge for services
     - I want to know if there is a transaction fee
     - is there a transaction fee
     - what is the transaction fee
@@ -129,16 +126,20 @@ nlu:
 - intent: cardlimit
   examples: |
     - How high is my card limit for the first purchase
-    - first purchase limit?
+    - i want to know about the first purchase limit?
     - any limitations for the [credit card](account_type)
     - any limitations for the [gold](credit_card) [credit card](account_type)
-    - my starting credit
-    - what is the starting credit
+    - what is the starting credit for my credit card
+    - what is the starting credit for a credit card in pay bank?
+    - tell me the credit card limit in pay bank
+    - what is the maximum cash I can get out from pay banks credit card
     - how much is the starting credit
     - preliminary credit card limit
-    - what is the credit card limit
+    - tell me what is the credit card limit
     - what is the maximum amount of money I can get out of my credit card?
     - How much can I have as first credit card limit
+    - what is my credit card limitations at the moment
+    - how hight is my credit card limit at the moment
 - intent: points_collect
   examples: |
     - Where do I collect bonus points?
@@ -174,7 +175,7 @@ nlu:
     - Will I be charged for transfering cash
     - do transfers cost something?
     - is there a transfer charge?
-    - Is there a charge
+    - Is there a service charge
     - will i be charged for transfering money?
     - do xfers cost something?
     - is there a transfer cost

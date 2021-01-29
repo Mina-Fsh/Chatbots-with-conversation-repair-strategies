@@ -2,14 +2,11 @@ version: "2.0"
 nlu:
 - intent: nlu_fallback
   examples: |
-    - the maximum outstanding balance I can have on a credit card.
-    - the maximum balance for a credit card.
-    - is there a service fee?
-    - do you charge me in a year for services?
-    - yearly charge for services
     - I want to know if there is a transaction fee
     - is there a transaction fee
     - what is the transaction fee
+    - what is the maximum amount I can charge my credit card
+    - the maximum amount I can charge my credit card
 - intent: whatisPAYbank
   examples: |
     - Can you brief me about PAY bank
@@ -128,17 +125,26 @@ nlu:
     - what is the minimum required age to get a master card
 - intent: cardlimit
   examples: |
-    - How high is my card limit for the first purchase
-    - first purchase limit?
-    - any limitations for the [credit card](account_type)
-    - any limitations for the [gold](credit_card) [credit card](account_type)
-    - my starting credit
-    - what is the starting credit
-    - how much is the starting credit
-    - preliminary credit card limit
-    - what is the credit card limit
+    - Is there any limitation for my [silver](credit_card) [credit card](account_type)
+    - Are there any limitations for my [gold](credit_card) [credit card](account_type)
+    - tell me my current credit card limit
+    - what is the maximum cash I can get out from my [gold](credit_card) [credit card](account_type)
+    - tell me what is the [credit card](account_type) maximum limit
     - what is the maximum amount of money I can get out of my credit card?
-    - How much can I have as first credit card limit
+    - what is my credit card limitations at the moment
+    - how hight is my credit card limit at the moment
+    - what is the maximum outstanding balance I can have on a credit card.
+    - what is the maximum balance I can have on my credit card
+    - what is the maximum limit I can charge my credit card
+  - intent: firstcardlimit
+  examples: |
+    - How high is my card limit for the first purchase
+    - i want to know about the first purchase limit?
+    - what is the starting credit for my credit card
+    - what is the starting credit for a credit card in pay bank?
+    - how much is the starting credit for a credit card in pay bank
+    - How much can I have as first card limit
+    - what is the preliminary card limit
 - intent: points_collect
   examples: |
     - Where do I collect bonus points?
@@ -174,7 +180,7 @@ nlu:
     - Will I be charged for transfering cash
     - do transfers cost something?
     - is there a transfer charge?
-    - Is there a charge
+    - Is there a service charge
     - will i be charged for transfering money?
     - do xfers cost something?
     - is there a transfer cost
