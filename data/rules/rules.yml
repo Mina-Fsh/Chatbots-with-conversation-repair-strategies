@@ -181,6 +181,11 @@ rules:
   - intent: required_age
   - action: utter_required_age
 
+- rule: faq - firstcardlimit
+  steps:
+  - intent: firstcardlimit
+  - action: utter_firstcardlimit
+
 - rule: faq - cardlimit
   steps:
   - intent: cardlimit

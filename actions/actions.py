@@ -911,9 +911,12 @@ class ActionGreetUser(Action):
 
         if intent == "greet":
             if name_entity is not None:
-                dispatcher.utter_message(
-                    template="utter_greet_name", name=name_entity
-                )
+                if name_entity.lower() == "paya":
+                    dispatcher.utter_message(template="utter_greet_noname")
+                else:
+                    dispatcher.utter_message(
+                        template="utter_greet_name", name=name_entity
+                    )
                 return [SlotSet("PERSON", None)]
             else:
                 dispatcher.utter_message(template="utter_greet_noname")
