@@ -324,8 +324,8 @@ responses:
   - text: PAY bank is an international online bank. We are glad to be at your service
       24/7.
   utter_product_description:
-  - text: All of our products and services are available only online and free of charge
-      for the first year.
+  - text: "All of our products and services are available only online and free of charge
+      for the first year. To read more about different services and accounts check our website: www.paybank.org."
   utter_howtoapply:
   - text: 'You already have the following accounts with us: a giro account, a Gold
       credit card, and a Silver credit card. You can request to open a savings account
