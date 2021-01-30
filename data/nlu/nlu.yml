@@ -7,9 +7,9 @@ nlu:
     - what is the transaction fee
     - Check the list of people I can send money to.
     - what is the maximum outstanding balance I can have on my credit cards?
-    - I want to find out how much Pay bank charges me for a credit card
-    - how much Pay bank charges me for a credit card
-    - Schedule a payment to pay off my dept to my [Gold](credit_card) credit card.
+    - I want to find out how much Pay bank charges me for having a credit card
+    - how much Pay bank charges me for having a credit card
+    - Schedule a payment to pay off my debt to my [Gold](credit_card) credit card.
     - schedule a payment to my [gold](credit_card) credit card
     - Can I earn bonus rewards on credit card purchases
     - open a savings account
