@@ -54,7 +54,7 @@ class ActionSystemRepair(Action):
 
         message_title = (
             "Sorry, I'm not sure I've understood "
-            "you correctly 🤔 Do you mean..."
+            "you correctly, Do you mean..."
         )
 
         entities = tracker.latest_message.get("entities", [])
