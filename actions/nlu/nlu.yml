@@ -3,17 +3,11 @@ nlu:
 - intent: nlu_fallback
   examples: |
     - I want to know if there is a transaction fee
-    - is there a transaction fee
-    - what is the transaction fee
     - Check the list of people I can send money to.
     - what is the maximum outstanding balance I can have on my credit cards?
-    - I want to find out how much Pay bank charges me for having a credit card
-    - how much Pay bank charges me for having a credit card
+    - how much the bank charges me for having a credit card
     - Schedule a payment to pay off my debt to my [Gold](credit_card) credit card.
-    - schedule a payment to my [gold](credit_card) credit card
-    - Can I earn bonus rewards on credit card purchases
-    - open a savings account
-    - I have already an account in Pay bank, but now I would like to open an account for my son. He is 7 years old. I was wondering about the minimum required age to open an account. 
+    - Can I collect bonus rewards on credit card purchases
 - intent: whatisPAYbank
   examples: |
     - Can you brief me about PAY bank
@@ -99,6 +93,7 @@ nlu:
 - intent: howtoapply
   examples: |
     - I already have an account with you, can I apply for a second [bank](account_type) account? and what are the differences?
+    - I already have an account with you, can I open a [savings account](account_type)? and what are the differences?
     - I already have two credit cards, a gold and a silver, can I apply for a third [credit card](account_type)? My balance is already full on the other two cards.
     - I already have an account with you, how can I open a [savings account](account_type)? I need this to save some money as I want to buy a house in future.
     - How can I apply for another account? though I am holding a giro account and two credit cards, a gold and a silver, at the moment
@@ -115,12 +110,14 @@ nlu:
     - how can I apply for a [credit accounts](account_type)
 - intent: required_age
   examples: |
-    - required age
-    - minimum age
-    - age limit
+    - required age for an account
+    - minimum age for an account
+    - account age limit
     - minimum required age
+    - any age limitations
 - intent: cardlimit
   examples: |
+    - what is the maximum balance I can have on my credit cards?
     - Is there any limitation for my [silver](credit_card) [credit card](account_type)
     - Are there any limitations for my [gold](credit_card) [credit card](account_type)
     - tell me my current credit card limit
@@ -145,8 +142,9 @@ nlu:
     - How much is the starting credit?
 - intent: points_collect
   examples: |
-    - Can I collect bonus points?
     - Where do I collect bonus points?
+    - is it possible to collect bonus rewards with credit card spending?
+    - is it possible to collect bonus rewards on credit card purchases
     - i would like to collect points, is it possible?
     - can I collect points on credit card purchase
     - is there any benefit with each purchase that I make with it
@@ -155,6 +153,7 @@ nlu:
     - with which card can I collect bonus points
 - intent: annualcost
   examples: |
+    - how much is the charge for having a credit card
     - What is the annual ticket price for the [credit accounts](account_type)?
     - how much should i pay to have a credit card
     - should i pay annualy for the card service
@@ -174,6 +173,7 @@ nlu:
     - should i pay annually for the credit cards in PAY bank?
 - intent: ask_transfer_charge
   examples: |
+    - I want to know if there is a transaction cost
     - What is the transaction cost?
     - Will I be charged for transfering cash
     - do transfers cost something?
@@ -181,11 +181,12 @@ nlu:
     - will i be charged for transfering money?
     - do transfers cost something?
     - will you charge me when i transfer money 
-    - is there a transfer cost
-    - how much is the transfer charge
+    - is there a transfer fee
+    - how much is the transfer fee
     - how much is the cost of transfering
     - is there a charge for transfering money?
     - will I be charges for transfering money?
+    - should I pay for transactions?
 - intent: check_balance
   examples: |
     - What is my account balance?
@@ -371,6 +372,7 @@ nlu:
     - [William Zelkind](PERSON)
 - intent: pay_cc
   examples: |
+    - i want to plan a payment to pay off my debt to my [Gold](credit_card) credit card.
     - I want to pay my credit card!
     - pay off my debt to [gold](credit_card) [credit card](account_type)
     - I would like to pay the [minimum balance](amount-of-money) on my [gold](credit_card) [card](account_type)
@@ -477,6 +479,7 @@ nlu:
     - i want to transfer money to [Latisha](PERSON)
 - intent: check_recipients
   examples: |
+    - list of people I can send money to.
     - Who can I send money to?
     - Who can I transfer money to?
     - Who are my known recipients
