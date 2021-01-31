@@ -69,9 +69,9 @@ class ActionSelfAssistedRepair(Action):
         user_msg_len = mean_std_dic["user_msg_len"]
         intent_description = self.get_intent_description(last_intent_name)
 
-        if user_msg_len <= (last_intent_nlu_mean - 2 * (last_intent_nlu_std)):
+        if user_msg_len <= (last_intent_nlu_mean - last_intent_nlu_std):
             length_warning = f'\n- I have learned requests similar to "{intent_description}" with <b>longer sentences</b>.'
-        elif user_msg_len >= (last_intent_nlu_mean + 2 * (last_intent_nlu_std)):
+        elif user_msg_len >= (last_intent_nlu_mean + last_intent_nlu_std):
             length_warning = f'\n- I have learned requests similar to "{intent_description}" with <b>shorter sentences</b>.'
         else:
             length_warning = ""
@@ -79,7 +79,7 @@ class ActionSelfAssistedRepair(Action):
         if second_last_intent_name is not None:
             # If the very first user message triggers fallback
             # there will be no second last intent
-            if last_intent_confidence >= 0.75:
+            if last_intent_confidence >= 0.5:
                 # Bot is in breakdown with high CL
                 # user text length or multiple breakdowns can be relevant.
                 message = f'Sorry, I\'m not compeletely sure what you mean by "{last_user_message}". Here is more information:'
