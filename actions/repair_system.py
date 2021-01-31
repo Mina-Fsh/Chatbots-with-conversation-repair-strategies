@@ -38,18 +38,21 @@ class ActionSystemRepair(Action):
 
         intent_ranking = tracker.latest_message.get("intent_ranking", [])
         logger.info(f"Intent ranking is: {intent_ranking}")
-        if len(intent_ranking) > 2:
-            diff_intent_confidence = intent_ranking[1].get(
+        clean_intent_ranking = [i for i in intent_ranking if not (i['name'] == 'nlu_fallback')]
+        logger.info(f"last intent ranking without nlu intent is: {clean_intent_ranking}")
+
+        if len(clean_intent_ranking) > 2:
+            diff_intent_confidence = clean_intent_ranking[0].get(
                 "confidence"
-            ) - intent_ranking[2].get("confidence")
+            ) - clean_intent_ranking[1].get("confidence")
             if diff_intent_confidence < 0.2:
-                intent_ranking = intent_ranking[1:3]
+                clean_intent_ranking = clean_intent_ranking[0:2]
             else:
-                intent_ranking = intent_ranking[1:2]
+                clean_intent_ranking = clean_intent_ranking[0:1]
 
         first_intent_names = [
             intent.get("name", "")
-            for intent in intent_ranking
+            for intent in clean_intent_ranking
         ]
 
         message_title = (

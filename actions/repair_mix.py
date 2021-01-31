@@ -15,9 +15,9 @@ logger = logging.getLogger(__name__)
 
 
 class ActionMixRepair(Action):
-    """Responses to the user text based on it's confidency.
-    if it is confidence it gives option, otherwise it checks for
-    the technical reasons behind the breakdown."""
+    """Responses to the user based on it's confidence level.
+    if it is confident, it explains the reasons behind the breakdown
+    + gives options, if it is not confident it just explains the reasons."""
 
     def name(self) -> Text:
         return "action_mix_repair"
@@ -40,22 +40,24 @@ class ActionMixRepair(Action):
 
         last_user_message = self.get_user_message_info(tracker)[
             "last_user_message"]
-        logger.info(f"last user message is: {last_user_message}")
         last_intent_name = self.get_user_message_info(tracker)[
             "last_intent_name"]
-        logger.info(f"last intent name is: {last_intent_name}")
         last_intent_confidence = self.get_user_message_info(tracker)[
             "last_intent_confidence"]
-        second_last_intent_confidence = self.get_user_message_info(tracker)[
-            "second_last_intent_confidence"]
+        second_last_intent_name = self.get_user_message_info(tracker)[
+            "second_last_intent_name"]
 
         two_breakdowns_in_a_row = self.get_user_message_info(tracker)[
             "two_breakdowns_in_a_row"]
-        logger.info(f"two breakdows is {two_breakdowns_in_a_row}")
         if two_breakdowns_in_a_row is True:
-            multiple_breakdowns_warning = "\n- I have not understood your last two requests. The <b>keywords</b> you have used might have been <b>unfamiliar to me</b>."
+            multiple_breakdowns_warning = "\n- I have not understood your last two requests."
         else:
             multiple_breakdowns_warning = ""
+
+        if not multiple_breakdowns_warning.strip():
+            keyword_message = "\n- The <b>keywords</b> you used might be <b>unfamiliar to me</b>."
+        else:
+            keyword_message = multiple_breakdowns_warning + " The <b>keywords</b> you have used might be <b>unfamiliar to me</b>."
 
         number_of_breakdowns = self.count_breakdowns(tracker)
         logger.info(f"number of breakdowns: {number_of_breakdowns}")
@@ -76,7 +78,7 @@ class ActionMixRepair(Action):
             length_warning = ""
 
         buttons = []
-        if second_last_intent_confidence is not None:
+        if second_last_intent_name is not None:
             # If the very first user message triggers fallback
             # there will be no second last intent
             if last_intent_confidence >= 0.75:
@@ -84,7 +86,7 @@ class ActionMixRepair(Action):
                 # user text length or multiple breakdowns can be relevant.
                 message = f'Sorry, I\'m not compeletely sure what you mean by "{last_user_message}". Here is more information:'
                 message_two = f'\n- I\'m <b>quite confident</b> that you mean something like: "{intent_description}"'
-                message_title = message + message_two + length_warning + multiple_breakdowns_warning
+                message_title = message + message_two + length_warning + keyword_message
 
                 entities = tracker.latest_message.get("entities", [])
                 entities = {e["entity"]: e["value"] for e in entities}
@@ -113,7 +115,7 @@ class ActionMixRepair(Action):
                 # Multiple breakdowns can be relevant.
                 message = f'Sorry, I have <b>severe doubts</b> about what you mean by "{last_user_message}".\nHere are the possible reasons behind this breakdown that comes to my mind:'
                 message_two = "\n- Your request might be <b>out of my scope</b>. You can <b>ask for my capabilities</b> to get familiar with my skills."
-                message_title = message + multiple_breakdowns_warning + message_two
+                message_title = message + keyword_message + message_two
         else:
             # Very first user message caused breakdown.
             # Say Hi to the user
@@ -239,14 +241,14 @@ class ActionMixRepair(Action):
 
         std = np.std(example_lengths)
 
-        # logger.info(f"Mean: {mean}")
-        # logger.info(f"Standard deviation: {std}")
+        logger.info(f"Mean: {mean}")
+        logger.info(f"Standard deviation: {std}")
 
         user_msg = tracker.latest_message['text']
         user_text_tokens = nlp(user_msg)
         user_tokens_without_sw = [token.text for token in user_text_tokens if not token.is_stop]
-        logger.info(f"User message without stopwords: {user_tokens_without_sw}")
         user_msg_len = len(user_tokens_without_sw)
+        logger.info(f"User message without stopwords: {user_tokens_without_sw} has length {user_msg_len}")
 
         return {"mean": mean, "std": std, "user_msg_len": user_msg_len}
 
@@ -266,14 +268,19 @@ class ActionMixRepair(Action):
         # get the ranking of the last user message
         last_intent_ranking = user_event_list[-1].get(
             "parse_data", []).get("intent_ranking", [])
+        logger.info(f"last intent ranking is: {last_intent_ranking}")
+
+        # to delete dictionary with key nlu fallback from the intent ranking list
+        last_intent_ranking_clean = [i for i in last_intent_ranking if not (i['name'] == 'nlu_fallback')]
+        logger.info(f"last intent ranking without nlu intent is: {last_intent_ranking_clean}")
 
         # get the name of the matched intent for last user message
         # the first one in rasa 2 is always nlu_fallback
-        last_intent_name = last_intent_ranking[1].get("name")
+        last_intent_name = last_intent_ranking_clean[0].get("name")
         # get the text of the last user message
         last_user_message = user_event_list[-1].get("text")
         # get the confidence level of the last user message
-        last_intent_confidence = last_intent_ranking[1].get("confidence")
+        last_intent_confidence = last_intent_ranking_clean[0].get("confidence")
 
         # get the ranking of the second last user message
         # check for multiple breakdowns
@@ -321,7 +328,7 @@ class ActionMixRepair(Action):
             if (events["event"] == "action" and events["name"] == "action_repair"):
                 breakdown_counter += 1
 
-        logger.debug(f"You already had {breakdown_counter} breakdowns in this conversation!")
+        logger.info(f"You already had {breakdown_counter} breakdowns in this conversation!")
 
         return breakdown_counter
 
