@@ -922,3 +922,4 @@ class ActionGreetUser(Action):
                 dispatcher.utter_message(template="utter_greet_noname")
                 return []
         return []
+
