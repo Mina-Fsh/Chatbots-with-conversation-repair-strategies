@@ -19,29 +19,29 @@ stories:
   - intent: deny
   - action: utter_thumbsup
 
-- story: say ok when user affirms after utter_capabilities
+- story: ask anything else? when user affirms after utter_capabilities
   steps:
   - action: utter_capabilities
   - intent: affirm
-  - action: utter_thumbsup
+  - action: utter_anything_else
 
-- story: say ok when user affirms after action_show_balance
+- story: ask anything else? when user affirms after action_show_balance
   steps:
   - action: action_show_balance
   - intent: affirm
-  - action: utter_thumbsup
+  - action: utter_anything_else
 
-- story: say ok when user affirms after action_show_recipients
+- story: ask anything else? when user affirms after action_show_recipients
   steps:
   - action: action_show_recipients
   - intent: affirm
-  - action: utter_thumbsup
+  - action: utter_anything_else
   
-- story: say ok when user affirms after action_show_transfer_charge
+- story: ask anything else? when user affirms after action_show_transfer_charge
   steps:
   - action: action_show_transfer_charge
   - intent: affirm
-  - action: utter_thumbsup
+  - action: utter_anything_else
 
 - story: deny chitchat
   steps:
