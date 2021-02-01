@@ -8,6 +8,7 @@ nlu:
     - how much the bank charges me for having a credit card
     - Schedule a payment to pay off my debt to my [Gold](credit_card) credit card.
     - Can I collect bonus rewards on credit card purchases
+    - My son is ten years old, and I would like to open a bank account for him. I was wondering if there is a minimum required age to open an account?
 - intent: whatisPAYbank
   examples: |
     - Can you brief me about PAY bank

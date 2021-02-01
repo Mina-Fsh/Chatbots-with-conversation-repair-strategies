@@ -466,6 +466,7 @@ actions:
 - action_system_repair
 - action_self_assisted_repair
 - action_mix_repair
+- action_rephrase
 - action_greet_user
 - action_repeat
 - action_pause
