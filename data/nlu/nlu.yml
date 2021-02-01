@@ -3,7 +3,7 @@ nlu:
 - intent: nlu_fallback
   examples: |
     - I want to know if there is a transaction fee
-    - Check the list of people I can send money to.
+    - I want to check the list of people I can send money to.
     - what is the maximum outstanding balance I can have on my credit cards?
     - how much the bank charges me for having a credit card
     - Schedule a payment to pay off my debt to my [Gold](credit_card) credit card.
@@ -92,6 +92,8 @@ nlu:
     - and what products do you have?
 - intent: howtoapply
   examples: |
+    - I want to open a savings account even though I already have a giro account, is it possible?
+    - open a savings account with me without closing my giro account. i need to start saving.
     - I already have an account with you, can I apply for a second [bank](account_type) account? and what are the differences?
     - I already have an account with you, can I open a [savings account](account_type)? and what are the differences?
     - I already have two credit cards, a gold and a silver, can I apply for a third [credit card](account_type)? My balance is already full on the other two cards.
@@ -115,6 +117,9 @@ nlu:
     - account age limit
     - minimum required age
     - any age limitations
+    - account for my son
+    - open account age limit
+    - account for ten years old
 - intent: cardlimit
   examples: |
     - what is the maximum balance I can have on my credit cards?
@@ -156,17 +161,17 @@ nlu:
     - how much is the charge for having a credit card
     - What is the annual ticket price for the [credit accounts](account_type)?
     - how much should i pay to have a credit card
-    - should i pay annualy for the card service
-    - should i pay annualy for the credit card
+    - should i pay annually for the card service
+    - should i pay annually for the credit card
     - can i get the a [credit account](account_type) for free
-    - how much should i pay for a card annualy
+    - how much should i pay for a card annually
     - how much should i pay for a card in the year
     - should i pay for a credit card?
     - should i pay to have a [gold](credit_card) [credit card](account_type)
     - Does the credit card include a fix cost
     - does the [credit cards](account_type) cost?
     - what is the cost of having a [silver](credit_card) [credit card](account_type)?
-    - should I pay annualy for the [cards](account_type)?
+    - should I pay annually for the [cards](account_type)?
     - does the card cost
     - Is Pay bank credit card free?
     - are these credit cards for free?
@@ -174,7 +179,7 @@ nlu:
 - intent: ask_transfer_charge
   examples: |
     - I want to know if there is a transaction cost
-    - What is the transaction cost?
+    - What does the transaction cost?
     - Will I be charged for transfering cash
     - do transfers cost something?
     - is there a transfer charge?
@@ -373,7 +378,7 @@ nlu:
 - intent: pay_cc
   examples: |
     - i want to plan a payment to pay off my debt to my [Gold](credit_card) credit card.
-    - I want to pay my credit card!
+    - I want to pay off my credit card!
     - pay off my debt to [gold](credit_card) [credit card](account_type)
     - I would like to pay the [minimum balance](amount-of-money) on my [gold](credit_card) [card](account_type)
     - I want to pay my [credit card](account_type)
