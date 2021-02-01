@@ -32,14 +32,14 @@ class ActionRepair(Action):
         restart_repairs = ["action_system_repair", "action_mix_repair"]
         events = tracker.events[-15:]
         logger.info(f"Events are: {events}")
-        logger.info(f'clause: {next((True for event in tracker.events[-12:] if event.get("name") in restart_repairs), False) }')
+        logger.info(f'clause: {next((True for event in tracker.events[-9:] if event.get("name") in restart_repairs), False) }')
 
         repair_strategy = tracker.get_slot("repair_strategy_name")
 
         # Fallback caused by TwoStageFallbackPolicy
         if (
             len(tracker.events) >= 12
-            and next((True for event in tracker.events[-12:] if event.get("name") in restart_repairs), False)
+            and next((True for event in tracker.events[-9:] if event.get("name") in restart_repairs), False)
         ):
 
             dispatcher.utter_message(template="utter_restart_with_button")
