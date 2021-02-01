@@ -4,6 +4,8 @@ from rasa_sdk import Tracker, Action
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import (
     FollowupAction,
+    EventType,
+    UserUtteranceReverted,
 )
 
 INTENT_DESCRIPTION_MAPPING_PATH = "actions/intent_description_mapping.csv"
@@ -56,3 +58,17 @@ class ActionRepair(Action):
         else:
             return [FollowupAction("action_system_repair")]
         return []
+
+
+class ActionRephrase(Action):
+    """reverts the last user message to keep
+    tracker clean when user says they mean something else!"""
+
+    def name(self) -> Text:
+        return "action_rephrase"
+
+    def run(self, dispatcher, tracker, domain) -> List[EventType]:
+
+        dispatcher.utter_message(template="utter_rephrase")
+
+        return [UserUtteranceReverted()]
